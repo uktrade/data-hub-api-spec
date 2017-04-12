@@ -4,7 +4,9 @@
   "description": "Data Hub REST API documentation and test server",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "run": "node index.js"
+
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,9 @@
   },
   "homepage": "https://github.com/uktrade/data-hub-api-spec#readme",
   "dependencies": {
-    "dredd": "^3.4.1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "install": "^0.8.8",
+    "js-yaml": "^3.8.3",
+    "npm": "^4.4.4"
   }
 }
