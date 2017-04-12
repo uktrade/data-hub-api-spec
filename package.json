@@ -1,0 +1,30 @@
+{
+  "name": "data-hub-api-spec",
+  "version": "1.0.0",
+  "description": "Data Hub REST API documentation and test server",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uktrade/data-hub-api-spec.git"
+  },
+  "keywords": [
+    "Data",
+    "Hub",
+    "Swagger",
+    "JSON",
+    "PI"
+  ],
+  "author": "Jim Smith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uktrade/data-hub-api-spec/issues"
+  },
+  "homepage": "https://github.com/uktrade/data-hub-api-spec#readme",
+  "dependencies": {
+    "dredd": "^3.4.1",
+    "express": "^4.15.2"
+  }
+}
