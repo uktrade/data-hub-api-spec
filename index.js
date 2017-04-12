@@ -2,9 +2,20 @@ const express = require('express')
 const yaml = require('js-yaml')
 const fs   = require('fs');
 const doc = yaml.safeLoad(fs.readFileSync('datahub.yml', 'UTF-8'))
+const nunjucks = require('nunjucks')
+
+
 
 const app = express()
 const router = express.Router()
+
+app.set('view engine', 'html')
+nunjucks.configure([`${__dirname}/src/views`], {
+  autoescape: true,
+  express: app,
+  watch: true
+})
+
 
 function bouncer(req, res) {
   console.log(req.url)
@@ -20,6 +31,17 @@ keys.forEach((key) => {
     router[k3](doc.basePath + escapeFormatPath, bouncer)
   })
 })
+
+console.log(doc)
+
+function index(req, res) {
+  res.render('index.html', {
+    doc:doc,
+    paths:Object.keys(doc.paths)
+  })
+}
+
+router.get('/', index)
 
 app.use(router)
 

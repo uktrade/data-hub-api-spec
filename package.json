@@ -6,7 +6,6 @@
   "scripts": {
     "test": "test",
     "run": "node index.js"
-
   },
   "repository": {
     "type": "git",
@@ -29,6 +28,7 @@
     "express": "^4.15.2",
     "install": "^0.8.8",
     "js-yaml": "^3.8.3",
-    "npm": "^4.4.4"
+    "npm": "^4.4.4",
+    "nunjucks": "^3.0.0"
   }
 }
