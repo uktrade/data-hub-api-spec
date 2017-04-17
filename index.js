@@ -4,7 +4,7 @@ const fs   = require('fs');
 const doc = yaml.safeLoad(fs.readFileSync('datahub.yml', 'UTF-8'))
 const nunjucks = require('nunjucks')
 
-
+const port = process.env.PORT || 80
 
 const app = express()
 const router = express.Router()
@@ -42,6 +42,9 @@ function index(req, res) {
 }
 
 router.get('/', index)
+
+app.use('/css', express.static(`${__dirname}/../node_modules/@uktrade/trade_elements/dist/css`))
+app.use('/css', express.static(`${__dirname}/src/css`))
 
 app.use(router)
 

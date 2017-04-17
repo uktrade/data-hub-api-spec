@@ -1,0 +1,19 @@
+swagger: '2.0'
+info:
+  description: Data Hub Company API V2
+  version: 1.0.0
+  title: Data Hub API
+  contact:
+    email: jim.smith@digital.trade.gov.uk
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+basePath: /v2
+
+tags:
+- name: public
+  description: API open to Data Hub client
+- name: company
+  description: @TODO
+

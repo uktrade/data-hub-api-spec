@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "run": "node index.js"
+    "run": "node index.js",
+    "build": "cat specs/headers/swagger_head.yml specs/headers/schemes.yml specs/headers/security.yml specs/headers/paths.yml specs/paths/* specs/headers/definitions.yml  specs/definitions/*  > datahub2.yml"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/uktrade/data-hub-api-spec#readme",
   "dependencies": {
+    "@uktrade/trade_elements": "^3.1.1",
     "express": "^4.15.2",
     "install": "^0.8.8",
     "js-yaml": "^3.8.3",

@@ -1,0 +1,110 @@
+  /company/{companyId}:
+    get:
+      tags:
+      - company
+      summary: Returns a company from the Data Hub repository
+      operationId: getcompany
+      description: |
+        Passing in a company UUID returns a Data Hub company object
+      produces:
+      - application/vnd.api+json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID for a Data Hub company
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted company object
+          schema:
+            $ref: '#/definitions/Company'
+        400:
+          description: bad input parameter
+        404:
+          description: company does not exist
+    put:
+      tags:
+      - company
+      summary: updates a company, creating a new one if not found
+      operationId: updateCompany
+      description: Updates an existing company
+      consumes:
+      - application/vnd.api+json
+      produces:
+      - application/vnd.api+json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID for a Data Hub company
+        type: string
+        required: true
+      - in: body
+        name: company
+        description: Company data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Company'
+      - in: query
+        name: Archived
+        description: Update the company's status to Archived
+        required: false
+        type: boolean
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+  /company:
+    post:
+      tags:
+      - company
+      summary: adds a Data Hub company
+      operationId: addCompany
+      description: Adds a Data Hub company from a Companies House company
+      consumes:
+      - application/vnd.api+json
+      produces:
+      - application/vnd.api+json
+      parameters:
+      - in: body
+        name: company
+        description: Company to add
+        required: true
+        schema:
+          $ref: '#/definitions/Company'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: company already exists
+  /ch_company/{company_number}:
+    get:
+      tags:
+      - company
+      summary: Returns a Companies House company from the Data Hub repository
+      operationId: getchcompany
+      description: |
+        Passing in a Companies House company number returns a Data Hub Companies House company object
+      produces:
+      - application/vnd.api+json
+      parameters:
+      - in: path
+        name: company_number
+        description: Companies House number
+        required: true
+        type: string
+      responses:
+        200:
+          description: JSON API formatted company object
+          schema:
+            $ref: '#/definitions/CompaniesHouseCompany'
+        400:
+          description: bad input parameter
+        404:
+          description: company does not exist
