@@ -568,3 +568,4 @@
               self:
                 type: string
                 example: 'http://HOST/v2/ch_company/d290f1ee-6c54-4b01-90e6-d701748f0851'
+
