@@ -341,5 +341,35 @@
           description: invalid input, object invalid
         409:
           description: investment already exists
-
+  /investment/businessactivity/{investmentId}:
+    put:
+      tags:
+      - investment
+      summary: Adds a new Business Activity to a project
+      operationId: addBusinessActivity
+      description: Adds a custom business activity to a project
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: business_activity
+        description: The business activity to add
+        required: true
+        schema:
+          $ref: '#/definitions/BusinessActivity'
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
 
