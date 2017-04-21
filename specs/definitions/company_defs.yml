@@ -2,118 +2,89 @@
     type: object
     description: A representation of the Data Hub company object
     required:
-    - data
+    - name
+    - registered_address_1
+    - registered_address_town
     properties:
-      data:
-        title: Company Top Level
-        type: object
-        required:
-        - type
-        - attributes
-        - relationships
-        - links
-        properties:
-          type:
-            type: string
-            example: 'Company'
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          attributes:
-            title: Company
-            type: object
-            required:
-            - name
-            - registered_address_1
-            - registered_address_town
-            properties:
-              name:
-                type: string
-                example: 'EXAMPLE Ltd'
-              trading_name:
-                type: string
-                example: 'Example Trading'
-              uk_based:
-                type: boolean
-              registered_address_1:
-                type: string
-                example: '123 HIGH STREET'
-              registered_address_2:
-                type: string
-                example: 'AREA'
-              registered_address_3:
-                type: string
-                example: 'SUBTOWN'
-              registered_address_4:
-                type: string
-                example: 'SUBREGION'
-              registered_address_town:
-                type: string
-                example: 'ANYTOWN'
-              registered_address_county:
-                type: string
-                example: 'ANYSHIRE'
-              registered_address_postcode:
-                type: string
-                example: 'AB1 2CD'
-              created_on:
-                type: string
-                format: date-time
-                example: 2014-07-23T10:36:04
-              modified_on:
-                type: string
-                format: date-time
-                example: 2014-07-23T10:36:04
-              archived:
-                type: boolean
-              archived_on:
-                type: string
-                format: date-time
-                example: 2014-07-23T10:36:04
-              archived_reason:
-                type: string
-                example: 'Company dissolved'
-              lead:
-                type: boolean
-              description:
-                type: string
-                example: 'MANUFACTURER OF WIDGETS AND DOODADS'
-              website:
-                type: string
-                example: 'http://www.example.com'
-              trading_address_1:
-                type: string
-                example: '123 HIGH STREET'
-              trading_address_2:
-                type: string
-                example: 'AREA'
-              trading_address_3:
-                type: string
-                example: 'SUBTOWN'
-              trading_address_4:
-                type: string
-                example: 'SUBREGION'
-              trading_address_town:
-                type: string
-                example: 'ANYTOWN'
-              trading_address_county:
-                type: string
-                example: 'ANYSHIRE'
-              trading_address_postcode:
-                type: string
-                example: 'AB1 2CD'
-          relationships:
-            $ref: '#/definitions/CompanyRelationships'
-          links:
-            type: object
-            properties:
-              self:
-                type: string
-                example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851'
-  CompanyRelationships:
-    type: object
-    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'EXAMPLE Ltd'
+      trading_name:
+        type: string
+        example: 'Example Trading'
+      uk_based:
+        type: boolean
+      registered_address_1:
+        type: string
+        example: '123 HIGH STREET'
+      registered_address_2:
+        type: string
+        example: 'AREA'
+      registered_address_3:
+        type: string
+        example: 'SUBTOWN'
+      registered_address_4:
+        type: string
+        example: 'SUBREGION'
+      registered_address_town:
+        type: string
+        example: 'ANYTOWN'
+      registered_address_county:
+        type: string
+        example: 'ANYSHIRE'
+      registered_address_postcode:
+        type: string
+        example: 'AB1 2CD'
+      created_on:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
+      modified_on:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
+      archived:
+        type: boolean
+      archived_on:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
+      archived_reason:
+        type: string
+        example: 'Company dissolved'
+      lead:
+        type: boolean
+      description:
+        type: string
+        example: 'MANUFACTURER OF WIDGETS AND DOODADS'
+      website:
+        type: string
+        example: 'http://www.example.com'
+      trading_address_1:
+        type: string
+        example: '123 HIGH STREET'
+      trading_address_2:
+        type: string
+        example: 'AREA'
+      trading_address_3:
+        type: string
+        example: 'SUBTOWN'
+      trading_address_4:
+        type: string
+        example: 'SUBREGION'
+      trading_address_town:
+        type: string
+        example: 'ANYTOWN'
+      trading_address_county:
+        type: string
+        example: 'ANYSHIRE'
+      trading_address_postcode:
+        type: string
+        example: 'AB1 2CD'
       account_manager:
         $ref: '#/definitions/Advisor'
       archived_by:
@@ -125,7 +96,7 @@
       classification:
         $ref: '#/definitions/Classification'
       companies_house_data:
-        $ref: '#/definitions/CompaniesHouseData'
+        $ref: '#/definitions/CompaniesHouseSlim'
       contacts:
         $ref: '#/definitions/ContactArray'
       employee_range:
@@ -141,7 +112,7 @@
       one_list_owner:
         $ref: '#/definitions/Advisor'
       parent:
-        $ref: '#/definitions/CompanyKey'
+        $ref: '#/definitions/CompanySlim'
       registered_address_country:
           $ref: '#/definitions/Country'
       sector:
@@ -155,207 +126,110 @@
   Advisor:
     type: object
     required:
-    - data
+    - id
+    - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'Advisor'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'A N Advisor'
   BusinessType:
     type: object
+    description: "Business Type metadata"
     required:
-    - data
+      - id
+      - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'BusinessType'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Limited Company'
   Classification:
     type: object
     required:
-    - data
+      - id
+      - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'OneListClassifaction'
-  CompaniesHouseData:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'D - Post managed'
+  CompaniesHouseSlim:
     type: object
     required:
-    - data
+    - company_number
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: string
-            example: 'SCO-123456'
-          type:
-            type: string
-            example: 'CompaniesHouse'
+      id:
+        type: string
+        format: string
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      company_number:
+        type: string
+        example: 'SCO-123456'
   CompanyKeyArray:
+    type: array
+    items:
+      $ref: '#/definitions/CompanySlim'
+  CompanySlim:
     type: object
     required:
-    - data
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/CompanyRaw'
-      meta:
-        type: object
-        properties:
-          count:
-            type: integer
-            example: 30
-      links:
-        type: object
-        properties:
-          self:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/children?page[offset]=0&page[limit]=10'
-          next:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/parents?page[offset]=10&page[limit]=10'
-          prev:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/children?page[offset]=0&page[limit]=10'
-          last:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/parents?page[offset]=120&page[limit]=10'
-  CompanyKey:
-    type: object
-    required:
-    - data
-    properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-          type:
-            type: string
-            example: 'CompanyKey'
-  CompanyRaw:
-    type: object
-    required:
-      - id
-      - type
+    - id
+    - name
     properties:
       id:
         type: string
         format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      type:
+      name:
         type: string
-        example: 'Company'
+        example: 'Company Registered Name Ltd'
   ContactArray:
-    type: object
-    required:
-    - data
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/ContactRaw'
-  ContactRaw:
+    type: array
+    items:
+      $ref: '#/definitions/Contact'
+  Contact:
     type: object
     required:
       - id
-      - type
+      - first_name
+      - last_name
     properties:
       id:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      type:
+      first_name:
+        type: string
+        example: 'Alison'
+      last_name:
         type: string
         example: 'Contact'
+  CountryArray:
+    type: array
+    items:
+      $ref: '#/definitions/Country'
   Country:
     type: object
-    required:
-    - data
-    properties:
-      data:
-        $ref: '#/definitions/CountryRaw'
-  CountryArray:
-    type: object
-    required:
-    - data
-    properties:
-      meta:
-        type: object
-        properties:
-          count:
-            type: integer
-            example: 30
-      links:
-        type: object
-        properties:
-          self:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/exportToCountries?page[offset]=0&page[limit]=10'
-          next:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/futureInterestCountries?page[offset]=10&page[limit]=10'
-          prev:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/exportToCountries?page[offset]=0&page[limit]=10'
-          last:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/futureInterestCountries?page[offset]=120&page[limit]=10'
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/CountryRaw'
-  CountryRaw:
-    type: object
+    description: "Country metadata"
     required:
       - id
-      - type
+      - name
     properties:
       id:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      type:
+      name:
         type: string
-        example: 'Country'
+        example: 'France'
   Interaction:
     type: object
     required:
@@ -370,202 +244,127 @@
         type: string
         example: 'Interaction'
   InteractionArray:
-    type: object
-    required:
-    - data
-    properties:
-      meta:
-        type: object
-        properties:
-          count:
-            type: integer
-            example: 30
-      links:
-        type: object
-        properties:
-          self:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/interactions?page[offset]=0&page[limit]=10'
-          next:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/interactions?page[offset]=10&page[limit]=10'
-          prev:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/interactions?page[offset]=0&page[limit]=10'
-          last:
-            type: string
-            example: 'http://HOST/v2/company/d290f1ee-6c54-4b01-90e6-d701748f0851/interactions?page[offset]=120&page[limit]=10'
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/Interaction'
+    type: array
+    items:
+      $ref: '#/definitions/Interaction'
   EmployeeRange:
     type: object
+    description: "Employee range metadata"
     required:
-    - data
+    - id
+    - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'EmployeeRange'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: '10 - 100'
   Sector:
     type: object
+    description: "Metadata"
     required:
-    - data
+      - id
+      - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'Sector'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Advanced Engineering'
   HeadquarterType:
     type: object
+    description: "Headquarters type metadata"
     required:
-    - data
+    - id
+    - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-          type:
-            type: string
-            example: 'HeadquarterType'
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        example: 'HeadquarterType'
   TurnoverRange:
     type: object
     required:
-    - data
+    - id
+    - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-          type:
-            type: string
-            example: 'TurnoverRange'
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        example: '10 -100'
   UKRegion:
     type: object
     required:
-      - data
+    - id
+    - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'UKRegion'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'South East'
   CompaniesHouseCompany:
     type: object
     description: A Companies House company object
     required:
-    - data
+    - name
+    - registered_address_1
+    - registered_address_town
+    - company_number
     properties:
-      data:
-        title: Company Top Level
-        type: object
-        required:
-        - type
-        - attributes
-        - links
-        - id # company number
-        properties:
-          type:
-            type: string
-            example: 'CompaniesHouseCompany'
-          id:
-            type: string
-            example: 'SCO-123456'
-          attributes:
-            title: CompaniesHouseCompany
-            type: object
-            required:
-            - name
-            - registered_address_1
-            - registered_address_town
-            - company_number
-            properties:
-              name:
-                type: string
-              registered_address_1:
-                type: string
-                example: '123 HIGH STREET'
-              registered_address_2:
-                type: string
-                example: 'AREA'
-              registered_address_town:
-                type: string
-                example: 'ANYTOWN'
-              registered_address_county:
-                type: string
-                example: 'ANYSHIRE'
-              registered_address_postcode:
-                type: string
-                example: 'AB1 2CD'
-              company_number:
-                type: string
-                example: 'SCO-123456'
-              company_category:
-                type: string
-                example: 'Private Limited Company'
-              company_status:
-                type: string
-                example: 'Active - Proposal to Strike off'
-              sic_code_1:
-                type: string
-                example: '20600 - Manufacture of man-made fibres'
-              sic_code_2:
-                type: string
-                example: '52211 - Operation of rail freight terminals'
-              sic_code_3:
-                type: string
-                example: '71111 - Architectural activities'
-              sic_code_4:
-                type: string
-                example: '96030 - Funeral and related activities'
-              uri:
-                type: string
-                example: 'http://www.example.com'
-              incorporation_date:
-                type: string
-                format: date-time
-                example: 2014-07-23T10:36:04
-          links:
-            type: object
-            properties:
-              self:
-                type: string
-                example: 'http://HOST/v2/ch_company/d290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+      registered_address_1:
+        type: string
+        example: '123 HIGH STREET'
+      registered_address_2:
+        type: string
+        example: 'AREA'
+      registered_address_town:
+        type: string
+        example: 'ANYTOWN'
+      registered_address_county:
+        type: string
+        example: 'ANYSHIRE'
+      registered_address_postcode:
+        type: string
+        example: 'AB1 2CD'
+      company_number:
+        type: string
+        example: 'SCO-123456'
+      company_category:
+        type: string
+        example: 'Private Limited Company'
+      company_status:
+        type: string
+        example: 'Active - Proposal to Strike off'
+      sic_code_1:
+        type: string
+        example: '20600 - Manufacture of man-made fibres'
+      sic_code_2:
+        type: string
+        example: '52211 - Operation of rail freight terminals'
+      sic_code_3:
+        type: string
+        example: '71111 - Architectural activities'
+      sic_code_4:
+        type: string
+        example: '96030 - Funeral and related activities'
+      uri:
+        type: string
+        example: 'http://www.example.com'
+      incorporation_date:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
 

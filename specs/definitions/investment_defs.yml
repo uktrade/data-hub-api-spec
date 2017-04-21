@@ -1,444 +1,293 @@
   InvestmentProject:
     type: object
     description: A Data Hub investment project
-    required:
-    - data
     properties:
-      data:
-        title: Investment Project
+      type:
+        type: string
+        example: 'Investment Project'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      attributes:
+        title: 'Investment Project'
         type: object
         required:
-        - type
-        - attributes
-        - relationships
-        - links
+        - name
+        - description
+        - nda_signed
+        - estimated_land_date
+        - investment_type
         properties:
-          type:
+          name:
             type: string
-            example: 'Investment Project'
-          id:
+            example: 'Marriot Hotels - New hotel in Manchester'
+          project_code:
             type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          attributes:
-            title: 'Investment Project'
-            type: object
-            required:
-            - name
-            - description
-            - nda_signed
-            - estimated_land_date
-            - investment_type
-            properties:
-              name:
-                type: string
-                example: 'Marriot Hotels - New hotel in Manchester'
-              project_code:
-                type: string
-                example: 'P-01234567'
-              description:
-                type: string
-                example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
-              document_link:
-                type: string
-                example: 'https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598'
-              nda_signed:
-                type: boolean
-                example: false
-              estimated_land_date:
-                type: string
-                format: date
-                example: '2017-05-01'
-              investment_type:
-                type: string
-                enum:
-                - FDI
-                - non-FDI
-                - Commitment to invest
-              project_shareable:
-                type: boolean
-              anonymous_description:
-                type: string
-                example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
-              not_shareable_reason:
-                type: string
-                example: 'Company has asked us to keep project quiet until official announcement'
-          relationships:
-            $ref: '#/definitions/InvestmentRelationships'
-          links:
-            type: object
-            properties:
-              self:
-                type: string
-                example: 'http://${HOST}/v2/investment/project/d290f1ee-6c54-4b01-90e6-d701748f0851'
-              value:
-                type: object
-                properties:
-                  href:
-                    type: string
-                    example: 'http://${HOST}/v2/investment/value/d290f1ee-6c54-4b01-90e6-d701748f0851'
-              requirements:
-                type: object
-                properties:
-                  href:
-                    type: string
-                    example: 'http://${HOST}/v2/investment/requirements/d290f1ee-6c54-4b01-90e6-d701748f0851'
-  InvestmentRelationships:
-    type: object
-    required:
-    - invester_company
-    - investment_recipient_company
-    - client_relationship_manager
-    - referral_source_advisor
-    - referral_source_activity
-    properties:
-      invester_company:
-        $ref: '#/definitions/CompanyKey'
-      investment_recipient_company:
-        $ref: '#/definitions/CompanyKey'
-      client_contacts:
-        $ref: '#/definitions/ContactArray'
-      client_relationship_manager:
-        $ref: '#/definitions/Advisor'
-      referral_source_advisor:
-        $ref: '#/definitions/Advisor'
-      referral_source_activity:
-        $ref: '#/definitions/SourceActivity'
-      fdi_type:
-        $ref: '#/definitions/FDIType'
-      non_fdi_type:
-        $ref: '#/definitions/NonFDIType'
-      sector:
-        $ref: '#/definitions/Sector'
-      business_activity:
-        $ref: '#/definitions/BusinessActivity'
+            example: 'P-01234567'
+          description:
+            type: string
+            example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
+          document_link:
+            type: string
+            example: 'https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598'
+          nda_signed:
+            type: boolean
+            example: false
+          estimated_land_date:
+            type: string
+            format: date
+            example: '2017-05-01'
+          investment_type:
+            type: string
+            enum:
+            - FDI
+            - non-FDI
+            - Commitment to invest
+          project_shareable:
+            type: boolean
+          anonymous_description:
+            type: string
+            example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
+          not_shareable_reason:
+            type: string
+            example: 'Company has asked us to keep project quiet until official announcement'
+          invester_company:
+            $ref: '#/definitions/CompanySlim'
+          investment_recipient_company:
+            $ref: '#/definitions/CompanySlim'
+          client_contacts:
+            $ref: '#/definitions/ContactArray'
+          client_relationship_manager:
+            $ref: '#/definitions/Advisor'
+          referral_source_advisor:
+            $ref: '#/definitions/Advisor'
+          referral_source_activity:
+            $ref: '#/definitions/ReferralSourceActivity'
+          referral_source_activity_event:
+            $ref: '#/definitions/ReferralSourceActivityEvent'
+          fdi_type:
+            $ref: '#/definitions/FDIType'
+          non_fdi_type:
+            $ref: '#/definitions/NonFDIType'
+          sector:
+            $ref: '#/definitions/Sector'
+          business_activity:
+            $ref: '#/definitions/BusinessActivity'
   InvestmentValue:
     type: object
     description: A Data Hub investment project Value object
     required:
-    - data
+    - project_id
     properties:
-      data:
-        title: Investment Project Value
-        type: object
-        required:
-        - type
-        - attributes
-        - relationships
-        - links
-        properties:
-          type:
-            type: string
-            example: 'Investment Project Value'
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          attributes:
-            title: 'Investment Project Value Object'
-            type: object
-            properties:
-              project_id:
-                type: string
-                format: uuid
-                example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-              total_investment:
-                type: integer
-                example: 145000000
-              foreign_equity_investment:
-                type: integer
-                example: 100000000
-              government_assistance:
-                type: boolean
-                example: false
-              number_new_jobs:
-                type: integer
-                example: 100
-              number_safeguarded_jobs:
-                type: integer
-                example: 100
-              r_and_d_budget:
-                type: boolean
-                example: false
-              non_fdi_r_and_d_budget:
-                type: boolean
-                example: false
-              new_tech_to_uk:
-                type: boolean
-                example: false
-              export_revenue:
-                type: boolean
-                example: false
-          relationships:
-            type: object
-            properties:
-              average_salary:
-                type: object
-                required:
-                - data
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                    example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-                  type:
-                    type: string
-                    example: 'AverageSalary'
-          links:
-            type: object
-            properties:
-              self:
-                type: string
-                example: 'http://${HOST}/v2/investment/value/d290f1ee-6c54-4b01-90e6-d701748f0851'
-  InvestmentRequirements:
-    type: object
-    description: A Data Hub investment project Value object
-    required:
-    - data
-    properties:
-      data:
-        title: Investment Project Value
-        type: object
-        required:
-        - type
-        - attributes
-        - relationships
-        - links
-        properties:
-          type:
-            type: string
-            example: 'Investment Project Requirements'
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          attributes:
-            title: 'Investment Project Requirements Object'
-            type: object
-            properties:
-              project_id:
-                type: string
-                format: uuid
-                example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-              client_requirements:
-                type: string
-                example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
-              site_decided:
-                type: boolean
-                default: false
-                example: false
-              address_line_1:
-                type: string
-                example: '19 Railway Cuttings'
-              address_line_2:
-                type: string
-                example: 'East Cheam'
-              address_line_3:
-                type: string
-                example: 'Surrey'
-              address_postcode:
-                type: string
-                example: 'SN1 1AA'
-          relationships:
-            type: object
-            properties:
-              competitor_countries:
-                $ref: '#/definitions/CountryArray' # @TODO Fix
-              uk_region_locations:
-                $ref: '#/definitions/UKRegions'
-              strategic_drivers:
-                $ref: '#/definitions/StrategicDrivers'
-          links:
-            type: object
-            properties:
-              self:
-                type: string
-                example: 'http://${HOST}/v2/investment/requirements/d290f1ee-6c54-4b01-90e6-d701748f0851'
-
-  InvestmentTeam:
-    type: object
-    description: A Data Hub investment project Value object
-    required:
-    - data
-    properties:
-      data:
-        title: Investment Project Value
-        type: object
-        required:
-        - type
-        - relationships
-        - links
-        properties:
-          type:
-            type: string
-            example: 'Investment Project Team'
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          relationships:
-            type: object
-            properties:
-              project_manager_team:
-                $ref: '#/definitions/AdvisorTeam'
-              project_manager:
-                $ref: '#/definitions/Advisor'
-              project_assurance_team:
-                $ref: '#/definitions/AdvisorTeam'
-              project_assurance:
-                $ref: '#/definitions/Advisor'
-          links:
-            type: object
-            properties:
-              self:
-                type: string
-                example: 'http://${HOST}/v2/investment/team/d290f1ee-6c54-4b01-90e6-d701748f0851'
-  BusinessActivity:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-            - id
-            - type
-          properties:
-            id:
-              type: string
-              format: uuid
-              example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-            type:
-              type: string
-              example: 'BusinessActivity'
-  SourceActivity:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-            - id
-            - type
-          properties:
-            id:
-              type: string
-              format: uuid
-              example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-            type:
-              type: string
-              example: 'SourceActivity'
-  FDIType:
-    type: object
-    required:
-    - data
-    properties:
-      data:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      project_id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      total_investment:
+        type: integer
+        example: 145000000
+      foreign_equity_investment:
+        type: integer
+        example: 100000000
+      government_assistance:
+        type: boolean
+        example: false
+      number_new_jobs:
+        type: integer
+        example: 100
+      number_safeguarded_jobs:
+        type: integer
+        example: 100
+      r_and_d_budget:
+        type: boolean
+        example: false
+      non_fdi_r_and_d_budget:
+        type: boolean
+        example: false
+      new_tech_to_uk:
+        type: boolean
+        example: false
+      export_revenue:
+        type: boolean
+        example: false
+      average_salary:
         type: object
         required:
         - id
-        - type
+        - name
         properties:
           id:
             type: string
             format: uuid
             example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
+          name:
             type: string
-            example: 'FDIType'
-  NonFDIType:
+            example: '£35,000'
+  InvestmentRequirements:
+    type: object
+    description: A Data Hub investment project Value object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      project_id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      client_requirements:
+        type: string
+        example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
+      site_decided:
+        type: boolean
+        default: false
+        example: false
+      address_line_1:
+        type: string
+        example: '19 Railway Cuttings'
+      address_line_2:
+        type: string
+        example: 'East Cheam'
+      address_line_3:
+        type: string
+        example: 'Surrey'
+      address_postcode:
+        type: string
+        example: 'SN1 1AA'
+      competitor_countries:
+        $ref: '#/definitions/CountryArray'
+      uk_region_locations:
+        $ref: '#/definitions/UKRegions'
+      strategic_drivers:
+        $ref: '#/definitions/StrategicDriverArray'
+  InvestmentTeam:
+    type: object
+    description: A Data Hub investment project Value object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      project_manager_team:
+        $ref: '#/definitions/AdvisorTeam'
+      project_manager:
+        $ref: '#/definitions/Advisor'
+      project_assurance_team:
+        $ref: '#/definitions/AdvisorTeam'
+      project_assurance:
+        $ref: '#/definitions/Advisor'
+  BusinessActivity:
     type: object
     required:
-    - data
+      - id
+      - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'FDIType'
-
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Retail'
+  ReferralSourceActivity:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Cold Call'
+  ReferralSourceActivityEvent:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Event Name'
+  FDIType:
+    type: object
+    description: "FDI Metadata"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Merger'
+  NonFDIType:
+    type: object
+    description: "Non-FDI Metadata"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Advanced Engineering Supply Chain'
   AdvisorTeam:
     type: object
     required:
-    - data
+    - id
+    - name
     properties:
-      data:
-        type: object
-        required:
-          - id
-          - type
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-          type:
-            type: string
-            example: 'AdvisorTeam'
-  StrategicDrivers:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Sector Advisory Services'
+  StrategicDriverArray:
+    type: array
+    items:
+      $ref: '#/definitions/StrategicDriver'
+  StrategicDriver:
     type: object
+    description: 'Strategic Driver metadata'
     required:
-    - data
+    - id
+    - name
     properties:
-      meta:
-        type: object
-        properties:
-          count:
-            type: integer
-            example: 30
-      links:
-        type: object
-        properties:
-          self:
-            type: string
-            example: 'http://${HOST}/v2/{api_call}/d290f1ee-6c54-4b01-90e6-d701748f0851/?page[offset]=0&page[limit]=10'
-          next:
-            type: string
-            example: 'http://${HOST}/v2/{api_call}/d290f1ee-6c54-4b01-90e6-d701748f0851/?page[offset]=10&page[limit]=10'
-          prev:
-            type: string
-            example: 'http://${HOST}/v2/{api_call}/d290f1ee-6c54-4b01-90e6-d701748f0851/?page[offset]=0&page[limit]=10'
-          last:
-            type: string
-            example: 'http://${HOST}/v2/{api_call}/d290f1ee-6c54-4b01-90e6-d701748f0851/?page[offset]=120&page[limit]=10'
-      data:
-        type: array
-        items:
-          type: object
-          required:
-            - id
-            - type
-          properties:
-            id:
-              type: string
-              format: uuid
-              example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-            type:
-              type: string
-              example: 'Access to market'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Access to market'
   UKRegions:
-    type: object
-    required:
-    - data
-    properties:
-      data:
-        type: array
-        items:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-            type:
-              type: string
-              example: 'South East England'
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        name:
+          type: string
+          example: 'South East England'

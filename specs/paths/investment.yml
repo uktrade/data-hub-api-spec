@@ -7,7 +7,7 @@
       description: |
         Passing in a UUID returns a Data Hub investment object
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -32,9 +32,9 @@
       operationId: updateInvestment
       description: Updates an existing investment project
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -63,9 +63,9 @@
       operationId: createInvestment
       description: Creates a new investment project within Data Hub
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: body
         name: investmentStageOne
@@ -89,7 +89,7 @@
       description: |
         Passing in the UUID of an investment project returns the value associated with it
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -111,12 +111,12 @@
       tags:
       - investment
       summary: updates an investment project value object, creating a new one if not found
-      operationId: updateInvestment
+      operationId: updateInvestmentValue
       description: Updates an existing investment project value object
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -141,12 +141,12 @@
       tags:
       - investment
       summary: creates an investment project value object
-      operationId: createInvestment
+      operationId: createInvestmentValue
       description: Creates an existing investment project value object
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -176,7 +176,7 @@
       description: |
         Passing in the UUID of an investment project returns the value associated with it
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -198,12 +198,12 @@
       tags:
       - investment
       summary: updates an investment project requirements object, creating a new one if not found
-      operationId: updateInvestment
+      operationId: updateInvestmentRequirements
       description: Updates an existing investment project requirements object
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -228,12 +228,12 @@
       tags:
       - investment
       summary: creates an investment project requirements object
-      operationId: createInvestment
+      operationId: createInvestmentRequirements
       description: Creates an existing investment project requirements object
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -259,11 +259,11 @@
       tags:
       - investment
       summary: Returns the team information associated with a project @TODO document WHY
-      operationId: getinvestmentrequirements
+      operationId: getinvestmentteam
       description: |
         Passing in the UUID of an investment project returns the team associated with it
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -285,12 +285,12 @@
       tags:
       - investment
       summary: updates an investment project team object, creating a new one if not found
-      operationId: updateInvestment
+      operationId: updateInvestmentTeam
       description: Updates an existing investment project team object
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
@@ -315,12 +315,12 @@
       tags:
       - investment
       summary: creates an investment project team object
-      operationId: createInvestment
+      operationId: createInvestmentTeam
       description: Creates an existing investment project team object
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: investmentId
