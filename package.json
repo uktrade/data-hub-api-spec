@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cat specs/headers/swagger_head.yml specs/headers/schemes.yml specs/headers/security.yml specs/headers/paths.yml specs/paths/* specs/headers/definitions.yml  specs/definitions/*  > datahub.yml && ./node_modules/swagger/bin/swagger.js validate datahub.yml",
-    "generate-node": "sh gendocs.sh"
+    "generate-node": "npm build && sh gendocs.sh"
   },
   "repository": {
     "type": "git",
