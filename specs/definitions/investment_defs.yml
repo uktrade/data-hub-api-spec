@@ -54,6 +54,8 @@
             example: 'Company has asked us to keep project quiet until official announcement'
           invester_company:
             $ref: '#/definitions/CompanySlim'
+          intermediate_company:
+            $ref: '#/definitions/CompanySlim'
           investment_recipient_company:
             $ref: '#/definitions/CompanySlim'
           client_contacts:
