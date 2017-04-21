@@ -7,7 +7,7 @@
       description: |
         Passing in a company UUID returns a Data Hub company object
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: companyId
@@ -31,9 +31,9 @@
       operationId: updateCompany
       description: Updates an existing company
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: companyId
@@ -66,9 +66,9 @@
       operationId: addCompany
       description: Adds a Data Hub company from a Companies House company
       consumes:
-      - application/vnd.api+json
+      - application/json
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: body
         name: company
@@ -92,7 +92,7 @@
       description: |
         Passing in a Companies House company number returns a Data Hub Companies House company object
       produces:
-      - application/vnd.api+json
+      - application/json
       parameters:
       - in: path
         name: company_number
