@@ -12,7 +12,7 @@ To Build
 
 Both the generate commands require a working Java installation
 
-Latest changes
+## Latest changes
 
 ### 16:48 21.04.2017
 
