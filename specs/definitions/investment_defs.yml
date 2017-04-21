@@ -39,11 +39,7 @@
             format: date
             example: '2017-05-01'
           investment_type:
-            type: string
-            enum:
-            - FDI
-            - non-FDI
-            - Commitment to invest
+            $ref: '#/definitions/InvestmentType'
           phase:
             $ref: '#/definitions/Phase'
           project_shareable:
@@ -54,7 +50,7 @@
           not_shareable_reason:
             type: string
             example: 'Company has asked us to keep project quiet until official announcement'
-          invester_company:
+          investor_company:
             $ref: '#/definitions/CompanySlim'
           intermediate_company:
             $ref: '#/definitions/CompanySlim'
@@ -68,6 +64,10 @@
             $ref: '#/definitions/Advisor'
           referral_source_activity:
             $ref: '#/definitions/ReferralSourceActivity'
+          referral_source_activity_website:
+            $ref: '#/definitions/ReferralSourceActivityWebsite'
+          referral_source_activity_marketing:
+            $ref: '#/definitions/ReferralSourceActivityMarketing'
           referral_source_activity_event:
             $ref: '#/definitions/ReferralSourceActivityEvent'
           fdi_type:
@@ -84,14 +84,6 @@
     required:
     - project_id
     properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      project_id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       total_investment:
         type: integer
         example: 145000000
@@ -136,14 +128,6 @@
     type: object
     description: A Data Hub investment project Value object
     properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      project_id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       client_requirements:
         type: string
         example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
@@ -183,7 +167,7 @@
         $ref: '#/definitions/Advisor'
       project_assurance_team:
         $ref: '#/definitions/AdvisorTeam'
-      project_assurance:
+      project_assurance_advisor:
         $ref: '#/definitions/Advisor'
   BusinessActivity:
     type: object
@@ -223,6 +207,32 @@
       name:
         type: string
         example: 'Event Name'
+  ReferralSourceActivityWebsite:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'DIT Regional Website'
+  ReferralSourceActivityMarketing:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Press advertisement'
   FDIType:
     type: object
     description: "FDI Metadata"
@@ -296,6 +306,20 @@
       name:
         type: string
         example: 'Access to market'
+  InvestmentType:
+    type: object
+    description: 'Investment Type metadata - one of FDI, Non-FDI, Commitment to Invest'
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'FDI'
   UKRegions:
     type: array
     items:

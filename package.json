@@ -4,8 +4,10 @@
   "description": "Data Hub REST API documentation and test server",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf gendocs && rm -rf genclient",
     "build": "cat specs/headers/swagger_head.yml specs/headers/schemes.yml specs/headers/security.yml specs/headers/paths.yml specs/paths/* specs/headers/definitions.yml  specs/definitions/*  > datahub.yml && ./node_modules/swagger/bin/swagger.js validate datahub.yml",
-    "generate-node": "npm build && sh gendocs.sh"
+    "generate-node": "npm build && sh gendocs.sh",
+    "generate-client": "npm build && sh generate-py-client.sh"
   },
   "repository": {
     "type": "git",

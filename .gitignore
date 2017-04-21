@@ -3,4 +3,5 @@ node_modules/
 .DS_Store
 datahub.yml
 /src/scratch
-gendocs/
+/gendocs/
+/genclient/

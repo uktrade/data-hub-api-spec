@@ -1,4 +1,4 @@
-  /investment/project/{investmentId}:
+  /investment/{investmentId}/project:
     get:
       tags:
       - investment
@@ -80,7 +80,7 @@
           description: invalid input, object invalid
         409:
           description: investment already exists
-  /investment/value/{investmentId}:
+  /investment/{investmentId}/value/:
     get:
       tags:
       - investment
@@ -195,7 +195,7 @@
           description: invalid input, object invalid
         409:
           description: investment already exists
-  /investment/requirements/{investmentId}:
+  /investment/{investmentId}/requirements:
     get:
       tags:
       - investment
@@ -252,37 +252,7 @@
           description: item created
         400:
           description: invalid input, object invalid
-    post:
-      tags:
-      - investment
-      summary: creates an investment project requirements object
-      operationId: createInvestmentRequirements
-      description: Creates an existing investment project requirements object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project requirements data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentRequirements'
-      responses:
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
-        409:
-          description: investment already exists
-  /investment/team/{investmentId}:
+  /investment/{investmentId}/team:
     get:
       tags:
       - investment
@@ -339,37 +309,7 @@
           description: item created
         400:
           description: invalid input, object invalid
-    post:
-      tags:
-      - investment
-      summary: creates an investment project team object
-      operationId: createInvestmentTeam
-      description: Creates an existing investment project team object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project team data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentTeam'
-      responses:
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
-        409:
-          description: investment already exists
-  /investment/businessactivity/{investmentId}:
+  /investment/{investmentId}/businessactivity:
     put:
       tags:
       - investment
