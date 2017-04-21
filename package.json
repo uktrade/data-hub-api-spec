@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "run": "node index.js",
-    "build": "cat specs/headers/swagger_head.yml specs/headers/schemes.yml specs/headers/security.yml specs/headers/paths.yml specs/paths/* specs/headers/definitions.yml  specs/definitions/*  > datahub2.yml && ./node_modules/swagger/bin/swagger.js validate datahub2.yml"
+    "build": "cat specs/headers/swagger_head.yml specs/headers/schemes.yml specs/headers/security.yml specs/headers/paths.yml specs/paths/* specs/headers/definitions.yml  specs/definitions/*  > datahub2.yml && ./node_modules/swagger/bin/swagger.js validate datahub.yml"
   },
   "repository": {
     "type": "git",
