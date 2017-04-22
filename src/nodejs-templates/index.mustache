@@ -9,7 +9,7 @@ const swaggerTools = require('swagger-tools');
 const jsyaml = require('js-yaml')
 const serveStatic = require('serve-static')
 
-const serverPort = {{serverPort}};
+const serverPort = process.env.PORT || 80;
 
 // swaggerRouter configuration
 const options = {
