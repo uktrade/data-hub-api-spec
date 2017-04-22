@@ -14,6 +14,10 @@ Both the generate commands require a working Java installation
 
 ## Latest changes
 
+### 22.04.2017
+
+Major reorganisation to get this running on heroku
+
 ### 16:48 21.04.2017
 
 Added auto-generated documentation
