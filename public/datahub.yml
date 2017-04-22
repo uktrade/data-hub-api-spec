@@ -10,8 +10,8 @@ info:
     url: https://opensource.org/licenses/MIT
 
 schemes:
-- http
 - https
+- http
 
 securityDefinitions:
   OauthSecurity:

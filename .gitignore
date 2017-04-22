@@ -3,3 +3,4 @@ node_modules/
 .DS_Store
 /generator/src/scratch
 /genclient/
+/generator/datahub.yml

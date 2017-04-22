@@ -13,13 +13,30 @@
 </ul>
 <p>To Build</p>
 <ul>
-<li><code>npm install &amp;&amp; npm build</code></li>
+<li><code>npm run generate-node &amp;&amp; npm start</code></li>
 <li>The output file - <code>datahub.yml</code> - is the full spec</li>
-<li><code>npm generate-node</code> runs a local version of swagger-ui with mocked endpoints at <a href="http://localhost:8080">http://localhost:8080</a></li>
 <li><code>npm generate-client</code> makes a Python client for the API</li>
+<li>To push updates to Heroku you need to commit the generated files (in /gendocs &amp; /public) - don&#39;t edit these directly</li>
 </ul>
 <p>Both the generate commands require a working Java installation</p>
+<h2 id="data-hub-api-rules">Data Hub API rules</h2>
+<h3 id="verbs">Verbs</h3>
+<p><strong>GET</strong> retrieves entities. Requests in the form /endpoint/{uuid} will retrieve one entity; requests in the form /endpoint?{filter}={filtervalue} will return an array. All GET requests <em>SHOULD</em> be idempotent. GET requests do not get a body, no matter what Elasticsearch says</p>
+<p><strong>POST</strong> creates a <em>new</em> entity each time it is called. Therefore POSTs are non-idempotent. Servers <em>MAY</em> apply duplicate checking to see if they are being asked to create a copy of an already existing entity, in which case they <em>MAY</em> regard this as a validation error and return an appropriate error code, and clients should handle this error case, but it will not always bne present.</p>
+<p><strong>PUT</strong> creates an entity, or updates it if it already exists. PUTs should always be associated with an id of some sort to allow the server to know what entity it is talking to. Generally if an entity is PUT into an endpoint, and some entity fields are missing, the server <em>SHOULD</em> regard these as instructions to null the field in its internal representation, however there is one major exception to this rule: PUTs used to add further data to a large object.</p>
+<p>PUTs are also used in Data Hub in the case where a very large representation of an entity is split across multiple endpoints, In the Investment family of calls, the Investment Project is large and its creation is split across multiple screens. Therefore there are no POST requests available for endpoints after the main Investment Project is created. Adding User Requirements and Value data is done with PUTs to the main object. So far, all operations that require PUT to operate in this way have a distinctive path pattern: /thing/id/subthing</p>
+<p><strong>PATCH</strong> allows the client to send a partial representation of the entity it wants to modify. In this case the server <em>MUST</em> leave any missing fields as they are in its handling of the entity.</p>
+<p><strong>DELETE</strong> will delete an entity, but we have no endpoints that implement this yet.</p>
+<h3 id="paths">Paths</h3>
+<p>Paths are in the form /{object}/{id}/{suboperation} where object is the main entity model being manipulated - eg company or investment, id (if present) is the database key of a particular entity, and suboperation describes some additional step ina  process.</p>
+<p>Generally endpoints returning an array will have a plural as the object. All requests to /metadata get an array as well (data is technically plural, so we&#39;re not really breaking the rules here.)</p>
+<h3 id="objects">Objects</h3>
+<p>Data Hub objects passed over the API are serialisations of JavaScript and Python objects in JSON. Values must always be coerced to their JSON equivalent: e.g., Python&#39;s <code>True</code> becomes <code>true</code></p>
+<p>Objects will generally expand to one nesting deep: the principle is that the Front End should do as little work as possible to populate values on screen, within reason. The reason for that reason: Data Hub objects can be very big, with dozens of fields and fkey relationships. Therefore, we may send a simple version of an object in some cases and the FE may need to issue a secondary call to inflate that object. An investment project involves three companies so to avoid bloating out the responses we send a metadata-like slim company object containing just the company&#39;s ID and it&#39;s registered name.</p>
+<p>FOR DISCUSSION - do we want a flag that completely fills out an object, barring circular refere3nces.</p>
 <h2 id="latest-changes">Latest changes</h2>
+<h3 id="22-04-2017">22.04.2017</h3>
+<p>Major reorganisation to get this running on heroku; API rules</p>
 <h3 id="16-48-21-04-2017">16:48 21.04.2017</h3>
 <p>Added auto-generated documentation</p>
 <h3 id="15-13-21-04-2017">15:13 21.04.2017</h3>
