@@ -4,12 +4,12 @@
   "description": "Data Hub REST API documentation and test server",
   "main": "index.js",
   "scripts": {
-    "swaggerui": "sh run-sub.sh",
+    "install": "cd generator && npm install",
     "clean": "rm -rf gendocs && rm -rf genclient",
-    "makeyaml": "cat specs/headers/swagger_head.yml specs/headers/schemes.yml specs/headers/security.yml specs/headers/paths.yml specs/paths/* specs/headers/definitions.yml  specs/definitions/*  > datahub.yml && ./node_modules/swagger/bin/swagger.js validate datahub.yml",
-    "generate-node": "npm run makeyaml && sh gendocs.sh",
-    "generate-client": "sh generate-py-client.sh",
-    "start": "npm run clean && npm run generate-node && npm run swaggerui",
+    "makeyaml": "cd generator && npm run makeyaml",
+    "generate-node": "cd generator && npm run generate-node",
+    "generate-client": "cd generator && sh generate-py-client.sh",
+    "start": "node gendocs/index.js",
     "postinstall": "cd gendocs && npm install"
   },
   "repository": {
@@ -30,13 +30,5 @@
   },
   "homepage": "https://github.com/uktrade/data-hub-api-spec#readme",
   "dependencies": {
-    "@uktrade/trade_elements": "^3.1.1",
-    "express": "^4.15.2",
-    "install": "^0.8.8",
-    "js-yaml": "^3.8.3",
-    "markdown-to-html": "0.0.13",
-    "npm": "^4.4.4",
-    "nunjucks": "^3.0.0",
-    "swagger": "^0.7.5"
   }
 }

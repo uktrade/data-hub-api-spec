@@ -5,7 +5,7 @@ const fs = require('fs')
 md.bufmax = 2048;
 
 const fileName = '../README.md';
-const outFile = 'public/index.html'
+const outFile = '../gendocs/public/index.html'
 const opts = {title: 'Data Hub API spec', stylesheet: 'style.css'};
 
 const outStream = fs.createWriteStream(outFile)

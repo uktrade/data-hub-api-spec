@@ -1,0 +1,12 @@
+body {
+    font-family: Arial;
+    margin: 0 20%
+}
+
+li {
+    line-height: 1.5em;
+}
+
+code {
+    font-size: 1.2em;
+}

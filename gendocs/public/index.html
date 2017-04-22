@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Hub API spec</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1 id="data-hub-crm-api-spec">Data Hub CRM API Spec</h1>
+<p>Swagger files and test server for the Data Hub CRM project</p>
+<ul>
+<li><a href="/docs">Interactive Swagger-UI documentation</a></li>
+<li><a href="/datahub.yml">Raw YAML API spec</a></li>
+</ul>
+<p>To Build</p>
+<ul>
+<li><code>npm install &amp;&amp; npm build</code></li>
+<li>The output file - <code>datahub.yml</code> - is the full spec</li>
+<li><code>npm generate-node</code> runs a local version of swagger-ui with mocked endpoints at <a href="http://localhost:8080">http://localhost:8080</a></li>
+<li><code>npm generate-client</code> makes a Python client for the API</li>
+</ul>
+<p>Both the generate commands require a working Java installation</p>
+<h2 id="latest-changes">Latest changes</h2>
+<h3 id="16-48-21-04-2017">16:48 21.04.2017</h3>
+<p>Added auto-generated documentation</p>
+<h3 id="15-13-21-04-2017">15:13 21.04.2017</h3>
+<ul>
+<li>&quot;investment_type&quot; - now object</li>
+<li>&quot;invester_company&quot; changed to &quot;investor_company&quot;</li>
+<li>referral_source_activity - added missing fields for website and marketing &quot;referral_source_activity_website&quot; &amp; &quot;referral_source_activity_marketing&quot;</li>
+<li>changes URL pattern for sub-resources (value/requirements/team etc.) to be /investment/{investmentId}/{subresource}</li>
+<li>removed id fields on sub-resources</li>
+<li>remove POST on sub-resources</li>
+<li>&quot;project_assurance&quot; (in team endpoint) changed to project_assurance_advisor</li>
+</ul>
+</body>
+</html>
