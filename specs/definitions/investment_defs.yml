@@ -81,8 +81,6 @@
   InvestmentValue:
     type: object
     description: A Data Hub investment project Value object
-    required:
-    - project_id
     properties:
       total_investment:
         type: integer

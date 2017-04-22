@@ -1,4 +1,4 @@
-# Data Hub API Spec
+# Data Hub CRM API Spec
 Swagger files and test server for the Data Hub CRM project
 
 - [Interactive Swagger-UI documentation](/docs)

@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: Data Hub Company API V2
+  description: Data Hub API
   version: 1.0.0
   title: Data Hub API
   contact:
@@ -8,6 +8,4 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-
-basePath: /v2
 
