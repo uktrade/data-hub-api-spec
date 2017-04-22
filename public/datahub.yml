@@ -1,0 +1,1184 @@
+swagger: '2.0'
+info:
+  description: Data Hub API
+  version: 1.0.0
+  title: Data Hub API
+  contact:
+    email: jim.smith@digital.trade.gov.uk
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+schemes:
+- http
+- https
+
+securityDefinitions:
+  OauthSecurity:
+    type: oauth2
+    flow: password
+    tokenUrl: '/token/'
+    scopes:
+      user: User scope
+
+security:
+  - OauthSecurity:
+    - user
+
+paths:
+  /company/{companyId}:
+    get:
+      tags:
+      - company
+      summary: Returns a company from the Data Hub repository
+      operationId: getcompany
+      description: |
+        Passing in a company UUID returns a Data Hub company object
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID for a Data Hub company
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted company object
+          schema:
+            $ref: '#/definitions/Company'
+        400:
+          description: bad input parameter
+        404:
+          description: company does not exist
+    put:
+      tags:
+      - company
+      summary: updates a company, creating a new one if not found
+      operationId: updateCompany
+      description: Updates an existing company
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID for a Data Hub company
+        type: string
+        required: true
+      - in: body
+        name: company
+        description: Company data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Company'
+      - in: query
+        name: Archived
+        description: Update the company's status to Archived
+        required: false
+        type: boolean
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+  /company:
+    post:
+      tags:
+      - company
+      summary: adds a Data Hub company
+      operationId: addCompany
+      description: Adds a Data Hub company from a Companies House company
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: company
+        description: Company to add
+        required: true
+        schema:
+          $ref: '#/definitions/Company'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: company already exists
+  /ch_company/{company_number}:
+    get:
+      tags:
+      - company
+      summary: Returns a Companies House company from the Data Hub repository
+      operationId: getchcompany
+      description: |
+        Passing in a Companies House company number returns a Data Hub Companies House company object
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_number
+        description: Companies House number
+        required: true
+        type: string
+      responses:
+        200:
+          description: JSON API formatted company object
+          schema:
+            $ref: '#/definitions/CompaniesHouseCompany'
+        400:
+          description: bad input parameter
+        404:
+          description: company does not exist
+  /investment/{investmentId}/project:
+    get:
+      tags:
+      - investment
+      summary: Returns an investment project from the Data Hub repository
+      operationId: getinvestment
+      description: |
+        Passing in a UUID returns a Data Hub investment object
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted investment project object
+          schema:
+            $ref: '#/definitions/InvestmentProject'
+        400:
+          description: bad input parameter
+        404:
+          description: investment does not exist
+    put:
+      tags:
+      - investment
+      summary: updates an investment project, creating a new one if not found
+      operationId: updateInvestment
+      description: Updates an existing investment project
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentProject'
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+  /investment/project:
+    post:
+      tags:
+      - investment
+      summary: adds the initial stage of an investment project
+      operationId: createInvestment
+      description: Creates a new investment project within Data Hub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: investmentStageOne
+        description: Investment to create a skeleton for
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentProject'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: investment already exists
+  /investment/{investmentId}/value/:
+    get:
+      tags:
+      - investment
+      summary: Returns the Value information associated with a project @TODO document WHY
+      operationId: getinvestmentvalue
+      description: |
+        Passing in the UUID of an investment project returns the value associated with it
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted investment value object
+          schema:
+            $ref: '#/definitions/InvestmentValue'
+        400:
+          description: bad input parameter
+        404:
+          description: investment does not exist
+    put:
+      tags:
+      - investment
+      summary: updates an investment project value object, creating a new one if not found
+      operationId: updateInvestmentValue
+      description: Updates an existing investment project value object
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project value data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentValue'
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+    patch:
+      tags:
+      - investment
+      summary: updates an investment project value object, from a partial JSON object
+      operationId: patchInvestmentValue
+      description: Patches an existing investment project value object
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project value data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentValue'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
+    post:
+      tags:
+      - investment
+      summary: creates an investment project value object
+      operationId: createInvestmentValue
+      description: Creates an existing investment project value object
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project value data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentValue'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: investment already exists
+  /investment/{investmentId}/requirements:
+    get:
+      tags:
+      - investment
+      summary: Returns the Requirements information associated with a project @TODO document WHY
+      operationId: getinvestmentrequirements
+      description: |
+        Passing in the UUID of an investment project returns the value associated with it
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted investment requirements object
+          schema:
+            $ref: '#/definitions/InvestmentRequirements'
+        400:
+          description: bad input parameter
+        404:
+          description: investment does not exist
+    put:
+      tags:
+      - investment
+      summary: updates an investment project requirements object, creating a new one if not found
+      operationId: updateInvestmentRequirements
+      description: Updates an existing investment project requirements object
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project requirements data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentRequirements'
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+  /investment/{investmentId}/team:
+    get:
+      tags:
+      - investment
+      summary: Returns the team information associated with a project @TODO document WHY
+      operationId: getinvestmentteam
+      description: |
+        Passing in the UUID of an investment project returns the team associated with it
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted investment team object
+          schema:
+            $ref: '#/definitions/InvestmentTeam'
+        400:
+          description: bad input parameter
+        404:
+          description: investment does not exist
+    put:
+      tags:
+      - investment
+      summary: updates an investment project team object, creating a new one if not found
+      operationId: updateInvestmentTeam
+      description: Updates an existing investment project team object
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project team data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentTeam'
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+  /investment/{investmentId}/businessactivity:
+    put:
+      tags:
+      - investment
+      summary: Adds a new Business Activity to a project
+      operationId: addBusinessActivity
+      description: Adds a custom business activity to a project
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: business_activity
+        description: The business activity to add
+        required: true
+        schema:
+          $ref: '#/definitions/BusinessActivity'
+      responses:
+        200:
+          description: item updated
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+
+definitions:
+  Company:
+    type: object
+    description: A representation of the Data Hub company object
+    required:
+    - name
+    - registered_address_1
+    - registered_address_town
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'EXAMPLE Ltd'
+      trading_name:
+        type: string
+        example: 'Example Trading'
+      uk_based:
+        type: boolean
+      registered_address_1:
+        type: string
+        example: '123 HIGH STREET'
+      registered_address_2:
+        type: string
+        example: 'AREA'
+      registered_address_3:
+        type: string
+        example: 'SUBTOWN'
+      registered_address_4:
+        type: string
+        example: 'SUBREGION'
+      registered_address_town:
+        type: string
+        example: 'ANYTOWN'
+      registered_address_county:
+        type: string
+        example: 'ANYSHIRE'
+      registered_address_postcode:
+        type: string
+        example: 'AB1 2CD'
+      created_on:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
+      modified_on:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
+      archived:
+        type: boolean
+      archived_on:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
+      archived_reason:
+        type: string
+        example: 'Company dissolved'
+      lead:
+        type: boolean
+      description:
+        type: string
+        example: 'MANUFACTURER OF WIDGETS AND DOODADS'
+      website:
+        type: string
+        example: 'http://www.example.com'
+      trading_address_1:
+        type: string
+        example: '123 HIGH STREET'
+      trading_address_2:
+        type: string
+        example: 'AREA'
+      trading_address_3:
+        type: string
+        example: 'SUBTOWN'
+      trading_address_4:
+        type: string
+        example: 'SUBREGION'
+      trading_address_town:
+        type: string
+        example: 'ANYTOWN'
+      trading_address_county:
+        type: string
+        example: 'ANYSHIRE'
+      trading_address_postcode:
+        type: string
+        example: 'AB1 2CD'
+      account_manager:
+        $ref: '#/definitions/Advisor'
+      archived_by:
+        $ref: '#/definitions/Advisor'
+      business_type:
+        $ref: '#/definitions/BusinessType'
+      children:
+        $ref: '#/definitions/CompanyKeyArray'
+      classification:
+        $ref: '#/definitions/Classification'
+      companies_house_data:
+        $ref: '#/definitions/CompaniesHouseSlim'
+      contacts:
+        $ref: '#/definitions/ContactArray'
+      employee_range:
+        $ref: '#/definitions/EmployeeRange'
+      export_to_countries:
+        $ref: '#/definitions/CountryArray'
+      future_interest_countries:
+        $ref: '#/definitions/CountryArray'
+      headquarter_type:
+        $ref: '#/definitions/HeadquarterType'
+      interactions:
+        $ref: '#/definitions/InteractionArray'
+      one_list_owner:
+        $ref: '#/definitions/Advisor'
+      parent:
+        $ref: '#/definitions/CompanySlim'
+      registered_address_country:
+          $ref: '#/definitions/Country'
+      sector:
+        $ref: '#/definitions/Sector'
+      trading_address_country:
+          $ref: '#/definitions/Country'
+      turnover_range:
+        $ref: '#/definitions/TurnoverRange'
+      uk_region:
+        $ref: '#/definitions/UKRegion'
+  Advisor:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'A N Advisor'
+  BusinessType:
+    type: object
+    description: "Business Type metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Limited Company'
+  Classification:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'D - Post managed'
+  CompaniesHouseSlim:
+    type: object
+    required:
+    - company_number
+    properties:
+      id:
+        type: string
+        format: string
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      company_number:
+        type: string
+        example: 'SCO-123456'
+  CompanyKeyArray:
+    type: array
+    items:
+      $ref: '#/definitions/CompanySlim'
+  CompanySlim:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        example: 'Company Registered Name Ltd'
+  ContactArray:
+    type: array
+    items:
+      $ref: '#/definitions/Contact'
+  Contact:
+    type: object
+    required:
+      - id
+      - first_name
+      - last_name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      first_name:
+        type: string
+        example: 'Alison'
+      last_name:
+        type: string
+        example: 'Contact'
+  CountryArray:
+    type: array
+    items:
+      $ref: '#/definitions/Country'
+  Country:
+    type: object
+    description: "Country metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'France'
+  Interaction:
+    type: object
+    required:
+      - id
+      - type
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      type:
+        type: string
+        example: 'Interaction'
+  InteractionArray:
+    type: array
+    items:
+      $ref: '#/definitions/Interaction'
+  EmployeeRange:
+    type: object
+    description: "Employee range metadata"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: '10 - 100'
+  Sector:
+    type: object
+    description: "Metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Advanced Engineering'
+  HeadquarterType:
+    type: object
+    description: "Headquarters type metadata"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        example: 'HeadquarterType'
+  TurnoverRange:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        example: '10 -100'
+  UKRegion:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'South East'
+  CompaniesHouseCompany:
+    type: object
+    description: A Companies House company object
+    required:
+    - name
+    - registered_address_1
+    - registered_address_town
+    - company_number
+    properties:
+      name:
+        type: string
+      registered_address_1:
+        type: string
+        example: '123 HIGH STREET'
+      registered_address_2:
+        type: string
+        example: 'AREA'
+      registered_address_town:
+        type: string
+        example: 'ANYTOWN'
+      registered_address_county:
+        type: string
+        example: 'ANYSHIRE'
+      registered_address_postcode:
+        type: string
+        example: 'AB1 2CD'
+      company_number:
+        type: string
+        example: 'SCO-123456'
+      company_category:
+        type: string
+        example: 'Private Limited Company'
+      company_status:
+        type: string
+        example: 'Active - Proposal to Strike off'
+      sic_code_1:
+        type: string
+        example: '20600 - Manufacture of man-made fibres'
+      sic_code_2:
+        type: string
+        example: '52211 - Operation of rail freight terminals'
+      sic_code_3:
+        type: string
+        example: '71111 - Architectural activities'
+      sic_code_4:
+        type: string
+        example: '96030 - Funeral and related activities'
+      uri:
+        type: string
+        example: 'http://www.example.com'
+      incorporation_date:
+        type: string
+        format: date-time
+        example: 2014-07-23T10:36:04
+
+  InvestmentProject:
+    type: object
+    description: A Data Hub investment project
+    properties:
+      type:
+        type: string
+        example: 'Investment Project'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      attributes:
+        title: 'Investment Project'
+        type: object
+        required:
+        - name
+        - description
+        - nda_signed
+        - estimated_land_date
+        - investment_type
+        properties:
+          name:
+            type: string
+            example: 'Marriot Hotels - New hotel in Manchester'
+          project_code:
+            type: string
+            example: 'P-01234567'
+          description:
+            type: string
+            example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
+          document_link:
+            type: string
+            example: 'https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598'
+          nda_signed:
+            type: boolean
+            example: false
+          estimated_land_date:
+            type: string
+            format: date
+            example: '2017-05-01'
+          investment_type:
+            $ref: '#/definitions/InvestmentType'
+          phase:
+            $ref: '#/definitions/Phase'
+          project_shareable:
+            type: boolean
+          anonymous_description:
+            type: string
+            example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
+          not_shareable_reason:
+            type: string
+            example: 'Company has asked us to keep project quiet until official announcement'
+          investor_company:
+            $ref: '#/definitions/CompanySlim'
+          intermediate_company:
+            $ref: '#/definitions/CompanySlim'
+          investment_recipient_company:
+            $ref: '#/definitions/CompanySlim'
+          client_contacts:
+            $ref: '#/definitions/ContactArray'
+          client_relationship_manager:
+            $ref: '#/definitions/Advisor'
+          referral_source_advisor:
+            $ref: '#/definitions/Advisor'
+          referral_source_activity:
+            $ref: '#/definitions/ReferralSourceActivity'
+          referral_source_activity_website:
+            $ref: '#/definitions/ReferralSourceActivityWebsite'
+          referral_source_activity_marketing:
+            $ref: '#/definitions/ReferralSourceActivityMarketing'
+          referral_source_activity_event:
+            $ref: '#/definitions/ReferralSourceActivityEvent'
+          fdi_type:
+            $ref: '#/definitions/FDIType'
+          non_fdi_type:
+            $ref: '#/definitions/NonFDIType'
+          sector:
+            $ref: '#/definitions/Sector'
+          business_activity:
+            $ref: '#/definitions/BusinessActivity'
+  InvestmentValue:
+    type: object
+    description: A Data Hub investment project Value object
+    properties:
+      total_investment:
+        type: integer
+        example: 145000000
+      foreign_equity_investment:
+        type: integer
+        example: 100000000
+      government_assistance:
+        type: boolean
+        example: false
+      number_new_jobs:
+        type: integer
+        example: 100
+      number_safeguarded_jobs:
+        type: integer
+        example: 100
+      r_and_d_budget:
+        type: boolean
+        example: false
+      non_fdi_r_and_d_budget:
+        type: boolean
+        example: false
+      new_tech_to_uk:
+        type: boolean
+        example: false
+      export_revenue:
+        type: boolean
+        example: false
+      average_salary:
+        type: object
+        required:
+        - id
+        - name
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+          name:
+            type: string
+            example: '£35,000'
+  InvestmentRequirements:
+    type: object
+    description: A Data Hub investment project Value object
+    properties:
+      client_requirements:
+        type: string
+        example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
+      site_decided:
+        type: boolean
+        default: false
+        example: false
+      address_line_1:
+        type: string
+        example: '19 Railway Cuttings'
+      address_line_2:
+        type: string
+        example: 'East Cheam'
+      address_line_3:
+        type: string
+        example: 'Surrey'
+      address_postcode:
+        type: string
+        example: 'SN1 1AA'
+      competitor_countries:
+        $ref: '#/definitions/CountryArray'
+      uk_region_locations:
+        $ref: '#/definitions/UKRegions'
+      strategic_drivers:
+        $ref: '#/definitions/StrategicDriverArray'
+  InvestmentTeam:
+    type: object
+    description: A Data Hub investment project Value object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      project_manager_team:
+        $ref: '#/definitions/AdvisorTeam'
+      project_manager:
+        $ref: '#/definitions/Advisor'
+      project_assurance_team:
+        $ref: '#/definitions/AdvisorTeam'
+      project_assurance_advisor:
+        $ref: '#/definitions/Advisor'
+  BusinessActivity:
+    type: object
+    required:
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Retail'
+  ReferralSourceActivity:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Cold Call'
+  ReferralSourceActivityEvent:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Event Name'
+  ReferralSourceActivityWebsite:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'DIT Regional Website'
+  ReferralSourceActivityMarketing:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Press advertisement'
+  FDIType:
+    type: object
+    description: "FDI Metadata"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Merger'
+  NonFDIType:
+    type: object
+    description: "Non-FDI Metadata"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Advanced Engineering Supply Chain'
+  AdvisorTeam:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Sector Advisory Services'
+  Phase:
+    type: object
+    description: 'Project phase metadata'
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Active'
+  StrategicDriverArray:
+    type: array
+    items:
+      $ref: '#/definitions/StrategicDriver'
+  StrategicDriver:
+    type: object
+    description: 'Strategic Driver metadata'
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Access to market'
+  InvestmentType:
+    type: object
+    description: 'Investment Type metadata - one of FDI, Non-FDI, Commitment to Invest'
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'FDI'
+  UKRegions:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        name:
+          type: string
+          example: 'South East England'
