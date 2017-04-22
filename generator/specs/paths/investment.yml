@@ -1,3 +1,28 @@
+  /investment/project:
+    post:
+      tags:
+      - investment
+      summary: adds the initial stage of an investment project
+      operationId: createInvestment
+      description: Creates a new investment project within Data Hub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: investmentStageOne
+        description: Investment to create a skeleton for
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentProject'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: investment already exists
   /investment/{investmentId}/project:
     get:
       tags:
@@ -55,31 +80,34 @@
           description: item created
         400:
           description: invalid input, object invalid
-  /investment/project:
-    post:
+    patch:
       tags:
       - investment
-      summary: adds the initial stage of an investment project
-      operationId: createInvestment
-      description: Creates a new investment project within Data Hub
+      summary: updates an investment project object, from a partial JSON object
+      operationId: patchInvestment
+      description: Patches an existing investment project object
       consumes:
       - application/json
       produces:
       - application/json
       parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
       - in: body
-        name: investmentStageOne
-        description: Investment to create a skeleton for
+        name: investment
+        description: Investment project  data to update
         required: true
         schema:
           $ref: '#/definitions/InvestmentProject'
       responses:
-        201:
-          description: item created
+        200:
+          description: item updated
         400:
           description: invalid input, object invalid
-        409:
-          description: investment already exists
   /investment/{investmentId}/value/:
     get:
       tags:
@@ -165,36 +193,6 @@
           description: item updated
         400:
           description: invalid input, object invalid
-    post:
-      tags:
-      - investment
-      summary: creates an investment project value object
-      operationId: createInvestmentValue
-      description: Creates an existing investment project value object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project value data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentValue'
-      responses:
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
-        409:
-          description: investment already exists
   /investment/{investmentId}/requirements:
     get:
       tags:
@@ -252,11 +250,39 @@
           description: item created
         400:
           description: invalid input, object invalid
+    patch:
+      tags:
+      - investment
+      summary: updates an investment requirements object, from a partial JSON object
+      operationId: patchInvestmentRequirements
+      description: Patches an existing investment requirements object
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project requirements data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentRequirements'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
   /investment/{investmentId}/team:
     get:
       tags:
       - investment
-      summary: Returns the team information associated with a project @TODO document WHY
+      summary: Returns the team information associated with a project
       operationId: getinvestmentteam
       description: |
         Passing in the UUID of an investment project returns the team associated with it
@@ -309,11 +335,39 @@
           description: item created
         400:
           description: invalid input, object invalid
+    patch:
+      tags:
+      - investment
+      summary: updates an investment team object, from a partial JSON object
+      operationId: patchInvestmentTeam
+      description: Patches an existing investment team object
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: investment
+        description: Investment project  data to update
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentTeam'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
   /investment/{investmentId}/businessactivity:
     put:
       tags:
       - investment
-      summary: Adds a new Business Activity to a project
+      summary: Adds a custom Business Activity to a project
       operationId: addBusinessActivity
       description: Adds a custom business activity to a project
       consumes:
@@ -340,4 +394,19 @@
           description: item created
         400:
           description: invalid input, object invalid
-
+  /metadata/business_activity:
+    get:
+      tags: 
+      - investment
+      - metadata
+      summary: retrieves Business Activity metadata array
+      operationId: metadataBusinessActibvity
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: metadata array
+          schema:
+            $ref: '#/definitions/BusinessActivities'

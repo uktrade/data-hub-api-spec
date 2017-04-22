@@ -1,0 +1,4 @@
+  BusinessActivities:
+    type: array
+    items:
+      $ref: '#/definitions/BusinessActivity'

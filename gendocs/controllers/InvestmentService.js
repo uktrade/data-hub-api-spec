@@ -2,7 +2,7 @@
 
 exports.addBusinessActivity = function(args, res, next) {
   /**
-   * Adds a new Business Activity to a project
+   * Adds a custom Business Activity to a project
    * Adds a custom business activity to a project
    *
    * investmentId String UUID for a Data Hub investment project
@@ -18,18 +18,6 @@ exports.createInvestment = function(args, res, next) {
    * Creates a new investment project within Data Hub
    *
    * investmentStageOne InvestmentProject Investment to create a skeleton for
-   * no response value expected for this operation
-   **/
-  res.end();
-}
-
-exports.createInvestmentValue = function(args, res, next) {
-  /**
-   * creates an investment project value object
-   * Creates an existing investment project value object
-   *
-   * investmentId String UUID for a Data Hub investment project
-   * investment InvestmentValue Investment project value data to update
    * no response value expected for this operation
    **/
   res.end();
@@ -149,7 +137,7 @@ exports.getinvestmentrequirements = function(args, res, next) {
 
 exports.getinvestmentteam = function(args, res, next) {
   /**
-   * Returns the team information associated with a project @TODO document WHY
+   * Returns the team information associated with a project
    * Passing in the UUID of an investment project returns the team associated with it 
    *
    * investmentId UUID UUID for a Data Hub investment project
@@ -207,6 +195,58 @@ exports.getinvestmentvalue = function(args, res, next) {
   } else {
     res.end();
   }
+}
+
+exports.metadataBusinessActibvity = function(args, res, next) {
+  /**
+   * retrieves Business Activity metadata array
+   *
+   * returns BusinessActivities
+   **/
+  var examples = {};
+  examples['application/json'] = "";
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
+}
+
+exports.patchInvestment = function(args, res, next) {
+  /**
+   * updates an investment project object, from a partial JSON object
+   * Patches an existing investment project object
+   *
+   * investmentId String UUID for a Data Hub investment project
+   * investment InvestmentProject Investment project  data to update
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.patchInvestmentRequirements = function(args, res, next) {
+  /**
+   * updates an investment requirements object, from a partial JSON object
+   * Patches an existing investment requirements object
+   *
+   * investmentId String UUID for a Data Hub investment project
+   * investment InvestmentRequirements Investment project requirements data to update
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.patchInvestmentTeam = function(args, res, next) {
+  /**
+   * updates an investment team object, from a partial JSON object
+   * Patches an existing investment team object
+   *
+   * investmentId String UUID for a Data Hub investment project
+   * investment InvestmentTeam Investment project  data to update
+   * no response value expected for this operation
+   **/
+  res.end();
 }
 
 exports.patchInvestmentValue = function(args, res, next) {

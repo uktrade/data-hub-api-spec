@@ -129,6 +129,32 @@ paths:
         404:
           description: "company does not exist"
       x-swagger-router-controller: "Company"
+  /investment/project:
+    post:
+      tags:
+      - "investment"
+      summary: "adds the initial stage of an investment project"
+      description: "Creates a new investment project within Data Hub"
+      operationId: "createInvestment"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "investmentStageOne"
+        description: "Investment to create a skeleton for"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentProject"
+      responses:
+        201:
+          description: "item created"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "investment already exists"
+      x-swagger-router-controller: "Investment"
   /investment/{investmentId}/project:
     get:
       tags:
@@ -187,31 +213,34 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/project:
-    post:
+    patch:
       tags:
       - "investment"
-      summary: "adds the initial stage of an investment project"
-      description: "Creates a new investment project within Data Hub"
-      operationId: "createInvestment"
+      summary: "updates an investment project object, from a partial JSON object"
+      description: "Patches an existing investment project object"
+      operationId: "patchInvestment"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID for a Data Hub investment project"
+        required: true
+        type: "string"
+        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
       - in: "body"
-        name: "investmentStageOne"
-        description: "Investment to create a skeleton for"
+        name: "investment"
+        description: "Investment project  data to update"
         required: true
         schema:
           $ref: "#/definitions/InvestmentProject"
       responses:
-        201:
-          description: "item created"
+        200:
+          description: "item updated"
         400:
           description: "invalid input, object invalid"
-        409:
-          description: "investment already exists"
       x-swagger-router-controller: "Investment"
   /investment/{investmentId}/value/:
     get:
@@ -241,37 +270,6 @@ paths:
           description: "bad input parameter"
         404:
           description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    post:
-      tags:
-      - "investment"
-      summary: "creates an investment project value object"
-      description: "Creates an existing investment project value object"
-      operationId: "createInvestmentValue"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project value data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentValue"
-      responses:
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
-        409:
-          description: "investment already exists"
       x-swagger-router-controller: "Investment"
     put:
       tags:
@@ -395,12 +393,40 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
+    patch:
+      tags:
+      - "investment"
+      summary: "updates an investment requirements object, from a partial JSON object"
+      description: "Patches an existing investment requirements object"
+      operationId: "patchInvestmentRequirements"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID for a Data Hub investment project"
+        required: true
+        type: "string"
+        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      - in: "body"
+        name: "investment"
+        description: "Investment project requirements data to update"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentRequirements"
+      responses:
+        200:
+          description: "item updated"
+        400:
+          description: "invalid input, object invalid"
+      x-swagger-router-controller: "Investment"
   /investment/{investmentId}/team:
     get:
       tags:
       - "investment"
-      summary: "Returns the team information associated with a project @TODO document\
-        \ WHY"
+      summary: "Returns the team information associated with a project"
       description: "Passing in the UUID of an investment project returns the team\
         \ associated with it\n"
       operationId: "getinvestmentteam"
@@ -456,11 +482,40 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
+    patch:
+      tags:
+      - "investment"
+      summary: "updates an investment team object, from a partial JSON object"
+      description: "Patches an existing investment team object"
+      operationId: "patchInvestmentTeam"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID for a Data Hub investment project"
+        required: true
+        type: "string"
+        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      - in: "body"
+        name: "investment"
+        description: "Investment project  data to update"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentTeam"
+      responses:
+        200:
+          description: "item updated"
+        400:
+          description: "invalid input, object invalid"
+      x-swagger-router-controller: "Investment"
   /investment/{investmentId}/businessactivity:
     put:
       tags:
       - "investment"
-      summary: "Adds a new Business Activity to a project"
+      summary: "Adds a custom Business Activity to a project"
       description: "Adds a custom business activity to a project"
       operationId: "addBusinessActivity"
       consumes:
@@ -487,6 +542,24 @@ paths:
           description: "item created"
         400:
           description: "invalid input, object invalid"
+      x-swagger-router-controller: "Investment"
+  /metadata/business_activity:
+    get:
+      tags:
+      - "investment"
+      - "metadata"
+      summary: "retrieves Business Activity metadata array"
+      operationId: "metadataBusinessActibvity"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "metadata array"
+          schema:
+            $ref: "#/definitions/BusinessActivities"
       x-swagger-router-controller: "Investment"
 securityDefinitions:
   OauthSecurity:
@@ -1112,6 +1185,10 @@ definitions:
     type: "array"
     items:
       $ref: "#/definitions/UKRegions_inner"
+  BusinessActivities:
+    type: "array"
+    items:
+      $ref: "#/definitions/BusinessActivity"
   Investment Project:
     required:
     - "description"
