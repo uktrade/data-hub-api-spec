@@ -4,7 +4,7 @@
   "description": "Data Hub REST API documentation and test server",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && npm run makeyaml && npm run generate-node && sh fixport.sh",
+    "build": "npm run makeyaml && echo STARTING && npm run generate-node",
     "swaggerui": "sh run-sub.sh",
     "clean": "rm -rf gendocs && rm -rf genclient",
     "makeyaml": "cat specs/headers/swagger_head.yml specs/headers/schemes.yml specs/headers/security.yml specs/headers/paths.yml specs/paths/* specs/headers/definitions.yml  specs/definitions/*  > datahub.yml && ./node_modules/swagger/bin/swagger.js validate datahub.yml",
@@ -12,7 +12,9 @@
     "generate-client": "sh generate-py-client.sh",
     "fixport": "sh fixport.sh",
     "start-local": "npm run clean && npm run generate-node && npm run swaggerui",
-    "start": "npm run swaggerui"
+    "start": "npm run swaggerui",
+    "heroku-prebuild": "echo XXXXXX This runs before Heroku installs your dependencies.",
+    "heroku-postbuild": "npm run fixport"
   },
   "repository": {
     "type": "git",
