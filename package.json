@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "install": "cd generator && npm install",
-    "clean": "rm -rf gendocs && rm -rf genclient",
+    "clean": "rm -rf gendocs/* && rm -rf genclient",
     "makeyaml": "cd generator && npm run makeyaml",
     "generate-node": "cd generator && npm run generate-node",
     "generate-client": "cd generator && sh generate-py-client.sh",
