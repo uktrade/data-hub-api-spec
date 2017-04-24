@@ -5,7 +5,7 @@ Swagger files and test server for the Data Hub CRM project
 - [Raw YAML API spec](/datahub.yml)
 
 To Build
-* `npm run generate-node && npm start`
+* `npm run makeyaml && npm run generate-node && npm start`
 * The output file - `datahub.yml` - is the full spec
 * `npm generate-client` makes a Python client for the API
 * To push updates to Heroku you need to commit the generated files (in /gendocs & /public) - don't edit these directly
