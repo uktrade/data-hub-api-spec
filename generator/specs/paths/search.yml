@@ -1,0 +1,25 @@
+  /search:
+    get:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: type
+        description: What type of entity to search for
+        required: false
+        type: string
+      - in: query
+        name: term
+        description: phrase to search for
+        required: true
+        type: string
+      responses:
+        200:
+          description: Search results

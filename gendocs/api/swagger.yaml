@@ -561,6 +561,32 @@ paths:
           schema:
             $ref: "#/definitions/BusinessActivities"
       x-swagger-router-controller: "Investment"
+  /search:
+    get:
+      tags:
+      - "search"
+      summary: "Basic search endpoint for Data Hub"
+      description: "Top level search for datahub"
+      operationId: "datahubSearch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "query"
+        description: "What type of entity to search for"
+        required: false
+        type: "string"
+      - name: "term"
+        in: "query"
+        description: "phrase to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Search results"
+      x-swagger-router-controller: "Search"
 securityDefinitions:
   OauthSecurity:
     type: "oauth2"
