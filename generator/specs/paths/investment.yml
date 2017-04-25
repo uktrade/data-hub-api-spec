@@ -108,11 +108,11 @@
           description: item updated
         400:
           description: invalid input, object invalid
-  /investment/{investmentId}/value/:
+  /investment/{investmentId}/value:
     get:
       tags:
       - investment
-      summary: Returns the Value information associated with a project @TODO document WHY
+      summary: Returns the Value information associated with a project
       operationId: getinvestmentvalue
       description: |
         Passing in the UUID of an investment project returns the value associated with it
