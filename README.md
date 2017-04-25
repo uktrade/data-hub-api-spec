@@ -40,25 +40,5 @@ Data Hub objects passed over the API are serialisations of JavaScript and Python
 
 Objects will generally expand to one nesting deep: the principle is that the Front End should do as little work as possible to populate values on screen, within reason. The reason for that reason: Data Hub objects can be very big, with dozens of fields and fkey relationships. Therefore, we may send a simple version of an object in some cases and the FE may need to issue a secondary call to inflate that object. An investment project involves three companies so to avoid bloating out the responses we send a metadata-like slim company object containing just the company's ID and it's registered name.
 
-FOR DISCUSSION - do we want a flag that completely fills out an object, barring circular refere3nces.
 
 
-
-## Latest changes
-
-### 22.04.2017
-
-Major reorganisation to get this running on heroku; API rules
-
-### 16:48 21.04.2017
-
-Added auto-generated documentation
-
-### 15:13 21.04.2017
-- "investment_type" - now object
-- "invester_company" changed to "investor_company"
-- referral_source_activity - added missing fields for website and marketing "referral_source_activity_website" & "referral_source_activity_marketing"
-- changes URL pattern for sub-resources (value/requirements/team etc.) to be /investment/{investmentId}/{subresource}
-- removed id fields on sub-resources
-- remove POST on sub-resources
-- "project_assurance" (in team endpoint) changed to project_assurance_advisor
