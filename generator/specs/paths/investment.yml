@@ -43,7 +43,7 @@
         format: uuid
       responses:
         200:
-          description: JSON API formatted investment project object
+          description: JSON formatted investment project object
           schema:
             $ref: '#/definitions/InvestmentProject'
         400:
@@ -108,6 +108,40 @@
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/investment/{companyId}/projects:
+    get:
+      tags:
+      - investment
+      summary: returns a summary of investment projects for a company
+      operationId: getprojectsforcompany
+      description: Returns a summary list of investment projects per companyid - @TODO there is an issue with companyId here - I need to get clarity on which (or any?) of the three company IDs this means
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID of a company with investment projects
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      - in: query
+        name: offset
+        type: integer
+        description: pagination parameter
+        required: false
+      - in: query
+        name: limit
+        type: integer
+        description: pagination parameter
+        required: true
+      responses:
+        200:
+          description: JSON formatted array of investment project summaries
+          schema:
+            $ref: '#/definitions/InvestmentProjectsList'
+        400:
+          description: bad input parameter
   /v3/investment/{investmentId}/value:
     get:
       tags:
@@ -128,7 +162,7 @@
         format: uuid
       responses:
         200:
-          description: JSON API formatted investment value object
+          description: JSON formatted investment value object
           schema:
             $ref: '#/definitions/InvestmentValue'
         400:
@@ -213,7 +247,7 @@
         format: uuid
       responses:
         200:
-          description: JSON API formatted investment requirements object
+          description: JSON formatted investment requirements object
           schema:
             $ref: '#/definitions/InvestmentRequirements'
         400:
@@ -298,7 +332,7 @@
         format: uuid
       responses:
         200:
-          description: JSON API formatted investment team object
+          description: JSON formatted investment team object
           schema:
             $ref: '#/definitions/InvestmentTeam'
         400:
