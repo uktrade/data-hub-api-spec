@@ -129,7 +129,7 @@ paths:
         404:
           description: "company does not exist"
       x-swagger-router-controller: "Company"
-  /investment/project:
+  /v3/investment/project:
     post:
       tags:
       - "investment"
@@ -155,7 +155,7 @@ paths:
         409:
           description: "investment already exists"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/project:
+  /v3/investment/{investmentId}/project:
     get:
       tags:
       - "investment"
@@ -242,7 +242,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/value:
+  /v3/investment/{investmentId}/value:
     get:
       tags:
       - "investment"
@@ -331,7 +331,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/requirements:
+  /v3/investment/{investmentId}/requirements:
     get:
       tags:
       - "investment"
@@ -421,7 +421,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/team:
+  /v3/investment/{investmentId}/team:
     get:
       tags:
       - "investment"
@@ -510,7 +510,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/businessactivity:
+  /v3/investment/{investmentId}/businessactivity:
     put:
       tags:
       - "investment"
@@ -542,7 +542,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /metadata/business_activity:
+  /v3/metadata/business_activity:
     get:
       tags:
       - "investment"
