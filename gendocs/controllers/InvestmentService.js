@@ -33,71 +33,69 @@ exports.getinvestment = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "attributes" : {
-    "estimated_land_date" : "2017-05-01",
-    "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
-    "referral_source_activity_event" : {
-      "name" : "Event Name",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "fdi_type" : {
-      "name" : "Merger",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
-    "anonymous_description" : "A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels",
-    "referral_source_activity_marketing" : {
-      "name" : "Press advertisement",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "client_contacts" : "",
-    "client_relationship_manager" : {
-      "name" : "A N Advisor",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "sector" : {
-      "name" : "Advanced Engineering",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "document_link" : "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598",
-    "phase" : {
-      "name" : "Active",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "referral_source_activity_website" : {
-      "name" : "DIT Regional Website",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "business_activity" : {
-      "name" : "Retail",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "investor_company" : {
-      "name" : "Company Registered Name Ltd",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    },
-    "project_code" : "P-01234567",
-    "referral_source_activity" : {
-      "name" : "Cold Call",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "project_shareable" : true,
-    "referral_source_advisor" : "",
-    "nda_signed" : false,
-    "investment_type" : {
-      "name" : "FDI",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "investment_recipient_company" : "",
-    "non_fdi_type" : {
-      "name" : "Advanced Engineering Supply Chain",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "name" : "Marriot Hotels - New hotel in Manchester",
-    "intermediate_company" : ""
+  "estimated_land_date" : "2017-05-01",
+  "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
+  "referral_source_activity_event" : {
+    "name" : "Event Name",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "fdi_type" : {
+    "name" : "Merger",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
+  "anonymous_description" : "A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels",
+  "referral_source_activity_marketing" : {
+    "name" : "Press advertisement",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "client_contacts" : "",
+  "client_relationship_manager" : {
+    "firstname" : "Alison",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "lastname" : "Advisor"
   },
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "type" : "Investment Project"
+  "sector" : {
+    "name" : "Advanced Engineering",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "document_link" : "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598",
+  "phase" : {
+    "name" : "Active",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "referral_source_activity_website" : {
+    "name" : "DIT Regional Website",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "business_activity" : {
+    "name" : "Retail",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "investor_company" : {
+    "name" : "Company Registered Name Ltd",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  },
+  "project_code" : "P-01234567",
+  "referral_source_activity" : {
+    "name" : "Cold Call",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "project_shareable" : true,
+  "referral_source_advisor" : "",
+  "nda_signed" : false,
+  "investment_type" : {
+    "name" : "FDI",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "investment_recipient_company" : "",
+  "non_fdi_type" : {
+    "name" : "Advanced Engineering Supply Chain",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "name" : "Marriot Hotels - New hotel in Manchester",
+  "intermediate_company" : ""
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -148,8 +146,9 @@ exports.getinvestmentteam = function(args, res, next) {
   "project_assurance_advisor" : "",
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "project_manager" : {
-    "name" : "A N Advisor",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    "firstname" : "Alison",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "lastname" : "Advisor"
   },
   "project_manager_team" : {
     "name" : "Sector Advisory Services",
@@ -167,7 +166,7 @@ exports.getinvestmentteam = function(args, res, next) {
 
 exports.getinvestmentvalue = function(args, res, next) {
   /**
-   * Returns the Value information associated with a project @TODO document WHY
+   * Returns the Value information associated with a project
    * Passing in the UUID of an investment project returns the value associated with it 
    *
    * investmentId UUID UUID for a Data Hub investment project
