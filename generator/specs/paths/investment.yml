@@ -1,4 +1,4 @@
-  /investment/project:
+  /v3/investment/project:
     post:
       tags:
       - investment
@@ -23,7 +23,7 @@
           description: invalid input, object invalid
         409:
           description: investment already exists
-  /investment/{investmentId}/project:
+  /v3/investment/{investmentId}/project:
     get:
       tags:
       - investment
@@ -108,11 +108,11 @@
           description: item updated
         400:
           description: invalid input, object invalid
-  /investment/{investmentId}/value/:
+  /v3/investment/{investmentId}/value:
     get:
       tags:
       - investment
-      summary: Returns the Value information associated with a project @TODO document WHY
+      summary: Returns the Value information associated with a project
       operationId: getinvestmentvalue
       description: |
         Passing in the UUID of an investment project returns the value associated with it
@@ -193,7 +193,7 @@
           description: item updated
         400:
           description: invalid input, object invalid
-  /investment/{investmentId}/requirements:
+  /v3/investment/{investmentId}/requirements:
     get:
       tags:
       - investment
@@ -278,7 +278,7 @@
           description: item updated
         400:
           description: invalid input, object invalid
-  /investment/{investmentId}/team:
+  /v3/investment/{investmentId}/team:
     get:
       tags:
       - investment
@@ -363,7 +363,7 @@
           description: item updated
         400:
           description: invalid input, object invalid
-  /investment/{investmentId}/businessactivity:
+  /v3/investment/{investmentId}/businessactivity:
     put:
       tags:
       - investment
@@ -394,7 +394,7 @@
           description: item created
         400:
           description: invalid input, object invalid
-  /metadata/business_activity:
+  /v3/metadata/business_activity:
     get:
       tags: 
       - investment

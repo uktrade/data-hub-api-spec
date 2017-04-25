@@ -127,15 +127,19 @@
     type: object
     required:
     - id
-    - name
+    - first_name
+    - last_name
     properties:
       id:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      name:
+      first_name:
         type: string
-        example: 'A N Advisor'
+        example: 'Alison'
+      last_name:
+        type: string
+        example: 'Advisor'
   BusinessType:
     type: object
     description: "Business Type metadata"

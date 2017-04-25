@@ -129,7 +129,7 @@ paths:
         404:
           description: "company does not exist"
       x-swagger-router-controller: "Company"
-  /investment/project:
+  /v3/investment/project:
     post:
       tags:
       - "investment"
@@ -155,7 +155,7 @@ paths:
         409:
           description: "investment already exists"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/project:
+  /v3/investment/{investmentId}/project:
     get:
       tags:
       - "investment"
@@ -242,12 +242,11 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/value/:
+  /v3/investment/{investmentId}/value:
     get:
       tags:
       - "investment"
-      summary: "Returns the Value information associated with a project @TODO document\
-        \ WHY"
+      summary: "Returns the Value information associated with a project"
       description: "Passing in the UUID of an investment project returns the value\
         \ associated with it\n"
       operationId: "getinvestmentvalue"
@@ -332,7 +331,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/requirements:
+  /v3/investment/{investmentId}/requirements:
     get:
       tags:
       - "investment"
@@ -422,7 +421,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/team:
+  /v3/investment/{investmentId}/team:
     get:
       tags:
       - "investment"
@@ -511,7 +510,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/businessactivity:
+  /v3/investment/{investmentId}/businessactivity:
     put:
       tags:
       - "investment"
@@ -543,7 +542,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /metadata/business_activity:
+  /v3/metadata/business_activity:
     get:
       tags:
       - "investment"
@@ -697,16 +696,20 @@ definitions:
   Advisor:
     type: "object"
     required:
+    - "first_name"
     - "id"
-    - "name"
+    - "last_name"
     properties:
       id:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
+      first_name:
         type: "string"
-        example: "A N Advisor"
+        example: "Alison"
+      last_name:
+        type: "string"
+        example: "Advisor"
   BusinessType:
     type: "object"
     required:
@@ -940,16 +943,78 @@ definitions:
     description: "A Companies House company object"
   InvestmentProject:
     type: "object"
+    required:
+    - "description"
+    - "estimated_land_date"
+    - "investment_type"
+    - "name"
+    - "nda_signed"
     properties:
-      type:
-        type: "string"
-        example: "Investment Project"
       id:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      attributes:
-        $ref: "#/definitions/Investment Project"
+      name:
+        type: "string"
+        example: "Marriot Hotels - New hotel in Manchester"
+      project_code:
+        type: "string"
+        example: "P-01234567"
+      description:
+        type: "string"
+        example: "Marriott hotels wishes to open in a new part of Manchester under-served\
+          \ by its existing hotels"
+      document_link:
+        type: "string"
+        example: "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598"
+      nda_signed:
+        type: "boolean"
+        example: false
+      estimated_land_date:
+        type: "string"
+        format: "date"
+        example: "2017-05-01"
+      investment_type:
+        $ref: "#/definitions/InvestmentType"
+      phase:
+        $ref: "#/definitions/Phase"
+      project_shareable:
+        type: "boolean"
+      anonymous_description:
+        type: "string"
+        example: "A large hotel chain wishes to open a hotel in a new part of a large\
+          \ northern city under-served by its existing hotels"
+      not_shareable_reason:
+        type: "string"
+        example: "Company has asked us to keep project quiet until official announcement"
+      investor_company:
+        $ref: "#/definitions/CompanySlim"
+      intermediate_company:
+        $ref: "#/definitions/CompanySlim"
+      investment_recipient_company:
+        $ref: "#/definitions/CompanySlim"
+      client_contacts:
+        $ref: "#/definitions/ContactArray"
+      client_relationship_manager:
+        $ref: "#/definitions/Advisor"
+      referral_source_advisor:
+        $ref: "#/definitions/Advisor"
+      referral_source_activity:
+        $ref: "#/definitions/ReferralSourceActivity"
+      referral_source_activity_website:
+        $ref: "#/definitions/ReferralSourceActivityWebsite"
+      referral_source_activity_marketing:
+        $ref: "#/definitions/ReferralSourceActivityMarketing"
+      referral_source_activity_event:
+        $ref: "#/definitions/ReferralSourceActivityEvent"
+      fdi_type:
+        $ref: "#/definitions/FDIType"
+      non_fdi_type:
+        $ref: "#/definitions/NonFDIType"
+      sector:
+        $ref: "#/definitions/Sector"
+      business_activity:
+        $ref: "#/definitions/BusinessActivity"
     description: "A Data Hub investment project"
   InvestmentValue:
     type: "object"
@@ -1189,75 +1254,6 @@ definitions:
     type: "array"
     items:
       $ref: "#/definitions/BusinessActivity"
-  Investment Project:
-    required:
-    - "description"
-    - "estimated_land_date"
-    - "investment_type"
-    - "name"
-    - "nda_signed"
-    properties:
-      name:
-        type: "string"
-        example: "Marriot Hotels - New hotel in Manchester"
-      project_code:
-        type: "string"
-        example: "P-01234567"
-      description:
-        type: "string"
-        example: "Marriott hotels wishes to open in a new part of Manchester under-served\
-          \ by its existing hotels"
-      document_link:
-        type: "string"
-        example: "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598"
-      nda_signed:
-        type: "boolean"
-        example: false
-      estimated_land_date:
-        type: "string"
-        format: "date"
-        example: "2017-05-01"
-      investment_type:
-        $ref: "#/definitions/InvestmentType"
-      phase:
-        $ref: "#/definitions/Phase"
-      project_shareable:
-        type: "boolean"
-      anonymous_description:
-        type: "string"
-        example: "A large hotel chain wishes to open a hotel in a new part of a large\
-          \ northern city under-served by its existing hotels"
-      not_shareable_reason:
-        type: "string"
-        example: "Company has asked us to keep project quiet until official announcement"
-      investor_company:
-        $ref: "#/definitions/CompanySlim"
-      intermediate_company:
-        $ref: "#/definitions/CompanySlim"
-      investment_recipient_company:
-        $ref: "#/definitions/CompanySlim"
-      client_contacts:
-        $ref: "#/definitions/ContactArray"
-      client_relationship_manager:
-        $ref: "#/definitions/Advisor"
-      referral_source_advisor:
-        $ref: "#/definitions/Advisor"
-      referral_source_activity:
-        $ref: "#/definitions/ReferralSourceActivity"
-      referral_source_activity_website:
-        $ref: "#/definitions/ReferralSourceActivityWebsite"
-      referral_source_activity_marketing:
-        $ref: "#/definitions/ReferralSourceActivityMarketing"
-      referral_source_activity_event:
-        $ref: "#/definitions/ReferralSourceActivityEvent"
-      fdi_type:
-        $ref: "#/definitions/FDIType"
-      non_fdi_type:
-        $ref: "#/definitions/NonFDIType"
-      sector:
-        $ref: "#/definitions/Sector"
-      business_activity:
-        $ref: "#/definitions/BusinessActivity"
   InvestmentValue_average_salary:
     required:
     - "id"
