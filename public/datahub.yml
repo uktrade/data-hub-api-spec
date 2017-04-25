@@ -678,17 +678,17 @@ definitions:
     type: object
     required:
     - id
-    - firstname
-    - lastname
+    - first_name
+    - last_name
     properties:
       id:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      firstname:
+      first_name:
         type: string
         example: 'Alison'
-      lastname:
+      last_name:
         type: string
         example: 'Advisor'
   BusinessType:

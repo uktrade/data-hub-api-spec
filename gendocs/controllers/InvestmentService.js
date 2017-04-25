@@ -51,9 +51,9 @@ exports.getinvestment = function(args, res, next) {
   },
   "client_contacts" : "",
   "client_relationship_manager" : {
-    "firstname" : "Alison",
+    "last_name" : "Advisor",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-    "lastname" : "Advisor"
+    "first_name" : "Alison"
   },
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "sector" : {
@@ -146,9 +146,9 @@ exports.getinvestmentteam = function(args, res, next) {
   "project_assurance_advisor" : "",
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "project_manager" : {
-    "firstname" : "Alison",
+    "last_name" : "Advisor",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-    "lastname" : "Advisor"
+    "first_name" : "Alison"
   },
   "project_manager_team" : {
     "name" : "Sector Advisory Services",
