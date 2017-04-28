@@ -247,10 +247,11 @@ paths:
       tags:
       - "investment"
       summary: "returns a summary of investment projects for a company"
-      description: "Returns a summary list of investment projects per companyid -\
-        \ @TODO there is an issue with companyId here - I need to get clarity on which\
-        \ (or any?) of the three company IDs this means"
+      description: "Returns a summary list of investment projects per investor-company\
+        \ ID"
       operationId: "getprojectsforcompany"
+      consumes:
+      - "application/json"
       produces:
       - "application/json"
       parameters:

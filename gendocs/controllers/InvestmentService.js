@@ -199,7 +199,7 @@ exports.getinvestmentvalue = function(args, res, next) {
 exports.getprojectsforcompany = function(args, res, next) {
   /**
    * returns a summary of investment projects for a company
-   * Returns a summary list of investment projects per companyid - @TODO there is an issue with companyId here - I need to get clarity on which (or any?) of the three company IDs this means
+   * Returns a summary list of investment projects per investor-company ID
    *
    * companyId UUID UUID of a company with investment projects
    * limit Integer pagination parameter
