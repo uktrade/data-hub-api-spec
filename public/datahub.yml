@@ -26,6 +26,42 @@ security:
     - user
 
 paths:
+  /v3/investment/{investmentId}/auditlogs:
+    get:
+      tags:
+      - investment
+      summary: returns a summary of investment projects for a company
+      operationId: getprojectsforcompany
+      description: Returns a summary list of investment projects per investor-company ID
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of an investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      - in: query
+        name: offset
+        type: integer
+        description: pagination parameter
+        required: false
+      - in: query
+        name: limit
+        type: integer
+        description: pagination parameter
+        required: true
+      responses:
+        200:
+          description: JSON formatted array of investment project summaries
+          schema:
+            $ref: '#/definitions/InvestmentAuditLogList'
+        400:
+          description: bad input parameter
   /company/{companyId}:
     get:
       tags:
@@ -585,6 +621,63 @@ paths:
           schema:
             $ref: '#/definitions/BusinessActivities'
 definitions:
+  InvestmentAuditLogList:
+    type: object
+    required:
+    - count
+    - next
+    - previous
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      next:
+        type: string
+        example: 'http://{HOST}/v3/investment/{companyId}/auditlogs?limit=10&offset=5'
+      previous:
+        type: string
+        example: 'http://{HOST}/v3/investment/{companyId}/auditlogs?limit=10&offset=5'
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/InvestmentAuditLog'
+  InvestmentAuditLog:
+    type: object
+    required:
+    - investmentId
+    - timestamp
+    - advisor
+    - action
+    - field
+    - grouping
+    - new_value
+    properties:
+      investmentId:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      timestamp:
+        type: string
+        format: date-time
+        example: '2017-08-20T08:26:21'
+      advisor:
+        $ref: '#/definitions/Advisor'
+      action:
+        type: string
+        example: 'ADDED'
+      field:
+        type: string
+        example: 'project_manager'
+      grouping:
+        type: string
+        example: 'team'
+      old_value:
+        type: string
+        example: 'John Oldadvisor'
+      new_value:
+        type: string
+        example: 'Janest Newadvisor'
   Company:
     type: object
     description: A representation of the Data Hub company object
