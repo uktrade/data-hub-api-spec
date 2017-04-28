@@ -32,10 +32,6 @@ module.exports.getprojectsforcompany = function getprojectsforcompany (req, res,
   Investment.getprojectsforcompany(req.swagger.params, res, next);
 };
 
-module.exports.getprojectsforcompany_1 = function getprojectsforcompany_1 (req, res, next) {
-  Investment.getprojectsforcompany_1(req.swagger.params, res, next);
-};
-
 module.exports.metadataBusinessActibvity = function metadataBusinessActibvity (req, res, next) {
   Investment.metadataBusinessActibvity(req.swagger.params, res, next);
 };
