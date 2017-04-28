@@ -174,7 +174,7 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment project object"
+          description: "JSON formatted investment project object"
           schema:
             $ref: "#/definitions/InvestmentProject"
         400:
@@ -242,6 +242,44 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
+  /v3/investment/{companyId}/projects:
+    get:
+      tags:
+      - "investment"
+      summary: "returns a summary of investment projects for a company"
+      description: "Returns a summary list of investment projects per investor-company\
+        \ ID"
+      operationId: "getprojectsforcompany"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "companyId"
+        in: "path"
+        description: "UUID of a company with investment projects"
+        required: true
+        type: "string"
+        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        format: "uuid"
+      - name: "offset"
+        in: "query"
+        description: "pagination parameter"
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "pagination parameter"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "JSON formatted array of investment project summaries"
+          schema:
+            $ref: "#/definitions/InvestmentProjectsList"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Investment"
   /v3/investment/{investmentId}/value:
     get:
       tags:
@@ -262,7 +300,7 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment value object"
+          description: "JSON formatted investment value object"
           schema:
             $ref: "#/definitions/InvestmentValue"
         400:
@@ -352,7 +390,7 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment requirements object"
+          description: "JSON formatted investment requirements object"
           schema:
             $ref: "#/definitions/InvestmentRequirements"
         400:
@@ -441,7 +479,7 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment team object"
+          description: "JSON formatted investment team object"
           schema:
             $ref: "#/definitions/InvestmentTeam"
         400:
@@ -1016,6 +1054,27 @@ definitions:
       business_activity:
         $ref: "#/definitions/BusinessActivity"
     description: "A Data Hub investment project"
+  InvestmentProjectsList:
+    type: "object"
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
   InvestmentValue:
     type: "object"
     properties:

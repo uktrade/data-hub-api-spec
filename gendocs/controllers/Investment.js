@@ -28,6 +28,10 @@ module.exports.getinvestmentvalue = function getinvestmentvalue (req, res, next)
   Investment.getinvestmentvalue(req.swagger.params, res, next);
 };
 
+module.exports.getprojectsforcompany = function getprojectsforcompany (req, res, next) {
+  Investment.getprojectsforcompany(req.swagger.params, res, next);
+};
+
 module.exports.metadataBusinessActibvity = function metadataBusinessActibvity (req, res, next) {
   Investment.metadataBusinessActibvity(req.swagger.params, res, next);
 };
