@@ -15,6 +15,12 @@
         description: phrase to search for
         required: true
         type: string
+      - in: query
+        name: entity
+        type: string
+        description: which top level entity to search
+        required: false
+        default: 'company'
       responses:
         200:
           description: Search results

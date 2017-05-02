@@ -3,8 +3,8 @@
     - "count"
     - "next"
     - "previous"
-    - "results"
     - "aggregates"
+    description: 'Note: only one of the two possible arrays will be populated depending on the search response'
     properties:
       count:
         type: "integer"
@@ -26,10 +26,14 @@
             entity:
               type: string
               example: "Events"
-      results:
+      companies:
         type: "array"
         items:
           $ref: "#/definitions/Company"
+      contacts:
+        type: "array"
+        items:
+          $ref: "#/definitions/Contact"
   CompanyFilteredSearch:
     type: object
     properties:

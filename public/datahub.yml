@@ -566,6 +566,12 @@ paths:
         description: phrase to search for
         required: true
         type: string
+      - in: query
+        name: entity
+        type: string
+        description: which top level entity to search
+        required: false
+        default: 'company'
       responses:
         200:
           description: Search results
@@ -1327,8 +1333,8 @@ definitions:
     - "count"
     - "next"
     - "previous"
-    - "results"
     - "aggregates"
+    description: 'Note: only one of the two possible arrays will be populated depending on the search response'
     properties:
       count:
         type: "integer"
@@ -1350,10 +1356,14 @@ definitions:
             entity:
               type: string
               example: "Events"
-      results:
+      companies:
         type: "array"
         items:
           $ref: "#/definitions/Company"
+      contacts:
+        type: "array"
+        items:
+          $ref: "#/definitions/Contact"
   CompanyFilteredSearch:
     type: object
     properties:

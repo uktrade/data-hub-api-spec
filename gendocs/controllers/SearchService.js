@@ -6,18 +6,13 @@ exports.datahubSearch = function(args, res, next) {
    * Top level search for datahub
    *
    * term String phrase to search for
+   * entity String which top level entity to search (optional)
    * returns AggregateSearchResults
    **/
   var examples = {};
   examples['application/json'] = {
   "next" : "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5",
-  "previous" : "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5",
-  "count" : 30,
-  "aggregates" : [ {
-    "count" : 3015,
-    "entity" : "Events"
-  } ],
-  "results" : [ {
+  "companies" : [ {
     "archived_by" : "",
     "parent" : {
       "name" : "Company Registered Name Ltd",
@@ -96,6 +91,17 @@ exports.datahubSearch = function(args, res, next) {
     "trading_name" : "Example Trading",
     "name" : "EXAMPLE Ltd",
     "contacts" : ""
+  } ],
+  "previous" : "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5",
+  "count" : 30,
+  "aggregates" : [ {
+    "count" : 3015,
+    "entity" : "Events"
+  } ],
+  "contacts" : [ {
+    "last_name" : "Contact",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "first_name" : "Alison"
   } ]
 };
   if (Object.keys(examples).length > 0) {
