@@ -188,36 +188,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project, creating a new one if not found
-      operationId: updateInvestment
-      description: Updates an existing investment project
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentProject'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
@@ -309,36 +279,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project value object, creating a new one if not found
-      operationId: updateInvestmentValue
-      description: Updates an existing investment project value object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project value data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentValue'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
@@ -394,36 +334,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project requirements object, creating a new one if not found
-      operationId: updateInvestmentRequirements
-      description: Updates an existing investment project requirements object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project requirements data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentRequirements'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
@@ -479,36 +389,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project team object, creating a new one if not found
-      operationId: updateInvestmentTeam
-      description: Updates an existing investment project team object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project team data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentTeam'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
