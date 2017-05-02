@@ -28,6 +28,10 @@ module.exports.getinvestmentvalue = function getinvestmentvalue (req, res, next)
   Investment.getinvestmentvalue(req.swagger.params, res, next);
 };
 
+module.exports.getprojectsforcompany = function getprojectsforcompany (req, res, next) {
+  Investment.getprojectsforcompany(req.swagger.params, res, next);
+};
+
 module.exports.metadataBusinessActibvity = function metadataBusinessActibvity (req, res, next) {
   Investment.metadataBusinessActibvity(req.swagger.params, res, next);
 };
@@ -46,20 +50,4 @@ module.exports.patchInvestmentTeam = function patchInvestmentTeam (req, res, nex
 
 module.exports.patchInvestmentValue = function patchInvestmentValue (req, res, next) {
   Investment.patchInvestmentValue(req.swagger.params, res, next);
-};
-
-module.exports.updateInvestment = function updateInvestment (req, res, next) {
-  Investment.updateInvestment(req.swagger.params, res, next);
-};
-
-module.exports.updateInvestmentRequirements = function updateInvestmentRequirements (req, res, next) {
-  Investment.updateInvestmentRequirements(req.swagger.params, res, next);
-};
-
-module.exports.updateInvestmentTeam = function updateInvestmentTeam (req, res, next) {
-  Investment.updateInvestmentTeam(req.swagger.params, res, next);
-};
-
-module.exports.updateInvestmentValue = function updateInvestmentValue (req, res, next) {
-  Investment.updateInvestmentValue(req.swagger.params, res, next);
 };

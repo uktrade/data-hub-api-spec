@@ -129,7 +129,7 @@ paths:
         404:
           description: "company does not exist"
       x-swagger-router-controller: "Company"
-  /investment/project:
+  /v3/investment/project:
     post:
       tags:
       - "investment"
@@ -155,7 +155,7 @@ paths:
         409:
           description: "investment already exists"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/project:
+  /v3/investment/{investmentId}/project:
     get:
       tags:
       - "investment"
@@ -174,44 +174,13 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment project object"
+          description: "JSON formatted investment project object"
           schema:
             $ref: "#/definitions/InvestmentProject"
         400:
           description: "bad input parameter"
         404:
           description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project, creating a new one if not found"
-      description: "Updates an existing investment project"
-      operationId: "updateInvestment"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentProject"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
     patch:
       tags:
@@ -242,12 +211,49 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/value/:
+  /v3/investment/{companyId}/projects:
     get:
       tags:
       - "investment"
-      summary: "Returns the Value information associated with a project @TODO document\
-        \ WHY"
+      summary: "returns a summary of investment projects for a company"
+      description: "Returns a summary list of investment projects per investor-company\
+        \ ID"
+      operationId: "getprojectsforcompany"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "companyId"
+        in: "path"
+        description: "UUID of a company with investment projects"
+        required: true
+        type: "string"
+        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        format: "uuid"
+      - name: "offset"
+        in: "query"
+        description: "pagination parameter"
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "pagination parameter"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "JSON formatted array of investment project summaries"
+          schema:
+            $ref: "#/definitions/InvestmentProjectsList"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/value:
+    get:
+      tags:
+      - "investment"
+      summary: "Returns the Value information associated with a project"
       description: "Passing in the UUID of an investment project returns the value\
         \ associated with it\n"
       operationId: "getinvestmentvalue"
@@ -263,45 +269,13 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment value object"
+          description: "JSON formatted investment value object"
           schema:
             $ref: "#/definitions/InvestmentValue"
         400:
           description: "bad input parameter"
         404:
           description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project value object, creating a new one if\
-        \ not found"
-      description: "Updates an existing investment project value object"
-      operationId: "updateInvestmentValue"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project value data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentValue"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
     patch:
       tags:
@@ -332,7 +306,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/requirements:
+  /v3/investment/{investmentId}/requirements:
     get:
       tags:
       - "investment"
@@ -353,45 +327,13 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment requirements object"
+          description: "JSON formatted investment requirements object"
           schema:
             $ref: "#/definitions/InvestmentRequirements"
         400:
           description: "bad input parameter"
         404:
           description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project requirements object, creating a new\
-        \ one if not found"
-      description: "Updates an existing investment project requirements object"
-      operationId: "updateInvestmentRequirements"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project requirements data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentRequirements"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
     patch:
       tags:
@@ -422,7 +364,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/team:
+  /v3/investment/{investmentId}/team:
     get:
       tags:
       - "investment"
@@ -442,45 +384,13 @@ paths:
         format: "uuid"
       responses:
         200:
-          description: "JSON API formatted investment team object"
+          description: "JSON formatted investment team object"
           schema:
             $ref: "#/definitions/InvestmentTeam"
         400:
           description: "bad input parameter"
         404:
           description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project team object, creating a new one if not\
-        \ found"
-      description: "Updates an existing investment project team object"
-      operationId: "updateInvestmentTeam"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project team data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentTeam"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
     patch:
       tags:
@@ -511,7 +421,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /investment/{investmentId}/businessactivity:
+  /v3/investment/{investmentId}/businessactivity:
     put:
       tags:
       - "investment"
@@ -543,7 +453,7 @@ paths:
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
-  /metadata/business_activity:
+  /v3/metadata/business_activity:
     get:
       tags:
       - "investment"
@@ -766,16 +676,20 @@ definitions:
   Advisor:
     type: "object"
     required:
+    - "first_name"
     - "id"
-    - "name"
+    - "last_name"
     properties:
       id:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
+      first_name:
         type: "string"
-        example: "A N Advisor"
+        example: "Alison"
+      last_name:
+        type: "string"
+        example: "Advisor"
   BusinessType:
     type: "object"
     required:
@@ -1009,17 +923,100 @@ definitions:
     description: "A Companies House company object"
   InvestmentProject:
     type: "object"
+    required:
+    - "description"
+    - "estimated_land_date"
+    - "investment_type"
+    - "name"
+    - "nda_signed"
     properties:
-      type:
-        type: "string"
-        example: "Investment Project"
       id:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      attributes:
-        $ref: "#/definitions/Investment Project"
+      name:
+        type: "string"
+        example: "Marriot Hotels - New hotel in Manchester"
+      project_code:
+        type: "string"
+        example: "P-01234567"
+      description:
+        type: "string"
+        example: "Marriott hotels wishes to open in a new part of Manchester under-served\
+          \ by its existing hotels"
+      document_link:
+        type: "string"
+        example: "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598"
+      nda_signed:
+        type: "boolean"
+        example: false
+      estimated_land_date:
+        type: "string"
+        format: "date"
+        example: "2017-05-01"
+      investment_type:
+        $ref: "#/definitions/InvestmentType"
+      phase:
+        $ref: "#/definitions/Phase"
+      project_shareable:
+        type: "boolean"
+      anonymous_description:
+        type: "string"
+        example: "A large hotel chain wishes to open a hotel in a new part of a large\
+          \ northern city under-served by its existing hotels"
+      not_shareable_reason:
+        type: "string"
+        example: "Company has asked us to keep project quiet until official announcement"
+      investor_company:
+        $ref: "#/definitions/CompanySlim"
+      intermediate_company:
+        $ref: "#/definitions/CompanySlim"
+      investment_recipient_company:
+        $ref: "#/definitions/CompanySlim"
+      client_contacts:
+        $ref: "#/definitions/ContactArray"
+      client_relationship_manager:
+        $ref: "#/definitions/Advisor"
+      referral_source_advisor:
+        $ref: "#/definitions/Advisor"
+      referral_source_activity:
+        $ref: "#/definitions/ReferralSourceActivity"
+      referral_source_activity_website:
+        $ref: "#/definitions/ReferralSourceActivityWebsite"
+      referral_source_activity_marketing:
+        $ref: "#/definitions/ReferralSourceActivityMarketing"
+      referral_source_activity_event:
+        $ref: "#/definitions/ReferralSourceActivityEvent"
+      fdi_type:
+        $ref: "#/definitions/FDIType"
+      non_fdi_type:
+        $ref: "#/definitions/NonFDIType"
+      sector:
+        $ref: "#/definitions/Sector"
+      business_activity:
+        $ref: "#/definitions/BusinessActivity"
     description: "A Data Hub investment project"
+  InvestmentProjectsList:
+    type: "object"
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
   InvestmentValue:
     type: "object"
     properties:
