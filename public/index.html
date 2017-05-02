@@ -13,7 +13,7 @@
 </ul>
 <p>To Build</p>
 <ul>
-<li><code>npm run generate-node &amp;&amp; npm start</code></li>
+<li><code>npm run makeyaml &amp;&amp; npm run generate-node &amp;&amp; npm start</code></li>
 <li>The output file - <code>datahub.yml</code> - is the full spec</li>
 <li><code>npm generate-client</code> makes a Python client for the API</li>
 <li>To push updates to Heroku you need to commit the generated files (in /gendocs &amp; /public) - don&#39;t edit these directly</li>
@@ -33,21 +33,5 @@
 <h3 id="objects">Objects</h3>
 <p>Data Hub objects passed over the API are serialisations of JavaScript and Python objects in JSON. Values must always be coerced to their JSON equivalent: e.g., Python&#39;s <code>True</code> becomes <code>true</code></p>
 <p>Objects will generally expand to one nesting deep: the principle is that the Front End should do as little work as possible to populate values on screen, within reason. The reason for that reason: Data Hub objects can be very big, with dozens of fields and fkey relationships. Therefore, we may send a simple version of an object in some cases and the FE may need to issue a secondary call to inflate that object. An investment project involves three companies so to avoid bloating out the responses we send a metadata-like slim company object containing just the company&#39;s ID and it&#39;s registered name.</p>
-<p>FOR DISCUSSION - do we want a flag that completely fills out an object, barring circular refere3nces.</p>
-<h2 id="latest-changes">Latest changes</h2>
-<h3 id="22-04-2017">22.04.2017</h3>
-<p>Major reorganisation to get this running on heroku; API rules</p>
-<h3 id="16-48-21-04-2017">16:48 21.04.2017</h3>
-<p>Added auto-generated documentation</p>
-<h3 id="15-13-21-04-2017">15:13 21.04.2017</h3>
-<ul>
-<li>&quot;investment_type&quot; - now object</li>
-<li>&quot;invester_company&quot; changed to &quot;investor_company&quot;</li>
-<li>referral_source_activity - added missing fields for website and marketing &quot;referral_source_activity_website&quot; &amp; &quot;referral_source_activity_marketing&quot;</li>
-<li>changes URL pattern for sub-resources (value/requirements/team etc.) to be /investment/{investmentId}/{subresource}</li>
-<li>removed id fields on sub-resources</li>
-<li>remove POST on sub-resources</li>
-<li>&quot;project_assurance&quot; (in team endpoint) changed to project_assurance_advisor</li>
-</ul>
 </body>
 </html>
