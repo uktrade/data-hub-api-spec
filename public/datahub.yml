@@ -585,6 +585,7 @@ paths:
       parameters:
       - in: body
         name: filter
+        required: true
         schema:
           $ref: '#/definitions/CompanyFilteredSearch'
       responses:
@@ -604,11 +605,11 @@ paths:
       produces:
       - application/json
       parameters:
-      - in: query
-        name: term
-        description: phrase to search for
+      - in: body
+        name: filter
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/ContactFilteredSearch'
       responses:
         200:
           description: Search results
@@ -1353,49 +1354,12 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Company"
-  CompanySearchResults:
-    required:
-    - "count"
-    - "next"
-    - "previous"
-    - "results"
-    properties:
-      count:
-        type: "integer"
-        example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
-      results:
-        type: "array"
-        items:
-          $ref: "#/definitions/Company"
-  ContactSearchResults:
-    required:
-    - "count"
-    - "next"
-    - "previous"
-    - "results"
-    properties:
-      count:
-        type: "integer"
-        example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
-      results:
-        type: "array"
-        items:
-          $ref: "#/definitions/Company"
   CompanyFilteredSearch:
     type: object
     properties:
+      original_query:
+        type: string
+        example: 'ABC DEF'
       name:
         type: string
         example: 'ABC Company'
@@ -1435,3 +1399,69 @@ definitions:
       trading_address_postcode:
         type: string
         example: 'AB1 2CD'
+  CompanySearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+  ContactFilteredSearch:
+    type: object
+    properties:
+      original_query:
+        type: string
+        example: 'Corine Contact'
+      first_name:
+        type: string
+        example: 'Corine'
+      last_name:
+        type: string
+        example: 'Contact'
+      job_title:
+        type: string
+        example: 'Managing director'
+      company:
+        type: string
+        example: 'DEF Ventures'
+      advisor:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      notes:
+        type: string
+        example: 'greenfield pharmaceutical'
+  ContactSearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+

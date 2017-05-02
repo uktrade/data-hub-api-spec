@@ -573,11 +573,6 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "type"
-        in: "query"
-        description: "What type of entity to search for"
-        required: false
-        type: "string"
       - name: "term"
         in: "query"
         description: "phrase to search for"
@@ -586,6 +581,54 @@ paths:
       responses:
         200:
           description: "Search results"
+          schema:
+            $ref: "#/definitions/AggregateSearchResults"
+      x-swagger-router-controller: "Search"
+  /search/company:
+    post:
+      tags:
+      - "search"
+      summary: "Basic search endpoint for Data Hub"
+      description: "Top level search for datahub"
+      operationId: "datahubSearch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "filter"
+        required: true
+        schema:
+          $ref: "#/definitions/CompanyFilteredSearch"
+      responses:
+        200:
+          description: "Search results"
+          schema:
+            $ref: "#/definitions/CompanySearchResults"
+      x-swagger-router-controller: "Search"
+  /search/contact:
+    get:
+      tags:
+      - "search"
+      summary: "Basic search endpoint for Data Hub"
+      description: "Top level search for datahub"
+      operationId: "datahubSearch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "filter"
+        required: true
+        schema:
+          $ref: "#/definitions/ContactFilteredSearch"
+      responses:
+        200:
+          description: "Search results"
+          schema:
+            $ref: "#/definitions/ContactSearchResults"
       x-swagger-router-controller: "Search"
 securityDefinitions:
   OauthSecurity:
@@ -1212,9 +1255,142 @@ definitions:
     items:
       $ref: "#/definitions/UKRegions_inner"
   BusinessActivities:
-    type: "array"
-    items:
-      $ref: "#/definitions/BusinessActivity"
+    type: "string"
+  AggregateSearchResults:
+    required:
+    - "aggregates"
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      aggregates:
+        type: "array"
+        items:
+          $ref: "#/definitions/AggregateSearchResults_aggregates"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+  CompanyFilteredSearch:
+    type: "object"
+    properties:
+      original_query:
+        type: "string"
+        example: "ABC DEF"
+      name:
+        type: "string"
+        example: "ABC Company"
+      alias:
+        type: "string"
+        example: "DEF Ventures"
+      sector:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      account_manager:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      export_to_countries:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      future_interest_countries:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      description:
+        type: "string"
+        example: "greenfield pharmaceutical"
+      uk_region:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      trading_address_town:
+        type: "string"
+        example: "Shipton"
+      trading_address_country:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      trading_address_postcode:
+        type: "string"
+        example: "AB1 2CD"
+  CompanySearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+  ContactFilteredSearch:
+    type: "object"
+    properties:
+      original_query:
+        type: "string"
+        example: "Corine Contact"
+      first_name:
+        type: "string"
+        example: "Corine"
+      last_name:
+        type: "string"
+        example: "Contact"
+      job_title:
+        type: "string"
+        example: "Managing director"
+      company:
+        type: "string"
+        example: "DEF Ventures"
+      advisor:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      notes:
+        type: "string"
+        example: "greenfield pharmaceutical"
+  ContactSearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
   Investment Project:
     required:
     - "description"
@@ -1305,3 +1481,11 @@ definitions:
       name:
         type: "string"
         example: "South East England"
+  AggregateSearchResults_aggregates:
+    properties:
+      count:
+        type: "integer"
+        example: 3015
+      entity:
+        type: "string"
+        example: "Events"
