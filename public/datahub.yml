@@ -516,7 +516,7 @@ paths:
           schema:
             $ref: '#/definitions/CompanySearchResults'
   /search/contact:
-    get:
+    post:
       tags:
       - search
       summary: Basic search endpoint for Data Hub

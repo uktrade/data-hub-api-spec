@@ -32,8 +32,9 @@ exports.datahubSearch = function(args, res, next) {
     "archived" : true,
     "archived_reason" : "Company dissolved",
     "account_manager" : {
-      "name" : "A N Advisor",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      "last_name" : "Advisor",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "first_name" : "Alison"
     },
     "headquarter_type" : {
       "name" : "HeadquarterType",
@@ -145,8 +146,9 @@ exports.datahubSearch_0 = function(args, res, next) {
     "archived" : true,
     "archived_reason" : "Company dissolved",
     "account_manager" : {
-      "name" : "A N Advisor",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      "last_name" : "Advisor",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "first_name" : "Alison"
     },
     "headquarter_type" : {
       "name" : "HeadquarterType",
@@ -247,8 +249,9 @@ exports.datahubSearch_1 = function(args, res, next) {
     "archived" : true,
     "archived_reason" : "Company dissolved",
     "account_manager" : {
-      "name" : "A N Advisor",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      "last_name" : "Advisor",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "first_name" : "Alison"
     },
     "headquarter_type" : {
       "name" : "HeadquarterType",
