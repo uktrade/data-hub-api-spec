@@ -115,11 +115,17 @@ exports.getinvestmentrequirements = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
+  "requirements_complete" : false,
   "competitor_countries" : "",
   "client_requirements" : "Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....",
+  "uk_company" : {
+    "name" : "Company Registered Name Ltd",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
+  },
   "strategic_drivers" : "",
   "address_line_1" : "19 Railway Cuttings",
   "address_postcode" : "SN1 1AA",
+  "client_considering_other_countries" : false,
   "site_decided" : false,
   "address_line_3" : "Surrey",
   "address_line_2" : "East Cheam",
@@ -174,19 +180,22 @@ exports.getinvestmentvalue = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "export_revenue" : false,
   "total_investment" : 145000000,
-  "new_tech_to_uk" : false,
-  "r_and_d_budget" : false,
   "number_safeguarded_jobs" : 100,
   "average_salary" : {
     "name" : "£35,000",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
-  "number_new_jobs" : 100,
+  "client_cannot_provide_total_investment" : false,
   "government_assistance" : false,
   "foreign_equity_investment" : 100000000,
-  "non_fdi_r_and_d_budget" : false
+  "non_fdi_r_and_d_budget" : false,
+  "client_cannot_provide_foreign_investment" : false,
+  "export_revenue" : false,
+  "new_tech_to_uk" : false,
+  "r_and_d_budget" : false,
+  "value_complete" : false,
+  "number_new_jobs" : 100
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');

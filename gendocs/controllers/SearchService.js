@@ -47,6 +47,7 @@ exports.datahubSearch = function(args, res, next) {
       "name" : "Limited Company",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "one_list_account_owner" : "",
     "trading_address_county" : "ANYSHIRE",
     "uk_based" : true,
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
@@ -70,7 +71,6 @@ exports.datahubSearch = function(args, res, next) {
     "trading_address_1" : "123 HIGH STREET",
     "future_interest_countries" : "",
     "registered_address_1" : "123 HIGH STREET",
-    "one_list_account_owner" : "",
     "registered_address_3" : "SUBTOWN",
     "registered_address_2" : "AREA",
     "registered_address_town" : "ANYTOWN",
@@ -161,6 +161,7 @@ exports.datahubSearch_0 = function(args, res, next) {
       "name" : "Limited Company",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "one_list_account_owner" : "",
     "trading_address_county" : "ANYSHIRE",
     "uk_based" : true,
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
@@ -184,7 +185,6 @@ exports.datahubSearch_0 = function(args, res, next) {
     "trading_address_1" : "123 HIGH STREET",
     "future_interest_countries" : "",
     "registered_address_1" : "123 HIGH STREET",
-    "one_list_account_owner" : "",
     "registered_address_3" : "SUBTOWN",
     "registered_address_2" : "AREA",
     "registered_address_town" : "ANYTOWN",
@@ -264,6 +264,7 @@ exports.datahubSearch_1 = function(args, res, next) {
       "name" : "Limited Company",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "one_list_account_owner" : "",
     "trading_address_county" : "ANYSHIRE",
     "uk_based" : true,
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
@@ -287,7 +288,6 @@ exports.datahubSearch_1 = function(args, res, next) {
     "trading_address_1" : "123 HIGH STREET",
     "future_interest_countries" : "",
     "registered_address_1" : "123 HIGH STREET",
-    "one_list_account_owner" : "",
     "registered_address_3" : "SUBTOWN",
     "registered_address_2" : "AREA",
     "registered_address_town" : "ANYTOWN",
