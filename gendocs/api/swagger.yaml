@@ -220,37 +220,6 @@ paths:
         404:
           description: "investment does not exist"
       x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project, creating a new one if not found"
-      description: "Updates an existing investment project"
-      operationId: "updateInvestment"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentProject"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
     patch:
       tags:
       - "investment"
@@ -346,38 +315,6 @@ paths:
         404:
           description: "investment does not exist"
       x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project value object, creating a new one if\
-        \ not found"
-      description: "Updates an existing investment project value object"
-      operationId: "updateInvestmentValue"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project value data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentValue"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
     patch:
       tags:
       - "investment"
@@ -436,38 +373,6 @@ paths:
         404:
           description: "investment does not exist"
       x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project requirements object, creating a new\
-        \ one if not found"
-      description: "Updates an existing investment project requirements object"
-      operationId: "updateInvestmentRequirements"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project requirements data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentRequirements"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
     patch:
       tags:
       - "investment"
@@ -524,38 +429,6 @@ paths:
           description: "bad input parameter"
         404:
           description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    put:
-      tags:
-      - "investment"
-      summary: "updates an investment project team object, creating a new one if not\
-        \ found"
-      description: "Updates an existing investment project team object"
-      operationId: "updateInvestmentTeam"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project team data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentTeam"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
     patch:
       tags:
@@ -636,6 +509,81 @@ paths:
           schema:
             $ref: "#/definitions/BusinessActivities"
       x-swagger-router-controller: "Investment"
+  /search:
+    get:
+      tags:
+      - "search"
+      summary: "Basic search endpoint for Data Hub"
+      description: "Top level search for datahub"
+      operationId: "datahubSearch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "term"
+        in: "query"
+        description: "phrase to search for"
+        required: true
+        type: "string"
+      - name: "entity"
+        in: "query"
+        description: "which top level entity to search"
+        required: false
+        type: "string"
+        default: "company"
+      responses:
+        200:
+          description: "Search results"
+          schema:
+            $ref: "#/definitions/AggregateSearchResults"
+      x-swagger-router-controller: "Search"
+  /search/company:
+    post:
+      tags:
+      - "search"
+      summary: "Basic search endpoint for Data Hub"
+      description: "Top level search for datahub"
+      operationId: "datahubSearch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "filter"
+        required: true
+        schema:
+          $ref: "#/definitions/CompanyFilteredSearch"
+      responses:
+        200:
+          description: "Search results"
+          schema:
+            $ref: "#/definitions/CompanySearchResults"
+      x-swagger-router-controller: "Search"
+  /search/contact:
+    get:
+      tags:
+      - "search"
+      summary: "Basic search endpoint for Data Hub"
+      description: "Top level search for datahub"
+      operationId: "datahubSearch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "filter"
+        required: true
+        schema:
+          $ref: "#/definitions/ContactFilteredSearch"
+      responses:
+        200:
+          description: "Search results"
+          schema:
+            $ref: "#/definitions/ContactSearchResults"
+      x-swagger-router-controller: "Search"
 securityDefinitions:
   OauthSecurity:
     type: "oauth2"
@@ -1405,9 +1353,216 @@ definitions:
     items:
       $ref: "#/definitions/UKRegions_inner"
   BusinessActivities:
-    type: "array"
-    items:
-      $ref: "#/definitions/BusinessActivity"
+    type: "string"
+  AggregateSearchResults:
+    required:
+    - "aggregates"
+    - "count"
+    - "next"
+    - "previous"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      aggregates:
+        type: "array"
+        items:
+          $ref: "#/definitions/AggregateSearchResults_aggregates"
+      companies:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+      contacts:
+        type: "array"
+        items:
+          $ref: "#/definitions/Contact"
+    description: "Note: only one of the two possible arrays will be populated depending\
+      \ on the search response"
+  CompanyFilteredSearch:
+    type: "object"
+    properties:
+      original_query:
+        type: "string"
+        example: "ABC DEF"
+      name:
+        type: "string"
+        example: "ABC Company"
+      alias:
+        type: "string"
+        example: "DEF Ventures"
+      sector:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      account_manager:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      export_to_country:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      future_interest_country:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      description:
+        type: "string"
+        example: "greenfield pharmaceutical"
+      uk_region:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      trading_address_town:
+        type: "string"
+        example: "Shipton"
+      trading_address_country:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      trading_address_postcode:
+        type: "string"
+        example: "AB1 2CD"
+  CompanySearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+  ContactFilteredSearch:
+    type: "object"
+    properties:
+      original_query:
+        type: "string"
+        example: "Corine Contact"
+      first_name:
+        type: "string"
+        example: "Corine"
+      last_name:
+        type: "string"
+        example: "Contact"
+      job_title:
+        type: "string"
+        example: "Managing director"
+      company:
+        type: "string"
+        example: "DEF Ventures"
+      advisor:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      notes:
+        type: "string"
+        example: "greenfield pharmaceutical"
+  ContactSearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+  Investment Project:
+    required:
+    - "description"
+    - "estimated_land_date"
+    - "investment_type"
+    - "name"
+    - "nda_signed"
+    properties:
+      name:
+        type: "string"
+        example: "Marriot Hotels - New hotel in Manchester"
+      project_code:
+        type: "string"
+        example: "P-01234567"
+      description:
+        type: "string"
+        example: "Marriott hotels wishes to open in a new part of Manchester under-served\
+          \ by its existing hotels"
+      document_link:
+        type: "string"
+        example: "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598"
+      nda_signed:
+        type: "boolean"
+        example: false
+      estimated_land_date:
+        type: "string"
+        format: "date"
+        example: "2017-05-01"
+      investment_type:
+        $ref: "#/definitions/InvestmentType"
+      phase:
+        $ref: "#/definitions/Phase"
+      project_shareable:
+        type: "boolean"
+      anonymous_description:
+        type: "string"
+        example: "A large hotel chain wishes to open a hotel in a new part of a large\
+          \ northern city under-served by its existing hotels"
+      not_shareable_reason:
+        type: "string"
+        example: "Company has asked us to keep project quiet until official announcement"
+      investor_company:
+        $ref: "#/definitions/CompanySlim"
+      intermediate_company:
+        $ref: "#/definitions/CompanySlim"
+      investment_recipient_company:
+        $ref: "#/definitions/CompanySlim"
+      client_contacts:
+        $ref: "#/definitions/ContactArray"
+      client_relationship_manager:
+        $ref: "#/definitions/Advisor"
+      referral_source_advisor:
+        $ref: "#/definitions/Advisor"
+      referral_source_activity:
+        $ref: "#/definitions/ReferralSourceActivity"
+      referral_source_activity_website:
+        $ref: "#/definitions/ReferralSourceActivityWebsite"
+      referral_source_activity_marketing:
+        $ref: "#/definitions/ReferralSourceActivityMarketing"
+      referral_source_activity_event:
+        $ref: "#/definitions/ReferralSourceActivityEvent"
+      fdi_type:
+        $ref: "#/definitions/FDIType"
+      non_fdi_type:
+        $ref: "#/definitions/NonFDIType"
+      sector:
+        $ref: "#/definitions/Sector"
+      business_activity:
+        $ref: "#/definitions/BusinessActivity"
   InvestmentValue_average_salary:
     required:
     - "id"
@@ -1429,3 +1584,11 @@ definitions:
       name:
         type: "string"
         example: "South East England"
+  AggregateSearchResults_aggregates:
+    properties:
+      count:
+        type: "integer"
+        example: 3015
+      entity:
+        type: "string"
+        example: "Events"

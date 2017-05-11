@@ -330,7 +330,7 @@ exports.metadataBusinessActibvity = function(args, res, next) {
    * returns BusinessActivities
    **/
   var examples = {};
-  examples['application/json'] = "";
+  examples['application/json'] = { };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -379,54 +379,6 @@ exports.patchInvestmentValue = function(args, res, next) {
   /**
    * updates an investment project value object, from a partial JSON object
    * Patches an existing investment project value object
-   *
-   * investmentId String UUID for a Data Hub investment project
-   * investment InvestmentValue Investment project value data to update
-   * no response value expected for this operation
-   **/
-  res.end();
-}
-
-exports.updateInvestment = function(args, res, next) {
-  /**
-   * updates an investment project, creating a new one if not found
-   * Updates an existing investment project
-   *
-   * investmentId String UUID for a Data Hub investment project
-   * investment InvestmentProject Investment project data to update
-   * no response value expected for this operation
-   **/
-  res.end();
-}
-
-exports.updateInvestmentRequirements = function(args, res, next) {
-  /**
-   * updates an investment project requirements object, creating a new one if not found
-   * Updates an existing investment project requirements object
-   *
-   * investmentId String UUID for a Data Hub investment project
-   * investment InvestmentRequirements Investment project requirements data to update
-   * no response value expected for this operation
-   **/
-  res.end();
-}
-
-exports.updateInvestmentTeam = function(args, res, next) {
-  /**
-   * updates an investment project team object, creating a new one if not found
-   * Updates an existing investment project team object
-   *
-   * investmentId String UUID for a Data Hub investment project
-   * investment InvestmentTeam Investment project team data to update
-   * no response value expected for this operation
-   **/
-  res.end();
-}
-
-exports.updateInvestmentValue = function(args, res, next) {
-  /**
-   * updates an investment project value object, creating a new one if not found
-   * Updates an existing investment project value object
    *
    * investmentId String UUID for a Data Hub investment project
    * investment InvestmentValue Investment project value data to update

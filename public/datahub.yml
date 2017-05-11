@@ -1,4 +1,5 @@
 swagger: '2.0'
+
 info:
   description: Data Hub API
   version: 1.0.0
@@ -224,36 +225,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project, creating a new one if not found
-      operationId: updateInvestment
-      description: Updates an existing investment project
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentProject'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
@@ -345,36 +316,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project value object, creating a new one if not found
-      operationId: updateInvestmentValue
-      description: Updates an existing investment project value object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project value data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentValue'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
@@ -430,36 +371,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project requirements object, creating a new one if not found
-      operationId: updateInvestmentRequirements
-      description: Updates an existing investment project requirements object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project requirements data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentRequirements'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
@@ -515,36 +426,6 @@ paths:
           description: bad input parameter
         404:
           description: investment does not exist
-    put:
-      tags:
-      - investment
-      summary: updates an investment project team object, creating a new one if not found
-      operationId: updateInvestmentTeam
-      description: Updates an existing investment project team object
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: investment
-        description: Investment project team data to update
-        required: true
-        schema:
-          $ref: '#/definitions/InvestmentTeam'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - investment
@@ -620,6 +501,78 @@ paths:
           description: metadata array
           schema:
             $ref: '#/definitions/BusinessActivities'
+  /search:
+    get:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: term
+        description: phrase to search for
+        required: true
+        type: string
+      - in: query
+        name: entity
+        type: string
+        description: which top level entity to search
+        required: false
+        default: 'company'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/AggregateSearchResults'
+  /search/company:
+    post:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/CompanyFilteredSearch'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/CompanySearchResults'
+  /search/contact:
+    get:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/ContactFilteredSearch'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/ContactSearchResults'
 definitions:
   InvestmentAuditLogList:
     type: object
@@ -1399,6 +1352,153 @@ definitions:
           type: string
           example: 'South East England'
   BusinessActivities:
-    type: array
+    type: string
     items:
       $ref: '#/definitions/BusinessActivity'
+  AggregateSearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "aggregates"
+    description: 'Note: only one of the two possible arrays will be populated depending on the search response'
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      aggregates:
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              type: integer
+              example: 3015
+            entity:
+              type: string
+              example: "Events"
+      companies:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+      contacts:
+        type: "array"
+        items:
+          $ref: "#/definitions/Contact"
+  CompanyFilteredSearch:
+    type: object
+    properties:
+      original_query:
+        type: string
+        example: 'ABC DEF'
+      name:
+        type: string
+        example: 'ABC Company'
+      alias:
+        type: string
+        example: 'DEF Ventures'
+      sector:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      account_manager:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      export_to_country:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      future_interest_country:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      description:
+        type: string
+        example: 'greenfield pharmaceutical'
+      uk_region:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      trading_address_town:
+        type: string
+        example: 'Shipton'
+      trading_address_country:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      trading_address_postcode:
+        type: string
+        example: 'AB1 2CD'
+  CompanySearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+  ContactFilteredSearch:
+    type: object
+    properties:
+      original_query:
+        type: string
+        example: 'Corine Contact'
+      first_name:
+        type: string
+        example: 'Corine'
+      last_name:
+        type: string
+        example: 'Contact'
+      job_title:
+        type: string
+        example: 'Managing director'
+      company:
+        type: string
+        example: 'DEF Ventures'
+      advisor:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      notes:
+        type: string
+        example: 'greenfield pharmaceutical'
+  ContactSearchResults:
+    required:
+    - "count"
+    - "next"
+    - "previous"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      next:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      previous:
+        type: "string"
+        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+
