@@ -41,7 +41,7 @@ Name | Type | Description | Notes
 **future_interest_countries** | [**CountryArray**](CountryArray.md) |  | [optional] 
 **headquarter_type** | [**HeadquarterType**](HeadquarterType.md) |  | [optional] 
 **interactions** | [**InteractionArray**](InteractionArray.md) |  | [optional] 
-**one_list_owner** | [**Advisor**](Advisor.md) |  | [optional] 
+**one_list_account_owner** | [**Advisor**](Advisor.md) |  | [optional] 
 **parent** | [**CompanySlim**](CompanySlim.md) |  | [optional] 
 **registered_address_country** | [**Country**](Country.md) |  | [optional] 
 **sector** | [**Sector**](Sector.md) |  | [optional] 
