@@ -112,7 +112,7 @@ exports.getcompany = function(args, res, next) {
   "trading_address_1" : "123 HIGH STREET",
   "future_interest_countries" : "",
   "registered_address_1" : "123 HIGH STREET",
-  "one_list_owner" : "",
+  "one_list_account_owner" : "",
   "registered_address_3" : "SUBTOWN",
   "registered_address_2" : "AREA",
   "registered_address_town" : "ANYTOWN",

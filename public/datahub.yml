@@ -649,7 +649,7 @@ definitions:
         $ref: '#/definitions/HeadquarterType'
       interactions:
         $ref: '#/definitions/InteractionArray'
-      one_list_owner:
+      one_list_account_owner:
         $ref: '#/definitions/Advisor'
       parent:
         $ref: '#/definitions/CompanySlim'
