@@ -96,6 +96,9 @@
     type: object
     description: A Data Hub investment project Value object
     properties:
+      value_complete:
+        type: boolean
+        example: false
       total_investment:
         type: integer
         example: 145000000
@@ -146,6 +149,9 @@
     type: object
     description: A Data Hub investment project Value object
     properties:
+      requirements_complete:
+        type: boolean
+        example: false
       client_requirements:
         type: string
         example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
@@ -175,7 +181,7 @@
       strategic_drivers:
         $ref: '#/definitions/StrategicDriverArray'
       uk_company:
-        $ref: '#/definitions/Company'
+        $ref: '#/definitions/CompanySlim'
   InvestmentTeam:
     type: object
     description: A Data Hub investment project Value object
