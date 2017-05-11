@@ -1,0 +1,72 @@
+  /search:
+    get:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: term
+        description: phrase to search for
+        required: true
+        type: string
+      - in: query
+        name: entity
+        type: string
+        description: which top level entity to search
+        required: false
+        default: 'company'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/AggregateSearchResults'
+  /search/company:
+    post:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/CompanyFilteredSearch'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/CompanySearchResults'
+  /search/contact:
+    post:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/ContactFilteredSearch'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/ContactSearchResults'
