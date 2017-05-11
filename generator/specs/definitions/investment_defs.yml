@@ -99,9 +99,15 @@
       total_investment:
         type: integer
         example: 145000000
+      client_cannot_provide_total_investment:
+        type: boolean
+        example: false
       foreign_equity_investment:
         type: integer
         example: 100000000
+      client_cannot_provide_foreign_investment:
+        type: boolean
+        example: false
       government_assistance:
         type: boolean
         example: false
@@ -159,12 +165,17 @@
       address_postcode:
         type: string
         example: 'SN1 1AA'
+      client_considering_other_countries:
+        type: boolean
+        example: false
       competitor_countries:
         $ref: '#/definitions/CountryArray'
       uk_region_locations:
         $ref: '#/definitions/UKRegions'
       strategic_drivers:
         $ref: '#/definitions/StrategicDriverArray'
+      uk_company:
+        $ref: '#/definitions/Company'
   InvestmentTeam:
     type: object
     description: A Data Hub investment project Value object
