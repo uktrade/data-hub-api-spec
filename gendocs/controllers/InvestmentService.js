@@ -210,6 +210,44 @@ exports.getprojectsforcompany = function(args, res, next) {
    * returns a summary of investment projects for a company
    * Returns a summary list of investment projects per investor-company ID
    *
+   * investmentId UUID UUID of an investment project
+   * limit Integer pagination parameter
+   * offset Integer pagination parameter (optional)
+   * returns InvestmentAuditLogList
+   **/
+  var examples = {};
+  examples['application/json'] = {
+  "next" : "http://{HOST}/v3/investment/{companyId}/auditlogs?limit=10&offset=5",
+  "previous" : "http://{HOST}/v3/investment/{companyId}/auditlogs?limit=10&offset=5",
+  "count" : 30,
+  "results" : [ {
+    "advisor" : {
+      "last_name" : "Advisor",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "first_name" : "Alison"
+    },
+    "field" : "project_manager",
+    "investmentId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "action" : "ADDED",
+    "old_value" : "John Oldadvisor",
+    "grouping" : "team",
+    "new_value" : "Janest Newadvisor",
+    "timestamp" : "2017-08-20T08:26:21"
+  } ]
+};
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
+}
+
+exports.getprojectsforcompany_0 = function(args, res, next) {
+  /**
+   * returns a summary of investment projects for a company
+   * Returns a summary list of investment projects per investor-company ID
+   *
    * companyId UUID UUID of a company with investment projects
    * limit Integer pagination parameter
    * offset Integer pagination parameter (optional)
