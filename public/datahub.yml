@@ -138,6 +138,39 @@ paths:
         404:
           description: company does not exist
   /v3/investment/project:
+    get:
+      tags:
+      - investment
+      summary: returns a summary of investment projects for a company
+      operationId: getprojectsforcompany
+      description: Returns a summary list of investment projects per investor-company ID
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: investor_company_id
+        description: UUID of a company with investment projects
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: offset
+        type: integer
+        description: pagination parameter
+        required: false
+      - in: query
+        name: limit
+        type: integer
+        description: pagination parameter
+        required: false
+      responses:
+        200:
+          description: JSON formatted array of investment project summaries
+          schema:
+            $ref: '#/definitions/InvestmentProjectsList'
+        400:
+          description: bad input parameter
     post:
       tags:
       - investment
@@ -217,42 +250,6 @@ paths:
           description: item updated
         400:
           description: invalid input, object invalid
-  /v3/investment/{companyId}/projects:
-    get:
-      tags:
-      - investment
-      summary: returns a summary of investment projects for a company
-      operationId: getprojectsforcompany
-      description: Returns a summary list of investment projects per investor-company ID
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: companyId
-        description: UUID of a company with investment projects
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        required: true
-        type: string
-        format: uuid
-      - in: query
-        name: offset
-        type: integer
-        description: pagination parameter
-        required: false
-      - in: query
-        name: limit
-        type: integer
-        description: pagination parameter
-        required: true
-      responses:
-        200:
-          description: JSON formatted array of investment project summaries
-          schema:
-            $ref: '#/definitions/InvestmentProjectsList'
-        400:
-          description: bad input parameter
   /v3/investment/{investmentId}/value:
     get:
       tags:
@@ -416,37 +413,6 @@ paths:
       responses:
         200:
           description: item updated
-        400:
-          description: invalid input, object invalid
-  /v3/investment/{investmentId}/businessactivity:
-    put:
-      tags:
-      - investment
-      summary: Adds a custom Business Activity to a project
-      operationId: addBusinessActivity
-      description: Adds a custom business activity to a project
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: investmentId
-        description: UUID for a Data Hub investment project
-        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        type: string
-        required: true
-      - in: body
-        name: business_activity
-        description: The business activity to add
-        required: true
-        schema:
-          $ref: '#/definitions/BusinessActivity'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
         400:
           description: invalid input, object invalid
   /v3/metadata/business_activity:
@@ -983,8 +949,8 @@ definitions:
         $ref: '#/definitions/NonFDIType'
       sector:
         $ref: '#/definitions/Sector'
-      business_activity:
-        $ref: '#/definitions/BusinessActivity'
+      business_activities:
+        $ref: '#/definitions/BusinessActivities'
   InvestmentProjectsList:
     type: object
     required:
@@ -1276,7 +1242,7 @@ definitions:
           type: string
           example: 'South East England'
   BusinessActivities:
-    type: string
+    type: array
     items:
       $ref: '#/definitions/BusinessActivity'
   AggregateSearchResults:

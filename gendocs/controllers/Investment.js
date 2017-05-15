@@ -4,10 +4,6 @@ var url = require('url');
 
 var Investment = require('./InvestmentService');
 
-module.exports.addBusinessActivity = function addBusinessActivity (req, res, next) {
-  Investment.addBusinessActivity(req.swagger.params, res, next);
-};
-
 module.exports.createInvestment = function createInvestment (req, res, next) {
   Investment.createInvestment(req.swagger.params, res, next);
 };

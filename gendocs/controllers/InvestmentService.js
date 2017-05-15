@@ -1,17 +1,5 @@
 'use strict';
 
-exports.addBusinessActivity = function(args, res, next) {
-  /**
-   * Adds a custom Business Activity to a project
-   * Adds a custom business activity to a project
-   *
-   * investmentId String UUID for a Data Hub investment project
-   * business_activity BusinessActivity The business activity to add
-   * no response value expected for this operation
-   **/
-  res.end();
-}
-
 exports.createInvestment = function(args, res, next) {
   /**
    * adds the initial stage of an investment project
@@ -69,10 +57,6 @@ exports.getinvestment = function(args, res, next) {
     "name" : "DIT Regional Website",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
-  "business_activity" : {
-    "name" : "Retail",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
   "investor_company" : {
     "name" : "Company Registered Name Ltd",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
@@ -95,7 +79,8 @@ exports.getinvestment = function(args, res, next) {
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "name" : "Marriot Hotels - New hotel in Manchester",
-  "intermediate_company" : ""
+  "intermediate_company" : "",
+  "business_activities" : ""
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -210,9 +195,9 @@ exports.getprojectsforcompany = function(args, res, next) {
    * returns a summary of investment projects for a company
    * Returns a summary list of investment projects per investor-company ID
    *
-   * companyId UUID UUID of a company with investment projects
-   * limit Integer pagination parameter
+   * investor_company_id UUID UUID of a company with investment projects (optional)
    * offset Integer pagination parameter (optional)
+   * limit Integer pagination parameter (optional)
    * returns InvestmentProjectsList
    **/
   var examples = {};
@@ -257,10 +242,6 @@ exports.getprojectsforcompany = function(args, res, next) {
       "name" : "DIT Regional Website",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "business_activity" : {
-      "name" : "Retail",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "investor_company" : {
       "name" : "Company Registered Name Ltd",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
@@ -283,7 +264,8 @@ exports.getprojectsforcompany = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "name" : "Marriot Hotels - New hotel in Manchester",
-    "intermediate_company" : ""
+    "intermediate_company" : "",
+    "business_activities" : ""
   } ]
 };
   if (Object.keys(examples).length > 0) {
@@ -301,7 +283,7 @@ exports.metadataBusinessActibvity = function(args, res, next) {
    * returns BusinessActivities
    **/
   var examples = {};
-  examples['application/json'] = { };
+  examples['application/json'] = "";
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));

@@ -130,6 +130,41 @@ paths:
           description: "company does not exist"
       x-swagger-router-controller: "Company"
   /v3/investment/project:
+    get:
+      tags:
+      - "investment"
+      summary: "returns a summary of investment projects for a company"
+      description: "Returns a summary list of investment projects per investor-company\
+        \ ID"
+      operationId: "getprojectsforcompany"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investor_company_id"
+        in: "query"
+        description: "UUID of a company with investment projects"
+        required: false
+        type: "string"
+        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        format: "uuid"
+      - name: "offset"
+        in: "query"
+        description: "pagination parameter"
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "pagination parameter"
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "JSON formatted array of investment project summaries"
+          schema:
+            $ref: "#/definitions/InvestmentProjectsList"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Investment"
     post:
       tags:
       - "investment"
@@ -210,44 +245,6 @@ paths:
           description: "item updated"
         400:
           description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
-  /v3/investment/{companyId}/projects:
-    get:
-      tags:
-      - "investment"
-      summary: "returns a summary of investment projects for a company"
-      description: "Returns a summary list of investment projects per investor-company\
-        \ ID"
-      operationId: "getprojectsforcompany"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "companyId"
-        in: "path"
-        description: "UUID of a company with investment projects"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-        format: "uuid"
-      - name: "offset"
-        in: "query"
-        description: "pagination parameter"
-        required: false
-        type: "integer"
-      - name: "limit"
-        in: "query"
-        description: "pagination parameter"
-        required: true
-        type: "integer"
-      responses:
-        200:
-          description: "JSON formatted array of investment project summaries"
-          schema:
-            $ref: "#/definitions/InvestmentProjectsList"
-        400:
-          description: "bad input parameter"
       x-swagger-router-controller: "Investment"
   /v3/investment/{investmentId}/value:
     get:
@@ -418,38 +415,6 @@ paths:
       responses:
         200:
           description: "item updated"
-        400:
-          description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
-  /v3/investment/{investmentId}/businessactivity:
-    put:
-      tags:
-      - "investment"
-      summary: "Adds a custom Business Activity to a project"
-      description: "Adds a custom business activity to a project"
-      operationId: "addBusinessActivity"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "business_activity"
-        description: "The business activity to add"
-        required: true
-        schema:
-          $ref: "#/definitions/BusinessActivity"
-      responses:
-        200:
-          description: "item updated"
-        201:
-          description: "item created"
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Investment"
@@ -999,8 +964,8 @@ definitions:
         $ref: "#/definitions/NonFDIType"
       sector:
         $ref: "#/definitions/Sector"
-      business_activity:
-        $ref: "#/definitions/BusinessActivity"
+      business_activities:
+        $ref: "#/definitions/BusinessActivities"
     description: "A Data Hub investment project"
   InvestmentProjectsList:
     type: "object"
@@ -1275,7 +1240,9 @@ definitions:
     items:
       $ref: "#/definitions/UKRegions_inner"
   BusinessActivities:
-    type: "string"
+    type: "array"
+    items:
+      $ref: "#/definitions/BusinessActivity"
   AggregateSearchResults:
     required:
     - "aggregates"
