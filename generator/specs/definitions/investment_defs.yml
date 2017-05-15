@@ -69,8 +69,8 @@
         $ref: '#/definitions/NonFDIType'
       sector:
         $ref: '#/definitions/Sector'
-      business_activity:
-        $ref: '#/definitions/BusinessActivity'
+      business_activities:
+        $ref: '#/definitions/BusinessActivities'
   InvestmentProjectsList:
     type: object
     required:
