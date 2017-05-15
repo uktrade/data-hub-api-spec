@@ -71,7 +71,6 @@
         $ref: '#/definitions/Sector'
       business_activity:
         type: array
-        items:
           $ref: '#/definitions/BusinessActivity'
   InvestmentProjectsList:
     type: object
@@ -320,6 +319,7 @@
         type: string
         example: 'Active'
   StrategicDriverArray:
+    type: array
     items:
       $ref: '#/definitions/StrategicDriver'
   StrategicDriver:
