@@ -70,7 +70,9 @@
       sector:
         $ref: '#/definitions/Sector'
       business_activity:
-        $ref: '#/definitions/BusinessActivity'
+        type: array
+        items:
+          $ref: '#/definitions/BusinessActivity'
   InvestmentProjectsList:
     type: object
     required:
@@ -318,7 +320,6 @@
         type: string
         example: 'Active'
   StrategicDriverArray:
-    type: array
     items:
       $ref: '#/definitions/StrategicDriver'
   StrategicDriver:
