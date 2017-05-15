@@ -78,7 +78,7 @@
           description: item updated
         400:
           description: invalid input, object invalid
-  /v3/investment/{companyId}/projects:
+  /v3/investment/project:
     get:
       tags:
       - investment
@@ -90,11 +90,11 @@
       produces:
       - application/json
       parameters:
-      - in: path
-        name: companyId
+      - in: query
+        name: investor_company_id
         description: UUID of a company with investment projects
         default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-        required: true
+        required: false
         type: string
         format: uuid
       - in: query
@@ -106,7 +106,7 @@
         name: limit
         type: integer
         description: pagination parameter
-        required: true
+        required: false
       responses:
         200:
           description: JSON formatted array of investment project summaries
