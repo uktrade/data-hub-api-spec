@@ -2,7 +2,6 @@
     type: object
     description: A Data Hub investment project
     required:
-    - anonymous_description
     - business_activities
     - client_contacts
     - client_relationship_manager
