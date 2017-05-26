@@ -58,6 +58,38 @@
           description: item created
         400:
           description: invalid input, object invalid
+    patch:
+      tags:
+      - company
+      summary: updates a company
+      operationId: updateCompany
+      description: Updates an existing company, only changing fields specified in the request
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID for a Data Hub company
+        type: string
+        required: true
+      - in: body
+        name: company
+        description: Company data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Company'
+      - in: query
+        name: Archived
+        description: Update the company's status to Archived
+        required: false
+        type: boolean
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
   /v3/company:
     post:
       tags:
