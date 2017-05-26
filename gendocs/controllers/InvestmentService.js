@@ -21,18 +21,41 @@ exports.getinvestment = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
-  "estimated_land_date" : "2017-05-01",
-  "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
-  "referral_source_activity_event" : {
-    "name" : "Event Name",
+  "phase" : {
+    "name" : "Active",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
+  "referral_source_activity_website" : {
+    "name" : "DIT Regional Website",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "estimated_land_date" : "2017-05-01",
+  "investor_company" : "",
+  "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
+  "project_code" : "P-01234567",
+  "referral_source_activity" : {
+    "name" : "Cold Call",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "referral_source_activity_event" : "Moscow Hotels Expo 2017",
   "fdi_type" : {
     "name" : "Merger",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
+  "project_shareable" : true,
+  "referral_source_advisor" : "",
+  "nda_signed" : false,
+  "investment_type" : {
+    "name" : "FDI",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
+  "non_fdi_type" : {
+    "name" : "Advanced Engineering Supply Chain",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "anonymous_description" : "A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels",
+  "name" : "Marriot Hotels - New hotel in Manchester",
   "referral_source_activity_marketing" : {
     "name" : "Press advertisement",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -48,39 +71,11 @@ exports.getinvestment = function(args, res, next) {
     "name" : "Advanced Engineering",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
-  "document_link" : "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598",
-  "phase" : {
-    "name" : "Active",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
-  "referral_source_activity_website" : {
-    "name" : "DIT Regional Website",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
-  "investor_company" : {
+  "business_activities" : "",
+  "intermediate_company" : {
     "name" : "Company Registered Name Ltd",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-  },
-  "project_code" : "P-01234567",
-  "referral_source_activity" : {
-    "name" : "Cold Call",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
-  "project_shareable" : true,
-  "referral_source_advisor" : "",
-  "nda_signed" : false,
-  "investment_type" : {
-    "name" : "FDI",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
-  "investment_recipient_company" : "",
-  "non_fdi_type" : {
-    "name" : "Advanced Engineering Supply Chain",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
-  "name" : "Marriot Hotels - New hotel in Manchester",
-  "intermediate_company" : "",
-  "business_activities" : ""
+  }
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -206,18 +201,41 @@ exports.getprojectsforcompany = function(args, res, next) {
   "previous" : "http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5",
   "count" : 30,
   "results" : [ {
-    "estimated_land_date" : "2017-05-01",
-    "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
-    "referral_source_activity_event" : {
-      "name" : "Event Name",
+    "phase" : {
+      "name" : "Active",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "referral_source_activity_website" : {
+      "name" : "DIT Regional Website",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "estimated_land_date" : "2017-05-01",
+    "investor_company" : "",
+    "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
+    "project_code" : "P-01234567",
+    "referral_source_activity" : {
+      "name" : "Cold Call",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "referral_source_activity_event" : "Moscow Hotels Expo 2017",
     "fdi_type" : {
       "name" : "Merger",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "project_shareable" : true,
+    "referral_source_advisor" : "",
+    "nda_signed" : false,
+    "investment_type" : {
+      "name" : "FDI",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
+    "non_fdi_type" : {
+      "name" : "Advanced Engineering Supply Chain",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "anonymous_description" : "A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels",
+    "name" : "Marriot Hotels - New hotel in Manchester",
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -233,39 +251,11 @@ exports.getprojectsforcompany = function(args, res, next) {
       "name" : "Advanced Engineering",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "document_link" : "https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598",
-    "phase" : {
-      "name" : "Active",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "referral_source_activity_website" : {
-      "name" : "DIT Regional Website",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "investor_company" : {
+    "business_activities" : "",
+    "intermediate_company" : {
       "name" : "Company Registered Name Ltd",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    },
-    "project_code" : "P-01234567",
-    "referral_source_activity" : {
-      "name" : "Cold Call",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "project_shareable" : true,
-    "referral_source_advisor" : "",
-    "nda_signed" : false,
-    "investment_type" : {
-      "name" : "FDI",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "investment_recipient_company" : "",
-    "non_fdi_type" : {
-      "name" : "Advanced Engineering Supply Chain",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "name" : "Marriot Hotels - New hotel in Manchester",
-    "intermediate_company" : "",
-    "business_activities" : ""
+    }
   } ]
 };
   if (Object.keys(examples).length > 0) {

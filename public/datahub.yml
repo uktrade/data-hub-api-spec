@@ -882,75 +882,78 @@ definitions:
     type: object
     description: A Data Hub investment project
     required:
-    - name
+    - business_activities
+    - client_contacts
+    - client_relationship_manager
     - description
-    - nda_signed
     - estimated_land_date
+    - investor_company
     - investment_type
+    - name
+    - nda_signed
+    - referral_source_activity
+    - referral_source_advisor
+    - sector
     properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      name:
-        type: string
-        example: 'Marriot Hotels - New hotel in Manchester'
-      project_code:
-        type: string
-        example: 'P-01234567'
-      description:
-        type: string
-        example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
-      document_link:
-        type: string
-        example: 'https://sp.cdms.ukti.gov.uk/optevia_project/P-30027598'
-      nda_signed:
-        type: boolean
-        example: false
-      estimated_land_date:
-        type: string
-        format: date
-        example: '2017-05-01'
-      investment_type:
-        $ref: '#/definitions/InvestmentType'
-      phase:
-        $ref: '#/definitions/Phase'
-      project_shareable:
-        type: boolean
       anonymous_description:
         type: string
         example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
-      not_shareable_reason:
-        type: string
-        example: 'Company has asked us to keep project quiet until official announcement'
-      investor_company:
-        $ref: '#/definitions/CompanySlim'
-      intermediate_company:
-        $ref: '#/definitions/CompanySlim'
-      investment_recipient_company:
-        $ref: '#/definitions/CompanySlim'
+      business_activities:
+        $ref: '#/definitions/BusinessActivities'
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
         $ref: '#/definitions/Advisor'
-      referral_source_advisor:
-        $ref: '#/definitions/Advisor'
-      referral_source_activity:
-        $ref: '#/definitions/ReferralSourceActivity'
-      referral_source_activity_website:
-        $ref: '#/definitions/ReferralSourceActivityWebsite'
-      referral_source_activity_marketing:
-        $ref: '#/definitions/ReferralSourceActivityMarketing'
-      referral_source_activity_event:
-        $ref: '#/definitions/ReferralSourceActivityEvent'
+      description:
+        type: string
+        example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
+      estimated_land_date:
+        type: string
+        format: date
+        example: '2017-05-01'
       fdi_type:
         $ref: '#/definitions/FDIType'
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      intermediate_company:
+        $ref: '#/definitions/CompanySlim'
+      investor_company:
+        $ref: '#/definitions/CompanySlim'
+      investment_type:
+        $ref: '#/definitions/InvestmentType'
+      name:
+        type: string
+        example: 'Marriot Hotels - New hotel in Manchester'
+      nda_signed:
+        type: boolean
+        example: false
       non_fdi_type:
         $ref: '#/definitions/NonFDIType'
+      not_shareable_reason:
+        type: string
+        example: 'Company has asked us to keep project quiet until official announcement'
+      phase:
+        $ref: '#/definitions/Phase'
+      project_code:
+        type: string
+        example: 'P-01234567'
+      project_shareable:
+        type: boolean
+      referral_source_activity:
+        $ref: '#/definitions/ReferralSourceActivity'
+      referral_source_activity_marketing:
+        $ref: '#/definitions/ReferralSourceActivityMarketing'
+      referral_source_activity_website:
+        $ref: '#/definitions/ReferralSourceActivityWebsite'
+      referral_source_activity_event:
+        type: string
+        example: "Moscow Hotels Expo 2017"
+      referral_source_advisor:
+        $ref: '#/definitions/Advisor'
       sector:
         $ref: '#/definitions/Sector'
-      business_activities:
-        $ref: '#/definitions/BusinessActivities'
   InvestmentProjectsList:
     type: object
     required:
