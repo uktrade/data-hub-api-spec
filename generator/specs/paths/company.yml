@@ -58,6 +58,7 @@
           description: item created
         400:
           description: invalid input, object invalid
+  /v3/company:
     post:
       tags:
       - company

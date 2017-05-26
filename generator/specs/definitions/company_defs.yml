@@ -86,9 +86,9 @@
         type: string
         example: 'AB1 2CD'
       account_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       archived_by:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       business_type:
         $ref: '#/definitions/BusinessType'
       children:
@@ -110,7 +110,7 @@
       interactions:
         $ref: '#/definitions/InteractionArray'
       one_list_account_owner:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       parent:
         $ref: '#/definitions/CompanySlim'
       registered_address_country:
@@ -123,7 +123,7 @@
         $ref: '#/definitions/TurnoverRange'
       uk_region:
         $ref: '#/definitions/UKRegion'
-  Advisor:
+  Adviser:
     type: object
     required:
     - id
@@ -139,7 +139,7 @@
         example: 'Annette'
       last_name:
         type: string
-        example: 'Advisor'
+        example: 'Adviser'
   BusinessType:
     type: object
     description: "Business Type metadata"
