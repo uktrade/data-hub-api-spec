@@ -1,4 +1,4 @@
-  /company/{companyId}:
+  /v3/company/{companyId}:
     get:
       tags:
       - company
@@ -58,7 +58,6 @@
           description: item created
         400:
           description: invalid input, object invalid
-  /company:
     post:
       tags:
       - company
@@ -83,7 +82,7 @@
           description: invalid input, object invalid
         409:
           description: company already exists
-  /ch_company/{company_number}:
+  /v3/ch_company/{company_number}:
     get:
       tags:
       - company
