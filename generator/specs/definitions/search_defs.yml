@@ -44,9 +44,16 @@
       alias:
         type: string
         example: 'DEF Ventures'
+      country:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       description:
         type: string
         example: 'greenfield pharmaceutical'
+      exclusions:
+        type: object
+          $ref: '#/definitions/CompanyFilteredSearch'
       export_to_country:
         type: string
         format: uuid
