@@ -37,23 +37,16 @@
   CompanyFilteredSearch:
     type: object
     properties:
-      original_query:
-        type: string
-        example: 'ABC DEF'
-      name:
-        type: string
-        example: 'ABC Company'
-      alias:
-        type: string
-        example: 'DEF Ventures'
-      sector:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       account_manager:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      alias:
+        type: string
+        example: 'DEF Ventures'
+      description:
+        type: string
+        example: 'greenfield pharmaceutical'
       export_to_country:
         type: string
         format: uuid
@@ -62,10 +55,13 @@
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      description:
+      name:
         type: string
-        example: 'greenfield pharmaceutical'
-      uk_region:
+        example: 'ABC Company'
+      original_query:
+        type: string
+        example: 'ABC DEF'
+      sector:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
@@ -79,6 +75,10 @@
       trading_address_postcode:
         type: string
         example: 'AB1 2CD'
+      uk_region:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
   CompanySearchResults:
     required:
     - "count"
