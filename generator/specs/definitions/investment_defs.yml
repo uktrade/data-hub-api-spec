@@ -185,6 +185,127 @@
         $ref: '#/definitions/StrategicDriverArray'
       uk_company:
         $ref: '#/definitions/CompanySlim'
+  InvestmentAuditEntry:
+    type: object
+    description: A single audit log entry
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      user:
+        $ref: '#/definitions/Advisor'
+      items_changed_count:
+        type: integer
+        example: 6
+      datestamp:
+        type: string
+        format: datetime
+        example: '2017-05-01 12:00'
+  InvestmentAuditList:
+    type: array
+    items:
+      $ref: '#/definitions/InvestmentAuditEntry'
+  InvestmentEvaluation:
+    type: object
+    description: The _read-only_ values required for the investment evaluation procedure
+    properties:
+      account_tier:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      address_line_1:
+        type: string
+        example: '19 Railway Cuttings'
+      address_line_2:
+        type: string
+        example: 'East Cheam'
+      address_line_3:
+        type: string
+        example: 'Surrey'
+      address_postcode:
+        type: string
+        example: 'SN1 1AA'
+      average_salary:
+        type: object
+        required:
+        - id
+        - name
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+          name:
+            type: string
+            example: '£35,000'
+      confirmed_fdi:
+        type: boolean
+      confirmed_high_value:
+        type: boolean
+      confirmed_landed:
+        type: boolean
+      foreign_equity_investment:
+        type: integer
+        example: 100000000
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      investor_company:
+        $ref: '#/definitions/CompanySlim'
+      investor_company_country:
+        $ref: '#/definitions/Country'
+      land_date:
+        type: string
+        format: date
+        example: '2017-05-01'
+      longlasting:
+        type: boolean
+      new_ghq:
+        type: boolean
+      new_ehq:
+        type: boolean
+      number_new_jobs:
+        type: integer
+        example: 100
+      number_safeguarded_jobs:
+        type: integer
+        example: 100
+      operations_started:
+        type: string
+        format: date
+        example: '2017-05-01'
+      research_and_development:
+        type: string
+        example: '£145,000 invested in R&D'
+      sector:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      significant_exports:
+        type: boolean
+      total_investment:
+        type: integer
+        example: 145000000
+      type_of_investment:
+        type: string
+        example: 'FDI'
+      uk_company:
+        $ref: '#/definitions/CompanySlim'
+      uk_company_ch_number:
+        type: string
+        example: 'SC-123456'
+  InvestmentEvaluationConfirmations:
+    type: object
+    description: just the three booleans required to pass a project
+    properties:
+      confirmed_fdi:
+        type: boolean
+      confirmed_high_value:
+        type: boolean
+      confirmed_landed:
+        type: boolean
   InvestmentTeam:
     type: object
     description: A Data Hub investment project Value object

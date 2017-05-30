@@ -143,5 +143,5 @@
       results:
         type: "array"
         items:
-          $ref: "#/definitions/Company"
+          $ref: "#/definitions/Contact"
 

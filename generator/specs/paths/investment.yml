@@ -276,6 +276,71 @@
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/{investmentId}/evaluation:
+    get:
+      tags:
+      - investment
+      summary: displays the fields from an Investment Project required for evaluation
+      operationId: getInvestmentEvaluation
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      responses:
+        200:
+          description: evaluation data
+          schema:
+            $ref: '#/definitions/InvestmentEvaluation'
+    put:
+      tags:
+      - investment
+      summary: updates the three booleans on the evaluation screen
+      operationId: putInvestmentEvaluation
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      - in: body
+        name: data
+        description: evaluation booleans
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentEvaluationConfirmations'
+      responses:
+        201:
+          description: status updated
+  /v3/get/{investmentId}/audit:
+    get:
+      tags:
+      - investment
+      summary: produces a list of auditable events associated with a project
+      operationId: getInvestmentAudit
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID for a Data Hub investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        type: string
+        required: true
+      responses:
+        200:
+          description: audit trail
+          schema:
+            $ref: '#/definitions/InvestmentAuditList'
   /v3/metadata/business_activity:
     get:
       tags: 
@@ -292,3 +357,4 @@
           description: metadata array
           schema:
             $ref: '#/definitions/BusinessActivities'
+
