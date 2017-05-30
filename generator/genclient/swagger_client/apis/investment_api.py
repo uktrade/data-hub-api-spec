@@ -40,120 +40,6 @@ class InvestmentApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def add_business_activity(self, investment_id, business_activity, **kwargs):
-        """
-        Adds a custom Business Activity to a project
-        Adds a custom business activity to a project
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.add_business_activity(investment_id, business_activity, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param BusinessActivity business_activity: The business activity to add (required)
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.add_business_activity_with_http_info(investment_id, business_activity, **kwargs)
-        else:
-            (data) = self.add_business_activity_with_http_info(investment_id, business_activity, **kwargs)
-            return data
-
-    def add_business_activity_with_http_info(self, investment_id, business_activity, **kwargs):
-        """
-        Adds a custom Business Activity to a project
-        Adds a custom business activity to a project
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.add_business_activity_with_http_info(investment_id, business_activity, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param BusinessActivity business_activity: The business activity to add (required)
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['investment_id', 'business_activity']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method add_business_activity" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'investment_id' is set
-        if ('investment_id' not in params) or (params['investment_id'] is None):
-            raise ValueError("Missing the required parameter `investment_id` when calling `add_business_activity`")
-        # verify the required parameter 'business_activity' is set
-        if ('business_activity' not in params) or (params['business_activity'] is None):
-            raise ValueError("Missing the required parameter `business_activity` when calling `add_business_activity`")
-
-
-        collection_formats = {}
-
-        resource_path = '/v3/investment/{investmentId}/businessactivity'.replace('{format}', 'json')
-        path_params = {}
-        if 'investment_id' in params:
-            path_params['investmentId'] = params['investment_id']
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'business_activity' in params:
-            body_params = params['business_activity']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = ['OauthSecurity']
-
-        return self.api_client.call_api(resource_path, 'PUT',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type=None,
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
     def create_investment(self, investment_stage_one, **kwargs):
         """
         adds the initial stage of an investment project
@@ -673,7 +559,7 @@ class InvestmentApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def getprojectsforcompany(self, company_id, limit, **kwargs):
+    def getprojectsforcompany(self, **kwargs):
         """
         returns a summary of investment projects for a company
         Returns a summary list of investment projects per investor-company ID
@@ -683,25 +569,25 @@ class InvestmentApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.getprojectsforcompany(company_id, limit, callback=callback_function)
+        >>> thread = api.getprojectsforcompany(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str company_id: UUID of a company with investment projects (required)
-        :param int limit: pagination parameter (required)
+        :param str investor_company_id: UUID of a company with investment projects
         :param int offset: pagination parameter
+        :param int limit: pagination parameter
         :return: InvestmentProjectsList
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.getprojectsforcompany_with_http_info(company_id, limit, **kwargs)
+            return self.getprojectsforcompany_with_http_info(**kwargs)
         else:
-            (data) = self.getprojectsforcompany_with_http_info(company_id, limit, **kwargs)
+            (data) = self.getprojectsforcompany_with_http_info(**kwargs)
             return data
 
-    def getprojectsforcompany_with_http_info(self, company_id, limit, **kwargs):
+    def getprojectsforcompany_with_http_info(self, **kwargs):
         """
         returns a summary of investment projects for a company
         Returns a summary list of investment projects per investor-company ID
@@ -711,19 +597,19 @@ class InvestmentApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.getprojectsforcompany_with_http_info(company_id, limit, callback=callback_function)
+        >>> thread = api.getprojectsforcompany_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str company_id: UUID of a company with investment projects (required)
-        :param int limit: pagination parameter (required)
+        :param str investor_company_id: UUID of a company with investment projects
         :param int offset: pagination parameter
+        :param int limit: pagination parameter
         :return: InvestmentProjectsList
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['company_id', 'limit', 'offset']
+        all_params = ['investor_company_id', 'offset', 'limit']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -738,22 +624,16 @@ class InvestmentApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'company_id' is set
-        if ('company_id' not in params) or (params['company_id'] is None):
-            raise ValueError("Missing the required parameter `company_id` when calling `getprojectsforcompany`")
-        # verify the required parameter 'limit' is set
-        if ('limit' not in params) or (params['limit'] is None):
-            raise ValueError("Missing the required parameter `limit` when calling `getprojectsforcompany`")
 
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/{companyId}/projects'.replace('{format}', 'json')
+        resource_path = '/v3/investment/project'.replace('{format}', 'json')
         path_params = {}
-        if 'company_id' in params:
-            path_params['companyId'] = params['company_id']
 
         query_params = {}
+        if 'investor_company_id' in params:
+            query_params['investor_company_id'] = params['investor_company_id']
         if 'offset' in params:
             query_params['offset'] = params['offset']
         if 'limit' in params:
@@ -768,10 +648,6 @@ class InvestmentApi(object):
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
             select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
 
         # Authentication setting
         auth_settings = ['OauthSecurity']

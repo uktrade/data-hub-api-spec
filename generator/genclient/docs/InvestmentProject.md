@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **fdi_type** | [**FDIType**](FDIType.md) |  | [optional] 
 **non_fdi_type** | [**NonFDIType**](NonFDIType.md) |  | [optional] 
 **sector** | [**Sector**](Sector.md) |  | [optional] 
-**business_activity** | [**BusinessActivity**](BusinessActivity.md) |  | [optional] 
+**business_activities** | [**BusinessActivities**](BusinessActivities.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
