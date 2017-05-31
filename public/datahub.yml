@@ -722,6 +722,85 @@ definitions:
       last_name:
         type: string
         example: 'Contact'
+      archived:
+        type: boolean
+      archived_on:
+        format: date-time
+        example: 2014-07-23T10:36:04
+      archived_reason:
+        type: string
+        example: 'Archived Reason'
+      created_on:
+        format: date-time
+        example: 2014-07-23T10:36:04
+      modified_on:
+        format: date-time
+        example: 2014-07-23T10:36:04
+      title:
+        $ref: '#/definitions/ContactTitle'
+      primary:
+        type: boolean
+      telephone_countrycode:
+        type: string
+        example: '+44'
+      telephone_number:
+        type: string
+        example: '12345678'
+      email:
+        type: string
+        example: 'valid@email.address'
+      address_same_as_company:
+        type: boolean
+      address_1:
+        type: string
+        example: '1 Woodlane'
+      address_2:
+        type: string
+        example: '1 Woodlane'
+      address_3:
+        type: string
+        example: '1 Woodlane'
+      address_4:
+        type: string
+        example: '1 Woodlane'
+      address_town:
+        type: string
+        example: 'London'
+      address_county:
+        type: string
+        example: 'County'
+      address_postcode:
+        type: string
+        example: 'ABC 123'
+      telephone_alternative:
+        type: string
+        example: 'Telegraph'
+      email_alternative:
+        type: string
+        example: 'alternative@email.address'
+      notes:
+        type: string
+        example: 'Notes'
+      job_title:
+        type: string
+        example: 'Director'
+      contactable_by_dit:
+        type: boolean
+      contactable_by_dit_partners:
+        type: boolean
+      contactable_by_email:
+        type: boolean
+      contactable_by_phone:
+        type: boolean
+      address_country:
+        $ref: '#/definitions/Country'
+      advisor:
+        $ref: '#/definitions/Advisor'
+      archived_by:
+        $ref: '#/definitions/Advisor'
+      company:
+        $ref: '#/definitions/CompanySlim'
+        
   CountryArray:
     type: array
     items:
@@ -798,6 +877,19 @@ definitions:
       name:
         type: string
         example: 'HeadquarterType'
+  ContactTitle:
+    type: object
+    description: "Title of the contact"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        example: 'Mr.'
   TurnoverRange:
     type: object
     required:
@@ -1251,20 +1343,12 @@ definitions:
   AggregateSearchResults:
     required:
     - "count"
-    - "next"
-    - "previous"
     - "aggregates"
     description: 'Note: only one of the two possible arrays will be populated depending on the search response'
     properties:
       count:
         type: "integer"
         example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
       aggregates:
         type: array
         items:
@@ -1332,19 +1416,11 @@ definitions:
   CompanySearchResults:
     required:
     - "count"
-    - "next"
-    - "previous"
     - "results"
     properties:
       count:
         type: "integer"
         example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
       results:
         type: "array"
         items:
@@ -1377,21 +1453,13 @@ definitions:
   ContactSearchResults:
     required:
     - "count"
-    - "next"
-    - "previous"
     - "results"
     properties:
       count:
         type: "integer"
         example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
       results:
         type: "array"
         items:
-          $ref: "#/definitions/Company"
+          $ref: "#/definitions/Contact"
 

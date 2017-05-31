@@ -4,71 +4,18 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_business_activity**](InvestmentApi.md#add_business_activity) | **PUT** /v3/investment/{investmentId}/businessactivity | Adds a custom Business Activity to a project
 [**create_investment**](InvestmentApi.md#create_investment) | **POST** /v3/investment/project | adds the initial stage of an investment project
 [**getinvestment**](InvestmentApi.md#getinvestment) | **GET** /v3/investment/{investmentId}/project | Returns an investment project from the Data Hub repository
 [**getinvestmentrequirements**](InvestmentApi.md#getinvestmentrequirements) | **GET** /v3/investment/{investmentId}/requirements | Returns the Requirements information associated with a project @TODO document WHY
 [**getinvestmentteam**](InvestmentApi.md#getinvestmentteam) | **GET** /v3/investment/{investmentId}/team | Returns the team information associated with a project
 [**getinvestmentvalue**](InvestmentApi.md#getinvestmentvalue) | **GET** /v3/investment/{investmentId}/value | Returns the Value information associated with a project
-[**getprojectsforcompany**](InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment/{companyId}/projects | returns a summary of investment projects for a company
+[**getprojectsforcompany**](InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment/project | returns a summary of investment projects for a company
 [**metadata_business_actibvity**](InvestmentApi.md#metadata_business_actibvity) | **GET** /v3/metadata/business_activity | retrieves Business Activity metadata array
 [**patch_investment**](InvestmentApi.md#patch_investment) | **PATCH** /v3/investment/{investmentId}/project | updates an investment project object, from a partial JSON object
 [**patch_investment_requirements**](InvestmentApi.md#patch_investment_requirements) | **PATCH** /v3/investment/{investmentId}/requirements | updates an investment requirements object, from a partial JSON object
 [**patch_investment_team**](InvestmentApi.md#patch_investment_team) | **PATCH** /v3/investment/{investmentId}/team | updates an investment team object, from a partial JSON object
 [**patch_investment_value**](InvestmentApi.md#patch_investment_value) | **PATCH** /v3/investment/{investmentId}/value | updates an investment project value object, from a partial JSON object
 
-
-# **add_business_activity**
-> add_business_activity(investment_id, business_activity)
-
-Adds a custom Business Activity to a project
-
-Adds a custom business activity to a project
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: OauthSecurity
-swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = swagger_client.InvestmentApi()
-investment_id = 'investment_id_example' # str | UUID for a Data Hub investment project
-business_activity = swagger_client.BusinessActivity() # BusinessActivity | The business activity to add
-
-try: 
-    # Adds a custom Business Activity to a project
-    api_instance.add_business_activity(investment_id, business_activity)
-except ApiException as e:
-    print("Exception when calling InvestmentApi->add_business_activity: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **investment_id** | **str**| UUID for a Data Hub investment project | 
- **business_activity** | [**BusinessActivity**](BusinessActivity.md)| The business activity to add | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[OauthSecurity](../README.md#OauthSecurity)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_investment**
 > create_investment(investment_stage_one)
@@ -325,7 +272,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getprojectsforcompany**
-> InvestmentProjectsList getprojectsforcompany(company_id, limit, offset=offset)
+> InvestmentProjectsList getprojectsforcompany(investor_company_id=investor_company_id, offset=offset, limit=limit)
 
 returns a summary of investment projects for a company
 
@@ -344,13 +291,13 @@ swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.InvestmentApi()
-company_id = 'company_id_example' # str | UUID of a company with investment projects
-limit = 56 # int | pagination parameter
+investor_company_id = 'd290f1ee-6c54-4b01-90e6-d701748f0851' # str | UUID of a company with investment projects (optional) (default to d290f1ee-6c54-4b01-90e6-d701748f0851)
 offset = 56 # int | pagination parameter (optional)
+limit = 56 # int | pagination parameter (optional)
 
 try: 
     # returns a summary of investment projects for a company
-    api_response = api_instance.getprojectsforcompany(company_id, limit, offset=offset)
+    api_response = api_instance.getprojectsforcompany(investor_company_id=investor_company_id, offset=offset, limit=limit)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling InvestmentApi->getprojectsforcompany: %s\n" % e)
@@ -360,9 +307,9 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **company_id** | **str**| UUID of a company with investment projects | 
- **limit** | **int**| pagination parameter | 
+ **investor_company_id** | **str**| UUID of a company with investment projects | [optional] [default to d290f1ee-6c54-4b01-90e6-d701748f0851]
  **offset** | **int**| pagination parameter | [optional] 
+ **limit** | **int**| pagination parameter | [optional] 
 
 ### Return type
 
@@ -374,7 +321,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

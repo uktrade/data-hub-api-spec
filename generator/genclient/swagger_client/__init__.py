@@ -33,6 +33,7 @@ from .models.contact import Contact
 from .models.contact_array import ContactArray
 from .models.contact_filtered_search import ContactFilteredSearch
 from .models.contact_search_results import ContactSearchResults
+from .models.contact_title import ContactTitle
 from .models.country import Country
 from .models.country_array import CountryArray
 from .models.employee_range import EmployeeRange

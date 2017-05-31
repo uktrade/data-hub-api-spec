@@ -75,13 +75,12 @@ Class | Method | HTTP request | Description
 *CompanyApi* | [**getchcompany**](docs/CompanyApi.md#getchcompany) | **GET** /ch_company/{company_number} | Returns a Companies House company from the Data Hub repository
 *CompanyApi* | [**getcompany**](docs/CompanyApi.md#getcompany) | **GET** /company/{companyId} | Returns a company from the Data Hub repository
 *CompanyApi* | [**update_company**](docs/CompanyApi.md#update_company) | **PUT** /company/{companyId} | updates a company, creating a new one if not found
-*InvestmentApi* | [**add_business_activity**](docs/InvestmentApi.md#add_business_activity) | **PUT** /v3/investment/{investmentId}/businessactivity | Adds a custom Business Activity to a project
 *InvestmentApi* | [**create_investment**](docs/InvestmentApi.md#create_investment) | **POST** /v3/investment/project | adds the initial stage of an investment project
 *InvestmentApi* | [**getinvestment**](docs/InvestmentApi.md#getinvestment) | **GET** /v3/investment/{investmentId}/project | Returns an investment project from the Data Hub repository
 *InvestmentApi* | [**getinvestmentrequirements**](docs/InvestmentApi.md#getinvestmentrequirements) | **GET** /v3/investment/{investmentId}/requirements | Returns the Requirements information associated with a project @TODO document WHY
 *InvestmentApi* | [**getinvestmentteam**](docs/InvestmentApi.md#getinvestmentteam) | **GET** /v3/investment/{investmentId}/team | Returns the team information associated with a project
 *InvestmentApi* | [**getinvestmentvalue**](docs/InvestmentApi.md#getinvestmentvalue) | **GET** /v3/investment/{investmentId}/value | Returns the Value information associated with a project
-*InvestmentApi* | [**getprojectsforcompany**](docs/InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment/{companyId}/projects | returns a summary of investment projects for a company
+*InvestmentApi* | [**getprojectsforcompany**](docs/InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment/project | returns a summary of investment projects for a company
 *InvestmentApi* | [**metadata_business_actibvity**](docs/InvestmentApi.md#metadata_business_actibvity) | **GET** /v3/metadata/business_activity | retrieves Business Activity metadata array
 *InvestmentApi* | [**patch_investment**](docs/InvestmentApi.md#patch_investment) | **PATCH** /v3/investment/{investmentId}/project | updates an investment project object, from a partial JSON object
 *InvestmentApi* | [**patch_investment_requirements**](docs/InvestmentApi.md#patch_investment_requirements) | **PATCH** /v3/investment/{investmentId}/requirements | updates an investment requirements object, from a partial JSON object
@@ -114,6 +113,7 @@ Class | Method | HTTP request | Description
  - [ContactArray](docs/ContactArray.md)
  - [ContactFilteredSearch](docs/ContactFilteredSearch.md)
  - [ContactSearchResults](docs/ContactSearchResults.md)
+ - [ContactTitle](docs/ContactTitle.md)
  - [Country](docs/Country.md)
  - [CountryArray](docs/CountryArray.md)
  - [EmployeeRange](docs/EmployeeRange.md)

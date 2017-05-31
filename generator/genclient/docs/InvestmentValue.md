@@ -3,8 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**value_complete** | **bool** |  | [optional] 
 **total_investment** | **int** |  | [optional] 
+**client_cannot_provide_total_investment** | **bool** |  | [optional] 
 **foreign_equity_investment** | **int** |  | [optional] 
+**client_cannot_provide_foreign_investment** | **bool** |  | [optional] 
 **government_assistance** | **bool** |  | [optional] 
 **number_new_jobs** | **int** |  | [optional] 
 **number_safeguarded_jobs** | **int** |  | [optional] 

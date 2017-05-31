@@ -1,20 +1,12 @@
   AggregateSearchResults:
     required:
     - "count"
-    - "next"
-    - "previous"
     - "aggregates"
     description: 'Note: only one of the two possible arrays will be populated depending on the search response'
     properties:
       count:
         type: "integer"
         example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
       aggregates:
         type: array
         items:
@@ -82,19 +74,11 @@
   CompanySearchResults:
     required:
     - "count"
-    - "next"
-    - "previous"
     - "results"
     properties:
       count:
         type: "integer"
         example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/company?query={query_text}&limit=10&offset=5"
       results:
         type: "array"
         items:
@@ -127,21 +111,13 @@
   ContactSearchResults:
     required:
     - "count"
-    - "next"
-    - "previous"
     - "results"
     properties:
       count:
         type: "integer"
         example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/search/contact?query={query_text}&limit=10&offset=5"
       results:
         type: "array"
         items:
-          $ref: "#/definitions/Company"
+          $ref: "#/definitions/Contact"
 

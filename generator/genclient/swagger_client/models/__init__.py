@@ -33,6 +33,7 @@ from .contact import Contact
 from .contact_array import ContactArray
 from .contact_filtered_search import ContactFilteredSearch
 from .contact_search_results import ContactSearchResults
+from .contact_title import ContactTitle
 from .country import Country
 from .country_array import CountryArray
 from .employee_range import EmployeeRange
