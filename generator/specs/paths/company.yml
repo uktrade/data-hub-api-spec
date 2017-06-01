@@ -46,11 +46,6 @@
         required: true
         schema:
           $ref: '#/definitions/Company'
-      - in: query
-        name: Archived
-        description: Update the company's status to Archived
-        required: false
-        type: boolean
       responses:
         200:
           description: item updated
@@ -90,6 +85,64 @@
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/company/{company_id}/archive:
+    post:
+      tags:
+      - company
+      summary: Archives a company with a reason
+      operationId: archiveCompany
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_id
+        description: UUID of company
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveUnarchiveReason'
+      responses:
+        201:
+          description: company archived
+        400:
+          description: input invalid
+        404:
+          description: company is already archived or does not exist
+  /v3/company/{company_id}/unarchive:
+    post:
+      tags:
+      - company
+      summary: Unarchives a company with a reason
+      operationId: archiveCompany
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_id
+        description: UUID of company
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveUnarchiveReason'
+      responses:
+        201:
+          description: company archived
+        400:
+          description: input invalid
+        404:
+          description: company is already archived or does not exist
   /v3/company:
     post:
       tags:
