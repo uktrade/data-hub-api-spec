@@ -356,11 +356,8 @@
     type: object
     description: the reason supplied for archiving or unarchiving a company or contact
     required:
-    - user
     - reason
     properties:
-      user:
-        $ref: '#/definitions/Adviser'
       reason:
         type: string
         example: 'Company has ceased trading'
