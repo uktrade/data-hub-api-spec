@@ -78,23 +78,25 @@
     type: object
     required:
     - count
-    - next
-    - previous
     - results
     properties:
       count:
         type: integer
         example: 30
-      next:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
-      previous:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
       results:
         type: array
         items:
-          $ref: '#/definitions/InvestmentProject'
+          $ref: '#/definitions/InvestmentProjectSlim'
+  InvestmentProjectSlim:
+    type: object
+    description: A Data Hub investment project summary
+    properties:
+      name:
+        type: string
+        example: 'Marriot Hotels - New hotel in Manchester'
+      project_code:
+        type: string
+        example: 'P-01234567'
   InvestmentValue:
     type: object
     description: A Data Hub investment project Value object

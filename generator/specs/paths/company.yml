@@ -24,35 +24,6 @@
           description: bad input parameter
         404:
           description: company does not exist
-    put:
-      tags:
-      - company
-      summary: updates a company, creating a new one if not found
-      operationId: updateCompany
-      description: Updates an existing company
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: companyId
-        description: UUID for a Data Hub company
-        type: string
-        required: true
-      - in: body
-        name: company
-        description: Company data to update
-        required: true
-        schema:
-          $ref: '#/definitions/Company'
-      responses:
-        200:
-          description: item updated
-        201:
-          description: item created
-        400:
-          description: invalid input, object invalid
     patch:
       tags:
       - company
@@ -90,35 +61,6 @@
       tags:
       - company
       summary: Archives a company with a reason
-      operationId: archiveCompany
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: company_id
-        description: UUID of company
-        required: true
-        type: string
-        format: uuid
-      - in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/ArchiveUnarchiveReason'
-      responses:
-        201:
-          description: company archived
-        400:
-          description: input invalid
-        404:
-          description: company is already archived or does not exist
-  /v3/company/{company_id}/unarchive:
-    post:
-      tags:
-      - company
-      summary: Unarchives a company with a reason
       operationId: archiveCompany
       consumes:
       - application/json
