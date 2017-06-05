@@ -23,7 +23,7 @@
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       description:
         type: string
         example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
@@ -71,30 +71,36 @@
         type: string
         example: "Moscow Hotels Expo 2017"
       referral_source_advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       sector:
         $ref: '#/definitions/Sector'
   InvestmentProjectsList:
     type: object
     required:
     - count
-    - next
-    - previous
     - results
     properties:
       count:
         type: integer
         example: 30
-      next:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
-      previous:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
       results:
         type: array
         items:
-          $ref: '#/definitions/InvestmentProject'
+          $ref: '#/definitions/InvestmentProjectSlim'
+  InvestmentProjectSlim:
+    type: object
+    description: A Data Hub investment project summary
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Marriot Hotels - New hotel in Manchester'
+      project_code:
+        type: string
+        example: 'P-01234567'
   InvestmentValue:
     type: object
     description: A Data Hub investment project Value object
@@ -194,13 +200,13 @@
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       project_manager_team:
-        $ref: '#/definitions/AdvisorTeam'
+        $ref: '#/definitions/AdviserTeam'
       project_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       project_assurance_team:
-        $ref: '#/definitions/AdvisorTeam'
+        $ref: '#/definitions/AdviserTeam'
       project_assurance_advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
   BusinessActivity:
     type: object
     required:
@@ -293,7 +299,7 @@
       name:
         type: string
         example: 'Advanced Engineering Supply Chain'
-  AdvisorTeam:
+  AdviserTeam:
     type: object
     required:
     - id

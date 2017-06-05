@@ -56,8 +56,6 @@
       archived_reason:
         type: string
         example: 'Company dissolved'
-      lead:
-        type: boolean
       description:
         type: string
         example: 'MANUFACTURER OF WIDGETS AND DOODADS'
@@ -86,9 +84,9 @@
         type: string
         example: 'AB1 2CD'
       account_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       archived_by:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       business_type:
         $ref: '#/definitions/BusinessType'
       children:
@@ -107,10 +105,8 @@
         $ref: '#/definitions/CountryArray'
       headquarter_type:
         $ref: '#/definitions/HeadquarterType'
-      interactions:
-        $ref: '#/definitions/InteractionArray'
       one_list_account_owner:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       parent:
         $ref: '#/definitions/CompanySlim'
       registered_address_country:
@@ -123,7 +119,9 @@
         $ref: '#/definitions/TurnoverRange'
       uk_region:
         $ref: '#/definitions/UKRegion'
-  Advisor:
+      investment_projects:
+        $ref: '#/definitions/InvestmentProjectsList'
+  Adviser:
     type: object
     required:
     - id
@@ -136,10 +134,10 @@
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       first_name:
         type: string
-        example: 'Alison'
+        example: 'Annette'
       last_name:
         type: string
-        example: 'Advisor'
+        example: 'Adviser'
   BusinessType:
     type: object
     description: "Business Type metadata"
@@ -313,23 +311,6 @@
       name:
         type: string
         example: 'France'
-  Interaction:
-    type: object
-    required:
-      - id
-      - type
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      type:
-        type: string
-        example: 'Interaction'
-  InteractionArray:
-    type: array
-    items:
-      $ref: '#/definitions/Interaction'
   EmployeeRange:
     type: object
     description: "Employee range metadata"
@@ -463,4 +444,13 @@
         type: string
         format: date-time
         example: 2014-07-23T10:36:04
+  ArchiveUnarchiveReason:
+    type: object
+    description: the reason supplied for archiving or unarchiving a company or contact
+    required:
+    - reason
+    properties:
+      reason:
+        type: string
+        example: 'Company has ceased trading'
 
