@@ -94,7 +94,7 @@
       classification:
         $ref: '#/definitions/Classification'
       companies_house_data:
-        $ref: '#/definitions/CompaniesHouseSlim'
+        $ref: '#/definitions/CompaniesHouseCompany'
       contacts:
         $ref: '#/definitions/ContactArray'
       employee_range:
@@ -165,18 +165,6 @@
       name:
         type: string
         example: 'D - Post managed'
-  CompaniesHouseSlim:
-    type: object
-    required:
-    - company_number
-    properties:
-      id:
-        type: string
-        format: string
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      company_number:
-        type: string
-        example: 'SCO-123456'
   CompanyKeyArray:
     type: array
     items:
@@ -292,7 +280,6 @@
         $ref: '#/definitions/Adviser'
       company:
         $ref: '#/definitions/CompanySlim'
-        
   CountryArray:
     type: array
     items:
