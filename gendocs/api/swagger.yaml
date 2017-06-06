@@ -16,7 +16,7 @@ security:
 - OauthSecurity:
   - "user"
 paths:
-  /company/{companyId}:
+  /v3/company/{companyId}:
     get:
       tags:
       - "company"
@@ -42,11 +42,12 @@ paths:
         404:
           description: "company does not exist"
       x-swagger-router-controller: "Company"
-    put:
+    patch:
       tags:
       - "company"
-      summary: "updates a company, creating a new one if not found"
-      description: "Updates an existing company"
+      summary: "updates a company"
+      description: "Updates an existing company, only changing fields specified in\
+        \ the request"
       operationId: "updateCompany"
       consumes:
       - "application/json"
@@ -72,12 +73,40 @@ paths:
       responses:
         200:
           description: "item updated"
-        201:
-          description: "item created"
         400:
           description: "invalid input, object invalid"
       x-swagger-router-controller: "Company"
-  /company:
+  /v3/company/{company_id}/archive:
+    post:
+      tags:
+      - "company"
+      summary: "Archives a company with a reason"
+      operationId: "archiveCompany"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "company_id"
+        in: "path"
+        description: "UUID of company"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ArchiveUnarchiveReason"
+      responses:
+        201:
+          description: "company archived"
+        400:
+          description: "input invalid"
+        404:
+          description: "company is already archived or does not exist"
+      x-swagger-router-controller: "Company"
+  /v3/company:
     post:
       tags:
       - "company"
@@ -103,7 +132,7 @@ paths:
         409:
           description: "company already exists"
       x-swagger-router-controller: "Company"
-  /ch_company/{company_number}:
+  /v3/ch_company/{company_number}:
     get:
       tags:
       - "company"
@@ -576,8 +605,6 @@ definitions:
       archived_reason:
         type: "string"
         example: "Company dissolved"
-      lead:
-        type: "boolean"
       description:
         type: "string"
         example: "MANUFACTURER OF WIDGETS AND DOODADS"
@@ -606,9 +633,9 @@ definitions:
         type: "string"
         example: "AB1 2CD"
       account_manager:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       archived_by:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       business_type:
         $ref: "#/definitions/BusinessType"
       children:
@@ -627,10 +654,8 @@ definitions:
         $ref: "#/definitions/CountryArray"
       headquarter_type:
         $ref: "#/definitions/HeadquarterType"
-      interactions:
-        $ref: "#/definitions/InteractionArray"
       one_list_account_owner:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       parent:
         $ref: "#/definitions/CompanySlim"
       registered_address_country:
@@ -643,8 +668,10 @@ definitions:
         $ref: "#/definitions/TurnoverRange"
       uk_region:
         $ref: "#/definitions/UKRegion"
+      investment_projects:
+        $ref: "#/definitions/InvestmentProjectsList"
     description: "A representation of the Data Hub company object"
-  Advisor:
+  Adviser:
     type: "object"
     required:
     - "first_name"
@@ -657,10 +684,10 @@ definitions:
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
       first_name:
         type: "string"
-        example: "Alison"
+        example: "Annette"
       last_name:
         type: "string"
-        example: "Advisor"
+        example: "Adviser"
   BusinessType:
     type: "object"
     required:
@@ -801,9 +828,9 @@ definitions:
       address_country:
         $ref: "#/definitions/Country"
       advisor:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       archived_by:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       company:
         $ref: "#/definitions/CompanySlim"
   CountryArray:
@@ -824,23 +851,6 @@ definitions:
         type: "string"
         example: "France"
     description: "Country metadata"
-  Interaction:
-    type: "object"
-    required:
-    - "id"
-    - "type"
-    properties:
-      id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      type:
-        type: "string"
-        example: "Interaction"
-  InteractionArray:
-    type: "array"
-    items:
-      $ref: "#/definitions/Interaction"
   EmployeeRange:
     type: "object"
     required:
@@ -974,6 +984,15 @@ definitions:
         format: "date-time"
         example: "2014-07-23T10:36:04.000+0000"
     description: "A Companies House company object"
+  ArchiveUnarchiveReason:
+    type: "object"
+    required:
+    - "reason"
+    properties:
+      reason:
+        type: "string"
+        example: "Company has ceased trading"
+    description: "the reason supplied for archiving or unarchiving a company or contact"
   InvestmentProject:
     type: "object"
     required:
@@ -999,7 +1018,7 @@ definitions:
       client_contacts:
         $ref: "#/definitions/ContactArray"
       client_relationship_manager:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       description:
         type: "string"
         example: "Marriott hotels wishes to open in a new part of Manchester under-served\
@@ -1048,7 +1067,7 @@ definitions:
         type: "string"
         example: "Moscow Hotels Expo 2017"
       referral_source_advisor:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       sector:
         $ref: "#/definitions/Sector"
     description: "A Data Hub investment project"
@@ -1056,23 +1075,29 @@ definitions:
     type: "object"
     required:
     - "count"
-    - "next"
-    - "previous"
     - "results"
     properties:
       count:
         type: "integer"
         example: 30
-      next:
-        type: "string"
-        example: "http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5"
-      previous:
-        type: "string"
-        example: "http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5"
       results:
         type: "array"
         items:
-          $ref: "#/definitions/InvestmentProject"
+          $ref: "#/definitions/InvestmentProjectSlim"
+  InvestmentProjectSlim:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Marriot Hotels - New hotel in Manchester"
+      project_code:
+        type: "string"
+        example: "P-01234567"
+    description: "A Data Hub investment project summary"
   InvestmentValue:
     type: "object"
     properties:
@@ -1161,13 +1186,13 @@ definitions:
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
       project_manager_team:
-        $ref: "#/definitions/AdvisorTeam"
+        $ref: "#/definitions/AdviserTeam"
       project_manager:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
       project_assurance_team:
-        $ref: "#/definitions/AdvisorTeam"
+        $ref: "#/definitions/AdviserTeam"
       project_assurance_advisor:
-        $ref: "#/definitions/Advisor"
+        $ref: "#/definitions/Adviser"
     description: "A Data Hub investment project Value object"
   BusinessActivity:
     type: "object"
@@ -1261,7 +1286,7 @@ definitions:
         type: "string"
         example: "Advanced Engineering Supply Chain"
     description: "Non-FDI Metadata"
-  AdvisorTeam:
+  AdviserTeam:
     type: "object"
     required:
     - "id"
@@ -1353,23 +1378,18 @@ definitions:
   CompanyFilteredSearch:
     type: "object"
     properties:
-      original_query:
-        type: "string"
-        example: "ABC DEF"
-      name:
-        type: "string"
-        example: "ABC Company"
-      alias:
-        type: "string"
-        example: "DEF Ventures"
-      sector:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
       account_manager:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      alias:
+        type: "string"
+        example: "DEF Ventures"
+      description:
+        type: "string"
+        example: "greenfield pharmaceutical"
+      exclusions:
+        $ref: "#/definitions/CompanyExclusionFilters"
       export_to_country:
         type: "string"
         format: "uuid"
@@ -1378,10 +1398,13 @@ definitions:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      description:
+      name:
         type: "string"
-        example: "greenfield pharmaceutical"
-      uk_region:
+        example: "ABC Company"
+      original_query:
+        type: "string"
+        example: "ABC DEF"
+      sector:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -1395,6 +1418,45 @@ definitions:
       trading_address_postcode:
         type: "string"
         example: "AB1 2CD"
+      uk_region:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  CompanyExclusionFilters:
+    type: "object"
+    properties:
+      alias:
+        type: "string"
+        example: "DEF Ventures"
+      export_to_country:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      future_interest_country:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "ABC Company"
+      sector:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      trading_address_town:
+        type: "string"
+        example: "Shipton"
+      trading_address_country:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      trading_address_postcode:
+        type: "string"
+        example: "AB1 2CD"
+      uk_region:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
   CompanySearchResults:
     required:
     - "count"

@@ -8,6 +8,10 @@ module.exports.addCompany = function addCompany (req, res, next) {
   Company.addCompany(req.swagger.params, res, next);
 };
 
+module.exports.archiveCompany = function archiveCompany (req, res, next) {
+  Company.archiveCompany(req.swagger.params, res, next);
+};
+
 module.exports.getchcompany = function getchcompany (req, res, next) {
   Company.getchcompany(req.swagger.params, res, next);
 };

@@ -11,6 +11,17 @@ exports.addCompany = function(args, res, next) {
   res.end();
 }
 
+exports.archiveCompany = function(args, res, next) {
+  /**
+   * Archives a company with a reason
+   *
+   * company_id UUID UUID of company
+   * body ArchiveUnarchiveReason 
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
 exports.getchcompany = function(args, res, next) {
   /**
    * Returns a Companies House company from the Data Hub repository
@@ -69,14 +80,13 @@ exports.getcompany = function(args, res, next) {
   "description" : "MANUFACTURER OF WIDGETS AND DOODADS",
   "registered_address_county" : "ANYSHIRE",
   "trading_address_postcode" : "AB1 2CD",
-  "interactions" : "",
   "registered_address_postcode" : "AB1 2CD",
   "archived" : true,
   "archived_reason" : "Company dissolved",
   "account_manager" : {
-    "last_name" : "Advisor",
+    "last_name" : "Adviser",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-    "first_name" : "Alison"
+    "first_name" : "Annette"
   },
   "headquarter_type" : {
     "name" : "HeadquarterType",
@@ -110,6 +120,14 @@ exports.getcompany = function(args, res, next) {
   },
   "website" : "http://www.example.com",
   "trading_address_2" : "AREA",
+  "investment_projects" : {
+    "count" : 30,
+    "results" : [ {
+      "name" : "Marriot Hotels - New hotel in Manchester",
+      "project_code" : "P-01234567",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    } ]
+  },
   "trading_address_1" : "123 HIGH STREET",
   "future_interest_countries" : "",
   "registered_address_1" : "123 HIGH STREET",
@@ -125,7 +143,6 @@ exports.getcompany = function(args, res, next) {
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "registered_address_4" : "SUBREGION",
-  "lead" : true,
   "registered_address_country" : {
     "name" : "France",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -145,8 +162,8 @@ exports.getcompany = function(args, res, next) {
 
 exports.updateCompany = function(args, res, next) {
   /**
-   * updates a company, creating a new one if not found
-   * Updates an existing company
+   * updates a company
+   * Updates an existing company, only changing fields specified in the request
    *
    * companyId String UUID for a Data Hub company
    * company Company Company data to update

@@ -287,9 +287,9 @@
       address_country:
         $ref: '#/definitions/Country'
       advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       archived_by:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       company:
         $ref: '#/definitions/CompanySlim'
         

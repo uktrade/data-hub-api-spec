@@ -26,14 +26,13 @@ exports.datahubSearch = function(args, res, next) {
     "description" : "MANUFACTURER OF WIDGETS AND DOODADS",
     "registered_address_county" : "ANYSHIRE",
     "trading_address_postcode" : "AB1 2CD",
-    "interactions" : "",
     "registered_address_postcode" : "AB1 2CD",
     "archived" : true,
     "archived_reason" : "Company dissolved",
     "account_manager" : {
-      "last_name" : "Advisor",
+      "last_name" : "Adviser",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-      "first_name" : "Alison"
+      "first_name" : "Annette"
     },
     "headquarter_type" : {
       "name" : "HeadquarterType",
@@ -67,6 +66,14 @@ exports.datahubSearch = function(args, res, next) {
     },
     "website" : "http://www.example.com",
     "trading_address_2" : "AREA",
+    "investment_projects" : {
+      "count" : 30,
+      "results" : [ {
+        "name" : "Marriot Hotels - New hotel in Manchester",
+        "project_code" : "P-01234567",
+        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      } ]
+    },
     "trading_address_1" : "123 HIGH STREET",
     "future_interest_countries" : "",
     "registered_address_1" : "123 HIGH STREET",
@@ -82,7 +89,6 @@ exports.datahubSearch = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "registered_address_4" : "SUBREGION",
-    "lead" : true,
     "registered_address_country" : {
       "name" : "France",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -167,14 +173,13 @@ exports.datahubSearch_0 = function(args, res, next) {
     "description" : "MANUFACTURER OF WIDGETS AND DOODADS",
     "registered_address_county" : "ANYSHIRE",
     "trading_address_postcode" : "AB1 2CD",
-    "interactions" : "",
     "registered_address_postcode" : "AB1 2CD",
     "archived" : true,
     "archived_reason" : "Company dissolved",
     "account_manager" : {
-      "last_name" : "Advisor",
+      "last_name" : "Adviser",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-      "first_name" : "Alison"
+      "first_name" : "Annette"
     },
     "headquarter_type" : {
       "name" : "HeadquarterType",
@@ -208,6 +213,14 @@ exports.datahubSearch_0 = function(args, res, next) {
     },
     "website" : "http://www.example.com",
     "trading_address_2" : "AREA",
+    "investment_projects" : {
+      "count" : 30,
+      "results" : [ {
+        "name" : "Marriot Hotels - New hotel in Manchester",
+        "project_code" : "P-01234567",
+        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      } ]
+    },
     "trading_address_1" : "123 HIGH STREET",
     "future_interest_countries" : "",
     "registered_address_1" : "123 HIGH STREET",
@@ -223,7 +236,6 @@ exports.datahubSearch_0 = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "registered_address_4" : "SUBREGION",
-    "lead" : true,
     "registered_address_country" : {
       "name" : "France",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -270,9 +282,9 @@ exports.datahubSearch_1 = function(args, res, next) {
     "archived_reason" : "Archived Reason",
     "contactable_by_phone" : true,
     "advisor" : {
-      "last_name" : "Advisor",
+      "last_name" : "Adviser",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-      "first_name" : "Alison"
+      "first_name" : "Annette"
     },
     "contactable_by_dit" : true,
     "company" : {
