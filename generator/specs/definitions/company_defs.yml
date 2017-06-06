@@ -109,6 +109,9 @@
         $ref: '#/definitions/UKRegion'
       investment_projects_invested_in:
         $ref: '#/definitions/InvestmentProjectsList'
+      investment_projects_invested_in_count:
+        type: integer
+        example: 5
   Adviser:
     type: object
     required:
@@ -419,9 +422,9 @@
         type: string
         format: date-time
         example: 2014-07-23T10:36:04
-  ArchiveUnarchiveReason:
+  ArchiveReason:
     type: object
-    description: the reason supplied for archiving or unarchiving a company or contact
+    description: the reason supplied for archiving a company or contact
     required:
     - reason
     properties:
