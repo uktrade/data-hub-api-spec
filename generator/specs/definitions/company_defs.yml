@@ -119,7 +119,7 @@
         $ref: '#/definitions/TurnoverRange'
       uk_region:
         $ref: '#/definitions/UKRegion'
-      investment_projects:
+      investment_projects_invested_in:
         $ref: '#/definitions/InvestmentProjectsList'
   Adviser:
     type: object
