@@ -16,7 +16,17 @@ exports.archiveCompany = function(args, res, next) {
    * Archives a company with a reason
    *
    * company_id UUID UUID of company
-   * body ArchiveUnarchiveReason 
+   * body ArchiveReason 
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.archiveCompany_0 = function(args, res, next) {
+  /**
+   * Archives a company with a reason
+   *
+   * company_id UUID UUID of company
    * no response value expected for this operation
    **/
   res.end();
@@ -95,6 +105,14 @@ exports.getcompany = function(args, res, next) {
   "export_to_countries" : "",
   "trading_address_town" : "ANYTOWN",
   "children" : "",
+  "investment_projects_invested_in" : {
+    "count" : 30,
+    "results" : [ {
+      "name" : "Marriot Hotels - New hotel in Manchester",
+      "project_code" : "P-01234567",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    } ]
+  },
   "business_type" : {
     "name" : "Limited Company",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -112,26 +130,16 @@ exports.getcompany = function(args, res, next) {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   },
   "modified_on" : "2014-07-23T10:36:04.000+0000",
-  "trading_address_4" : "SUBREGION",
-  "trading_address_3" : "SUBTOWN",
   "uk_region" : {
     "name" : "South East",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "website" : "http://www.example.com",
   "trading_address_2" : "AREA",
-  "investment_projects" : {
-    "count" : 30,
-    "results" : [ {
-      "name" : "Marriot Hotels - New hotel in Manchester",
-      "project_code" : "P-01234567",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    } ]
-  },
   "trading_address_1" : "123 HIGH STREET",
   "future_interest_countries" : "",
+  "investment_projects_invested_in_count" : 5,
   "registered_address_1" : "123 HIGH STREET",
-  "registered_address_3" : "SUBTOWN",
   "registered_address_2" : "AREA",
   "registered_address_town" : "ANYTOWN",
   "classification" : {
@@ -139,10 +147,22 @@ exports.getcompany = function(args, res, next) {
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "companies_house_data" : {
+    "company_category" : "Private Limited Company",
+    "registered_address_1" : "123 HIGH STREET",
+    "registered_address_2" : "AREA",
+    "registered_address_county" : "ANYSHIRE",
+    "registered_address_town" : "ANYTOWN",
+    "uri" : "http://www.example.com",
+    "registered_address_postcode" : "AB1 2CD",
     "company_number" : "SCO-123456",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    "name" : "aeiou",
+    "company_status" : "Active - Proposal to Strike off",
+    "sic_code_4" : "96030 - Funeral and related activities",
+    "sic_code_2" : "52211 - Operation of rail freight terminals",
+    "sic_code_3" : "71111 - Architectural activities",
+    "incorporation_date" : "2014-07-23T10:36:04.000+0000",
+    "sic_code_1" : "20600 - Manufacture of man-made fibres"
   },
-  "registered_address_4" : "SUBREGION",
   "registered_address_country" : {
     "name" : "France",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"

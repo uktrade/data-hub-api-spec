@@ -97,10 +97,35 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/ArchiveUnarchiveReason"
+          $ref: "#/definitions/ArchiveReason"
       responses:
         201:
           description: "company archived"
+        400:
+          description: "input invalid"
+        404:
+          description: "company is already archived or does not exist"
+      x-swagger-router-controller: "Company"
+  /v3/company/{company_id}/unarchive:
+    post:
+      tags:
+      - "company"
+      summary: "Archives a company with a reason"
+      operationId: "archiveCompany"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "company_id"
+        in: "path"
+        description: "UUID of company"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        201:
+          description: "company unarchived"
         400:
           description: "input invalid"
         404:
@@ -573,12 +598,6 @@ definitions:
       registered_address_2:
         type: "string"
         example: "AREA"
-      registered_address_3:
-        type: "string"
-        example: "SUBTOWN"
-      registered_address_4:
-        type: "string"
-        example: "SUBREGION"
       registered_address_town:
         type: "string"
         example: "ANYTOWN"
@@ -617,12 +636,6 @@ definitions:
       trading_address_2:
         type: "string"
         example: "AREA"
-      trading_address_3:
-        type: "string"
-        example: "SUBTOWN"
-      trading_address_4:
-        type: "string"
-        example: "SUBREGION"
       trading_address_town:
         type: "string"
         example: "ANYTOWN"
@@ -643,7 +656,7 @@ definitions:
       classification:
         $ref: "#/definitions/Classification"
       companies_house_data:
-        $ref: "#/definitions/CompaniesHouseSlim"
+        $ref: "#/definitions/CompaniesHouseCompany"
       contacts:
         $ref: "#/definitions/ContactArray"
       employee_range:
@@ -668,8 +681,11 @@ definitions:
         $ref: "#/definitions/TurnoverRange"
       uk_region:
         $ref: "#/definitions/UKRegion"
-      investment_projects:
+      investment_projects_invested_in:
         $ref: "#/definitions/InvestmentProjectsList"
+      investment_projects_invested_in_count:
+        type: "integer"
+        example: 5
     description: "A representation of the Data Hub company object"
   Adviser:
     type: "object"
@@ -715,18 +731,6 @@ definitions:
       name:
         type: "string"
         example: "D - Post managed"
-  CompaniesHouseSlim:
-    type: "object"
-    required:
-    - "company_number"
-    properties:
-      id:
-        type: "string"
-        format: "string"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      company_number:
-        type: "string"
-        example: "SCO-123456"
   CompanyKeyArray:
     type: "array"
     items:
@@ -984,7 +988,7 @@ definitions:
         format: "date-time"
         example: "2014-07-23T10:36:04.000+0000"
     description: "A Companies House company object"
-  ArchiveUnarchiveReason:
+  ArchiveReason:
     type: "object"
     required:
     - "reason"
@@ -992,7 +996,7 @@ definitions:
       reason:
         type: "string"
         example: "Company has ceased trading"
-    description: "the reason supplied for archiving or unarchiving a company or contact"
+    description: "the reason supplied for archiving a company or contact"
   InvestmentProject:
     type: "object"
     required:
