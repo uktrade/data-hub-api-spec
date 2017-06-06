@@ -77,10 +77,34 @@
         name: body
         required: true
         schema:
-          $ref: '#/definitions/ArchiveUnarchiveReason'
+          $ref: '#/definitions/ArchiveReason'
       responses:
         201:
           description: company archived
+        400:
+          description: input invalid
+        404:
+          description: company is already archived or does not exist
+  /v3/company/{company_id}/unarchive:
+    post:
+      tags:
+      - company
+      summary: Archives a company with a reason
+      operationId: archiveCompany
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_id
+        description: UUID of company
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: company unarchived
         400:
           description: input invalid
         404:

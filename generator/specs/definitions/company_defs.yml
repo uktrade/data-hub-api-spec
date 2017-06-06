@@ -24,12 +24,6 @@
       registered_address_2:
         type: string
         example: 'AREA'
-      registered_address_3:
-        type: string
-        example: 'SUBTOWN'
-      registered_address_4:
-        type: string
-        example: 'SUBREGION'
       registered_address_town:
         type: string
         example: 'ANYTOWN'
@@ -68,12 +62,6 @@
       trading_address_2:
         type: string
         example: 'AREA'
-      trading_address_3:
-        type: string
-        example: 'SUBTOWN'
-      trading_address_4:
-        type: string
-        example: 'SUBREGION'
       trading_address_town:
         type: string
         example: 'ANYTOWN'
@@ -94,7 +82,7 @@
       classification:
         $ref: '#/definitions/Classification'
       companies_house_data:
-        $ref: '#/definitions/CompaniesHouseSlim'
+        $ref: '#/definitions/CompaniesHouseCompany'
       contacts:
         $ref: '#/definitions/ContactArray'
       employee_range:
@@ -119,8 +107,11 @@
         $ref: '#/definitions/TurnoverRange'
       uk_region:
         $ref: '#/definitions/UKRegion'
-      investment_projects:
+      investment_projects_invested_in:
         $ref: '#/definitions/InvestmentProjectsList'
+      investment_projects_invested_in_count:
+        type: integer
+        example: 5
   Adviser:
     type: object
     required:
@@ -165,18 +156,6 @@
       name:
         type: string
         example: 'D - Post managed'
-  CompaniesHouseSlim:
-    type: object
-    required:
-    - company_number
-    properties:
-      id:
-        type: string
-        format: string
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      company_number:
-        type: string
-        example: 'SCO-123456'
   CompanyKeyArray:
     type: array
     items:
@@ -292,7 +271,6 @@
         $ref: '#/definitions/Adviser'
       company:
         $ref: '#/definitions/CompanySlim'
-        
   CountryArray:
     type: array
     items:
@@ -444,9 +422,9 @@
         type: string
         format: date-time
         example: 2014-07-23T10:36:04
-  ArchiveUnarchiveReason:
+  ArchiveReason:
     type: object
-    description: the reason supplied for archiving or unarchiving a company or contact
+    description: the reason supplied for archiving a company or contact
     required:
     - reason
     properties:
