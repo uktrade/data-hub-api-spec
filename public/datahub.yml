@@ -118,8 +118,8 @@ paths:
     post:
       tags:
       - company
-      summary: Archives a company with a reason
-      operationId: archiveCompany
+      summary: Unarchives a company
+      operationId: unarchiveCompany
       consumes:
       - application/json
       produces:
@@ -466,6 +466,59 @@ paths:
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/investment/{investmentId}/archive:
+    post:
+      tags:
+      - investment
+      summary: Archives an investment project with a reason
+      operationId: archiveInvestment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveReason'
+      responses:
+        201:
+          description: investment archived
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
+  /v3/investment/{investmentId}/unarchive:
+    post:
+      tags:
+      - investment
+      summary: Unarchives an investment project
+      operationId: unarchiveInvestment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: investment archived
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
   /v3/metadata/business_activity:
     get:
       tags: 

@@ -12,16 +12,16 @@ module.exports.archiveCompany = function archiveCompany (req, res, next) {
   Company.archiveCompany(req.swagger.params, res, next);
 };
 
-module.exports.archiveCompany_1 = function archiveCompany_1 (req, res, next) {
-  Company.archiveCompany_1(req.swagger.params, res, next);
-};
-
 module.exports.getchcompany = function getchcompany (req, res, next) {
   Company.getchcompany(req.swagger.params, res, next);
 };
 
 module.exports.getcompany = function getcompany (req, res, next) {
   Company.getcompany(req.swagger.params, res, next);
+};
+
+module.exports.unarchiveCompany = function unarchiveCompany (req, res, next) {
+  Company.unarchiveCompany(req.swagger.params, res, next);
 };
 
 module.exports.updateCompany = function updateCompany (req, res, next) {

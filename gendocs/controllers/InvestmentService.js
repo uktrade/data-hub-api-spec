@@ -1,5 +1,16 @@
 'use strict';
 
+exports.archiveInvestment = function(args, res, next) {
+  /**
+   * Archives an investment project with a reason
+   *
+   * investmentId UUID UUID of investment project
+   * body ArchiveReason 
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
 exports.createInvestment = function(args, res, next) {
   /**
    * adds the initial stage of an investment project
@@ -271,6 +282,16 @@ exports.patchInvestmentValue = function(args, res, next) {
    *
    * investmentId String UUID for a Data Hub investment project
    * investment InvestmentValue Investment project value data to update
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.unarchiveInvestment = function(args, res, next) {
+  /**
+   * Unarchives an investment project
+   *
+   * investmentId UUID UUID of investment project
    * no response value expected for this operation
    **/
   res.end();

@@ -4,6 +4,10 @@ var url = require('url');
 
 var Investment = require('./InvestmentService');
 
+module.exports.archiveInvestment = function archiveInvestment (req, res, next) {
+  Investment.archiveInvestment(req.swagger.params, res, next);
+};
+
 module.exports.createInvestment = function createInvestment (req, res, next) {
   Investment.createInvestment(req.swagger.params, res, next);
 };
@@ -46,4 +50,8 @@ module.exports.patchInvestmentTeam = function patchInvestmentTeam (req, res, nex
 
 module.exports.patchInvestmentValue = function patchInvestmentValue (req, res, next) {
   Investment.patchInvestmentValue(req.swagger.params, res, next);
+};
+
+module.exports.unarchiveInvestment = function unarchiveInvestment (req, res, next) {
+  Investment.unarchiveInvestment(req.swagger.params, res, next);
 };

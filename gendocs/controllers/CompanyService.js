@@ -22,16 +22,6 @@ exports.archiveCompany = function(args, res, next) {
   res.end();
 }
 
-exports.archiveCompany_0 = function(args, res, next) {
-  /**
-   * Archives a company with a reason
-   *
-   * company_id UUID UUID of company
-   * no response value expected for this operation
-   **/
-  res.end();
-}
-
 exports.getchcompany = function(args, res, next) {
   /**
    * Returns a Companies House company from the Data Hub repository
@@ -178,6 +168,16 @@ exports.getcompany = function(args, res, next) {
   } else {
     res.end();
   }
+}
+
+exports.unarchiveCompany = function(args, res, next) {
+  /**
+   * Unarchives a company
+   *
+   * company_id UUID UUID of company
+   * no response value expected for this operation
+   **/
+  res.end();
 }
 
 exports.updateCompany = function(args, res, next) {
