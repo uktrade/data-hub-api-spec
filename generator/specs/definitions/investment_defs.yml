@@ -15,6 +15,13 @@
     - referral_source_advisor
     - sector
     properties:
+      actual_land_date:
+        type: string
+        format: date
+        example: '2018-11-01'
+      actual_land_date_document:
+        type: string
+        format: uri
       anonymous_description:
         type: string
         example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
@@ -33,6 +40,9 @@
         example: '2017-05-01'
       fdi_type:
         $ref: '#/definitions/FDIType'
+      fdi_type_document:
+        type: string
+        format: uri
       id:
         type: string
         format: uuid
@@ -54,6 +64,9 @@
       not_shareable_reason:
         type: string
         example: 'Company has asked us to keep project quiet until official announcement'
+      operations_commenced_document:
+        type: string
+        format: uri
       phase:
         $ref: '#/definitions/Phase'
       project_code:
@@ -111,12 +124,18 @@
       total_investment:
         type: integer
         example: 145000000
+      total_investment_document:
+        type: string
+        format: uri
       client_cannot_provide_total_investment:
         type: boolean
         example: false
       foreign_equity_investment:
         type: integer
         example: 100000000
+      foreign_equity_investment_document:
+        type: string
+        format: uri
       client_cannot_provide_foreign_investment:
         type: boolean
         example: false
@@ -126,21 +145,36 @@
       number_new_jobs:
         type: integer
         example: 100
+      number_new_jobs_document:
+        type: string
+        format: uri
       number_safeguarded_jobs:
         type: integer
         example: 100
+      number_safeguarded_jobs_document:
+        type: string
+        format: uri
       r_and_d_budget:
         type: boolean
         example: false
+      r_and_d_budget_document:
+        type: string
+        format: uri
       non_fdi_r_and_d_budget:
         type: boolean
         example: false
       new_tech_to_uk:
         type: boolean
         example: false
+      new_tech_to_uk_document:
+        type: string
+        format: uri
       export_revenue:
         type: boolean
         example: false
+      export_revenue_document:
+        type: string
+        format: uri
       average_salary:
         type: object
         required:
@@ -154,6 +188,9 @@
           name:
             type: string
             example: '£35,000'
+      average_salary_document:
+        type: string
+        format: uri
   InvestmentRequirements:
     type: object
     description: A Data Hub investment project Value object
