@@ -70,3 +70,25 @@
           description: Search results
           schema:
             $ref: '#/definitions/ContactSearchResults'
+  /search/investment:
+    post:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentFilteredSearch'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/InvestmentSearchResults'

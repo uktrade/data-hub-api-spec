@@ -26,6 +26,10 @@
         type: "array"
         items:
           $ref: "#/definitions/Contact"
+      investments:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
   CompanyFilteredSearch:
     type: object
     properties:
@@ -157,4 +161,53 @@
         type: "array"
         items:
           $ref: "#/definitions/Contact"
+  InvestmentFilteredSearch:
+    type: object
+    properties:
+      anonymous_description:
+        type: string
+        example: 'hotel'
+      client_relationship_manager:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      description:
+        type: string
+        example: 'Marriott'
+      estimated_land_date_after:
+        type: string
+        format: date
+        example: '2017-05-01'
+      estimated_land_date_before:
+        type: string
+        format: date
+        example: '2017-05-01'
+      investor_company:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      investment_type:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      phase:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      sector:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+  InvestmentSearchResults:
+    required:
+    - "count"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
 
