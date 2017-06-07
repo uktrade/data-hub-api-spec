@@ -191,6 +191,27 @@
         $ref: '#/definitions/StrategicDriverArray'
       uk_company:
         $ref: '#/definitions/CompanySlim'
+  InvestmentAuditEntry:
+    type: object
+    description: A single audit log entry
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      user:
+        $ref: '#/definitions/Advisor'
+      items_changed_count:
+        type: integer
+        example: 6
+      datestamp:
+        type: string
+        format: datetime
+        example: '2017-05-01 12:00'
+  InvestmentAuditList:
+    type: array
+    items:
+      $ref: '#/definitions/InvestmentAuditEntry'
   InvestmentTeam:
     type: object
     description: A Data Hub investment project Value object
