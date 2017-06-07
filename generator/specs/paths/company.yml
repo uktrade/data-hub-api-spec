@@ -89,8 +89,8 @@
     post:
       tags:
       - company
-      summary: Archives a company with a reason
-      operationId: archiveCompany
+      summary: Unarchives a company
+      operationId: unarchiveCompany
       consumes:
       - application/json
       produces:
