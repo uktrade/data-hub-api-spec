@@ -1669,6 +1669,9 @@ definitions:
       trading_address_postcode:
         type: string
         example: 'AB1 2CD'
+      uk_based:
+        type: boolean
+        example: false
       uk_region:
         type: string
         format: uuid

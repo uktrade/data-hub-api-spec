@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **trading_address_town** | **str** |  | [optional] 
 **trading_address_country** | **str** |  | [optional] 
 **trading_address_postcode** | **str** |  | [optional] 
+**uk_based** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
