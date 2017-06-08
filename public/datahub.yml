@@ -1671,11 +1671,12 @@ definitions:
         example: 'AB1 2CD'
       uk_based:
         type: boolean
-        example: false
+        example: False
       uk_region:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+
   CompanySearchResults:
     required:
     - "count"
