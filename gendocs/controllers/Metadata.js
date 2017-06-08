@@ -4,6 +4,10 @@ var url = require('url');
 
 var Metadata = require('./MetadataService');
 
-module.exports.metadataBusinessActibvity = function metadataBusinessActibvity (req, res, next) {
-  Metadata.metadataBusinessActibvity(req.swagger.params, res, next);
+module.exports.metadataBusinessActivity = function metadataBusinessActivity (req, res, next) {
+  Metadata.metadataBusinessActivity(req.swagger.params, res, next);
+};
+
+module.exports.metadataDocumentableFields = function metadataDocumentableFields (req, res, next) {
+  Metadata.metadataDocumentableFields(req.swagger.params, res, next);
 };

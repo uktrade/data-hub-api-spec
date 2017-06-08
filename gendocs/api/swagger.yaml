@@ -527,15 +527,72 @@ paths:
         404:
           description: "investment is already archived or does not exist"
       x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/document:
+    post:
+      tags:
+      - "investment"
+      summary: "Tells the back end that a document has successfully uploaded and where\
+        \ to find it"
+      operationId: "addInvestmentDocument"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "document"
+        description: "object that contains the document URL and which the id of which\
+          \ section it belongs to"
+        required: true
+        schema:
+          $ref: "#/definitions/document"
+      responses:
+        201:
+          description: "document added"
+        400:
+          description: "input invalid"
+        404:
+          description: "investment is already archived or does not exist"
+      x-swagger-router-controller: "Investment"
+  /v3/investment/document/{documentId}:
+    delete:
+      tags:
+      - "investment"
+      summary: "Tells the back end to forget a docuemtn associated with a project\
+        \ and a field"
+      operationId: "addInvestmentDocument"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "documentId"
+        in: "path"
+        description: "id of the document to remove"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        204:
+          description: "document removed"
+        400:
+          description: "input invalid"
+        404:
+          description: "investment is already archived or does not exist"
+      x-swagger-router-controller: "Investment"
   /v3/metadata/business_activity:
     get:
       tags:
       - "investment"
       - "metadata"
       summary: "retrieves Business Activity metadata array"
-      operationId: "metadataBusinessActibvity"
-      consumes:
-      - "application/json"
+      operationId: "metadataBusinessActivity"
       produces:
       - "application/json"
       parameters: []
@@ -544,6 +601,22 @@ paths:
           description: "metadata array"
           schema:
             $ref: "#/definitions/BusinessActivities"
+      x-swagger-router-controller: "Investment"
+  /v3/metadata/documentable_fields:
+    get:
+      tags:
+      - "investment"
+      - "metadata"
+      summary: "retrieves the list of fields which require documents"
+      operationId: "metadataDocumentableFields"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "metadata array"
+          schema:
+            $ref: "#/definitions/DocumentableFields"
       x-swagger-router-controller: "Investment"
   /search:
     get:
@@ -619,6 +692,29 @@ paths:
           description: "Search results"
           schema:
             $ref: "#/definitions/ContactSearchResults"
+      x-swagger-router-controller: "Search"
+  /search/investment:
+    post:
+      tags:
+      - "search"
+      summary: "Basic search endpoint for Data Hub"
+      description: "Top level search for datahub"
+      operationId: "datahubSearch"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "filter"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentFilteredSearch"
+      responses:
+        200:
+          description: "Search results"
+          schema:
+            $ref: "#/definitions/InvestmentSearchResults"
       x-swagger-router-controller: "Search"
 securityDefinitions:
   OauthSecurity:
@@ -1068,10 +1164,24 @@ definitions:
     - "referral_source_advisor"
     - "sector"
     properties:
-      anonymous_description:
+      approved_commitment_to_invest:
+        type: "boolean"
+      approved_fdi:
+        type: "boolean"
+      approved_good_value:
+        type: "boolean"
+      approved_high_value:
+        type: "boolean"
+      approved_landed:
+        type: "boolean"
+      approved_non_fdi:
+        type: "boolean"
+      actual_land_date:
         type: "string"
-        example: "A large hotel chain wishes to open a hotel in a new part of a large\
-          \ northern city under-served by its existing hotels"
+        format: "date"
+        example: "2018-11-01"
+      actual_land_date_documents:
+        $ref: "#/definitions/Documents"
       business_activities:
         $ref: "#/definitions/BusinessActivities"
       client_contacts:
@@ -1088,6 +1198,8 @@ definitions:
         example: "2017-05-01"
       fdi_type:
         $ref: "#/definitions/FDIType"
+      fdi_type_documents:
+        $ref: "#/definitions/Documents"
       id:
         type: "string"
         format: "uuid"
@@ -1109,6 +1221,8 @@ definitions:
       not_shareable_reason:
         type: "string"
         example: "Company has asked us to keep project quiet until official announcement"
+      operations_commenced_documents:
+        $ref: "#/definitions/Documents"
       phase:
         $ref: "#/definitions/Phase"
       project_code:
@@ -1166,12 +1280,16 @@ definitions:
       total_investment:
         type: "integer"
         example: 145000000
+      total_investment_documents:
+        $ref: "#/definitions/Documents"
       client_cannot_provide_total_investment:
         type: "boolean"
         example: false
       foreign_equity_investment:
         type: "integer"
         example: 100000000
+      foreign_equity_investment_documents:
+        $ref: "#/definitions/Documents"
       client_cannot_provide_foreign_investment:
         type: "boolean"
         example: false
@@ -1181,23 +1299,35 @@ definitions:
       number_new_jobs:
         type: "integer"
         example: 100
+      number_new_jobs_documents:
+        $ref: "#/definitions/Documents"
       number_safeguarded_jobs:
         type: "integer"
         example: 100
+      number_safeguarded_jobs_documents:
+        $ref: "#/definitions/Documents"
       r_and_d_budget:
         type: "boolean"
         example: false
+      r_and_d_budget_documents:
+        $ref: "#/definitions/Documents"
       non_fdi_r_and_d_budget:
         type: "boolean"
         example: false
       new_tech_to_uk:
         type: "boolean"
         example: false
+      new_tech_to_uk_documents:
+        $ref: "#/definitions/Documents"
       export_revenue:
         type: "boolean"
         example: false
+      export_revenue_documents:
+        $ref: "#/definitions/Documents"
       average_salary:
         $ref: "#/definitions/InvestmentValue_average_salary"
+      average_salary_documents:
+        $ref: "#/definitions/Documents"
     description: "A Data Hub investment project Value object"
   InvestmentRequirements:
     type: "object"
@@ -1278,19 +1408,6 @@ definitions:
       name:
         type: "string"
         example: "Cold Call"
-  ReferralSourceActivityEvent:
-    type: "object"
-    required:
-    - "id"
-    - "name"
-    properties:
-      id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
-        type: "string"
-        example: "Event Name"
   ReferralSourceActivityWebsite:
     type: "object"
     required:
@@ -1408,6 +1525,14 @@ definitions:
     type: "array"
     items:
       $ref: "#/definitions/UKRegions_inner"
+  Documents:
+    type: "array"
+    items:
+      $ref: "#/definitions/Documents_inner"
+  DocumentableFields:
+    type: "array"
+    items:
+      $ref: "#/definitions/DocumentableFields_inner"
   BusinessActivities:
     type: "array"
     items:
@@ -1432,6 +1557,10 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Contact"
+      investments:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
     description: "Note: only one of the two possible arrays will be populated depending\
       \ on the search response"
   CompanyFilteredSearch:
@@ -1565,6 +1694,61 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Contact"
+  InvestmentFilteredSearch:
+    type: "object"
+    properties:
+      client_relationship_manager:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      description:
+        type: "string"
+        example: "Marriott"
+      estimated_land_date_after:
+        type: "string"
+        format: "date"
+        example: "2017-05-01"
+      estimated_land_date_before:
+        type: "string"
+        format: "date"
+        example: "2017-05-01"
+      investor_company:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      investment_type:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      phase:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      sector:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  InvestmentSearchResults:
+    required:
+    - "count"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
+  document:
+    type: "object"
+    properties:
+      uri:
+        type: "string"
+        format: "uri"
+      field:
+        type: "string"
+        format: "uuid"
   InvestmentValue_average_salary:
     required:
     - "id"
@@ -1586,6 +1770,23 @@ definitions:
       name:
         type: "string"
         example: "South East England"
+  Documents_inner:
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      uri:
+        type: "string"
+        format: "uri"
+  DocumentableFields_inner:
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
   AggregateSearchResults_aggregates:
     properties:
       count:
