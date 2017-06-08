@@ -164,9 +164,6 @@
   InvestmentFilteredSearch:
     type: object
     properties:
-      anonymous_description:
-        type: string
-        example: 'hotel'
       client_relationship_manager:
         type: string
         format: uuid
