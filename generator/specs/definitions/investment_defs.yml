@@ -15,15 +15,24 @@
     - referral_source_advisor
     - sector
     properties:
+      approved_commitment_to_invest:
+        type: boolean
+      approved_fdi:
+        type: boolean
+      approved_good_value:
+        type: boolean
+      approved_high_value:
+        type: boolean
+      approved_landed:
+        type: boolean
+      approved_non_fdi:
+        type: boolean
       actual_land_date:
         type: string
         format: date
         example: '2018-11-01'
       actual_land_date_documents:
         $ref: '#/definitions/Documents'
-      anonymous_description:
-        type: string
-        example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       client_contacts:
