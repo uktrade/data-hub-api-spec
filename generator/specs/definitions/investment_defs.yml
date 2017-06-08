@@ -15,9 +15,6 @@
     - referral_source_advisor
     - sector
     properties:
-      anonymous_description:
-        type: string
-        example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       client_contacts:
