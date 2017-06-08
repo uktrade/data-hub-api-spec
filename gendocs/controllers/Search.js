@@ -15,3 +15,7 @@ module.exports.datahubSearch_1 = function datahubSearch_1 (req, res, next) {
 module.exports.datahubSearch_2 = function datahubSearch_2 (req, res, next) {
   Search.datahubSearch_2(req.swagger.params, res, next);
 };
+
+module.exports.datahubSearch_3 = function datahubSearch_3 (req, res, next) {
+  Search.datahubSearch_3(req.swagger.params, res, next);
+};

@@ -41,4 +41,22 @@ Data Hub objects passed over the API are serialisations of JavaScript and Python
 Objects will generally expand to one nesting deep: the principle is that the Front End should do as little work as possible to populate values on screen, within reason. The reason for that reason: Data Hub objects can be very big, with dozens of fields and fkey relationships. Therefore, we may send a simple version of an object in some cases and the FE may need to issue a secondary call to inflate that object. An investment project involves three companies so to avoid bloating out the responses we send a metadata-like slim company object containing just the company's ID and it's registered name.
 
 
+### Exclusion filters
 
+The Company search API introduces an exclusion filter. Anything in the exclusion field is a negation of the search term. This provides for us to simply search for non-UK companies matching a particular critera (this is important for the Investment Project flow, among other things).
+
+A UK-excluding search would look like this:
+
+```
+POST /search/company
+
+{
+    "name": "Marriott",
+    "exclusions": {
+        "trading_address_country": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    }
+}
+
+```
+
+(assuming that's the UUID for the UK)

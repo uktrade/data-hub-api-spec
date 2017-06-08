@@ -33,5 +33,17 @@
 <h3 id="objects">Objects</h3>
 <p>Data Hub objects passed over the API are serialisations of JavaScript and Python objects in JSON. Values must always be coerced to their JSON equivalent: e.g., Python&#39;s <code>True</code> becomes <code>true</code></p>
 <p>Objects will generally expand to one nesting deep: the principle is that the Front End should do as little work as possible to populate values on screen, within reason. The reason for that reason: Data Hub objects can be very big, with dozens of fields and fkey relationships. Therefore, we may send a simple version of an object in some cases and the FE may need to issue a secondary call to inflate that object. An investment project involves three companies so to avoid bloating out the responses we send a metadata-like slim company object containing just the company&#39;s ID and it&#39;s registered name.</p>
+<h3 id="exclusion-filters">Exclusion filters</h3>
+<p>The Company search API introduces an exclusion filter. Anything in the exclusion field is a negation of the search term. This provides for us to simply search for non-UK companies matching a particular critera (this is important for the Investment Project flow, among other things).</p>
+<p>A UK-excluding search would look like this:</p>
+<pre><code>POST /search/company
+
+{
+    &quot;name&quot;: &quot;Marriott&quot;,
+    &quot;exclusions&quot;: {
+        &quot;trading_address_country&quot;: &quot;d290f1ee-6c54-4b01-90e6-d701748f0851&quot;
+    }
+}
+</code></pre><p>(assuming that&#39;s the UUID for the UK)</p>
 </body>
 </html>

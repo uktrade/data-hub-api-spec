@@ -27,7 +27,7 @@ security:
     - user
 
 paths:
-  /company/{companyId}:
+  /v3/company/{companyId}:
     get:
       tags:
       - company
@@ -53,12 +53,12 @@ paths:
           description: bad input parameter
         404:
           description: company does not exist
-    put:
+    patch:
       tags:
       - company
-      summary: updates a company, creating a new one if not found
+      summary: updates a company
       operationId: updateCompany
-      description: Updates an existing company
+      description: Updates an existing company, only changing fields specified in the request
       consumes:
       - application/json
       produces:
@@ -83,11 +83,62 @@ paths:
       responses:
         200:
           description: item updated
-        201:
-          description: item created
         400:
           description: invalid input, object invalid
-  /company:
+  /v3/company/{company_id}/archive:
+    post:
+      tags:
+      - company
+      summary: Archives a company with a reason
+      operationId: archiveCompany
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_id
+        description: UUID of company
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveReason'
+      responses:
+        201:
+          description: company archived
+        400:
+          description: input invalid
+        404:
+          description: company is already archived or does not exist
+  /v3/company/{company_id}/unarchive:
+    post:
+      tags:
+      - company
+      summary: Unarchives a company
+      operationId: unarchiveCompany
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_id
+        description: UUID of company
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: company unarchived
+        400:
+          description: input invalid
+        404:
+          description: company is already archived or does not exist
+  /v3/company:
     post:
       tags:
       - company
@@ -112,7 +163,7 @@ paths:
           description: invalid input, object invalid
         409:
           description: company already exists
-  /ch_company/{company_number}:
+  /v3/ch_company/{company_number}:
     get:
       tags:
       - company
@@ -415,15 +466,127 @@ paths:
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/investment/{investmentId}/archive:
+    post:
+      tags:
+      - investment
+      summary: Archives an investment project with a reason
+      operationId: archiveInvestment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveReason'
+      responses:
+        201:
+          description: investment archived
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
+  /v3/investment/{investmentId}/unarchive:
+    post:
+      tags:
+      - investment
+      summary: Unarchives an investment project
+      operationId: unarchiveInvestment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: investment archived
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
+  /v3/investment/{investmentId}/document:
+    post:
+      tags:
+      - investment
+      summary: Tells the back end that a document has successfully uploaded and where to find it
+      operationId: addInvestmentDocument
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: document
+        description: object that contains the document URL and which the id of which section it belongs to
+        required: true
+        schema:
+          type: object
+          properties:
+            uri:
+              type: string
+              format: uri
+            field:
+              type: string
+              format: uuid
+      responses:
+        201:
+          description: document added
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
+  /v3/investment/document/{documentId}:
+    delete:
+      tags:
+      - investment
+      summary: Tells the back end to forget a docuemtn associated with a project and a field
+      operationId: addInvestmentDocument
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: documentId
+        description: id of the document to remove
+        required: true
+        type: string
+        format: uuid
+      responses:
+        204:
+          description: document removed
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
   /v3/metadata/business_activity:
     get:
       tags: 
       - investment
       - metadata
       summary: retrieves Business Activity metadata array
-      operationId: metadataBusinessActibvity
-      consumes:
-      - application/json
+      operationId: metadataBusinessActivity
       produces:
       - application/json
       responses:
@@ -431,6 +594,21 @@ paths:
           description: metadata array
           schema:
             $ref: '#/definitions/BusinessActivities'
+  /v3/metadata/documentable_fields:
+    get:
+      tags:
+      - investment
+      - metadata
+      summary: retrieves the list of fields which require documents
+      operationId: metadataDocumentableFields
+      produces:
+      - application/json
+      responses:
+        200:
+          description: metadata array
+          schema:
+            $ref: '#/definitions/DocumentableFields'
+
   /search:
     get:
       tags:
@@ -503,6 +681,28 @@ paths:
           description: Search results
           schema:
             $ref: '#/definitions/ContactSearchResults'
+  /search/investment:
+    post:
+      tags:
+      - search
+      summary: Basic search endpoint for Data Hub
+      operationId: datahubSearch
+      description: Top level search for datahub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentFilteredSearch'
+      responses:
+        200:
+          description: Search results
+          schema:
+            $ref: '#/definitions/InvestmentSearchResults'
 definitions:
   Company:
     type: object
@@ -530,12 +730,6 @@ definitions:
       registered_address_2:
         type: string
         example: 'AREA'
-      registered_address_3:
-        type: string
-        example: 'SUBTOWN'
-      registered_address_4:
-        type: string
-        example: 'SUBREGION'
       registered_address_town:
         type: string
         example: 'ANYTOWN'
@@ -562,8 +756,6 @@ definitions:
       archived_reason:
         type: string
         example: 'Company dissolved'
-      lead:
-        type: boolean
       description:
         type: string
         example: 'MANUFACTURER OF WIDGETS AND DOODADS'
@@ -576,12 +768,6 @@ definitions:
       trading_address_2:
         type: string
         example: 'AREA'
-      trading_address_3:
-        type: string
-        example: 'SUBTOWN'
-      trading_address_4:
-        type: string
-        example: 'SUBREGION'
       trading_address_town:
         type: string
         example: 'ANYTOWN'
@@ -592,9 +778,9 @@ definitions:
         type: string
         example: 'AB1 2CD'
       account_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       archived_by:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       business_type:
         $ref: '#/definitions/BusinessType'
       children:
@@ -602,7 +788,7 @@ definitions:
       classification:
         $ref: '#/definitions/Classification'
       companies_house_data:
-        $ref: '#/definitions/CompaniesHouseSlim'
+        $ref: '#/definitions/CompaniesHouseCompany'
       contacts:
         $ref: '#/definitions/ContactArray'
       employee_range:
@@ -613,10 +799,8 @@ definitions:
         $ref: '#/definitions/CountryArray'
       headquarter_type:
         $ref: '#/definitions/HeadquarterType'
-      interactions:
-        $ref: '#/definitions/InteractionArray'
       one_list_account_owner:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       parent:
         $ref: '#/definitions/CompanySlim'
       registered_address_country:
@@ -629,7 +813,12 @@ definitions:
         $ref: '#/definitions/TurnoverRange'
       uk_region:
         $ref: '#/definitions/UKRegion'
-  Advisor:
+      investment_projects_invested_in:
+        $ref: '#/definitions/InvestmentProjectsList'
+      investment_projects_invested_in_count:
+        type: integer
+        example: 5
+  Adviser:
     type: object
     required:
     - id
@@ -642,10 +831,10 @@ definitions:
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       first_name:
         type: string
-        example: 'Alison'
+        example: 'Annette'
       last_name:
         type: string
-        example: 'Advisor'
+        example: 'Adviser'
   BusinessType:
     type: object
     description: "Business Type metadata"
@@ -673,18 +862,6 @@ definitions:
       name:
         type: string
         example: 'D - Post managed'
-  CompaniesHouseSlim:
-    type: object
-    required:
-    - company_number
-    properties:
-      id:
-        type: string
-        format: string
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      company_number:
-        type: string
-        example: 'SCO-123456'
   CompanyKeyArray:
     type: array
     items:
@@ -795,12 +972,11 @@ definitions:
       address_country:
         $ref: '#/definitions/Country'
       advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       archived_by:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       company:
         $ref: '#/definitions/CompanySlim'
-        
   CountryArray:
     type: array
     items:
@@ -819,23 +995,6 @@ definitions:
       name:
         type: string
         example: 'France'
-  Interaction:
-    type: object
-    required:
-      - id
-      - type
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      type:
-        type: string
-        example: 'Interaction'
-  InteractionArray:
-    type: array
-    items:
-      $ref: '#/definitions/Interaction'
   EmployeeRange:
     type: object
     description: "Employee range metadata"
@@ -969,6 +1128,15 @@ definitions:
         type: string
         format: date-time
         example: 2014-07-23T10:36:04
+  ArchiveReason:
+    type: object
+    description: the reason supplied for archiving a company or contact
+    required:
+    - reason
+    properties:
+      reason:
+        type: string
+        example: 'Company has ceased trading'
 
   InvestmentProject:
     type: object
@@ -987,15 +1155,30 @@ definitions:
     - referral_source_advisor
     - sector
     properties:
-      anonymous_description:
+      approved_commitment_to_invest:
+        type: boolean
+      approved_fdi:
+        type: boolean
+      approved_good_value:
+        type: boolean
+      approved_high_value:
+        type: boolean
+      approved_landed:
+        type: boolean
+      approved_non_fdi:
+        type: boolean
+      actual_land_date:
         type: string
-        example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
+        format: date
+        example: '2018-11-01'
+      actual_land_date_documents:
+        $ref: '#/definitions/Documents'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       description:
         type: string
         example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
@@ -1005,6 +1188,8 @@ definitions:
         example: '2017-05-01'
       fdi_type:
         $ref: '#/definitions/FDIType'
+      fdi_type_documents:
+        $ref: '#/definitions/Documents'
       id:
         type: string
         format: uuid
@@ -1026,6 +1211,8 @@ definitions:
       not_shareable_reason:
         type: string
         example: 'Company has asked us to keep project quiet until official announcement'
+      operations_commenced_documents:
+        $ref: '#/definitions/Documents'
       phase:
         $ref: '#/definitions/Phase'
       project_code:
@@ -1043,30 +1230,36 @@ definitions:
         type: string
         example: "Moscow Hotels Expo 2017"
       referral_source_advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       sector:
         $ref: '#/definitions/Sector'
   InvestmentProjectsList:
     type: object
     required:
     - count
-    - next
-    - previous
     - results
     properties:
       count:
         type: integer
         example: 30
-      next:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
-      previous:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
       results:
         type: array
         items:
-          $ref: '#/definitions/InvestmentProject'
+          $ref: '#/definitions/InvestmentProjectSlim'
+  InvestmentProjectSlim:
+    type: object
+    description: A Data Hub investment project summary
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Marriot Hotels - New hotel in Manchester'
+      project_code:
+        type: string
+        example: 'P-01234567'
   InvestmentValue:
     type: object
     description: A Data Hub investment project Value object
@@ -1077,12 +1270,16 @@ definitions:
       total_investment:
         type: integer
         example: 145000000
+      total_investment_documents:
+        $ref: '#/definitions/Documents'
       client_cannot_provide_total_investment:
         type: boolean
         example: false
       foreign_equity_investment:
         type: integer
         example: 100000000
+      foreign_equity_investment_documents:
+        $ref: '#/definitions/Documents'
       client_cannot_provide_foreign_investment:
         type: boolean
         example: false
@@ -1092,21 +1289,31 @@ definitions:
       number_new_jobs:
         type: integer
         example: 100
+      number_new_jobs_documents:
+        $ref: '#/definitions/Documents'
       number_safeguarded_jobs:
         type: integer
         example: 100
+      number_safeguarded_jobs_documents:
+        $ref: '#/definitions/Documents'
       r_and_d_budget:
         type: boolean
         example: false
+      r_and_d_budget_documents:
+        $ref: '#/definitions/Documents'
       non_fdi_r_and_d_budget:
         type: boolean
         example: false
       new_tech_to_uk:
         type: boolean
         example: false
+      new_tech_to_uk_documents:
+        $ref: '#/definitions/Documents'
       export_revenue:
         type: boolean
         example: false
+      export_revenue_documents:
+        $ref: '#/definitions/Documents'
       average_salary:
         type: object
         required:
@@ -1120,6 +1327,8 @@ definitions:
           name:
             type: string
             example: '£35,000'
+      average_salary_documents:
+        $ref: '#/definitions/Documents'
   InvestmentRequirements:
     type: object
     description: A Data Hub investment project Value object
@@ -1166,13 +1375,13 @@ definitions:
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       project_manager_team:
-        $ref: '#/definitions/AdvisorTeam'
+        $ref: '#/definitions/AdviserTeam'
       project_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       project_assurance_team:
-        $ref: '#/definitions/AdvisorTeam'
+        $ref: '#/definitions/AdviserTeam'
       project_assurance_advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
   BusinessActivity:
     type: object
     required:
@@ -1198,19 +1407,6 @@ definitions:
       name:
         type: string
         example: 'Cold Call'
-  ReferralSourceActivityEvent:
-    type: object
-    required:
-      - id
-      - name
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      name:
-        type: string
-        example: 'Event Name'
   ReferralSourceActivityWebsite:
     type: object
     required:
@@ -1265,7 +1461,7 @@ definitions:
       name:
         type: string
         example: 'Advanced Engineering Supply Chain'
-  AdvisorTeam:
+  AdviserTeam:
     type: object
     required:
     - id
@@ -1336,6 +1532,29 @@ definitions:
         name:
           type: string
           example: 'South East England'
+  Documents:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        uri:
+          type: string
+          format: uri
+  DocumentableFields:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        name:
+          type: string
   BusinessActivities:
     type: array
     items:
@@ -1368,26 +1587,25 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Contact"
+      investments:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
   CompanyFilteredSearch:
     type: object
     properties:
-      original_query:
-        type: string
-        example: 'ABC DEF'
-      name:
-        type: string
-        example: 'ABC Company'
-      alias:
-        type: string
-        example: 'DEF Ventures'
-      sector:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       account_manager:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      alias:
+        type: string
+        example: 'DEF Ventures'
+      description:
+        type: string
+        example: 'greenfield pharmaceutical'
+      exclusions:
+          $ref: '#/definitions/CompanyExclusionFilters'
       export_to_country:
         type: string
         format: uuid
@@ -1396,10 +1614,48 @@ definitions:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      description:
+      name:
         type: string
-        example: 'greenfield pharmaceutical'
+        example: 'ABC Company'
+      original_query:
+        type: string
+        example: 'ABC DEF'
+      sector:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      trading_address_town:
+        type: string
+        example: 'Shipton'
+      trading_address_country:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      trading_address_postcode:
+        type: string
+        example: 'AB1 2CD'
       uk_region:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+  CompanyExclusionFilters:
+    type: object
+    properties:
+      alias:
+        type: string
+        example: 'DEF Ventures'
+      export_to_country:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      future_interest_country:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'ABC Company'
+      sector:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
@@ -1415,7 +1671,11 @@ definitions:
         example: 'AB1 2CD'
       uk_based:
         type: boolean
-        example: False
+        example: false
+      uk_region:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
   CompanySearchResults:
     required:
     - "count"
@@ -1465,4 +1725,50 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Contact"
+  InvestmentFilteredSearch:
+    type: object
+    properties:
+      client_relationship_manager:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      description:
+        type: string
+        example: 'Marriott'
+      estimated_land_date_after:
+        type: string
+        format: date
+        example: '2017-05-01'
+      estimated_land_date_before:
+        type: string
+        format: date
+        example: '2017-05-01'
+      investor_company:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      investment_type:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      phase:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      sector:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+  InvestmentSearchResults:
+    required:
+    - "count"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProject"
 

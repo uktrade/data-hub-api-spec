@@ -24,12 +24,6 @@
       registered_address_2:
         type: string
         example: 'AREA'
-      registered_address_3:
-        type: string
-        example: 'SUBTOWN'
-      registered_address_4:
-        type: string
-        example: 'SUBREGION'
       registered_address_town:
         type: string
         example: 'ANYTOWN'
@@ -56,8 +50,6 @@
       archived_reason:
         type: string
         example: 'Company dissolved'
-      lead:
-        type: boolean
       description:
         type: string
         example: 'MANUFACTURER OF WIDGETS AND DOODADS'
@@ -70,12 +62,6 @@
       trading_address_2:
         type: string
         example: 'AREA'
-      trading_address_3:
-        type: string
-        example: 'SUBTOWN'
-      trading_address_4:
-        type: string
-        example: 'SUBREGION'
       trading_address_town:
         type: string
         example: 'ANYTOWN'
@@ -86,9 +72,9 @@
         type: string
         example: 'AB1 2CD'
       account_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       archived_by:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       business_type:
         $ref: '#/definitions/BusinessType'
       children:
@@ -96,7 +82,7 @@
       classification:
         $ref: '#/definitions/Classification'
       companies_house_data:
-        $ref: '#/definitions/CompaniesHouseSlim'
+        $ref: '#/definitions/CompaniesHouseCompany'
       contacts:
         $ref: '#/definitions/ContactArray'
       employee_range:
@@ -107,10 +93,8 @@
         $ref: '#/definitions/CountryArray'
       headquarter_type:
         $ref: '#/definitions/HeadquarterType'
-      interactions:
-        $ref: '#/definitions/InteractionArray'
       one_list_account_owner:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       parent:
         $ref: '#/definitions/CompanySlim'
       registered_address_country:
@@ -123,7 +107,12 @@
         $ref: '#/definitions/TurnoverRange'
       uk_region:
         $ref: '#/definitions/UKRegion'
-  Advisor:
+      investment_projects_invested_in:
+        $ref: '#/definitions/InvestmentProjectsList'
+      investment_projects_invested_in_count:
+        type: integer
+        example: 5
+  Adviser:
     type: object
     required:
     - id
@@ -136,10 +125,10 @@
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       first_name:
         type: string
-        example: 'Alison'
+        example: 'Annette'
       last_name:
         type: string
-        example: 'Advisor'
+        example: 'Adviser'
   BusinessType:
     type: object
     description: "Business Type metadata"
@@ -167,18 +156,6 @@
       name:
         type: string
         example: 'D - Post managed'
-  CompaniesHouseSlim:
-    type: object
-    required:
-    - company_number
-    properties:
-      id:
-        type: string
-        format: string
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      company_number:
-        type: string
-        example: 'SCO-123456'
   CompanyKeyArray:
     type: array
     items:
@@ -289,12 +266,11 @@
       address_country:
         $ref: '#/definitions/Country'
       advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       archived_by:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       company:
         $ref: '#/definitions/CompanySlim'
-        
   CountryArray:
     type: array
     items:
@@ -313,23 +289,6 @@
       name:
         type: string
         example: 'France'
-  Interaction:
-    type: object
-    required:
-      - id
-      - type
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      type:
-        type: string
-        example: 'Interaction'
-  InteractionArray:
-    type: array
-    items:
-      $ref: '#/definitions/Interaction'
   EmployeeRange:
     type: object
     description: "Employee range metadata"
@@ -463,4 +422,13 @@
         type: string
         format: date-time
         example: 2014-07-23T10:36:04
+  ArchiveReason:
+    type: object
+    description: the reason supplied for archiving a company or contact
+    required:
+    - reason
+    properties:
+      reason:
+        type: string
+        example: 'Company has ceased trading'
 

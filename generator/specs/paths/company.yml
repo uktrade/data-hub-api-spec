@@ -1,4 +1,4 @@
-  /company/{companyId}:
+  /v3/company/{companyId}:
     get:
       tags:
       - company
@@ -24,12 +24,12 @@
           description: bad input parameter
         404:
           description: company does not exist
-    put:
+    patch:
       tags:
       - company
-      summary: updates a company, creating a new one if not found
+      summary: updates a company
       operationId: updateCompany
-      description: Updates an existing company
+      description: Updates an existing company, only changing fields specified in the request
       consumes:
       - application/json
       produces:
@@ -54,11 +54,62 @@
       responses:
         200:
           description: item updated
-        201:
-          description: item created
         400:
           description: invalid input, object invalid
-  /company:
+  /v3/company/{company_id}/archive:
+    post:
+      tags:
+      - company
+      summary: Archives a company with a reason
+      operationId: archiveCompany
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_id
+        description: UUID of company
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveReason'
+      responses:
+        201:
+          description: company archived
+        400:
+          description: input invalid
+        404:
+          description: company is already archived or does not exist
+  /v3/company/{company_id}/unarchive:
+    post:
+      tags:
+      - company
+      summary: Unarchives a company
+      operationId: unarchiveCompany
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: company_id
+        description: UUID of company
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: company unarchived
+        400:
+          description: input invalid
+        404:
+          description: company is already archived or does not exist
+  /v3/company:
     post:
       tags:
       - company
@@ -83,7 +134,7 @@
           description: invalid input, object invalid
         409:
           description: company already exists
-  /ch_company/{company_number}:
+  /v3/ch_company/{company_number}:
     get:
       tags:
       - company

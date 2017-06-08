@@ -276,15 +276,127 @@
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/investment/{investmentId}/archive:
+    post:
+      tags:
+      - investment
+      summary: Archives an investment project with a reason
+      operationId: archiveInvestment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveReason'
+      responses:
+        201:
+          description: investment archived
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
+  /v3/investment/{investmentId}/unarchive:
+    post:
+      tags:
+      - investment
+      summary: Unarchives an investment project
+      operationId: unarchiveInvestment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: investment archived
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
+  /v3/investment/{investmentId}/document:
+    post:
+      tags:
+      - investment
+      summary: Tells the back end that a document has successfully uploaded and where to find it
+      operationId: addInvestmentDocument
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: document
+        description: object that contains the document URL and which the id of which section it belongs to
+        required: true
+        schema:
+          type: object
+          properties:
+            uri:
+              type: string
+              format: uri
+            field:
+              type: string
+              format: uuid
+      responses:
+        201:
+          description: document added
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
+  /v3/investment/document/{documentId}:
+    delete:
+      tags:
+      - investment
+      summary: Tells the back end to forget a docuemtn associated with a project and a field
+      operationId: addInvestmentDocument
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: documentId
+        description: id of the document to remove
+        required: true
+        type: string
+        format: uuid
+      responses:
+        204:
+          description: document removed
+        400:
+          description: input invalid
+        404:
+          description: investment is already archived or does not exist
   /v3/metadata/business_activity:
     get:
       tags: 
       - investment
       - metadata
       summary: retrieves Business Activity metadata array
-      operationId: metadataBusinessActibvity
-      consumes:
-      - application/json
+      operationId: metadataBusinessActivity
       produces:
       - application/json
       responses:
@@ -292,3 +404,18 @@
           description: metadata array
           schema:
             $ref: '#/definitions/BusinessActivities'
+  /v3/metadata/documentable_fields:
+    get:
+      tags:
+      - investment
+      - metadata
+      summary: retrieves the list of fields which require documents
+      operationId: metadataDocumentableFields
+      produces:
+      - application/json
+      responses:
+        200:
+          description: metadata array
+          schema:
+            $ref: '#/definitions/DocumentableFields'
+

@@ -15,15 +15,30 @@
     - referral_source_advisor
     - sector
     properties:
-      anonymous_description:
+      approved_commitment_to_invest:
+        type: boolean
+      approved_fdi:
+        type: boolean
+      approved_good_value:
+        type: boolean
+      approved_high_value:
+        type: boolean
+      approved_landed:
+        type: boolean
+      approved_non_fdi:
+        type: boolean
+      actual_land_date:
         type: string
-        example: 'A large hotel chain wishes to open a hotel in a new part of a large northern city under-served by its existing hotels'
+        format: date
+        example: '2018-11-01'
+      actual_land_date_documents:
+        $ref: '#/definitions/Documents'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       description:
         type: string
         example: 'Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels'
@@ -33,6 +48,8 @@
         example: '2017-05-01'
       fdi_type:
         $ref: '#/definitions/FDIType'
+      fdi_type_documents:
+        $ref: '#/definitions/Documents'
       id:
         type: string
         format: uuid
@@ -54,6 +71,8 @@
       not_shareable_reason:
         type: string
         example: 'Company has asked us to keep project quiet until official announcement'
+      operations_commenced_documents:
+        $ref: '#/definitions/Documents'
       phase:
         $ref: '#/definitions/Phase'
       project_code:
@@ -71,30 +90,36 @@
         type: string
         example: "Moscow Hotels Expo 2017"
       referral_source_advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       sector:
         $ref: '#/definitions/Sector'
   InvestmentProjectsList:
     type: object
     required:
     - count
-    - next
-    - previous
     - results
     properties:
       count:
         type: integer
         example: 30
-      next:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
-      previous:
-        type: string
-        example: 'http://{HOST}/v3/investment/{companyId}/projects?limit=10&offset=5'
       results:
         type: array
         items:
-          $ref: '#/definitions/InvestmentProject'
+          $ref: '#/definitions/InvestmentProjectSlim'
+  InvestmentProjectSlim:
+    type: object
+    description: A Data Hub investment project summary
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Marriot Hotels - New hotel in Manchester'
+      project_code:
+        type: string
+        example: 'P-01234567'
   InvestmentValue:
     type: object
     description: A Data Hub investment project Value object
@@ -105,12 +130,16 @@
       total_investment:
         type: integer
         example: 145000000
+      total_investment_documents:
+        $ref: '#/definitions/Documents'
       client_cannot_provide_total_investment:
         type: boolean
         example: false
       foreign_equity_investment:
         type: integer
         example: 100000000
+      foreign_equity_investment_documents:
+        $ref: '#/definitions/Documents'
       client_cannot_provide_foreign_investment:
         type: boolean
         example: false
@@ -120,21 +149,31 @@
       number_new_jobs:
         type: integer
         example: 100
+      number_new_jobs_documents:
+        $ref: '#/definitions/Documents'
       number_safeguarded_jobs:
         type: integer
         example: 100
+      number_safeguarded_jobs_documents:
+        $ref: '#/definitions/Documents'
       r_and_d_budget:
         type: boolean
         example: false
+      r_and_d_budget_documents:
+        $ref: '#/definitions/Documents'
       non_fdi_r_and_d_budget:
         type: boolean
         example: false
       new_tech_to_uk:
         type: boolean
         example: false
+      new_tech_to_uk_documents:
+        $ref: '#/definitions/Documents'
       export_revenue:
         type: boolean
         example: false
+      export_revenue_documents:
+        $ref: '#/definitions/Documents'
       average_salary:
         type: object
         required:
@@ -148,6 +187,8 @@
           name:
             type: string
             example: '£35,000'
+      average_salary_documents:
+        $ref: '#/definitions/Documents'
   InvestmentRequirements:
     type: object
     description: A Data Hub investment project Value object
@@ -194,13 +235,13 @@
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       project_manager_team:
-        $ref: '#/definitions/AdvisorTeam'
+        $ref: '#/definitions/AdviserTeam'
       project_manager:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
       project_assurance_team:
-        $ref: '#/definitions/AdvisorTeam'
+        $ref: '#/definitions/AdviserTeam'
       project_assurance_advisor:
-        $ref: '#/definitions/Advisor'
+        $ref: '#/definitions/Adviser'
   BusinessActivity:
     type: object
     required:
@@ -226,19 +267,6 @@
       name:
         type: string
         example: 'Cold Call'
-  ReferralSourceActivityEvent:
-    type: object
-    required:
-      - id
-      - name
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      name:
-        type: string
-        example: 'Event Name'
   ReferralSourceActivityWebsite:
     type: object
     required:
@@ -293,7 +321,7 @@
       name:
         type: string
         example: 'Advanced Engineering Supply Chain'
-  AdvisorTeam:
+  AdviserTeam:
     type: object
     required:
     - id
@@ -364,3 +392,26 @@
         name:
           type: string
           example: 'South East England'
+  Documents:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        uri:
+          type: string
+          format: uri
+  DocumentableFields:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        name:
+          type: string
