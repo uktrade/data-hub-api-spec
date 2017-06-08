@@ -353,7 +353,7 @@
         schema:
           type: object
           properties:
-            documentUri:
+            uri:
               type: string
               format: uri
             field:
@@ -370,7 +370,7 @@
     delete:
       tags:
       - investment
-      summary: Tells the back end that a document has successfully uploaded and where to find it
+      summary: Tells the back end to forget a docuemtn associated with a project and a field
       operationId: addInvestmentDocument
       consumes:
       - application/json
