@@ -15,6 +15,18 @@
     - referral_source_advisor
     - sector
     properties:
+      approved_commitment_to_invest:
+        type: boolean
+      approved_fdi:
+        type: boolean
+      approved_good_value:
+        type: boolean
+      approved_high_value:
+        type: boolean
+      approved_landed:
+        type: boolean
+      approved_non_fdi:
+        type: boolean
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       client_contacts:
