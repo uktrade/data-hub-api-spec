@@ -176,9 +176,6 @@
       address_line_3:
         type: string
         example: 'Surrey'
-      address_postcode:
-        type: string
-        example: 'SN1 1AA'
       client_considering_other_countries:
         type: boolean
         example: false
@@ -190,6 +187,9 @@
         $ref: '#/definitions/StrategicDriverArray'
       uk_company:
         $ref: '#/definitions/CompanySlim'
+      address_postcode:
+        type: string
+        example: 'SN1 1AA'
   InvestmentProjectsList:
     type: object
     required:
