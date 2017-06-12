@@ -12,7 +12,6 @@
     - name
     - nda_signed
     - referral_source_activity
-    - referral_source_advisor
     - sector
     properties:
       approved_commitment_to_invest:
