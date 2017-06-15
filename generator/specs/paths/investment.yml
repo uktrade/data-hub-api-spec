@@ -1,4 +1,4 @@
-  /v3/investment/project:
+  /v3/investment:
     get:
       tags:
       - investment
@@ -56,7 +56,7 @@
           description: invalid input, object invalid
         409:
           description: investment already exists
-  /v3/investment/{investmentId}/project:
+  /v3/investment/{investmentId}:
     get:
       tags:
       - investment
