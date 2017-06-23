@@ -12,7 +12,6 @@
     - name
     - nda_signed
     - referral_source_activity
-    - referral_source_advisor
     - sector
     properties:
       approved_commitment_to_invest:
@@ -93,37 +92,6 @@
         $ref: '#/definitions/Adviser'
       sector:
         $ref: '#/definitions/Sector'
-  InvestmentProjectsList:
-    type: object
-    required:
-    - count
-    - results
-    properties:
-      count:
-        type: integer
-        example: 30
-      results:
-        type: array
-        items:
-          $ref: '#/definitions/InvestmentProjectSlim'
-  InvestmentProjectSlim:
-    type: object
-    description: A Data Hub investment project summary
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      name:
-        type: string
-        example: 'Marriot Hotels - New hotel in Manchester'
-      project_code:
-        type: string
-        example: 'P-01234567'
-  InvestmentValue:
-    type: object
-    description: A Data Hub investment project Value object
-    properties:
       value_complete:
         type: boolean
         example: false
@@ -189,10 +157,6 @@
             example: '£35,000'
       average_salary_documents:
         $ref: '#/definitions/Documents'
-  InvestmentRequirements:
-    type: object
-    description: A Data Hub investment project Value object
-    properties:
       requirements_complete:
         type: boolean
         example: false
@@ -212,9 +176,6 @@
       address_line_3:
         type: string
         example: 'Surrey'
-      address_postcode:
-        type: string
-        example: 'SN1 1AA'
       client_considering_other_countries:
         type: boolean
         example: false
@@ -226,14 +187,36 @@
         $ref: '#/definitions/StrategicDriverArray'
       uk_company:
         $ref: '#/definitions/CompanySlim'
-  InvestmentTeam:
+      address_postcode:
+        type: string
+        example: 'SN1 1AA'
+  InvestmentProjectsList:
     type: object
-    description: A Data Hub investment project Value object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/InvestmentProjectSlim'
+  InvestmentProjectSlim:
+    type: object
+    description: A Data Hub investment project summary
     properties:
       id:
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Marriot Hotels - New hotel in Manchester'
+      project_code:
+        type: string
+        example: 'P-01234567'
       project_manager_team:
         $ref: '#/definitions/AdviserTeam'
       project_manager:
