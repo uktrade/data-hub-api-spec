@@ -104,9 +104,9 @@
       priority:
         type: string
         enum:
-        - LOW
-        - MEDIUM
-        - HIGH
+        - 1_low
+        - 2_medium
+        - 3_high
       total_investment_documents:
         $ref: '#/definitions/Documents'
       client_cannot_provide_total_investment:
