@@ -183,7 +183,7 @@ paths:
         404:
           description: "company does not exist"
       x-swagger-router-controller: "Company"
-  /v3/investment/project:
+  /v3/investment:
     get:
       tags:
       - "investment"
@@ -244,7 +244,7 @@ paths:
         409:
           description: "investment already exists"
       x-swagger-router-controller: "Investment"
-  /v3/investment/{investmentId}/project:
+  /v3/investment/{investmentId}:
     get:
       tags:
       - "investment"
@@ -294,178 +294,6 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/InvestmentProject"
-      responses:
-        200:
-          description: "item updated"
-        400:
-          description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
-  /v3/investment/{investmentId}/value:
-    get:
-      tags:
-      - "investment"
-      summary: "Returns the Value information associated with a project"
-      description: "Passing in the UUID of an investment project returns the value\
-        \ associated with it\n"
-      operationId: "getinvestmentvalue"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-        format: "uuid"
-      responses:
-        200:
-          description: "JSON formatted investment value object"
-          schema:
-            $ref: "#/definitions/InvestmentValue"
-        400:
-          description: "bad input parameter"
-        404:
-          description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    patch:
-      tags:
-      - "investment"
-      summary: "updates an investment project value object, from a partial JSON object"
-      description: "Patches an existing investment project value object"
-      operationId: "patchInvestmentValue"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project value data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentValue"
-      responses:
-        200:
-          description: "item updated"
-        400:
-          description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
-  /v3/investment/{investmentId}/requirements:
-    get:
-      tags:
-      - "investment"
-      summary: "Returns the Requirements information associated with a project @TODO\
-        \ document WHY"
-      description: "Passing in the UUID of an investment project returns the value\
-        \ associated with it\n"
-      operationId: "getinvestmentrequirements"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-        format: "uuid"
-      responses:
-        200:
-          description: "JSON formatted investment requirements object"
-          schema:
-            $ref: "#/definitions/InvestmentRequirements"
-        400:
-          description: "bad input parameter"
-        404:
-          description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    patch:
-      tags:
-      - "investment"
-      summary: "updates an investment requirements object, from a partial JSON object"
-      description: "Patches an existing investment requirements object"
-      operationId: "patchInvestmentRequirements"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project requirements data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentRequirements"
-      responses:
-        200:
-          description: "item updated"
-        400:
-          description: "invalid input, object invalid"
-      x-swagger-router-controller: "Investment"
-  /v3/investment/{investmentId}/team:
-    get:
-      tags:
-      - "investment"
-      summary: "Returns the team information associated with a project"
-      description: "Passing in the UUID of an investment project returns the team\
-        \ associated with it\n"
-      operationId: "getinvestmentteam"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-        format: "uuid"
-      responses:
-        200:
-          description: "JSON formatted investment team object"
-          schema:
-            $ref: "#/definitions/InvestmentTeam"
-        400:
-          description: "bad input parameter"
-        404:
-          description: "investment does not exist"
-      x-swagger-router-controller: "Investment"
-    patch:
-      tags:
-      - "investment"
-      summary: "updates an investment team object, from a partial JSON object"
-      description: "Patches an existing investment team object"
-      operationId: "patchInvestmentTeam"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "investmentId"
-        in: "path"
-        description: "UUID for a Data Hub investment project"
-        required: true
-        type: "string"
-        default: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      - in: "body"
-        name: "investment"
-        description: "Investment project  data to update"
-        required: true
-        schema:
-          $ref: "#/definitions/InvestmentTeam"
       responses:
         200:
           description: "item updated"
@@ -1161,7 +989,6 @@ definitions:
     - "name"
     - "nda_signed"
     - "referral_source_activity"
-    - "referral_source_advisor"
     - "sector"
     properties:
       approved_commitment_to_invest:
@@ -1223,8 +1050,8 @@ definitions:
         example: "Company has asked us to keep project quiet until official announcement"
       operations_commenced_documents:
         $ref: "#/definitions/Documents"
-      phase:
-        $ref: "#/definitions/Phase"
+      stage:
+        $ref: "#/definitions/Stage"
       project_code:
         type: "string"
         example: "P-01234567"
@@ -1243,43 +1070,23 @@ definitions:
         $ref: "#/definitions/Adviser"
       sector:
         $ref: "#/definitions/Sector"
-    description: "A Data Hub investment project"
-  InvestmentProjectsList:
-    type: "object"
-    required:
-    - "count"
-    - "results"
-    properties:
-      count:
-        type: "integer"
-        example: 30
-      results:
-        type: "array"
-        items:
-          $ref: "#/definitions/InvestmentProjectSlim"
-  InvestmentProjectSlim:
-    type: "object"
-    properties:
-      id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
-        type: "string"
-        example: "Marriot Hotels - New hotel in Manchester"
-      project_code:
-        type: "string"
-        example: "P-01234567"
-    description: "A Data Hub investment project summary"
-  InvestmentValue:
-    type: "object"
-    properties:
       value_complete:
         type: "boolean"
         example: false
+        description: "Whether the value section is complete enough to move to the\
+          \ next project stage"
       total_investment:
         type: "integer"
         example: 145000000
+      likelihood_of_landing:
+        type: "integer"
+        example: 60
+      priority:
+        type: "string"
+        enum:
+        - "1_low"
+        - "2_medium"
+        - "3_high"
       total_investment_documents:
         $ref: "#/definitions/Documents"
       client_cannot_provide_total_investment:
@@ -1325,16 +1132,14 @@ definitions:
       export_revenue_documents:
         $ref: "#/definitions/Documents"
       average_salary:
-        $ref: "#/definitions/InvestmentValue_average_salary"
+        $ref: "#/definitions/InvestmentProject_average_salary"
       average_salary_documents:
         $ref: "#/definitions/Documents"
-    description: "A Data Hub investment project Value object"
-  InvestmentRequirements:
-    type: "object"
-    properties:
       requirements_complete:
         type: "boolean"
         example: false
+        description: "Whether the requirements section is complete enough to move\
+          \ to the next project stage"
       client_requirements:
         type: "string"
         example: "Marriott are looking to expand into a city or town where they do\
@@ -1352,9 +1157,6 @@ definitions:
       address_line_3:
         type: "string"
         example: "Surrey"
-      address_postcode:
-        type: "string"
-        example: "SN1 1AA"
       client_considering_other_countries:
         type: "boolean"
         example: false
@@ -1366,14 +1168,36 @@ definitions:
         $ref: "#/definitions/StrategicDriverArray"
       uk_company:
         $ref: "#/definitions/CompanySlim"
-    description: "A Data Hub investment project Value object"
-  InvestmentTeam:
+      address_postcode:
+        type: "string"
+        example: "SN1 1AA"
+    description: "A Data Hub investment project"
+  InvestmentProjectsList:
+    type: "object"
+    required:
+    - "count"
+    - "results"
+    properties:
+      count:
+        type: "integer"
+        example: 30
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/InvestmentProjectSlim"
+  InvestmentProjectSlim:
     type: "object"
     properties:
       id:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Marriot Hotels - New hotel in Manchester"
+      project_code:
+        type: "string"
+        example: "P-01234567"
       project_manager_team:
         $ref: "#/definitions/AdviserTeam"
       project_manager:
@@ -1382,7 +1206,12 @@ definitions:
         $ref: "#/definitions/AdviserTeam"
       project_assurance_advisor:
         $ref: "#/definitions/Adviser"
-    description: "A Data Hub investment project Value object"
+      team_complete:
+        type: "boolean"
+        example: false
+        description: "Whether the team section is complete enough to move to the next\
+          \ project stage"
+    description: "A Data Hub investment project summary"
   BusinessActivity:
     type: "object"
     required:
@@ -1475,7 +1304,7 @@ definitions:
       name:
         type: "string"
         example: "Sector Advisory Services"
-  Phase:
+  Stage:
     type: "object"
     required:
     - "id"
@@ -1488,7 +1317,7 @@ definitions:
       name:
         type: "string"
         example: "Active"
-    description: "Project phase metadata"
+    description: "Project stage metadata"
   StrategicDriverArray:
     type: "array"
     items:
@@ -1723,7 +1552,7 @@ definitions:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      phase:
+      stage:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -1752,7 +1581,7 @@ definitions:
       field:
         type: "string"
         format: "uuid"
-  InvestmentValue_average_salary:
+  InvestmentProject_average_salary:
     required:
     - "id"
     - "name"
