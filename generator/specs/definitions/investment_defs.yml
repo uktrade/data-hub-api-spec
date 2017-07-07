@@ -98,6 +98,15 @@
       total_investment:
         type: integer
         example: 145000000
+      likelihood_of_landing:
+        type: integer
+        example: 60
+      priority:
+        type: string
+        enum:
+        - LOW
+        - MEDIUM
+        - HIGH
       total_investment_documents:
         $ref: '#/definitions/Documents'
       client_cannot_provide_total_investment:
