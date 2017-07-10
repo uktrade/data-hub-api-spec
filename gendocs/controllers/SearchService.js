@@ -44,9 +44,17 @@ exports.datahubSearch = function(args, res, next) {
     "investment_projects_invested_in" : {
       "count" : 30,
       "results" : [ {
+        "team_complete" : false,
         "name" : "Marriot Hotels - New hotel in Manchester",
+        "project_assurance_advisor" : "",
         "project_code" : "P-01234567",
-        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "project_manager" : "",
+        "project_manager_team" : {
+          "name" : "Sector Advisory Services",
+          "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        },
+        "project_assurance_team" : ""
       } ]
     },
     "business_type" : {
@@ -115,16 +123,13 @@ exports.datahubSearch = function(args, res, next) {
   } ],
   "investments" : [ {
     "estimated_land_date" : "2017-05-01",
-    "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
+    "total_investment" : 145000000,
+    "client_requirements" : "Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....",
     "approved_landed" : true,
-    "referral_source_activity_event" : "Moscow Hotels Expo 2017",
-    "fdi_type" : {
-      "name" : "Merger",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
+    "non_fdi_r_and_d_budget" : false,
+    "foreign_equity_investment_documents" : "",
     "operations_commenced_documents" : "",
     "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
-    "approved_high_value" : true,
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -132,42 +137,83 @@ exports.datahubSearch = function(args, res, next) {
     "client_contacts" : "",
     "client_relationship_manager" : "",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "number_new_jobs" : 100,
     "approved_non_fdi" : true,
     "sector" : "",
-    "fdi_type_documents" : "",
+    "total_investment_documents" : "",
     "approved_commitment_to_invest" : true,
-    "phase" : {
-      "name" : "Active",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "approved_fdi" : true,
-    "referral_source_activity_website" : {
-      "name" : "DIT Regional Website",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "actual_land_date" : "2018-11-01",
     "investor_company" : "",
+    "address_postcode" : "SN1 1AA",
     "project_code" : "P-01234567",
     "referral_source_activity" : {
       "name" : "Cold Call",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "r_and_d_budget_documents" : "",
+    "priority" : "aeiou",
     "project_shareable" : true,
+    "foreign_equity_investment" : 100000000,
+    "export_revenue_documents" : "",
     "referral_source_advisor" : "",
     "nda_signed" : false,
     "investment_type" : {
       "name" : "FDI",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "export_revenue" : false,
+    "uk_company" : "",
+    "name" : "Marriot Hotels - New hotel in Manchester",
+    "average_salary_documents" : "",
+    "client_considering_other_countries" : false,
+    "value_complete" : false,
+    "actual_land_date_documents" : "",
+    "business_activities" : "",
+    "requirements_complete" : false,
+    "likelihood_of_landing" : 60,
+    "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
+    "referral_source_activity_event" : "Moscow Hotels Expo 2017",
+    "fdi_type" : {
+      "name" : "Merger",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "client_cannot_provide_total_investment" : false,
+    "uk_region_locations" : "",
+    "client_cannot_provide_foreign_investment" : false,
+    "approved_high_value" : true,
+    "strategic_drivers" : "",
+    "number_safeguarded_jobs_documents" : "",
+    "r_and_d_budget" : false,
+    "address_line_1" : "19 Railway Cuttings",
+    "site_decided" : false,
+    "address_line_3" : "Surrey",
+    "address_line_2" : "East Cheam",
+    "fdi_type_documents" : "",
+    "referral_source_activity_website" : {
+      "name" : "DIT Regional Website",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "number_safeguarded_jobs" : 100,
+    "new_tech_to_uk_documents" : "",
+    "average_salary" : {
+      "name" : "£35,000",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "government_assistance" : false,
+    "competitor_countries" : "",
+    "stage" : {
+      "name" : "Active",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "new_tech_to_uk" : false,
     "non_fdi_type" : {
       "name" : "Advanced Engineering Supply Chain",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "name" : "Marriot Hotels - New hotel in Manchester",
     "approved_good_value" : true,
-    "actual_land_date_documents" : "",
-    "business_activities" : "",
-    "intermediate_company" : ""
+    "intermediate_company" : "",
+    "number_new_jobs_documents" : ""
   } ],
   "contacts" : [ {
     "archived_by" : "",
@@ -257,9 +303,17 @@ exports.datahubSearch_0 = function(args, res, next) {
     "investment_projects_invested_in" : {
       "count" : 30,
       "results" : [ {
+        "team_complete" : false,
         "name" : "Marriot Hotels - New hotel in Manchester",
+        "project_assurance_advisor" : "",
         "project_code" : "P-01234567",
-        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "project_manager" : "",
+        "project_manager_team" : {
+          "name" : "Sector Advisory Services",
+          "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        },
+        "project_assurance_team" : ""
       } ]
     },
     "business_type" : {
@@ -408,16 +462,13 @@ exports.datahubSearch_2 = function(args, res, next) {
   "count" : 30,
   "results" : [ {
     "estimated_land_date" : "2017-05-01",
-    "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
+    "total_investment" : 145000000,
+    "client_requirements" : "Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....",
     "approved_landed" : true,
-    "referral_source_activity_event" : "Moscow Hotels Expo 2017",
-    "fdi_type" : {
-      "name" : "Merger",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
+    "non_fdi_r_and_d_budget" : false,
+    "foreign_equity_investment_documents" : "",
     "operations_commenced_documents" : "",
     "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
-    "approved_high_value" : true,
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -429,48 +480,89 @@ exports.datahubSearch_2 = function(args, res, next) {
       "first_name" : "Annette"
     },
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "number_new_jobs" : 100,
     "approved_non_fdi" : true,
     "sector" : {
       "name" : "Advanced Engineering",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "fdi_type_documents" : "",
+    "total_investment_documents" : "",
     "approved_commitment_to_invest" : true,
-    "phase" : {
-      "name" : "Active",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "approved_fdi" : true,
-    "referral_source_activity_website" : {
-      "name" : "DIT Regional Website",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "actual_land_date" : "2018-11-01",
     "investor_company" : "",
+    "address_postcode" : "SN1 1AA",
     "project_code" : "P-01234567",
     "referral_source_activity" : {
       "name" : "Cold Call",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "r_and_d_budget_documents" : "",
+    "priority" : "aeiou",
     "project_shareable" : true,
+    "foreign_equity_investment" : 100000000,
+    "export_revenue_documents" : "",
     "referral_source_advisor" : "",
     "nda_signed" : false,
     "investment_type" : {
       "name" : "FDI",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "export_revenue" : false,
+    "uk_company" : "",
+    "name" : "Marriot Hotels - New hotel in Manchester",
+    "average_salary_documents" : "",
+    "client_considering_other_countries" : false,
+    "value_complete" : false,
+    "actual_land_date_documents" : "",
+    "business_activities" : "",
+    "requirements_complete" : false,
+    "likelihood_of_landing" : 60,
+    "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
+    "referral_source_activity_event" : "Moscow Hotels Expo 2017",
+    "fdi_type" : {
+      "name" : "Merger",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "client_cannot_provide_total_investment" : false,
+    "uk_region_locations" : "",
+    "client_cannot_provide_foreign_investment" : false,
+    "approved_high_value" : true,
+    "strategic_drivers" : "",
+    "number_safeguarded_jobs_documents" : "",
+    "r_and_d_budget" : false,
+    "address_line_1" : "19 Railway Cuttings",
+    "site_decided" : false,
+    "address_line_3" : "Surrey",
+    "address_line_2" : "East Cheam",
+    "fdi_type_documents" : "",
+    "referral_source_activity_website" : {
+      "name" : "DIT Regional Website",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "number_safeguarded_jobs" : 100,
+    "new_tech_to_uk_documents" : "",
+    "average_salary" : {
+      "name" : "£35,000",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "government_assistance" : false,
+    "competitor_countries" : "",
+    "stage" : {
+      "name" : "Active",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "new_tech_to_uk" : false,
     "non_fdi_type" : {
       "name" : "Advanced Engineering Supply Chain",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "name" : "Marriot Hotels - New hotel in Manchester",
     "approved_good_value" : true,
-    "actual_land_date_documents" : "",
-    "business_activities" : "",
     "intermediate_company" : {
       "name" : "Company Registered Name Ltd",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
-    }
+    },
+    "number_new_jobs_documents" : ""
   } ]
 };
   if (Object.keys(examples).length > 0) {

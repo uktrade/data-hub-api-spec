@@ -72,8 +72,8 @@
         example: 'Company has asked us to keep project quiet until official announcement'
       operations_commenced_documents:
         $ref: '#/definitions/Documents'
-      phase:
-        $ref: '#/definitions/Phase'
+      stage:
+        $ref: '#/definitions/Stage'
       project_code:
         type: string
         example: 'P-01234567'
@@ -95,9 +95,19 @@
       value_complete:
         type: boolean
         example: false
+        description: Whether the value section is complete enough to move to the next project stage
       total_investment:
         type: integer
         example: 145000000
+      likelihood_of_landing:
+        type: integer
+        example: 60
+      priority:
+        type: string
+        enum:
+        - 1_low
+        - 2_medium
+        - 3_high
       total_investment_documents:
         $ref: '#/definitions/Documents'
       client_cannot_provide_total_investment:
@@ -160,6 +170,7 @@
       requirements_complete:
         type: boolean
         example: false
+        description: Whether the requirements section is complete enough to move to the next project stage
       client_requirements:
         type: string
         example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
@@ -229,6 +240,10 @@
         $ref: '#/definitions/AdviserTeam'
       project_assurance_advisor:
         $ref: '#/definitions/Adviser'
+      team_complete:
+        type: boolean
+        example: false
+        description: Whether the team section is complete enough to move to the next project stage
   BusinessActivity:
     type: object
     required:
@@ -321,9 +336,9 @@
       name:
         type: string
         example: 'Sector Advisory Services'
-  Phase:
+  Stage:
     type: object
-    description: 'Project phase metadata'
+    description: 'Project stage metadata'
     required:
     - id
     - name

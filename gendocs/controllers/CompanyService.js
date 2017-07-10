@@ -98,9 +98,17 @@ exports.getcompany = function(args, res, next) {
   "investment_projects_invested_in" : {
     "count" : 30,
     "results" : [ {
+      "team_complete" : false,
       "name" : "Marriot Hotels - New hotel in Manchester",
+      "project_assurance_advisor" : "",
       "project_code" : "P-01234567",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "project_manager" : "",
+      "project_manager_team" : {
+        "name" : "Sector Advisory Services",
+        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      },
+      "project_assurance_team" : ""
     } ]
   },
   "business_type" : {
