@@ -203,7 +203,7 @@
         example: 'SN1 1AA'
       team_members:
         $ref: '#/definitions/InvestmentTeamMemberArray'
-        description: Read-only in this endpoint.
+        description: Additional team members assigned to this project. Read-only in this endpoint.
 
   InvestmentProjectsList:
     type: object
