@@ -190,6 +190,10 @@
       address_postcode:
         type: string
         example: 'SN1 1AA'
+      team_members:
+        $ref: '#/definitions/InvestmentTeamMemberArray'
+        description: Read-only in this endpoint.
+
   InvestmentProjectsList:
     type: object
     required:
@@ -349,6 +353,21 @@
       name:
         type: string
         example: 'Access to market'
+  InvestmentTeamMember:
+    type: object
+    required:
+      - adviser
+      - role
+    properties:
+      adviser:
+        $ref: '#/definitions/Adviser'
+      role:
+        type: string
+        example: 'Sector adviser'
+  InvestmentTeamMemberArray:
+    type: array
+    items:
+      $ref: '#/definitions/InvestmentTeamMember'
   InvestmentType:
     type: object
     description: 'Investment Type metadata - one of FDI, Non-FDI, Commitment to Invest'
