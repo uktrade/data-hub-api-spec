@@ -357,7 +357,7 @@
           description: input invalid
         404:
           description: investment is already archived or does not exist
-  /v3/metadata/business_activity:
+  /v3/metadata/business-activity:
     get:
       tags: 
       - investment
@@ -371,7 +371,7 @@
           description: metadata array
           schema:
             $ref: '#/definitions/BusinessActivities'
-  /v3/metadata/documentable_fields:
+  /v3/metadata/documentable-fields:
     get:
       tags:
       - investment
