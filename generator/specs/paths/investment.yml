@@ -164,6 +164,138 @@
           description: input invalid
         404:
           description: investment is already archived or does not exist
+  /v3/investment/{investmentId}/team-member:
+    post:
+      tags:
+      - investment
+      summary: Adds a team member to an investment project
+      operationId: addInvestmentTeamMember
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentTeamMember'
+      responses:
+        201:
+          description: team member added
+        400:
+          description: input invalid
+    delete:
+      tags:
+      - investment
+      summary: Removes all team members from an investment project
+      operationId: removeAllInvestmentTeamMember
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        204:
+          description: all team members removed
+        400:
+          description: input invalid
+  /v3/investment/{investmentId}/team-member/{adviserId}:
+    get:
+      tags:
+      - investment
+      summary: Gets a team member's role
+      operationId: getInvestmentTeamMember
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: path
+        name: adviserId
+        description: UUID of adviser
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentTeamMember'
+      responses:
+        200:
+          description: JSON formatted team member object
+          schema:
+            $ref: '#/definitions/InvestmentTeamMember'
+        404:
+          description: team member or investment project not found
+    patch:
+      tags:
+      - investment
+      summary: Updates a team member role
+      operationId: updateInvestmentTeamMember
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: path
+        name: adviserId
+        description: UUID of adviser
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/InvestmentTeamMember'
+      responses:
+        200:
+          description: team member updated
+        400:
+          description: input invalid
+    delete:
+      tags:
+      - investment
+      summary: Removes a team member from an investment project
+      operationId: removeInvestmentTeamMember
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: path
+        name: adviserId
+        description: UUID of adviser
+        required: true
+        type: string
+        format: uuid
+      responses:
+        204:
+          description: team member removed
+        400:
+          description: input invalid
   /v3/investment/{investmentId}/document:
     post:
       tags:
@@ -225,7 +357,7 @@
           description: input invalid
         404:
           description: investment is already archived or does not exist
-  /v3/metadata/business_activity:
+  /v3/metadata/business-activity:
     get:
       tags: 
       - investment
@@ -239,7 +371,7 @@
           description: metadata array
           schema:
             $ref: '#/definitions/BusinessActivities'
-  /v3/metadata/documentable_fields:
+  /v3/metadata/documentable-fields:
     get:
       tags:
       - investment
