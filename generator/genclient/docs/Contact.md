@@ -30,8 +30,8 @@ Name | Type | Description | Notes
 **contactable_by_email** | **bool** |  | [optional] 
 **contactable_by_phone** | **bool** |  | [optional] 
 **address_country** | [**Country**](Country.md) |  | [optional] 
-**advisor** | [**Advisor**](Advisor.md) |  | [optional] 
-**archived_by** | [**Advisor**](Advisor.md) |  | [optional] 
+**advisor** | [**Adviser**](Adviser.md) |  | [optional] 
+**archived_by** | [**Adviser**](Adviser.md) |  | [optional] 
 **company** | [**CompanySlim**](CompanySlim.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

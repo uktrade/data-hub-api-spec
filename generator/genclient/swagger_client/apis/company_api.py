@@ -108,7 +108,7 @@ class CompanyApi(object):
 
         collection_formats = {}
 
-        resource_path = '/company'.replace('{format}', 'json')
+        resource_path = '/v3/company'.replace('{format}', 'json')
         path_params = {}
 
         query_params = {}
@@ -121,6 +121,118 @@ class CompanyApi(object):
         body_params = None
         if 'company' in params:
             body_params = params['company']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def archive_company(self, company_id, body, **kwargs):
+        """
+        Archives a company with a reason
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.archive_company(company_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str company_id: UUID of company (required)
+        :param ArchiveReason body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.archive_company_with_http_info(company_id, body, **kwargs)
+        else:
+            (data) = self.archive_company_with_http_info(company_id, body, **kwargs)
+            return data
+
+    def archive_company_with_http_info(self, company_id, body, **kwargs):
+        """
+        Archives a company with a reason
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.archive_company_with_http_info(company_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str company_id: UUID of company (required)
+        :param ArchiveReason body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['company_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method archive_company" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'company_id' is set
+        if ('company_id' not in params) or (params['company_id'] is None):
+            raise ValueError("Missing the required parameter `company_id` when calling `archive_company`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `archive_company`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/company/{company_id}/archive'.replace('{format}', 'json')
+        path_params = {}
+        if 'company_id' in params:
+            path_params['company_id'] = params['company_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
             select_header_accept(['application/json'])
@@ -215,7 +327,7 @@ class CompanyApi(object):
 
         collection_formats = {}
 
-        resource_path = '/ch_company/{company_number}'.replace('{format}', 'json')
+        resource_path = '/v3/ch-company/{company_number}'.replace('{format}', 'json')
         path_params = {}
         if 'company_number' in params:
             path_params['company_number'] = params['company_number']
@@ -318,7 +430,7 @@ class CompanyApi(object):
 
         collection_formats = {}
 
-        resource_path = '/company/{companyId}'.replace('{format}', 'json')
+        resource_path = '/v3/company/{companyId}'.replace('{format}', 'json')
         path_params = {}
         if 'company_id' in params:
             path_params['companyId'] = params['company_id']
@@ -353,10 +465,115 @@ class CompanyApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
+    def unarchive_company(self, company_id, **kwargs):
+        """
+        Unarchives a company
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.unarchive_company(company_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str company_id: UUID of company (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.unarchive_company_with_http_info(company_id, **kwargs)
+        else:
+            (data) = self.unarchive_company_with_http_info(company_id, **kwargs)
+            return data
+
+    def unarchive_company_with_http_info(self, company_id, **kwargs):
+        """
+        Unarchives a company
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.unarchive_company_with_http_info(company_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str company_id: UUID of company (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['company_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method unarchive_company" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'company_id' is set
+        if ('company_id' not in params) or (params['company_id'] is None):
+            raise ValueError("Missing the required parameter `company_id` when calling `unarchive_company`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/company/{company_id}/unarchive'.replace('{format}', 'json')
+        path_params = {}
+        if 'company_id' in params:
+            path_params['company_id'] = params['company_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def update_company(self, company_id, company, **kwargs):
         """
-        updates a company, creating a new one if not found
-        Updates an existing company
+        updates a company
+        Updates an existing company, only changing fields specified in the request
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -383,8 +600,8 @@ class CompanyApi(object):
 
     def update_company_with_http_info(self, company_id, company, **kwargs):
         """
-        updates a company, creating a new one if not found
-        Updates an existing company
+        updates a company
+        Updates an existing company, only changing fields specified in the request
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -428,7 +645,7 @@ class CompanyApi(object):
 
         collection_formats = {}
 
-        resource_path = '/company/{companyId}'.replace('{format}', 'json')
+        resource_path = '/v3/company/{companyId}'.replace('{format}', 'json')
         path_params = {}
         if 'company_id' in params:
             path_params['companyId'] = params['company_id']
@@ -456,7 +673,7 @@ class CompanyApi(object):
         # Authentication setting
         auth_settings = ['OauthSecurity']
 
-        return self.api_client.call_api(resource_path, 'PUT',
+        return self.api_client.call_api(resource_path, 'PATCH',
                                         path_params,
                                         query_params,
                                         header_params,

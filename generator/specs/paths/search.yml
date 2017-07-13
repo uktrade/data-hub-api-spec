@@ -21,6 +21,11 @@
         description: which top level entity to search
         required: false
         default: 'company'
+      - in: query
+        name: sort
+        type: string
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
       responses:
         200:
           description: Search results
@@ -43,6 +48,11 @@
         required: true
         schema:
           $ref: '#/definitions/CompanyFilteredSearch'
+      - in: query
+        name: sort
+        type: string
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
       responses:
         200:
           description: Search results
@@ -65,6 +75,11 @@
         required: true
         schema:
           $ref: '#/definitions/ContactFilteredSearch'
+      - in: query
+        name: sort
+        type: string
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
       responses:
         200:
           description: Search results
@@ -87,6 +102,11 @@
         required: true
         schema:
           $ref: '#/definitions/InvestmentFilteredSearch'
+      - in: query
+        name: sort
+        type: string
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
       responses:
         200:
           description: Search results

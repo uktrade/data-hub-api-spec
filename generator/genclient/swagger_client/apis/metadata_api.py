@@ -40,7 +40,7 @@ class MetadataApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def metadata_business_actibvity(self, **kwargs):
+    def metadata_business_activity(self, **kwargs):
         """
         retrieves Business Activity metadata array
         This method makes a synchronous HTTP request by default. To make an
@@ -49,7 +49,7 @@ class MetadataApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.metadata_business_actibvity(callback=callback_function)
+        >>> thread = api.metadata_business_activity(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -59,12 +59,12 @@ class MetadataApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.metadata_business_actibvity_with_http_info(**kwargs)
+            return self.metadata_business_activity_with_http_info(**kwargs)
         else:
-            (data) = self.metadata_business_actibvity_with_http_info(**kwargs)
+            (data) = self.metadata_business_activity_with_http_info(**kwargs)
             return data
 
-    def metadata_business_actibvity_with_http_info(self, **kwargs):
+    def metadata_business_activity_with_http_info(self, **kwargs):
         """
         retrieves Business Activity metadata array
         This method makes a synchronous HTTP request by default. To make an
@@ -73,7 +73,7 @@ class MetadataApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.metadata_business_actibvity_with_http_info(callback=callback_function)
+        >>> thread = api.metadata_business_activity_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -93,14 +93,14 @@ class MetadataApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method metadata_business_actibvity" % key
+                    " to method metadata_business_activity" % key
                 )
             params[key] = val
         del params['kwargs']
 
         collection_formats = {}
 
-        resource_path = '/v3/metadata/business_activity'.replace('{format}', 'json')
+        resource_path = '/v3/metadata/business-activity'.replace('{format}', 'json')
         path_params = {}
 
         query_params = {}
@@ -115,10 +115,6 @@ class MetadataApi(object):
         header_params['Accept'] = self.api_client.\
             select_header_accept(['application/json'])
 
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
         # Authentication setting
         auth_settings = ['OauthSecurity']
 
@@ -130,6 +126,99 @@ class MetadataApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='BusinessActivities',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def metadata_documentable_fields(self, **kwargs):
+        """
+        retrieves the list of fields which require documents
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.metadata_documentable_fields(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :return: DocumentableFields
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.metadata_documentable_fields_with_http_info(**kwargs)
+        else:
+            (data) = self.metadata_documentable_fields_with_http_info(**kwargs)
+            return data
+
+    def metadata_documentable_fields_with_http_info(self, **kwargs):
+        """
+        retrieves the list of fields which require documents
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.metadata_documentable_fields_with_http_info(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :return: DocumentableFields
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method metadata_documentable_fields" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        resource_path = '/v3/metadata/documentable-fields'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DocumentableFields',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
