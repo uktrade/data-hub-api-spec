@@ -157,7 +157,7 @@ paths:
         409:
           description: "company already exists"
       x-swagger-router-controller: "Company"
-  /v3/ch_company/{company_number}:
+  /v3/ch-company/{company_number}:
     get:
       tags:
       - "company"
@@ -355,6 +355,143 @@ paths:
         404:
           description: "investment is already archived or does not exist"
       x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/team-member:
+    post:
+      tags:
+      - "investment"
+      summary: "Adds a team member to an investment project"
+      operationId: "addInvestmentTeamMember"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentTeamMember"
+      responses:
+        201:
+          description: "team member added"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
+    delete:
+      tags:
+      - "investment"
+      summary: "Removes all team members from an investment project"
+      operationId: "removeAllInvestmentTeamMember"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        204:
+          description: "all team members removed"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/team-member/{adviserId}:
+    get:
+      tags:
+      - "investment"
+      summary: "Gets a team member's role"
+      operationId: "getInvestmentTeamMember"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "adviserId"
+        in: "path"
+        description: "UUID of adviser"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentTeamMember"
+      responses:
+        200:
+          description: "JSON formatted team member object"
+          schema:
+            $ref: "#/definitions/InvestmentTeamMember"
+        404:
+          description: "team member or investment project not found"
+      x-swagger-router-controller: "Investment"
+    delete:
+      tags:
+      - "investment"
+      summary: "Removes a team member from an investment project"
+      operationId: "removeInvestmentTeamMember"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "adviserId"
+        in: "path"
+        description: "UUID of adviser"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        204:
+          description: "team member removed"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
+    patch:
+      tags:
+      - "investment"
+      summary: "Updates a team member role"
+      operationId: "updateInvestmentTeamMember"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "adviserId"
+        in: "path"
+        description: "UUID of adviser"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentTeamMember"
+      responses:
+        200:
+          description: "team member updated"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
   /v3/investment/{investmentId}/document:
     post:
       tags:
@@ -414,7 +551,7 @@ paths:
         404:
           description: "investment is already archived or does not exist"
       x-swagger-router-controller: "Investment"
-  /v3/metadata/business_activity:
+  /v3/metadata/business-activity:
     get:
       tags:
       - "investment"
@@ -430,7 +567,7 @@ paths:
           schema:
             $ref: "#/definitions/BusinessActivities"
       x-swagger-router-controller: "Investment"
-  /v3/metadata/documentable_fields:
+  /v3/metadata/documentable-fields:
     get:
       tags:
       - "investment"
@@ -469,6 +606,11 @@ paths:
         required: false
         type: "string"
         default: "company"
+      - name: "sort"
+        in: "query"
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
+        type: "string"
       responses:
         200:
           description: "Search results"
@@ -492,6 +634,11 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/CompanyFilteredSearch"
+      - name: "sort"
+        in: "query"
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
+        type: "string"
       responses:
         200:
           description: "Search results"
@@ -515,6 +662,11 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/ContactFilteredSearch"
+      - name: "sort"
+        in: "query"
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
+        type: "string"
       responses:
         200:
           description: "Search results"
@@ -538,6 +690,11 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/InvestmentFilteredSearch"
+      - name: "sort"
+        in: "query"
+        description: "sort field and direction (:asc|:desc) example: name:asc"
+        required: false
+        type: "string"
       responses:
         200:
           description: "Search results"
@@ -1171,6 +1328,10 @@ definitions:
       address_postcode:
         type: "string"
         example: "SN1 1AA"
+      team_members:
+        description: "Additional team members assigned to this project. Read-only\
+          \ in this endpoint."
+        $ref: "#/definitions/InvestmentTeamMemberArray"
     description: "A Data Hub investment project"
   InvestmentProjectsList:
     type: "object"
@@ -1336,6 +1497,21 @@ definitions:
         type: "string"
         example: "Access to market"
     description: "Strategic Driver metadata"
+  InvestmentTeamMember:
+    type: "object"
+    required:
+    - "adviser"
+    - "role"
+    properties:
+      adviser:
+        $ref: "#/definitions/Adviser"
+      role:
+        type: "string"
+        example: "Sector adviser"
+  InvestmentTeamMemberArray:
+    type: "array"
+    items:
+      $ref: "#/definitions/InvestmentTeamMember"
   InvestmentType:
     type: "object"
     required:

@@ -56,6 +56,7 @@ class SearchApi(object):
             for asynchronous request. (optional)
         :param str term: phrase to search for (required)
         :param str entity: which top level entity to search
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
         :return: AggregateSearchResults
                  If the method is called asynchronously,
                  returns the request thread.
@@ -83,12 +84,13 @@ class SearchApi(object):
             for asynchronous request. (optional)
         :param str term: phrase to search for (required)
         :param str entity: which top level entity to search
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
         :return: AggregateSearchResults
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['term', 'entity']
+        all_params = ['term', 'entity', 'sort']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -118,6 +120,8 @@ class SearchApi(object):
             query_params['term'] = params['term']
         if 'entity' in params:
             query_params['entity'] = params['entity']
+        if 'sort' in params:
+            query_params['sort'] = params['sort']
 
         header_params = {}
 
@@ -166,6 +170,7 @@ class SearchApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param CompanyFilteredSearch filter: (required)
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
         :return: CompanySearchResults
                  If the method is called asynchronously,
                  returns the request thread.
@@ -192,12 +197,13 @@ class SearchApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param CompanyFilteredSearch filter: (required)
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
         :return: CompanySearchResults
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['filter']
+        all_params = ['filter', 'sort']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -223,6 +229,8 @@ class SearchApi(object):
         path_params = {}
 
         query_params = {}
+        if 'sort' in params:
+            query_params['sort'] = params['sort']
 
         header_params = {}
 
@@ -273,6 +281,7 @@ class SearchApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param ContactFilteredSearch filter: (required)
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
         :return: ContactSearchResults
                  If the method is called asynchronously,
                  returns the request thread.
@@ -299,12 +308,13 @@ class SearchApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param ContactFilteredSearch filter: (required)
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
         :return: ContactSearchResults
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['filter']
+        all_params = ['filter', 'sort']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -330,6 +340,8 @@ class SearchApi(object):
         path_params = {}
 
         query_params = {}
+        if 'sort' in params:
+            query_params['sort'] = params['sort']
 
         header_params = {}
 
@@ -358,6 +370,117 @@ class SearchApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='ContactSearchResults',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def datahub_search_2(self, filter, **kwargs):
+        """
+        Basic search endpoint for Data Hub
+        Top level search for datahub
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.datahub_search_2(filter, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param InvestmentFilteredSearch filter: (required)
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
+        :return: InvestmentSearchResults
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.datahub_search_2_with_http_info(filter, **kwargs)
+        else:
+            (data) = self.datahub_search_2_with_http_info(filter, **kwargs)
+            return data
+
+    def datahub_search_2_with_http_info(self, filter, **kwargs):
+        """
+        Basic search endpoint for Data Hub
+        Top level search for datahub
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.datahub_search_2_with_http_info(filter, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param InvestmentFilteredSearch filter: (required)
+        :param str sort: sort field and direction (:asc|:desc) example: name:asc
+        :return: InvestmentSearchResults
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['filter', 'sort']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method datahub_search_2" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'filter' is set
+        if ('filter' not in params) or (params['filter'] is None):
+            raise ValueError("Missing the required parameter `filter` when calling `datahub_search_2`")
+
+
+        collection_formats = {}
+
+        resource_path = '/search/investment'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+        if 'sort' in params:
+            query_params['sort'] = params['sort']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'filter' in params:
+            body_params = params['filter']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='InvestmentSearchResults',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),

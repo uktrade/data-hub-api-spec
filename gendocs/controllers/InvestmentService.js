@@ -21,6 +21,17 @@ exports.addInvestmentDocument_0 = function(args, res, next) {
   res.end();
 }
 
+exports.addInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Adds a team member to an investment project
+   *
+   * investmentId UUID UUID of investment project
+   * body InvestmentTeamMember 
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
 exports.archiveInvestment = function(args, res, next) {
   /**
    * Archives an investment project with a reason
@@ -41,6 +52,32 @@ exports.createInvestment = function(args, res, next) {
    * no response value expected for this operation
    **/
   res.end();
+}
+
+exports.getInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Gets a team member's role
+   *
+   * investmentId UUID UUID of investment project
+   * adviserId UUID UUID of adviser
+   * body InvestmentTeamMember 
+   * returns InvestmentTeamMember
+   **/
+  var examples = {};
+  examples['application/json'] = {
+  "role" : "Sector adviser",
+  "adviser" : {
+    "last_name" : "Adviser",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "first_name" : "Annette"
+  }
+};
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
 }
 
 exports.getinvestment = function(args, res, next) {
@@ -149,6 +186,7 @@ exports.getinvestment = function(args, res, next) {
     "name" : "Advanced Engineering Supply Chain",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
+  "team_members" : "",
   "approved_good_value" : true,
   "intermediate_company" : {
     "name" : "Company Registered Name Ltd",
@@ -247,11 +285,44 @@ exports.patchInvestment = function(args, res, next) {
   res.end();
 }
 
+exports.removeAllInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Removes all team members from an investment project
+   *
+   * investmentId UUID UUID of investment project
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.removeInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Removes a team member from an investment project
+   *
+   * investmentId UUID UUID of investment project
+   * adviserId UUID UUID of adviser
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
 exports.unarchiveInvestment = function(args, res, next) {
   /**
    * Unarchives an investment project
    *
    * investmentId UUID UUID of investment project
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.updateInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Updates a team member role
+   *
+   * investmentId UUID UUID of investment project
+   * adviserId UUID UUID of adviser
+   * body InvestmentTeamMember 
    * no response value expected for this operation
    **/
   res.end();

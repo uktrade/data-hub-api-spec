@@ -71,40 +71,49 @@ All URIs are relative to *https://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CompanyApi* | [**add_company**](docs/CompanyApi.md#add_company) | **POST** /company | adds a Data Hub company
-*CompanyApi* | [**getchcompany**](docs/CompanyApi.md#getchcompany) | **GET** /ch_company/{company_number} | Returns a Companies House company from the Data Hub repository
-*CompanyApi* | [**getcompany**](docs/CompanyApi.md#getcompany) | **GET** /company/{companyId} | Returns a company from the Data Hub repository
-*CompanyApi* | [**update_company**](docs/CompanyApi.md#update_company) | **PUT** /company/{companyId} | updates a company, creating a new one if not found
-*InvestmentApi* | [**create_investment**](docs/InvestmentApi.md#create_investment) | **POST** /v3/investment/project | adds the initial stage of an investment project
-*InvestmentApi* | [**getinvestment**](docs/InvestmentApi.md#getinvestment) | **GET** /v3/investment/{investmentId}/project | Returns an investment project from the Data Hub repository
-*InvestmentApi* | [**getinvestmentrequirements**](docs/InvestmentApi.md#getinvestmentrequirements) | **GET** /v3/investment/{investmentId}/requirements | Returns the Requirements information associated with a project @TODO document WHY
-*InvestmentApi* | [**getinvestmentteam**](docs/InvestmentApi.md#getinvestmentteam) | **GET** /v3/investment/{investmentId}/team | Returns the team information associated with a project
-*InvestmentApi* | [**getinvestmentvalue**](docs/InvestmentApi.md#getinvestmentvalue) | **GET** /v3/investment/{investmentId}/value | Returns the Value information associated with a project
-*InvestmentApi* | [**getprojectsforcompany**](docs/InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment/project | returns a summary of investment projects for a company
-*InvestmentApi* | [**metadata_business_actibvity**](docs/InvestmentApi.md#metadata_business_actibvity) | **GET** /v3/metadata/business_activity | retrieves Business Activity metadata array
-*InvestmentApi* | [**patch_investment**](docs/InvestmentApi.md#patch_investment) | **PATCH** /v3/investment/{investmentId}/project | updates an investment project object, from a partial JSON object
-*InvestmentApi* | [**patch_investment_requirements**](docs/InvestmentApi.md#patch_investment_requirements) | **PATCH** /v3/investment/{investmentId}/requirements | updates an investment requirements object, from a partial JSON object
-*InvestmentApi* | [**patch_investment_team**](docs/InvestmentApi.md#patch_investment_team) | **PATCH** /v3/investment/{investmentId}/team | updates an investment team object, from a partial JSON object
-*InvestmentApi* | [**patch_investment_value**](docs/InvestmentApi.md#patch_investment_value) | **PATCH** /v3/investment/{investmentId}/value | updates an investment project value object, from a partial JSON object
-*MetadataApi* | [**metadata_business_actibvity**](docs/MetadataApi.md#metadata_business_actibvity) | **GET** /v3/metadata/business_activity | retrieves Business Activity metadata array
+*CompanyApi* | [**add_company**](docs/CompanyApi.md#add_company) | **POST** /v3/company | adds a Data Hub company
+*CompanyApi* | [**archive_company**](docs/CompanyApi.md#archive_company) | **POST** /v3/company/{company_id}/archive | Archives a company with a reason
+*CompanyApi* | [**getchcompany**](docs/CompanyApi.md#getchcompany) | **GET** /v3/ch-company/{company_number} | Returns a Companies House company from the Data Hub repository
+*CompanyApi* | [**getcompany**](docs/CompanyApi.md#getcompany) | **GET** /v3/company/{companyId} | Returns a company from the Data Hub repository
+*CompanyApi* | [**unarchive_company**](docs/CompanyApi.md#unarchive_company) | **POST** /v3/company/{company_id}/unarchive | Unarchives a company
+*CompanyApi* | [**update_company**](docs/CompanyApi.md#update_company) | **PATCH** /v3/company/{companyId} | updates a company
+*InvestmentApi* | [**add_investment_document**](docs/InvestmentApi.md#add_investment_document) | **POST** /v3/investment/{investmentId}/document | Tells the back end that a document has successfully uploaded and where to find it
+*InvestmentApi* | [**add_investment_document_0**](docs/InvestmentApi.md#add_investment_document_0) | **DELETE** /v3/investment/document/{documentId} | Tells the back end to forget a docuemtn associated with a project and a field
+*InvestmentApi* | [**add_investment_team_member**](docs/InvestmentApi.md#add_investment_team_member) | **POST** /v3/investment/{investmentId}/team-member | Adds a team member to an investment project
+*InvestmentApi* | [**archive_investment**](docs/InvestmentApi.md#archive_investment) | **POST** /v3/investment/{investmentId}/archive | Archives an investment project with a reason
+*InvestmentApi* | [**create_investment**](docs/InvestmentApi.md#create_investment) | **POST** /v3/investment | adds the initial stage of an investment project
+*InvestmentApi* | [**get_investment_team_member**](docs/InvestmentApi.md#get_investment_team_member) | **GET** /v3/investment/{investmentId}/team-member/{adviserId} | Gets a team member&#39;s role
+*InvestmentApi* | [**getinvestment**](docs/InvestmentApi.md#getinvestment) | **GET** /v3/investment/{investmentId} | Returns an investment project from the Data Hub repository
+*InvestmentApi* | [**getprojectsforcompany**](docs/InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment | returns a summary of investment projects for a company
+*InvestmentApi* | [**metadata_business_activity**](docs/InvestmentApi.md#metadata_business_activity) | **GET** /v3/metadata/business-activity | retrieves Business Activity metadata array
+*InvestmentApi* | [**metadata_documentable_fields**](docs/InvestmentApi.md#metadata_documentable_fields) | **GET** /v3/metadata/documentable-fields | retrieves the list of fields which require documents
+*InvestmentApi* | [**patch_investment**](docs/InvestmentApi.md#patch_investment) | **PATCH** /v3/investment/{investmentId} | updates an investment project object, from a partial JSON object
+*InvestmentApi* | [**remove_all_investment_team_member**](docs/InvestmentApi.md#remove_all_investment_team_member) | **DELETE** /v3/investment/{investmentId}/team-member | Removes all team members from an investment project
+*InvestmentApi* | [**remove_investment_team_member**](docs/InvestmentApi.md#remove_investment_team_member) | **DELETE** /v3/investment/{investmentId}/team-member/{adviserId} | Removes a team member from an investment project
+*InvestmentApi* | [**unarchive_investment**](docs/InvestmentApi.md#unarchive_investment) | **POST** /v3/investment/{investmentId}/unarchive | Unarchives an investment project
+*InvestmentApi* | [**update_investment_team_member**](docs/InvestmentApi.md#update_investment_team_member) | **PATCH** /v3/investment/{investmentId}/team-member/{adviserId} | Updates a team member role
+*MetadataApi* | [**metadata_business_activity**](docs/MetadataApi.md#metadata_business_activity) | **GET** /v3/metadata/business-activity | retrieves Business Activity metadata array
+*MetadataApi* | [**metadata_documentable_fields**](docs/MetadataApi.md#metadata_documentable_fields) | **GET** /v3/metadata/documentable-fields | retrieves the list of fields which require documents
 *SearchApi* | [**datahub_search**](docs/SearchApi.md#datahub_search) | **GET** /search | Basic search endpoint for Data Hub
 *SearchApi* | [**datahub_search_0**](docs/SearchApi.md#datahub_search_0) | **POST** /search/company | Basic search endpoint for Data Hub
 *SearchApi* | [**datahub_search_1**](docs/SearchApi.md#datahub_search_1) | **POST** /search/contact | Basic search endpoint for Data Hub
+*SearchApi* | [**datahub_search_2**](docs/SearchApi.md#datahub_search_2) | **POST** /search/investment | Basic search endpoint for Data Hub
 
 
 ## Documentation For Models
 
- - [Advisor](docs/Advisor.md)
- - [AdvisorTeam](docs/AdvisorTeam.md)
+ - [Adviser](docs/Adviser.md)
+ - [AdviserTeam](docs/AdviserTeam.md)
  - [AggregateSearchResults](docs/AggregateSearchResults.md)
  - [AggregateSearchResultsAggregates](docs/AggregateSearchResultsAggregates.md)
+ - [ArchiveReason](docs/ArchiveReason.md)
  - [BusinessActivities](docs/BusinessActivities.md)
  - [BusinessActivity](docs/BusinessActivity.md)
  - [BusinessType](docs/BusinessType.md)
  - [Classification](docs/Classification.md)
  - [CompaniesHouseCompany](docs/CompaniesHouseCompany.md)
- - [CompaniesHouseSlim](docs/CompaniesHouseSlim.md)
  - [Company](docs/Company.md)
+ - [CompanyExclusionFilters](docs/CompanyExclusionFilters.md)
  - [CompanyFilteredSearch](docs/CompanyFilteredSearch.md)
  - [CompanyKeyArray](docs/CompanyKeyArray.md)
  - [CompanySearchResults](docs/CompanySearchResults.md)
@@ -116,25 +125,29 @@ Class | Method | HTTP request | Description
  - [ContactTitle](docs/ContactTitle.md)
  - [Country](docs/Country.md)
  - [CountryArray](docs/CountryArray.md)
+ - [Document](docs/Document.md)
+ - [DocumentableFields](docs/DocumentableFields.md)
+ - [DocumentableFieldsInner](docs/DocumentableFieldsInner.md)
+ - [Documents](docs/Documents.md)
+ - [DocumentsInner](docs/DocumentsInner.md)
  - [EmployeeRange](docs/EmployeeRange.md)
  - [FDIType](docs/FDIType.md)
  - [HeadquarterType](docs/HeadquarterType.md)
- - [Interaction](docs/Interaction.md)
- - [InteractionArray](docs/InteractionArray.md)
+ - [InvestmentFilteredSearch](docs/InvestmentFilteredSearch.md)
  - [InvestmentProject](docs/InvestmentProject.md)
+ - [InvestmentProjectAverageSalary](docs/InvestmentProjectAverageSalary.md)
+ - [InvestmentProjectSlim](docs/InvestmentProjectSlim.md)
  - [InvestmentProjectsList](docs/InvestmentProjectsList.md)
- - [InvestmentRequirements](docs/InvestmentRequirements.md)
- - [InvestmentTeam](docs/InvestmentTeam.md)
+ - [InvestmentSearchResults](docs/InvestmentSearchResults.md)
+ - [InvestmentTeamMember](docs/InvestmentTeamMember.md)
+ - [InvestmentTeamMemberArray](docs/InvestmentTeamMemberArray.md)
  - [InvestmentType](docs/InvestmentType.md)
- - [InvestmentValue](docs/InvestmentValue.md)
- - [InvestmentValueAverageSalary](docs/InvestmentValueAverageSalary.md)
  - [NonFDIType](docs/NonFDIType.md)
- - [Phase](docs/Phase.md)
  - [ReferralSourceActivity](docs/ReferralSourceActivity.md)
- - [ReferralSourceActivityEvent](docs/ReferralSourceActivityEvent.md)
  - [ReferralSourceActivityMarketing](docs/ReferralSourceActivityMarketing.md)
  - [ReferralSourceActivityWebsite](docs/ReferralSourceActivityWebsite.md)
  - [Sector](docs/Sector.md)
+ - [Stage](docs/Stage.md)
  - [StrategicDriver](docs/StrategicDriver.md)
  - [StrategicDriverArray](docs/StrategicDriverArray.md)
  - [TurnoverRange](docs/TurnoverRange.md)

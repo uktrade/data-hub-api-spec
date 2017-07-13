@@ -40,6 +40,447 @@ class InvestmentApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
+    def add_investment_document(self, investment_id, document, **kwargs):
+        """
+        Tells the back end that a document has successfully uploaded and where to find it
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_investment_document(investment_id, document, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param Document document: object that contains the document URL and which the id of which section it belongs to (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.add_investment_document_with_http_info(investment_id, document, **kwargs)
+        else:
+            (data) = self.add_investment_document_with_http_info(investment_id, document, **kwargs)
+            return data
+
+    def add_investment_document_with_http_info(self, investment_id, document, **kwargs):
+        """
+        Tells the back end that a document has successfully uploaded and where to find it
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_investment_document_with_http_info(investment_id, document, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param Document document: object that contains the document URL and which the id of which section it belongs to (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['investment_id', 'document']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method add_investment_document" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'investment_id' is set
+        if ('investment_id' not in params) or (params['investment_id'] is None):
+            raise ValueError("Missing the required parameter `investment_id` when calling `add_investment_document`")
+        # verify the required parameter 'document' is set
+        if ('document' not in params) or (params['document'] is None):
+            raise ValueError("Missing the required parameter `document` when calling `add_investment_document`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/investment/{investmentId}/document'.replace('{format}', 'json')
+        path_params = {}
+        if 'investment_id' in params:
+            path_params['investmentId'] = params['investment_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'document' in params:
+            body_params = params['document']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def add_investment_document_0(self, document_id, **kwargs):
+        """
+        Tells the back end to forget a docuemtn associated with a project and a field
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_investment_document_0(document_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str document_id: id of the document to remove (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.add_investment_document_0_with_http_info(document_id, **kwargs)
+        else:
+            (data) = self.add_investment_document_0_with_http_info(document_id, **kwargs)
+            return data
+
+    def add_investment_document_0_with_http_info(self, document_id, **kwargs):
+        """
+        Tells the back end to forget a docuemtn associated with a project and a field
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_investment_document_0_with_http_info(document_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str document_id: id of the document to remove (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['document_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method add_investment_document_0" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'document_id' is set
+        if ('document_id' not in params) or (params['document_id'] is None):
+            raise ValueError("Missing the required parameter `document_id` when calling `add_investment_document_0`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/investment/document/{documentId}'.replace('{format}', 'json')
+        path_params = {}
+        if 'document_id' in params:
+            path_params['documentId'] = params['document_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'DELETE',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def add_investment_team_member(self, investment_id, body, **kwargs):
+        """
+        Adds a team member to an investment project
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_investment_team_member(investment_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param InvestmentTeamMember body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.add_investment_team_member_with_http_info(investment_id, body, **kwargs)
+        else:
+            (data) = self.add_investment_team_member_with_http_info(investment_id, body, **kwargs)
+            return data
+
+    def add_investment_team_member_with_http_info(self, investment_id, body, **kwargs):
+        """
+        Adds a team member to an investment project
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.add_investment_team_member_with_http_info(investment_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param InvestmentTeamMember body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['investment_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method add_investment_team_member" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'investment_id' is set
+        if ('investment_id' not in params) or (params['investment_id'] is None):
+            raise ValueError("Missing the required parameter `investment_id` when calling `add_investment_team_member`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `add_investment_team_member`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/investment/{investmentId}/team-member'.replace('{format}', 'json')
+        path_params = {}
+        if 'investment_id' in params:
+            path_params['investmentId'] = params['investment_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def archive_investment(self, investment_id, body, **kwargs):
+        """
+        Archives an investment project with a reason
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.archive_investment(investment_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param ArchiveReason body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.archive_investment_with_http_info(investment_id, body, **kwargs)
+        else:
+            (data) = self.archive_investment_with_http_info(investment_id, body, **kwargs)
+            return data
+
+    def archive_investment_with_http_info(self, investment_id, body, **kwargs):
+        """
+        Archives an investment project with a reason
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.archive_investment_with_http_info(investment_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param ArchiveReason body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['investment_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method archive_investment" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'investment_id' is set
+        if ('investment_id' not in params) or (params['investment_id'] is None):
+            raise ValueError("Missing the required parameter `investment_id` when calling `archive_investment`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `archive_investment`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/investment/{investmentId}/archive'.replace('{format}', 'json')
+        path_params = {}
+        if 'investment_id' in params:
+            path_params['investmentId'] = params['investment_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def create_investment(self, investment_stage_one, **kwargs):
         """
         adds the initial stage of an investment project
@@ -108,7 +549,7 @@ class InvestmentApi(object):
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/project'.replace('{format}', 'json')
+        resource_path = '/v3/investment'.replace('{format}', 'json')
         path_params = {}
 
         query_params = {}
@@ -140,6 +581,121 @@ class InvestmentApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def get_investment_team_member(self, investment_id, adviser_id, body, **kwargs):
+        """
+        Gets a team member's role
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.get_investment_team_member(investment_id, adviser_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param str adviser_id: UUID of adviser (required)
+        :param InvestmentTeamMember body: (required)
+        :return: InvestmentTeamMember
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.get_investment_team_member_with_http_info(investment_id, adviser_id, body, **kwargs)
+        else:
+            (data) = self.get_investment_team_member_with_http_info(investment_id, adviser_id, body, **kwargs)
+            return data
+
+    def get_investment_team_member_with_http_info(self, investment_id, adviser_id, body, **kwargs):
+        """
+        Gets a team member's role
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.get_investment_team_member_with_http_info(investment_id, adviser_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param str adviser_id: UUID of adviser (required)
+        :param InvestmentTeamMember body: (required)
+        :return: InvestmentTeamMember
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['investment_id', 'adviser_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_investment_team_member" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'investment_id' is set
+        if ('investment_id' not in params) or (params['investment_id'] is None):
+            raise ValueError("Missing the required parameter `investment_id` when calling `get_investment_team_member`")
+        # verify the required parameter 'adviser_id' is set
+        if ('adviser_id' not in params) or (params['adviser_id'] is None):
+            raise ValueError("Missing the required parameter `adviser_id` when calling `get_investment_team_member`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `get_investment_team_member`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/investment/{investmentId}/team-member/{adviserId}'.replace('{format}', 'json')
+        path_params = {}
+        if 'investment_id' in params:
+            path_params['investmentId'] = params['investment_id']
+        if 'adviser_id' in params:
+            path_params['adviserId'] = params['adviser_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='InvestmentTeamMember',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -215,7 +771,7 @@ class InvestmentApi(object):
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/{investmentId}/project'.replace('{format}', 'json')
+        resource_path = '/v3/investment/{investmentId}'.replace('{format}', 'json')
         path_params = {}
         if 'investment_id' in params:
             path_params['investmentId'] = params['investment_id']
@@ -243,315 +799,6 @@ class InvestmentApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='InvestmentProject',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
-    def getinvestmentrequirements(self, investment_id, **kwargs):
-        """
-        Returns the Requirements information associated with a project @TODO document WHY
-        Passing in the UUID of an investment project returns the value associated with it 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.getinvestmentrequirements(investment_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :return: InvestmentRequirements
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.getinvestmentrequirements_with_http_info(investment_id, **kwargs)
-        else:
-            (data) = self.getinvestmentrequirements_with_http_info(investment_id, **kwargs)
-            return data
-
-    def getinvestmentrequirements_with_http_info(self, investment_id, **kwargs):
-        """
-        Returns the Requirements information associated with a project @TODO document WHY
-        Passing in the UUID of an investment project returns the value associated with it 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.getinvestmentrequirements_with_http_info(investment_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :return: InvestmentRequirements
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['investment_id']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method getinvestmentrequirements" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'investment_id' is set
-        if ('investment_id' not in params) or (params['investment_id'] is None):
-            raise ValueError("Missing the required parameter `investment_id` when calling `getinvestmentrequirements`")
-
-
-        collection_formats = {}
-
-        resource_path = '/v3/investment/{investmentId}/requirements'.replace('{format}', 'json')
-        path_params = {}
-        if 'investment_id' in params:
-            path_params['investmentId'] = params['investment_id']
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # Authentication setting
-        auth_settings = ['OauthSecurity']
-
-        return self.api_client.call_api(resource_path, 'GET',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='InvestmentRequirements',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
-    def getinvestmentteam(self, investment_id, **kwargs):
-        """
-        Returns the team information associated with a project
-        Passing in the UUID of an investment project returns the team associated with it 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.getinvestmentteam(investment_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :return: InvestmentTeam
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.getinvestmentteam_with_http_info(investment_id, **kwargs)
-        else:
-            (data) = self.getinvestmentteam_with_http_info(investment_id, **kwargs)
-            return data
-
-    def getinvestmentteam_with_http_info(self, investment_id, **kwargs):
-        """
-        Returns the team information associated with a project
-        Passing in the UUID of an investment project returns the team associated with it 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.getinvestmentteam_with_http_info(investment_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :return: InvestmentTeam
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['investment_id']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method getinvestmentteam" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'investment_id' is set
-        if ('investment_id' not in params) or (params['investment_id'] is None):
-            raise ValueError("Missing the required parameter `investment_id` when calling `getinvestmentteam`")
-
-
-        collection_formats = {}
-
-        resource_path = '/v3/investment/{investmentId}/team'.replace('{format}', 'json')
-        path_params = {}
-        if 'investment_id' in params:
-            path_params['investmentId'] = params['investment_id']
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # Authentication setting
-        auth_settings = ['OauthSecurity']
-
-        return self.api_client.call_api(resource_path, 'GET',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='InvestmentTeam',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
-    def getinvestmentvalue(self, investment_id, **kwargs):
-        """
-        Returns the Value information associated with a project
-        Passing in the UUID of an investment project returns the value associated with it 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.getinvestmentvalue(investment_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :return: InvestmentValue
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.getinvestmentvalue_with_http_info(investment_id, **kwargs)
-        else:
-            (data) = self.getinvestmentvalue_with_http_info(investment_id, **kwargs)
-            return data
-
-    def getinvestmentvalue_with_http_info(self, investment_id, **kwargs):
-        """
-        Returns the Value information associated with a project
-        Passing in the UUID of an investment project returns the value associated with it 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.getinvestmentvalue_with_http_info(investment_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :return: InvestmentValue
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['investment_id']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method getinvestmentvalue" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'investment_id' is set
-        if ('investment_id' not in params) or (params['investment_id'] is None):
-            raise ValueError("Missing the required parameter `investment_id` when calling `getinvestmentvalue`")
-
-
-        collection_formats = {}
-
-        resource_path = '/v3/investment/{investmentId}/value'.replace('{format}', 'json')
-        path_params = {}
-        if 'investment_id' in params:
-            path_params['investmentId'] = params['investment_id']
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # Authentication setting
-        auth_settings = ['OauthSecurity']
-
-        return self.api_client.call_api(resource_path, 'GET',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='InvestmentValue',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -628,7 +875,7 @@ class InvestmentApi(object):
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/project'.replace('{format}', 'json')
+        resource_path = '/v3/investment'.replace('{format}', 'json')
         path_params = {}
 
         query_params = {}
@@ -667,7 +914,7 @@ class InvestmentApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def metadata_business_actibvity(self, **kwargs):
+    def metadata_business_activity(self, **kwargs):
         """
         retrieves Business Activity metadata array
         This method makes a synchronous HTTP request by default. To make an
@@ -676,7 +923,7 @@ class InvestmentApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.metadata_business_actibvity(callback=callback_function)
+        >>> thread = api.metadata_business_activity(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -686,12 +933,12 @@ class InvestmentApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.metadata_business_actibvity_with_http_info(**kwargs)
+            return self.metadata_business_activity_with_http_info(**kwargs)
         else:
-            (data) = self.metadata_business_actibvity_with_http_info(**kwargs)
+            (data) = self.metadata_business_activity_with_http_info(**kwargs)
             return data
 
-    def metadata_business_actibvity_with_http_info(self, **kwargs):
+    def metadata_business_activity_with_http_info(self, **kwargs):
         """
         retrieves Business Activity metadata array
         This method makes a synchronous HTTP request by default. To make an
@@ -700,7 +947,7 @@ class InvestmentApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.metadata_business_actibvity_with_http_info(callback=callback_function)
+        >>> thread = api.metadata_business_activity_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -720,14 +967,14 @@ class InvestmentApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method metadata_business_actibvity" % key
+                    " to method metadata_business_activity" % key
                 )
             params[key] = val
         del params['kwargs']
 
         collection_formats = {}
 
-        resource_path = '/v3/metadata/business_activity'.replace('{format}', 'json')
+        resource_path = '/v3/metadata/business-activity'.replace('{format}', 'json')
         path_params = {}
 
         query_params = {}
@@ -742,10 +989,6 @@ class InvestmentApi(object):
         header_params['Accept'] = self.api_client.\
             select_header_accept(['application/json'])
 
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
         # Authentication setting
         auth_settings = ['OauthSecurity']
 
@@ -757,6 +1000,99 @@ class InvestmentApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='BusinessActivities',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def metadata_documentable_fields(self, **kwargs):
+        """
+        retrieves the list of fields which require documents
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.metadata_documentable_fields(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :return: DocumentableFields
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.metadata_documentable_fields_with_http_info(**kwargs)
+        else:
+            (data) = self.metadata_documentable_fields_with_http_info(**kwargs)
+            return data
+
+    def metadata_documentable_fields_with_http_info(self, **kwargs):
+        """
+        retrieves the list of fields which require documents
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.metadata_documentable_fields_with_http_info(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :return: DocumentableFields
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method metadata_documentable_fields" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        resource_path = '/v3/metadata/documentable-fields'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DocumentableFields',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -837,7 +1173,7 @@ class InvestmentApi(object):
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/{investmentId}/project'.replace('{format}', 'json')
+        resource_path = '/v3/investment/{investmentId}'.replace('{format}', 'json')
         path_params = {}
         if 'investment_id' in params:
             path_params['investmentId'] = params['investment_id']
@@ -878,55 +1214,51 @@ class InvestmentApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def patch_investment_requirements(self, investment_id, investment, **kwargs):
+    def remove_all_investment_team_member(self, investment_id, **kwargs):
         """
-        updates an investment requirements object, from a partial JSON object
-        Patches an existing investment requirements object
+        Removes all team members from an investment project
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_investment_requirements(investment_id, investment, callback=callback_function)
+        >>> thread = api.remove_all_investment_team_member(investment_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param InvestmentRequirements investment: Investment project requirements data to update (required)
+        :param str investment_id: UUID of investment project (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.patch_investment_requirements_with_http_info(investment_id, investment, **kwargs)
+            return self.remove_all_investment_team_member_with_http_info(investment_id, **kwargs)
         else:
-            (data) = self.patch_investment_requirements_with_http_info(investment_id, investment, **kwargs)
+            (data) = self.remove_all_investment_team_member_with_http_info(investment_id, **kwargs)
             return data
 
-    def patch_investment_requirements_with_http_info(self, investment_id, investment, **kwargs):
+    def remove_all_investment_team_member_with_http_info(self, investment_id, **kwargs):
         """
-        updates an investment requirements object, from a partial JSON object
-        Patches an existing investment requirements object
+        Removes all team members from an investment project
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_investment_requirements_with_http_info(investment_id, investment, callback=callback_function)
+        >>> thread = api.remove_all_investment_team_member_with_http_info(investment_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param InvestmentRequirements investment: Investment project requirements data to update (required)
+        :param str investment_id: UUID of investment project (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['investment_id', 'investment']
+        all_params = ['investment_id']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -937,21 +1269,18 @@ class InvestmentApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method patch_investment_requirements" % key
+                    " to method remove_all_investment_team_member" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'investment_id' is set
         if ('investment_id' not in params) or (params['investment_id'] is None):
-            raise ValueError("Missing the required parameter `investment_id` when calling `patch_investment_requirements`")
-        # verify the required parameter 'investment' is set
-        if ('investment' not in params) or (params['investment'] is None):
-            raise ValueError("Missing the required parameter `investment` when calling `patch_investment_requirements`")
+            raise ValueError("Missing the required parameter `investment_id` when calling `remove_all_investment_team_member`")
 
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/{investmentId}/requirements'.replace('{format}', 'json')
+        resource_path = '/v3/investment/{investmentId}/team-member'.replace('{format}', 'json')
         path_params = {}
         if 'investment_id' in params:
             path_params['investmentId'] = params['investment_id']
@@ -964,20 +1293,10 @@ class InvestmentApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'investment' in params:
-            body_params = params['investment']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
         # Authentication setting
         auth_settings = ['OauthSecurity']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api(resource_path, 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -992,55 +1311,53 @@ class InvestmentApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def patch_investment_team(self, investment_id, investment, **kwargs):
+    def remove_investment_team_member(self, investment_id, adviser_id, **kwargs):
         """
-        updates an investment team object, from a partial JSON object
-        Patches an existing investment team object
+        Removes a team member from an investment project
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_investment_team(investment_id, investment, callback=callback_function)
+        >>> thread = api.remove_investment_team_member(investment_id, adviser_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param InvestmentTeam investment: Investment project  data to update (required)
+        :param str investment_id: UUID of investment project (required)
+        :param str adviser_id: UUID of adviser (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.patch_investment_team_with_http_info(investment_id, investment, **kwargs)
+            return self.remove_investment_team_member_with_http_info(investment_id, adviser_id, **kwargs)
         else:
-            (data) = self.patch_investment_team_with_http_info(investment_id, investment, **kwargs)
+            (data) = self.remove_investment_team_member_with_http_info(investment_id, adviser_id, **kwargs)
             return data
 
-    def patch_investment_team_with_http_info(self, investment_id, investment, **kwargs):
+    def remove_investment_team_member_with_http_info(self, investment_id, adviser_id, **kwargs):
         """
-        updates an investment team object, from a partial JSON object
-        Patches an existing investment team object
+        Removes a team member from an investment project
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_investment_team_with_http_info(investment_id, investment, callback=callback_function)
+        >>> thread = api.remove_investment_team_member_with_http_info(investment_id, adviser_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param InvestmentTeam investment: Investment project  data to update (required)
+        :param str investment_id: UUID of investment project (required)
+        :param str adviser_id: UUID of adviser (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['investment_id', 'investment']
+        all_params = ['investment_id', 'adviser_id']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1051,24 +1368,26 @@ class InvestmentApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method patch_investment_team" % key
+                    " to method remove_investment_team_member" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'investment_id' is set
         if ('investment_id' not in params) or (params['investment_id'] is None):
-            raise ValueError("Missing the required parameter `investment_id` when calling `patch_investment_team`")
-        # verify the required parameter 'investment' is set
-        if ('investment' not in params) or (params['investment'] is None):
-            raise ValueError("Missing the required parameter `investment` when calling `patch_investment_team`")
+            raise ValueError("Missing the required parameter `investment_id` when calling `remove_investment_team_member`")
+        # verify the required parameter 'adviser_id' is set
+        if ('adviser_id' not in params) or (params['adviser_id'] is None):
+            raise ValueError("Missing the required parameter `adviser_id` when calling `remove_investment_team_member`")
 
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/{investmentId}/team'.replace('{format}', 'json')
+        resource_path = '/v3/investment/{investmentId}/team-member/{adviserId}'.replace('{format}', 'json')
         path_params = {}
         if 'investment_id' in params:
             path_params['investmentId'] = params['investment_id']
+        if 'adviser_id' in params:
+            path_params['adviserId'] = params['adviser_id']
 
         query_params = {}
 
@@ -1078,20 +1397,10 @@ class InvestmentApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'investment' in params:
-            body_params = params['investment']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
         # Authentication setting
         auth_settings = ['OauthSecurity']
 
-        return self.api_client.call_api(resource_path, 'PATCH',
+        return self.api_client.call_api(resource_path, 'DELETE',
                                         path_params,
                                         query_params,
                                         header_params,
@@ -1106,55 +1415,51 @@ class InvestmentApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def patch_investment_value(self, investment_id, investment, **kwargs):
+    def unarchive_investment(self, investment_id, **kwargs):
         """
-        updates an investment project value object, from a partial JSON object
-        Patches an existing investment project value object
+        Unarchives an investment project
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_investment_value(investment_id, investment, callback=callback_function)
+        >>> thread = api.unarchive_investment(investment_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param InvestmentValue investment: Investment project value data to update (required)
+        :param str investment_id: UUID of investment project (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.patch_investment_value_with_http_info(investment_id, investment, **kwargs)
+            return self.unarchive_investment_with_http_info(investment_id, **kwargs)
         else:
-            (data) = self.patch_investment_value_with_http_info(investment_id, investment, **kwargs)
+            (data) = self.unarchive_investment_with_http_info(investment_id, **kwargs)
             return data
 
-    def patch_investment_value_with_http_info(self, investment_id, investment, **kwargs):
+    def unarchive_investment_with_http_info(self, investment_id, **kwargs):
         """
-        updates an investment project value object, from a partial JSON object
-        Patches an existing investment project value object
+        Unarchives an investment project
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.patch_investment_value_with_http_info(investment_id, investment, callback=callback_function)
+        >>> thread = api.unarchive_investment_with_http_info(investment_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str investment_id: UUID for a Data Hub investment project (required)
-        :param InvestmentValue investment: Investment project value data to update (required)
+        :param str investment_id: UUID of investment project (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['investment_id', 'investment']
+        all_params = ['investment_id']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1165,21 +1470,18 @@ class InvestmentApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method patch_investment_value" % key
+                    " to method unarchive_investment" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'investment_id' is set
         if ('investment_id' not in params) or (params['investment_id'] is None):
-            raise ValueError("Missing the required parameter `investment_id` when calling `patch_investment_value`")
-        # verify the required parameter 'investment' is set
-        if ('investment' not in params) or (params['investment'] is None):
-            raise ValueError("Missing the required parameter `investment` when calling `patch_investment_value`")
+            raise ValueError("Missing the required parameter `investment_id` when calling `unarchive_investment`")
 
 
         collection_formats = {}
 
-        resource_path = '/v3/investment/{investmentId}/value'.replace('{format}', 'json')
+        resource_path = '/v3/investment/{investmentId}/unarchive'.replace('{format}', 'json')
         path_params = {}
         if 'investment_id' in params:
             path_params['investmentId'] = params['investment_id']
@@ -1192,8 +1494,125 @@ class InvestmentApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'investment' in params:
-            body_params = params['investment']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['OauthSecurity']
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type=None,
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def update_investment_team_member(self, investment_id, adviser_id, body, **kwargs):
+        """
+        Updates a team member role
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_investment_team_member(investment_id, adviser_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param str adviser_id: UUID of adviser (required)
+        :param InvestmentTeamMember body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.update_investment_team_member_with_http_info(investment_id, adviser_id, body, **kwargs)
+        else:
+            (data) = self.update_investment_team_member_with_http_info(investment_id, adviser_id, body, **kwargs)
+            return data
+
+    def update_investment_team_member_with_http_info(self, investment_id, adviser_id, body, **kwargs):
+        """
+        Updates a team member role
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_investment_team_member_with_http_info(investment_id, adviser_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str investment_id: UUID of investment project (required)
+        :param str adviser_id: UUID of adviser (required)
+        :param InvestmentTeamMember body: (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['investment_id', 'adviser_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_investment_team_member" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'investment_id' is set
+        if ('investment_id' not in params) or (params['investment_id'] is None):
+            raise ValueError("Missing the required parameter `investment_id` when calling `update_investment_team_member`")
+        # verify the required parameter 'adviser_id' is set
+        if ('adviser_id' not in params) or (params['adviser_id'] is None):
+            raise ValueError("Missing the required parameter `adviser_id` when calling `update_investment_team_member`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_investment_team_member`")
+
+
+        collection_formats = {}
+
+        resource_path = '/v3/investment/{investmentId}/team-member/{adviserId}'.replace('{format}', 'json')
+        path_params = {}
+        if 'investment_id' in params:
+            path_params['investmentId'] = params['investment_id']
+        if 'adviser_id' in params:
+            path_params['adviserId'] = params['adviser_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
             select_header_accept(['application/json'])

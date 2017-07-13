@@ -58,8 +58,8 @@ class Contact(object):
             'contactable_by_email': 'bool',
             'contactable_by_phone': 'bool',
             'address_country': 'Country',
-            'advisor': 'Advisor',
-            'archived_by': 'Advisor',
+            'advisor': 'Adviser',
+            'archived_by': 'Adviser',
             'company': 'CompanySlim'
         }
 
@@ -706,7 +706,7 @@ class Contact(object):
         Gets the advisor of this Contact.
 
         :return: The advisor of this Contact.
-        :rtype: Advisor
+        :rtype: Adviser
         """
         return self._advisor
 
@@ -716,7 +716,7 @@ class Contact(object):
         Sets the advisor of this Contact.
 
         :param advisor: The advisor of this Contact.
-        :type: Advisor
+        :type: Adviser
         """
 
         self._advisor = advisor
@@ -727,7 +727,7 @@ class Contact(object):
         Gets the archived_by of this Contact.
 
         :return: The archived_by of this Contact.
-        :rtype: Advisor
+        :rtype: Adviser
         """
         return self._archived_by
 
@@ -737,7 +737,7 @@ class Contact(object):
         Sets the archived_by of this Contact.
 
         :param archived_by: The archived_by of this Contact.
-        :type: Advisor
+        :type: Adviser
         """
 
         self._archived_by = archived_by

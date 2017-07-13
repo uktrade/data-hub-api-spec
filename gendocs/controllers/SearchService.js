@@ -7,6 +7,7 @@ exports.datahubSearch = function(args, res, next) {
    *
    * term String phrase to search for
    * entity String which top level entity to search (optional)
+   * sort String sort field and direction (:asc|:desc) example: name:asc (optional)
    * returns AggregateSearchResults
    **/
   var examples = {};
@@ -211,6 +212,7 @@ exports.datahubSearch = function(args, res, next) {
       "name" : "Advanced Engineering Supply Chain",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "team_members" : "",
     "approved_good_value" : true,
     "intermediate_company" : "",
     "number_new_jobs_documents" : ""
@@ -265,6 +267,7 @@ exports.datahubSearch_0 = function(args, res, next) {
    * Top level search for datahub
    *
    * filter CompanyFilteredSearch 
+   * sort String sort field and direction (:asc|:desc) example: name:asc (optional)
    * returns CompanySearchResults
    **/
   var examples = {};
@@ -390,6 +393,7 @@ exports.datahubSearch_1 = function(args, res, next) {
    * Top level search for datahub
    *
    * filter ContactFilteredSearch 
+   * sort String sort field and direction (:asc|:desc) example: name:asc (optional)
    * returns ContactSearchResults
    **/
   var examples = {};
@@ -455,6 +459,7 @@ exports.datahubSearch_2 = function(args, res, next) {
    * Top level search for datahub
    *
    * filter InvestmentFilteredSearch 
+   * sort String sort field and direction (:asc|:desc) example: name:asc (optional)
    * returns InvestmentSearchResults
    **/
   var examples = {};
@@ -557,6 +562,7 @@ exports.datahubSearch_2 = function(args, res, next) {
       "name" : "Advanced Engineering Supply Chain",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "team_members" : "",
     "approved_good_value" : true,
     "intermediate_company" : {
       "name" : "Company Registered Name Ltd",

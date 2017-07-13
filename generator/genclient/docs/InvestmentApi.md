@@ -4,18 +4,220 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_investment**](InvestmentApi.md#create_investment) | **POST** /v3/investment/project | adds the initial stage of an investment project
-[**getinvestment**](InvestmentApi.md#getinvestment) | **GET** /v3/investment/{investmentId}/project | Returns an investment project from the Data Hub repository
-[**getinvestmentrequirements**](InvestmentApi.md#getinvestmentrequirements) | **GET** /v3/investment/{investmentId}/requirements | Returns the Requirements information associated with a project @TODO document WHY
-[**getinvestmentteam**](InvestmentApi.md#getinvestmentteam) | **GET** /v3/investment/{investmentId}/team | Returns the team information associated with a project
-[**getinvestmentvalue**](InvestmentApi.md#getinvestmentvalue) | **GET** /v3/investment/{investmentId}/value | Returns the Value information associated with a project
-[**getprojectsforcompany**](InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment/project | returns a summary of investment projects for a company
-[**metadata_business_actibvity**](InvestmentApi.md#metadata_business_actibvity) | **GET** /v3/metadata/business_activity | retrieves Business Activity metadata array
-[**patch_investment**](InvestmentApi.md#patch_investment) | **PATCH** /v3/investment/{investmentId}/project | updates an investment project object, from a partial JSON object
-[**patch_investment_requirements**](InvestmentApi.md#patch_investment_requirements) | **PATCH** /v3/investment/{investmentId}/requirements | updates an investment requirements object, from a partial JSON object
-[**patch_investment_team**](InvestmentApi.md#patch_investment_team) | **PATCH** /v3/investment/{investmentId}/team | updates an investment team object, from a partial JSON object
-[**patch_investment_value**](InvestmentApi.md#patch_investment_value) | **PATCH** /v3/investment/{investmentId}/value | updates an investment project value object, from a partial JSON object
+[**add_investment_document**](InvestmentApi.md#add_investment_document) | **POST** /v3/investment/{investmentId}/document | Tells the back end that a document has successfully uploaded and where to find it
+[**add_investment_document_0**](InvestmentApi.md#add_investment_document_0) | **DELETE** /v3/investment/document/{documentId} | Tells the back end to forget a docuemtn associated with a project and a field
+[**add_investment_team_member**](InvestmentApi.md#add_investment_team_member) | **POST** /v3/investment/{investmentId}/team-member | Adds a team member to an investment project
+[**archive_investment**](InvestmentApi.md#archive_investment) | **POST** /v3/investment/{investmentId}/archive | Archives an investment project with a reason
+[**create_investment**](InvestmentApi.md#create_investment) | **POST** /v3/investment | adds the initial stage of an investment project
+[**get_investment_team_member**](InvestmentApi.md#get_investment_team_member) | **GET** /v3/investment/{investmentId}/team-member/{adviserId} | Gets a team member&#39;s role
+[**getinvestment**](InvestmentApi.md#getinvestment) | **GET** /v3/investment/{investmentId} | Returns an investment project from the Data Hub repository
+[**getprojectsforcompany**](InvestmentApi.md#getprojectsforcompany) | **GET** /v3/investment | returns a summary of investment projects for a company
+[**metadata_business_activity**](InvestmentApi.md#metadata_business_activity) | **GET** /v3/metadata/business-activity | retrieves Business Activity metadata array
+[**metadata_documentable_fields**](InvestmentApi.md#metadata_documentable_fields) | **GET** /v3/metadata/documentable-fields | retrieves the list of fields which require documents
+[**patch_investment**](InvestmentApi.md#patch_investment) | **PATCH** /v3/investment/{investmentId} | updates an investment project object, from a partial JSON object
+[**remove_all_investment_team_member**](InvestmentApi.md#remove_all_investment_team_member) | **DELETE** /v3/investment/{investmentId}/team-member | Removes all team members from an investment project
+[**remove_investment_team_member**](InvestmentApi.md#remove_investment_team_member) | **DELETE** /v3/investment/{investmentId}/team-member/{adviserId} | Removes a team member from an investment project
+[**unarchive_investment**](InvestmentApi.md#unarchive_investment) | **POST** /v3/investment/{investmentId}/unarchive | Unarchives an investment project
+[**update_investment_team_member**](InvestmentApi.md#update_investment_team_member) | **PATCH** /v3/investment/{investmentId}/team-member/{adviserId} | Updates a team member role
 
+
+# **add_investment_document**
+> add_investment_document(investment_id, document)
+
+Tells the back end that a document has successfully uploaded and where to find it
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+investment_id = 'investment_id_example' # str | UUID of investment project
+document = swagger_client.Document() # Document | object that contains the document URL and which the id of which section it belongs to
+
+try: 
+    # Tells the back end that a document has successfully uploaded and where to find it
+    api_instance.add_investment_document(investment_id, document)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->add_investment_document: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **investment_id** | **str**| UUID of investment project | 
+ **document** | [**Document**](Document.md)| object that contains the document URL and which the id of which section it belongs to | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_investment_document_0**
+> add_investment_document_0(document_id)
+
+Tells the back end to forget a docuemtn associated with a project and a field
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+document_id = 'document_id_example' # str | id of the document to remove
+
+try: 
+    # Tells the back end to forget a docuemtn associated with a project and a field
+    api_instance.add_investment_document_0(document_id)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->add_investment_document_0: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| id of the document to remove | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_investment_team_member**
+> add_investment_team_member(investment_id, body)
+
+Adds a team member to an investment project
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+investment_id = 'investment_id_example' # str | UUID of investment project
+body = swagger_client.InvestmentTeamMember() # InvestmentTeamMember | 
+
+try: 
+    # Adds a team member to an investment project
+    api_instance.add_investment_team_member(investment_id, body)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->add_investment_team_member: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **investment_id** | **str**| UUID of investment project | 
+ **body** | [**InvestmentTeamMember**](InvestmentTeamMember.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **archive_investment**
+> archive_investment(investment_id, body)
+
+Archives an investment project with a reason
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+investment_id = 'investment_id_example' # str | UUID of investment project
+body = swagger_client.ArchiveReason() # ArchiveReason | 
+
+try: 
+    # Archives an investment project with a reason
+    api_instance.archive_investment(investment_id, body)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->archive_investment: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **investment_id** | **str**| UUID of investment project | 
+ **body** | [**ArchiveReason**](ArchiveReason.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_investment**
 > create_investment(investment_stage_one)
@@ -67,6 +269,59 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_investment_team_member**
+> InvestmentTeamMember get_investment_team_member(investment_id, adviser_id, body)
+
+Gets a team member's role
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+investment_id = 'investment_id_example' # str | UUID of investment project
+adviser_id = 'adviser_id_example' # str | UUID of adviser
+body = swagger_client.InvestmentTeamMember() # InvestmentTeamMember | 
+
+try: 
+    # Gets a team member's role
+    api_response = api_instance.get_investment_team_member(investment_id, adviser_id, body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->get_investment_team_member: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **investment_id** | **str**| UUID of investment project | 
+ **adviser_id** | **str**| UUID of adviser | 
+ **body** | [**InvestmentTeamMember**](InvestmentTeamMember.md)|  | 
+
+### Return type
+
+[**InvestmentTeamMember**](InvestmentTeamMember.md)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getinvestment**
 > InvestmentProject getinvestment(investment_id)
 
@@ -106,159 +361,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**InvestmentProject**](InvestmentProject.md)
-
-### Authorization
-
-[OauthSecurity](../README.md#OauthSecurity)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getinvestmentrequirements**
-> InvestmentRequirements getinvestmentrequirements(investment_id)
-
-Returns the Requirements information associated with a project @TODO document WHY
-
-Passing in the UUID of an investment project returns the value associated with it 
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: OauthSecurity
-swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = swagger_client.InvestmentApi()
-investment_id = 'investment_id_example' # str | UUID for a Data Hub investment project
-
-try: 
-    # Returns the Requirements information associated with a project @TODO document WHY
-    api_response = api_instance.getinvestmentrequirements(investment_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InvestmentApi->getinvestmentrequirements: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **investment_id** | **str**| UUID for a Data Hub investment project | 
-
-### Return type
-
-[**InvestmentRequirements**](InvestmentRequirements.md)
-
-### Authorization
-
-[OauthSecurity](../README.md#OauthSecurity)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getinvestmentteam**
-> InvestmentTeam getinvestmentteam(investment_id)
-
-Returns the team information associated with a project
-
-Passing in the UUID of an investment project returns the team associated with it 
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: OauthSecurity
-swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = swagger_client.InvestmentApi()
-investment_id = 'investment_id_example' # str | UUID for a Data Hub investment project
-
-try: 
-    # Returns the team information associated with a project
-    api_response = api_instance.getinvestmentteam(investment_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InvestmentApi->getinvestmentteam: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **investment_id** | **str**| UUID for a Data Hub investment project | 
-
-### Return type
-
-[**InvestmentTeam**](InvestmentTeam.md)
-
-### Authorization
-
-[OauthSecurity](../README.md#OauthSecurity)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getinvestmentvalue**
-> InvestmentValue getinvestmentvalue(investment_id)
-
-Returns the Value information associated with a project
-
-Passing in the UUID of an investment project returns the value associated with it 
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: OauthSecurity
-swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = swagger_client.InvestmentApi()
-investment_id = 'investment_id_example' # str | UUID for a Data Hub investment project
-
-try: 
-    # Returns the Value information associated with a project
-    api_response = api_instance.getinvestmentvalue(investment_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling InvestmentApi->getinvestmentvalue: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **investment_id** | **str**| UUID for a Data Hub investment project | 
-
-### Return type
-
-[**InvestmentValue**](InvestmentValue.md)
 
 ### Authorization
 
@@ -326,8 +428,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **metadata_business_actibvity**
-> BusinessActivities metadata_business_actibvity()
+# **metadata_business_activity**
+> BusinessActivities metadata_business_activity()
 
 retrieves Business Activity metadata array
 
@@ -347,10 +449,10 @@ api_instance = swagger_client.InvestmentApi()
 
 try: 
     # retrieves Business Activity metadata array
-    api_response = api_instance.metadata_business_actibvity()
+    api_response = api_instance.metadata_business_activity()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling InvestmentApi->metadata_business_actibvity: %s\n" % e)
+    print("Exception when calling InvestmentApi->metadata_business_activity: %s\n" % e)
 ```
 
 ### Parameters
@@ -366,7 +468,52 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **metadata_documentable_fields**
+> DocumentableFields metadata_documentable_fields()
+
+retrieves the list of fields which require documents
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+
+try: 
+    # retrieves the list of fields which require documents
+    api_response = api_instance.metadata_documentable_fields()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->metadata_documentable_fields: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**DocumentableFields**](DocumentableFields.md)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -423,12 +570,10 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **patch_investment_requirements**
-> patch_investment_requirements(investment_id, investment)
+# **remove_all_investment_team_member**
+> remove_all_investment_team_member(investment_id)
 
-updates an investment requirements object, from a partial JSON object
-
-Patches an existing investment requirements object
+Removes all team members from an investment project
 
 ### Example 
 ```python
@@ -443,22 +588,118 @@ swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.InvestmentApi()
-investment_id = 'investment_id_example' # str | UUID for a Data Hub investment project
-investment = swagger_client.InvestmentRequirements() # InvestmentRequirements | Investment project requirements data to update
+investment_id = 'investment_id_example' # str | UUID of investment project
 
 try: 
-    # updates an investment requirements object, from a partial JSON object
-    api_instance.patch_investment_requirements(investment_id, investment)
+    # Removes all team members from an investment project
+    api_instance.remove_all_investment_team_member(investment_id)
 except ApiException as e:
-    print("Exception when calling InvestmentApi->patch_investment_requirements: %s\n" % e)
+    print("Exception when calling InvestmentApi->remove_all_investment_team_member: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **investment_id** | **str**| UUID for a Data Hub investment project | 
- **investment** | [**InvestmentRequirements**](InvestmentRequirements.md)| Investment project requirements data to update | 
+ **investment_id** | **str**| UUID of investment project | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **remove_investment_team_member**
+> remove_investment_team_member(investment_id, adviser_id)
+
+Removes a team member from an investment project
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+investment_id = 'investment_id_example' # str | UUID of investment project
+adviser_id = 'adviser_id_example' # str | UUID of adviser
+
+try: 
+    # Removes a team member from an investment project
+    api_instance.remove_investment_team_member(investment_id, adviser_id)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->remove_investment_team_member: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **investment_id** | **str**| UUID of investment project | 
+ **adviser_id** | **str**| UUID of adviser | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OauthSecurity](../README.md#OauthSecurity)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **unarchive_investment**
+> unarchive_investment(investment_id)
+
+Unarchives an investment project
+
+### Example 
+```python
+from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OauthSecurity
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.InvestmentApi()
+investment_id = 'investment_id_example' # str | UUID of investment project
+
+try: 
+    # Unarchives an investment project
+    api_instance.unarchive_investment(investment_id)
+except ApiException as e:
+    print("Exception when calling InvestmentApi->unarchive_investment: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **investment_id** | **str**| UUID of investment project | 
 
 ### Return type
 
@@ -475,12 +716,10 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **patch_investment_team**
-> patch_investment_team(investment_id, investment)
+# **update_investment_team_member**
+> update_investment_team_member(investment_id, adviser_id, body)
 
-updates an investment team object, from a partial JSON object
-
-Patches an existing investment team object
+Updates a team member role
 
 ### Example 
 ```python
@@ -495,74 +734,24 @@ swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = swagger_client.InvestmentApi()
-investment_id = 'investment_id_example' # str | UUID for a Data Hub investment project
-investment = swagger_client.InvestmentTeam() # InvestmentTeam | Investment project  data to update
+investment_id = 'investment_id_example' # str | UUID of investment project
+adviser_id = 'adviser_id_example' # str | UUID of adviser
+body = swagger_client.InvestmentTeamMember() # InvestmentTeamMember | 
 
 try: 
-    # updates an investment team object, from a partial JSON object
-    api_instance.patch_investment_team(investment_id, investment)
+    # Updates a team member role
+    api_instance.update_investment_team_member(investment_id, adviser_id, body)
 except ApiException as e:
-    print("Exception when calling InvestmentApi->patch_investment_team: %s\n" % e)
+    print("Exception when calling InvestmentApi->update_investment_team_member: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **investment_id** | **str**| UUID for a Data Hub investment project | 
- **investment** | [**InvestmentTeam**](InvestmentTeam.md)| Investment project  data to update | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[OauthSecurity](../README.md#OauthSecurity)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **patch_investment_value**
-> patch_investment_value(investment_id, investment)
-
-updates an investment project value object, from a partial JSON object
-
-Patches an existing investment project value object
-
-### Example 
-```python
-from __future__ import print_statement
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: OauthSecurity
-swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = swagger_client.InvestmentApi()
-investment_id = 'investment_id_example' # str | UUID for a Data Hub investment project
-investment = swagger_client.InvestmentValue() # InvestmentValue | Investment project value data to update
-
-try: 
-    # updates an investment project value object, from a partial JSON object
-    api_instance.patch_investment_value(investment_id, investment)
-except ApiException as e:
-    print("Exception when calling InvestmentApi->patch_investment_value: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **investment_id** | **str**| UUID for a Data Hub investment project | 
- **investment** | [**InvestmentValue**](InvestmentValue.md)| Investment project value data to update | 
+ **investment_id** | **str**| UUID of investment project | 
+ **adviser_id** | **str**| UUID of adviser | 
+ **body** | [**InvestmentTeamMember**](InvestmentTeamMember.md)|  | 
 
 ### Return type
 

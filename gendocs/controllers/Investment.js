@@ -12,12 +12,20 @@ module.exports.addInvestmentDocument_1 = function addInvestmentDocument_1 (req, 
   Investment.addInvestmentDocument_1(req.swagger.params, res, next);
 };
 
+module.exports.addInvestmentTeamMember = function addInvestmentTeamMember (req, res, next) {
+  Investment.addInvestmentTeamMember(req.swagger.params, res, next);
+};
+
 module.exports.archiveInvestment = function archiveInvestment (req, res, next) {
   Investment.archiveInvestment(req.swagger.params, res, next);
 };
 
 module.exports.createInvestment = function createInvestment (req, res, next) {
   Investment.createInvestment(req.swagger.params, res, next);
+};
+
+module.exports.getInvestmentTeamMember = function getInvestmentTeamMember (req, res, next) {
+  Investment.getInvestmentTeamMember(req.swagger.params, res, next);
 };
 
 module.exports.getinvestment = function getinvestment (req, res, next) {
@@ -40,6 +48,18 @@ module.exports.patchInvestment = function patchInvestment (req, res, next) {
   Investment.patchInvestment(req.swagger.params, res, next);
 };
 
+module.exports.removeAllInvestmentTeamMember = function removeAllInvestmentTeamMember (req, res, next) {
+  Investment.removeAllInvestmentTeamMember(req.swagger.params, res, next);
+};
+
+module.exports.removeInvestmentTeamMember = function removeInvestmentTeamMember (req, res, next) {
+  Investment.removeInvestmentTeamMember(req.swagger.params, res, next);
+};
+
 module.exports.unarchiveInvestment = function unarchiveInvestment (req, res, next) {
   Investment.unarchiveInvestment(req.swagger.params, res, next);
+};
+
+module.exports.updateInvestmentTeamMember = function updateInvestmentTeamMember (req, res, next) {
+  Investment.updateInvestmentTeamMember(req.swagger.params, res, next);
 };
