@@ -413,3 +413,47 @@
           example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
         name:
           type: string
+  DocumentLocation:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      project:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+          name:
+            type: string
+            example: "New hotel in Manchester"
+      doc_type:
+        type: string
+        example: "new_tech_to_uk_documents"
+      filename:
+        type: string
+        example: "press_release.pdf"
+      signed_url:
+        type: string
+        format: uri
+      signed_upload_url:
+        type: string
+        format: uri
+  DocumentLocationList:
+    type: object
+    properties:
+      count:
+        type: integer
+      next:
+        type: string
+        format: uri
+      previous:
+        type: string
+        format: uri
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/DocumentLocation'

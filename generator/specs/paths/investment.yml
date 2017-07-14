@@ -168,7 +168,7 @@
     post:
       tags:
       - investment
-      summary: Tells the back end that a document has successfully uploaded and where to find it
+      summary: Requests a signed URI for S3 from the back end
       operationId: addInvestmentDocument
       consumes:
       - application/json
@@ -183,29 +183,127 @@
         format: uuid
       - in: body
         name: document
-        description: object that contains the document URL and which the id of which section it belongs to
+        description: object that contains the document filename and which the name of which section it belongs to
         required: true
         schema:
           type: object
           properties:
-            uri:
+            filename:
               type: string
-              format: uri
-            field:
+              example: "press release.pdf"
+            doc_type:
               type: string
-              format: uuid
+              example: "new_tech_to_uk_documents"
       responses:
-        201:
-          description: document added
+        200:
+          description: JSON formatted document location response
+          schema:
+            $ref: '#/definitions/DocumentLocation'
         400:
           description: input invalid
         404:
-          description: investment is already archived or does not exist
+          description: investment does not exist
+    get:
+      tags:
+        - investment
+      summary: Returns a list of all documenst associated with a project
+      operationId: getInvestmentDocuments
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: list of documents associated with an investment project
+          schema:
+            $ref: '#/definitions/DocumentLocationList'
+        400:
+          description: input invalid
+        404:
+          description: investment does not exist
+  /v3/investment/{investmentId}/document/{documentId}:
+    get:
+      tags:
+      - investment
+      summary: Retrieves a document associated with an investment project
+      operationId: getInvestmentDocument
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: documentId
+        description: id of the document to remove
+        required: true
+        type: string
+        format: uuid
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: document location
+          schema:
+            $ref: '#/definitions/DocumentLocation'
+        400:
+          description: input invalid
+        404:
+          description: investment does not exist
+  /v3/investment/{investmentId}/document/{documentId}/upload-callback:
+    post:
+      tags:
+      - investment
+      summary: tells the server a document has been uploaded
+      operationId: getInvestmentDocument
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: documentId
+        description: id of the document to remove
+        required: true
+        type: string
+        format: uuid
+      - in: path
+        name: investmentId
+        description: UUID of investment project
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: response
+        required: true
+        schema:
+          type: object
+          properties:
+            status:
+              type: string
+              default: "success"
+      responses:
+        200:
+          description: accepted
+        400:
+          description: input invalid
+        404:
+          description: investment does not exist
   /v3/investment/document/{documentId}:
     delete:
       tags:
       - investment
-      summary: Tells the back end to forget a docuemtn associated with a project and a field
+      summary: Tells the back end to forget a document associated with a project and a field
       operationId: addInvestmentDocument
       consumes:
       - application/json
@@ -253,4 +351,3 @@
           description: metadata array
           schema:
             $ref: '#/definitions/DocumentableFields'
-
