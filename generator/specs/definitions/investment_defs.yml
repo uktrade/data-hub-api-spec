@@ -436,12 +436,14 @@
       filename:
         type: string
         example: "press_release.pdf"
+        description: "this will be null if the document has been submitted (so exists) but has not passed the antivirus check yet"
       signed_url:
         type: string
         format: uri
       signed_upload_url:
         type: string
         format: uri
+        description: "only returned after a succesful POST - if POST fails this will be empty"
   DocumentLocationList:
     type: object
     properties:
