@@ -49,6 +49,8 @@
         $ref: '#/definitions/FDIType'
       fdi_type_documents:
         $ref: '#/definitions/Documents'
+      fdi_value:
+        $ref: '#/definitions/FDIValue'
       id:
         type: string
         format: uuid
@@ -204,6 +206,10 @@
       team_members:
         $ref: '#/definitions/InvestmentTeamMemberArray'
         description: Additional team members assigned to this project. Read-only in this endpoint.
+      team_complete:
+        type: boolean
+        example: false
+        description: Whether the team section is complete enough to move to the next project stage
 
   InvestmentProjectsList:
     type: object
@@ -240,10 +246,6 @@
         $ref: '#/definitions/AdviserTeam'
       project_assurance_advisor:
         $ref: '#/definitions/Adviser'
-      team_complete:
-        type: boolean
-        example: false
-        description: Whether the team section is complete enough to move to the next project stage
   BusinessActivity:
     type: object
     required:
@@ -323,6 +325,20 @@
       name:
         type: string
         example: 'Advanced Engineering Supply Chain'
+  FDIValue:
+    type: object
+    description: "FDI value categorisation"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Good'
   AdviserTeam:
     type: object
     required:
