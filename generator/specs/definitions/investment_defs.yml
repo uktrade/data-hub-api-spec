@@ -14,6 +14,12 @@
     - referral_source_activity
     - sector
     properties:
+      incomplete_fields:
+        type: array
+        description: List of names of fields that need to be completed in order to move the project to the next stage
+        items:
+          type: string
+          example: 'total_investment'
       approved_commitment_to_invest:
         type: boolean
       approved_fdi:
