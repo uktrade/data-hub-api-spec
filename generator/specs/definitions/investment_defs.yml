@@ -132,9 +132,15 @@
       government_assistance:
         type: boolean
         example: false
+      some_new_jobs:
+        type: boolean
+        example: false
       number_new_jobs:
         type: integer
         example: 100
+      will_new_jobs_last_two_years:
+        type: boolean
+        example: false
       number_new_jobs_documents:
         $ref: '#/definitions/Documents'
       number_safeguarded_jobs:
@@ -204,6 +210,9 @@
         $ref: '#/definitions/UKRegions'
       strategic_drivers:
         $ref: '#/definitions/StrategicDriverArray'
+      uk_company_decided:
+        type: boolean
+        example: false
       uk_company:
         $ref: '#/definitions/CompanySlim'
       address_postcode:
