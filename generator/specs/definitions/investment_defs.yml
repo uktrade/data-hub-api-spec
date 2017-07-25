@@ -188,10 +188,6 @@
       client_requirements:
         type: string
         example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
-      site_decided:
-        type: boolean
-        default: false
-        example: false
       address_line_1:
         type: string
         example: '19 Railway Cuttings'
