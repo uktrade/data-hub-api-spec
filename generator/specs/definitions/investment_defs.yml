@@ -132,9 +132,15 @@
       government_assistance:
         type: boolean
         example: false
+      some_new_jobs:
+        type: boolean
+        example: false
       number_new_jobs:
         type: integer
         example: 100
+      will_new_jobs_last_two_years:
+        type: boolean
+        example: false
       number_new_jobs_documents:
         $ref: '#/definitions/Documents'
       number_safeguarded_jobs:
@@ -182,10 +188,6 @@
       client_requirements:
         type: string
         example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
-      site_decided:
-        type: boolean
-        default: false
-        example: false
       address_line_1:
         type: string
         example: '19 Railway Cuttings'
@@ -204,6 +206,9 @@
         $ref: '#/definitions/UKRegions'
       strategic_drivers:
         $ref: '#/definitions/StrategicDriverArray'
+      uk_company_decided:
+        type: boolean
+        example: false
       uk_company:
         $ref: '#/definitions/CompanySlim'
       address_postcode:
