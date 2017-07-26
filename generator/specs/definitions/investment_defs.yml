@@ -87,6 +87,9 @@
         example: 'P-01234567'
       project_shareable:
         type: boolean
+      quotable_as_public_case_study:
+        type: boolean
+        example: false
       referral_source_activity:
         $ref: '#/definitions/ReferralSourceActivity'
       referral_source_activity_marketing:
