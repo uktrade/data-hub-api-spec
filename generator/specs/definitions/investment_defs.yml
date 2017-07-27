@@ -40,6 +40,8 @@
         $ref: '#/definitions/Documents'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
+      other_business_activity:
+        type: string
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
