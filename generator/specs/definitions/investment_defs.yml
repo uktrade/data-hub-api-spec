@@ -40,6 +40,9 @@
         $ref: '#/definitions/Documents'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
+      hq_documents:
+        description: Evidence that the site will operate as a Global HQ or European HQ
+        $ref: '#/definitions/Documents'
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
@@ -53,8 +56,6 @@
         example: '2017-05-01'
       fdi_type:
         $ref: '#/definitions/FDIType'
-      fdi_type_documents:
-        $ref: '#/definitions/Documents'
       fdi_value:
         $ref: '#/definitions/FDIValue'
       id:
@@ -67,6 +68,9 @@
         $ref: '#/definitions/CompanySlim'
       investment_type:
         $ref: '#/definitions/InvestmentType'
+      foreign_ownership_documents:
+        description: Evidence that the investor has 10% ownership/voting power
+        $ref: '#/definitions/Documents'
       name:
         type: string
         example: 'Marriot Hotels - New hotel in Manchester'
