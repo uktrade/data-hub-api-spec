@@ -44,7 +44,6 @@ exports.datahubSearch = function(args, res, next) {
     "investment_projects_invested_in" : {
       "count" : 30,
       "results" : [ {
-        "team_complete" : false,
         "name" : "Marriot Hotels - New hotel in Manchester",
         "project_assurance_advisor" : "",
         "project_code" : "P-01234567",
@@ -130,6 +129,7 @@ exports.datahubSearch = function(args, res, next) {
     "foreign_equity_investment_documents" : "",
     "operations_commenced_documents" : "",
     "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
+    "incomplete_fields" : [ "total_investment" ],
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -163,6 +163,7 @@ exports.datahubSearch = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "export_revenue" : false,
+    "some_new_jobs" : false,
     "uk_company" : "",
     "name" : "Marriot Hotels - New hotel in Manchester",
     "average_salary_documents" : "",
@@ -180,13 +181,15 @@ exports.datahubSearch = function(args, res, next) {
     },
     "client_cannot_provide_total_investment" : false,
     "uk_region_locations" : "",
+    "uk_company_decided" : false,
     "client_cannot_provide_foreign_investment" : false,
     "approved_high_value" : true,
     "strategic_drivers" : "",
+    "team_complete" : false,
     "number_safeguarded_jobs_documents" : "",
     "r_and_d_budget" : false,
     "address_line_1" : "19 Railway Cuttings",
-    "site_decided" : false,
+    "will_new_jobs_last_two_years" : false,
     "address_line_3" : "Surrey",
     "address_line_2" : "East Cheam",
     "fdi_type_documents" : "",
@@ -200,6 +203,10 @@ exports.datahubSearch = function(args, res, next) {
       "name" : "£35,000",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "fdi_value" : {
+      "name" : "Good",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "government_assistance" : false,
     "competitor_countries" : "",
     "stage" : {
@@ -211,6 +218,7 @@ exports.datahubSearch = function(args, res, next) {
       "name" : "Advanced Engineering Supply Chain",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "team_members" : "",
     "approved_good_value" : true,
     "intermediate_company" : "",
     "number_new_jobs_documents" : ""
@@ -303,7 +311,6 @@ exports.datahubSearch_0 = function(args, res, next) {
     "investment_projects_invested_in" : {
       "count" : 30,
       "results" : [ {
-        "team_complete" : false,
         "name" : "Marriot Hotels - New hotel in Manchester",
         "project_assurance_advisor" : "",
         "project_code" : "P-01234567",
@@ -469,6 +476,7 @@ exports.datahubSearch_2 = function(args, res, next) {
     "foreign_equity_investment_documents" : "",
     "operations_commenced_documents" : "",
     "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
+    "incomplete_fields" : [ "total_investment" ],
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -509,6 +517,7 @@ exports.datahubSearch_2 = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "export_revenue" : false,
+    "some_new_jobs" : false,
     "uk_company" : "",
     "name" : "Marriot Hotels - New hotel in Manchester",
     "average_salary_documents" : "",
@@ -526,13 +535,15 @@ exports.datahubSearch_2 = function(args, res, next) {
     },
     "client_cannot_provide_total_investment" : false,
     "uk_region_locations" : "",
+    "uk_company_decided" : false,
     "client_cannot_provide_foreign_investment" : false,
     "approved_high_value" : true,
     "strategic_drivers" : "",
+    "team_complete" : false,
     "number_safeguarded_jobs_documents" : "",
     "r_and_d_budget" : false,
     "address_line_1" : "19 Railway Cuttings",
-    "site_decided" : false,
+    "will_new_jobs_last_two_years" : false,
     "address_line_3" : "Surrey",
     "address_line_2" : "East Cheam",
     "fdi_type_documents" : "",
@@ -546,6 +557,10 @@ exports.datahubSearch_2 = function(args, res, next) {
       "name" : "£35,000",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "fdi_value" : {
+      "name" : "Good",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "government_assistance" : false,
     "competitor_countries" : "",
     "stage" : {
@@ -557,6 +572,7 @@ exports.datahubSearch_2 = function(args, res, next) {
       "name" : "Advanced Engineering Supply Chain",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "team_members" : "",
     "approved_good_value" : true,
     "intermediate_company" : {
       "name" : "Company Registered Name Ltd",

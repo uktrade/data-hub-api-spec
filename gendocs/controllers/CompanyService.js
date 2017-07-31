@@ -98,7 +98,6 @@ exports.getcompany = function(args, res, next) {
   "investment_projects_invested_in" : {
     "count" : 30,
     "results" : [ {
-      "team_complete" : false,
       "name" : "Marriot Hotels - New hotel in Manchester",
       "project_assurance_advisor" : "",
       "project_code" : "P-01234567",

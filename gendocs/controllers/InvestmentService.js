@@ -2,20 +2,48 @@
 
 exports.addInvestmentDocument = function(args, res, next) {
   /**
-   * Tells the back end that a document has successfully uploaded and where to find it
+   * Requests a signed URI for S3 from the back end
    *
    * investmentId UUID UUID of investment project
-   * document Document object that contains the document URL and which the id of which section it belongs to
+   * document Document object that contains the document filename and which the name of which section it belongs to
+   * returns DocumentLocation
+   **/
+  var examples = {};
+  examples['application/json'] = {
+  "signed_url" : "aeiou",
+  "filename" : "press_release.pdf",
+  "signed_upload_url" : "aeiou",
+  "project" : {
+    "name" : "New hotel in Manchester",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "doc_type" : "new_tech_to_uk_documents"
+};
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
+}
+
+exports.addInvestmentDocument_0 = function(args, res, next) {
+  /**
+   * Tells the back end to forget a document associated with a project and a field
+   *
+   * documentId UUID id of the document to remove
    * no response value expected for this operation
    **/
   res.end();
 }
 
-exports.addInvestmentDocument_0 = function(args, res, next) {
+exports.addInvestmentTeamMember = function(args, res, next) {
   /**
-   * Tells the back end to forget a docuemtn associated with a project and a field
+   * Adds a team member to an investment project
    *
-   * documentId UUID id of the document to remove
+   * investmentId UUID UUID of investment project
+   * body InvestmentTeamMember 
    * no response value expected for this operation
    **/
   res.end();
@@ -43,6 +71,104 @@ exports.createInvestment = function(args, res, next) {
   res.end();
 }
 
+exports.getInvestmentDocument = function(args, res, next) {
+  /**
+   * Retrieves a document associated with an investment project
+   *
+   * documentId UUID id of the document to remove
+   * investmentId UUID UUID of investment project
+   * returns DocumentLocation
+   **/
+  var examples = {};
+  examples['application/json'] = {
+  "signed_url" : "aeiou",
+  "filename" : "press_release.pdf",
+  "signed_upload_url" : "aeiou",
+  "project" : {
+    "name" : "New hotel in Manchester",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
+  "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "doc_type" : "new_tech_to_uk_documents"
+};
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
+}
+
+exports.getInvestmentDocument_0 = function(args, res, next) {
+  /**
+   * tells the server a document has been uploaded
+   *
+   * documentId UUID id of the document to remove
+   * investmentId UUID UUID of investment project
+   * response Response 
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.getInvestmentDocuments = function(args, res, next) {
+  /**
+   * Returns a list of all documenst associated with a project
+   *
+   * investmentId UUID UUID of investment project
+   * returns DocumentLocationList
+   **/
+  var examples = {};
+  examples['application/json'] = {
+  "next" : "aeiou",
+  "previous" : "aeiou",
+  "count" : 123,
+  "results" : [ {
+    "signed_url" : "aeiou",
+    "filename" : "press_release.pdf",
+    "signed_upload_url" : "aeiou",
+    "project" : {
+      "name" : "New hotel in Manchester",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "doc_type" : "new_tech_to_uk_documents"
+  } ]
+};
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
+}
+
+exports.getInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Gets a team member's role
+   *
+   * investmentId UUID UUID of investment project
+   * adviserId UUID UUID of adviser
+   * body InvestmentTeamMember 
+   * returns InvestmentTeamMember
+   **/
+  var examples = {};
+  examples['application/json'] = {
+  "role" : "Sector adviser",
+  "adviser" : {
+    "last_name" : "Adviser",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "first_name" : "Annette"
+  }
+};
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
+}
+
 exports.getinvestment = function(args, res, next) {
   /**
    * Returns an investment project from the Data Hub repository
@@ -61,6 +187,7 @@ exports.getinvestment = function(args, res, next) {
   "foreign_equity_investment_documents" : "",
   "operations_commenced_documents" : "",
   "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
+  "incomplete_fields" : [ "total_investment" ],
   "referral_source_activity_marketing" : {
     "name" : "Press advertisement",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -101,6 +228,7 @@ exports.getinvestment = function(args, res, next) {
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "export_revenue" : false,
+  "some_new_jobs" : false,
   "uk_company" : "",
   "name" : "Marriot Hotels - New hotel in Manchester",
   "average_salary_documents" : "",
@@ -118,13 +246,15 @@ exports.getinvestment = function(args, res, next) {
   },
   "client_cannot_provide_total_investment" : false,
   "uk_region_locations" : "",
+  "uk_company_decided" : false,
   "client_cannot_provide_foreign_investment" : false,
   "approved_high_value" : true,
   "strategic_drivers" : "",
+  "team_complete" : false,
   "number_safeguarded_jobs_documents" : "",
   "r_and_d_budget" : false,
   "address_line_1" : "19 Railway Cuttings",
-  "site_decided" : false,
+  "will_new_jobs_last_two_years" : false,
   "address_line_3" : "Surrey",
   "address_line_2" : "East Cheam",
   "fdi_type_documents" : "",
@@ -138,6 +268,10 @@ exports.getinvestment = function(args, res, next) {
     "name" : "£35,000",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
+  "fdi_value" : {
+    "name" : "Good",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "government_assistance" : false,
   "competitor_countries" : "",
   "stage" : {
@@ -149,6 +283,7 @@ exports.getinvestment = function(args, res, next) {
     "name" : "Advanced Engineering Supply Chain",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
+  "team_members" : "",
   "approved_good_value" : true,
   "intermediate_company" : {
     "name" : "Company Registered Name Ltd",
@@ -178,7 +313,6 @@ exports.getprojectsforcompany = function(args, res, next) {
   examples['application/json'] = {
   "count" : 30,
   "results" : [ {
-    "team_complete" : false,
     "name" : "Marriot Hotels - New hotel in Manchester",
     "project_assurance_advisor" : "",
     "project_code" : "P-01234567",
@@ -247,11 +381,44 @@ exports.patchInvestment = function(args, res, next) {
   res.end();
 }
 
+exports.removeAllInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Removes all team members from an investment project
+   *
+   * investmentId UUID UUID of investment project
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.removeInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Removes a team member from an investment project
+   *
+   * investmentId UUID UUID of investment project
+   * adviserId UUID UUID of adviser
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
 exports.unarchiveInvestment = function(args, res, next) {
   /**
    * Unarchives an investment project
    *
    * investmentId UUID UUID of investment project
+   * no response value expected for this operation
+   **/
+  res.end();
+}
+
+exports.updateInvestmentTeamMember = function(args, res, next) {
+  /**
+   * Updates a team member role
+   *
+   * investmentId UUID UUID of investment project
+   * adviserId UUID UUID of adviser
+   * body InvestmentTeamMember 
    * no response value expected for this operation
    **/
   res.end();

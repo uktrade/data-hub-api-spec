@@ -157,7 +157,7 @@ paths:
         409:
           description: "company already exists"
       x-swagger-router-controller: "Company"
-  /v3/ch_company/{company_number}:
+  /v3/ch-company/{company_number}:
     get:
       tags:
       - "company"
@@ -355,12 +355,174 @@ paths:
         404:
           description: "investment is already archived or does not exist"
       x-swagger-router-controller: "Investment"
-  /v3/investment/{investmentId}/document:
+  /v3/investment/{investmentId}/team-member:
     post:
       tags:
       - "investment"
-      summary: "Tells the back end that a document has successfully uploaded and where\
-        \ to find it"
+      summary: "Adds a team member to an investment project"
+      operationId: "addInvestmentTeamMember"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentTeamMember"
+      responses:
+        201:
+          description: "team member added"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
+    delete:
+      tags:
+      - "investment"
+      summary: "Removes all team members from an investment project"
+      operationId: "removeAllInvestmentTeamMember"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        204:
+          description: "all team members removed"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/team-member/{adviserId}:
+    get:
+      tags:
+      - "investment"
+      summary: "Gets a team member's role"
+      operationId: "getInvestmentTeamMember"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "adviserId"
+        in: "path"
+        description: "UUID of adviser"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentTeamMember"
+      responses:
+        200:
+          description: "JSON formatted team member object"
+          schema:
+            $ref: "#/definitions/InvestmentTeamMember"
+        404:
+          description: "team member or investment project not found"
+      x-swagger-router-controller: "Investment"
+    delete:
+      tags:
+      - "investment"
+      summary: "Removes a team member from an investment project"
+      operationId: "removeInvestmentTeamMember"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "adviserId"
+        in: "path"
+        description: "UUID of adviser"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        204:
+          description: "team member removed"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
+    patch:
+      tags:
+      - "investment"
+      summary: "Updates a team member role"
+      operationId: "updateInvestmentTeamMember"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "adviserId"
+        in: "path"
+        description: "UUID of adviser"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/InvestmentTeamMember"
+      responses:
+        200:
+          description: "team member updated"
+        400:
+          description: "input invalid"
+      x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/document:
+    get:
+      tags:
+      - "investment"
+      summary: "Returns a list of all documenst associated with a project"
+      operationId: "getInvestmentDocuments"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        200:
+          description: "list of documents associated with an investment project"
+          schema:
+            $ref: "#/definitions/DocumentLocationList"
+        400:
+          description: "input invalid"
+        404:
+          description: "investment does not exist"
+      x-swagger-router-controller: "Investment"
+    post:
+      tags:
+      - "investment"
+      summary: "Requests a signed URI for S3 from the back end"
       operationId: "addInvestmentDocument"
       consumes:
       - "application/json"
@@ -375,24 +537,95 @@ paths:
         format: "uuid"
       - in: "body"
         name: "document"
-        description: "object that contains the document URL and which the id of which\
-          \ section it belongs to"
+        description: "object that contains the document filename and which the name\
+          \ of which section it belongs to"
         required: true
         schema:
           $ref: "#/definitions/document"
       responses:
-        201:
-          description: "document added"
+        200:
+          description: "JSON formatted document location response"
+          schema:
+            $ref: "#/definitions/DocumentLocation"
         400:
           description: "input invalid"
         404:
-          description: "investment is already archived or does not exist"
+          description: "investment does not exist"
+      x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/document/{documentId}:
+    get:
+      tags:
+      - "investment"
+      summary: "Retrieves a document associated with an investment project"
+      operationId: "getInvestmentDocument"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "documentId"
+        in: "path"
+        description: "id of the document to remove"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        200:
+          description: "document location"
+          schema:
+            $ref: "#/definitions/DocumentLocation"
+        400:
+          description: "input invalid"
+        404:
+          description: "investment does not exist"
+      x-swagger-router-controller: "Investment"
+  /v3/investment/{investmentId}/document/{documentId}/upload-callback:
+    post:
+      tags:
+      - "investment"
+      summary: "tells the server a document has been uploaded"
+      operationId: "getInvestmentDocument"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "documentId"
+        in: "path"
+        description: "id of the document to remove"
+        required: true
+        type: "string"
+        format: "uuid"
+      - name: "investmentId"
+        in: "path"
+        description: "UUID of investment project"
+        required: true
+        type: "string"
+        format: "uuid"
+      - in: "body"
+        name: "response"
+        required: true
+        schema:
+          $ref: "#/definitions/response"
+      responses:
+        200:
+          description: "accepted"
+        400:
+          description: "input invalid"
+        404:
+          description: "investment does not exist"
       x-swagger-router-controller: "Investment"
   /v3/investment/document/{documentId}:
     delete:
       tags:
       - "investment"
-      summary: "Tells the back end to forget a docuemtn associated with a project\
+      summary: "Tells the back end to forget a document associated with a project\
         \ and a field"
       operationId: "addInvestmentDocument"
       consumes:
@@ -414,7 +647,7 @@ paths:
         404:
           description: "investment is already archived or does not exist"
       x-swagger-router-controller: "Investment"
-  /v3/metadata/business_activity:
+  /v3/metadata/business-activity:
     get:
       tags:
       - "investment"
@@ -430,7 +663,7 @@ paths:
           schema:
             $ref: "#/definitions/BusinessActivities"
       x-swagger-router-controller: "Investment"
-  /v3/metadata/documentable_fields:
+  /v3/metadata/documentable-fields:
     get:
       tags:
       - "investment"
@@ -991,6 +1224,13 @@ definitions:
     - "referral_source_activity"
     - "sector"
     properties:
+      incomplete_fields:
+        type: "array"
+        description: "List of names of fields that need to be completed in order to\
+          \ move the project to the next stage"
+        items:
+          type: "string"
+          example: "total_investment"
       approved_commitment_to_invest:
         type: "boolean"
       approved_fdi:
@@ -1027,6 +1267,8 @@ definitions:
         $ref: "#/definitions/FDIType"
       fdi_type_documents:
         $ref: "#/definitions/Documents"
+      fdi_value:
+        $ref: "#/definitions/FDIValue"
       id:
         type: "string"
         format: "uuid"
@@ -1103,9 +1345,15 @@ definitions:
       government_assistance:
         type: "boolean"
         example: false
+      some_new_jobs:
+        type: "boolean"
+        example: false
       number_new_jobs:
         type: "integer"
         example: 100
+      will_new_jobs_last_two_years:
+        type: "boolean"
+        example: false
       number_new_jobs_documents:
         $ref: "#/definitions/Documents"
       number_safeguarded_jobs:
@@ -1144,10 +1392,6 @@ definitions:
         type: "string"
         example: "Marriott are looking to expand into a city or town where they do\
           \ not currently have a presence, or have room for expansion...."
-      site_decided:
-        type: "boolean"
-        example: false
-        default: false
       address_line_1:
         type: "string"
         example: "19 Railway Cuttings"
@@ -1166,11 +1410,23 @@ definitions:
         $ref: "#/definitions/UKRegions"
       strategic_drivers:
         $ref: "#/definitions/StrategicDriverArray"
+      uk_company_decided:
+        type: "boolean"
+        example: false
       uk_company:
         $ref: "#/definitions/CompanySlim"
       address_postcode:
         type: "string"
         example: "SN1 1AA"
+      team_members:
+        description: "Additional team members assigned to this project. Read-only\
+          \ in this endpoint."
+        $ref: "#/definitions/InvestmentTeamMemberArray"
+      team_complete:
+        type: "boolean"
+        example: false
+        description: "Whether the team section is complete enough to move to the next\
+          \ project stage"
     description: "A Data Hub investment project"
   InvestmentProjectsList:
     type: "object"
@@ -1206,11 +1462,6 @@ definitions:
         $ref: "#/definitions/AdviserTeam"
       project_assurance_advisor:
         $ref: "#/definitions/Adviser"
-      team_complete:
-        type: "boolean"
-        example: false
-        description: "Whether the team section is complete enough to move to the next\
-          \ project stage"
     description: "A Data Hub investment project summary"
   BusinessActivity:
     type: "object"
@@ -1291,6 +1542,20 @@ definitions:
         type: "string"
         example: "Advanced Engineering Supply Chain"
     description: "Non-FDI Metadata"
+  FDIValue:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Good"
+    description: "FDI value categorisation"
   AdviserTeam:
     type: "object"
     required:
@@ -1336,6 +1601,21 @@ definitions:
         type: "string"
         example: "Access to market"
     description: "Strategic Driver metadata"
+  InvestmentTeamMember:
+    type: "object"
+    required:
+    - "adviser"
+    - "role"
+    properties:
+      adviser:
+        $ref: "#/definitions/Adviser"
+      role:
+        type: "string"
+        example: "Sector adviser"
+  InvestmentTeamMemberArray:
+    type: "array"
+    items:
+      $ref: "#/definitions/InvestmentTeamMember"
   InvestmentType:
     type: "object"
     required:
@@ -1362,6 +1642,46 @@ definitions:
     type: "array"
     items:
       $ref: "#/definitions/DocumentableFields_inner"
+  DocumentLocation:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      project:
+        $ref: "#/definitions/DocumentLocation_project"
+      doc_type:
+        type: "string"
+        example: "new_tech_to_uk_documents"
+      filename:
+        type: "string"
+        example: "press_release.pdf"
+        description: "this will be null if the document has been submitted (so exists)\
+          \ but has not passed the antivirus check yet"
+      signed_url:
+        type: "string"
+        format: "uri"
+      signed_upload_url:
+        type: "string"
+        format: "uri"
+        description: "only returned after a succesful POST - if POST fails this will\
+          \ be empty"
+  DocumentLocationList:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+      next:
+        type: "string"
+        format: "uri"
+      previous:
+        type: "string"
+        format: "uri"
+      results:
+        type: "array"
+        items:
+          $ref: "#/definitions/DocumentLocation"
   BusinessActivities:
     type: "array"
     items:
@@ -1575,12 +1895,18 @@ definitions:
   document:
     type: "object"
     properties:
-      uri:
+      filename:
         type: "string"
-        format: "uri"
-      field:
+        example: "press release.pdf"
+      doc_type:
         type: "string"
-        format: "uuid"
+        example: "new_tech_to_uk_documents"
+  response:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        default: "success"
   InvestmentProject_average_salary:
     required:
     - "id"
@@ -1619,6 +1945,15 @@ definitions:
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
       name:
         type: "string"
+  DocumentLocation_project:
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "New hotel in Manchester"
   AggregateSearchResults_aggregates:
     properties:
       count:
