@@ -84,6 +84,32 @@
         $ref: '#/definitions/Documents'
       stage:
         $ref: '#/definitions/Stage'
+      status:
+        type: string
+        enum:
+        - ongoing
+        - delayed
+        - abandoned
+        - lost
+      reason_delayed:
+        type: string
+        example: Problems getting planning permission
+      reason_abandoned:
+        type: string
+        example: Funding lost
+      date_abandoned:
+        type: string
+        format: date
+        example: '2018-11-01'
+      reason_lost:
+        type: string
+        example: Cheaper in other country
+      date_lost:
+        type: string
+        format: date
+        example: '2018-11-01'
+      country_lost_to:
+        $ref: '#/definitions/Country'
       project_code:
         type: string
         example: 'P-01234567'
