@@ -40,6 +40,8 @@
         $ref: '#/definitions/Documents'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
+      other_business_activity:
+        type: string
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
@@ -87,6 +89,9 @@
         example: 'P-01234567'
       project_shareable:
         type: boolean
+      quotable_as_public_case_study:
+        type: boolean
+        example: false
       referral_source_activity:
         $ref: '#/definitions/ReferralSourceActivity'
       referral_source_activity_marketing:
