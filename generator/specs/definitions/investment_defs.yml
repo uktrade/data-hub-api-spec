@@ -36,8 +36,6 @@
         type: string
         format: date
         example: '2018-11-01'
-      actual_land_date_documents:
-        $ref: '#/definitions/Documents'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       other_business_activity:
@@ -55,8 +53,6 @@
         example: '2017-05-01'
       fdi_type:
         $ref: '#/definitions/FDIType'
-      fdi_type_documents:
-        $ref: '#/definitions/Documents'
       fdi_value:
         $ref: '#/definitions/FDIValue'
       id:
@@ -80,8 +76,6 @@
       not_shareable_reason:
         type: string
         example: 'Company has asked us to keep project quiet until official announcement'
-      operations_commenced_documents:
-        $ref: '#/definitions/Documents'
       stage:
         $ref: '#/definitions/Stage'
       status:
@@ -147,16 +141,12 @@
         - 1_low
         - 2_medium
         - 3_high
-      total_investment_documents:
-        $ref: '#/definitions/Documents'
       client_cannot_provide_total_investment:
         type: boolean
         example: false
       foreign_equity_investment:
         type: integer
         example: 100000000
-      foreign_equity_investment_documents:
-        $ref: '#/definitions/Documents'
       client_cannot_provide_foreign_investment:
         type: boolean
         example: false
@@ -172,31 +162,21 @@
       will_new_jobs_last_two_years:
         type: boolean
         example: false
-      number_new_jobs_documents:
-        $ref: '#/definitions/Documents'
       number_safeguarded_jobs:
         type: integer
         example: 100
-      number_safeguarded_jobs_documents:
-        $ref: '#/definitions/Documents'
       r_and_d_budget:
         type: boolean
         example: false
-      r_and_d_budget_documents:
-        $ref: '#/definitions/Documents'
       non_fdi_r_and_d_budget:
         type: boolean
         example: false
       new_tech_to_uk:
         type: boolean
         example: false
-      new_tech_to_uk_documents:
-        $ref: '#/definitions/Documents'
       export_revenue:
         type: boolean
         example: false
-      export_revenue_documents:
-        $ref: '#/definitions/Documents'
       average_salary:
         type: object
         required:
@@ -210,8 +190,6 @@
           name:
             type: string
             example: '£35,000'
-      average_salary_documents:
-        $ref: '#/definitions/Documents'
       requirements_complete:
         type: boolean
         example: false
@@ -510,6 +488,9 @@
       doc_type:
         type: string
         example: "new_tech_to_uk_documents"
+        description: 'one of actual_land_date, hq, foreign_ownership, operations_commenced, total_investment,
+        foreign_equity_investment, number_new_jobs, number_safeguarded_jobs, r_and_d_budget, new_tech_to_uk,
+        export_revenue, average_salary'
       filename:
         type: string
         example: "press_release.pdf"
