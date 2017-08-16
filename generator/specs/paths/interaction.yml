@@ -1,0 +1,128 @@
+  /v3/interaction:
+    get:
+      tags:
+      - interaction
+      summary: Gets a list of interactions in the system
+      operationId: getAllInteractions
+      description: Gets a list of interactions, optionally filtered by company, contact or investment project
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: company_id
+        description: UUID of a company
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: contact_id
+        description: UUID of a contact
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: investment_project_id
+        description: UUID of a investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: offset
+        type: integer
+        description: Pagination parameter
+        required: false
+      - in: query
+        name: limit
+        type: integer
+        description: Pagination parameter
+        required: false
+      responses:
+        200:
+          description: Single page of results
+          schema:
+            $ref: '#/definitions/InteractionList'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - interaction
+      summary: Creates an interaction
+      operationId: createInteraction
+      description: Adds an interaction against a company, contact and/or investment project
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: interaction
+        description: Interaction data
+        required: true
+        schema:
+          $ref: '#/definitions/Interaction'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+  /v3/interaction/{interactionId}:
+    get:
+      tags:
+      - interaction
+      summary: Gets an individual interaction
+      operationId: getInteraction
+      description: |
+        Gets an individual interaction given an interaction ID
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: interactionId
+        description: An interaction UUID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: Interaction object
+          schema:
+            $ref: '#/definitions/Interaction'
+        400:
+          description: bad input parameter
+        404:
+          description: interaction does not exist
+    patch:
+      tags:
+      - interaction
+      summary: Updates an interaction
+      operationId: updateInteraction
+      description: Updates an existing interaction, only changing fields specified in the request
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: interactionId
+        description: UUID for a Data Hub interaction
+        type: string
+        required: true
+      - in: body
+        name: interaction
+        description: Interaction data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Interaction'
+      - in: query
+        name: Archived
+        description: Update the interaction's status to Archived
+        required: false
+        type: boolean
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid

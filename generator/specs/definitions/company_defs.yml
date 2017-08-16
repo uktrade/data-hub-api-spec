@@ -129,6 +129,9 @@
       last_name:
         type: string
         example: 'Adviser'
+      name:
+        type: string
+        example: Annette Adviser
   BusinessType:
     type: object
     description: "Business Type metadata"
@@ -271,6 +274,26 @@
         $ref: '#/definitions/Adviser'
       company:
         $ref: '#/definitions/CompanySlim'
+  ContactSlim:
+    type: object
+    required:
+    - id
+    - first_name
+    - last_name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      first_name:
+        type: string
+        example: George
+      last_name:
+        type: string
+        example: Theo
+      name:
+        type: string
+        example: George Theo
   CountryArray:
     type: array
     items:
@@ -343,6 +366,19 @@
       name:
         type: string
         example: 'Mr.'
+  TeamSlim:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: Investment Services Team
   TurnoverRange:
     type: object
     required:

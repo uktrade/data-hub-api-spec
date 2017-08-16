@@ -258,14 +258,6 @@
       project_code:
         type: string
         example: 'P-01234567'
-      project_manager_team:
-        $ref: '#/definitions/AdviserTeam'
-      project_manager:
-        $ref: '#/definitions/Adviser'
-      project_assurance_team:
-        $ref: '#/definitions/AdviserTeam'
-      project_assurance_advisor:
-        $ref: '#/definitions/Adviser'
   BusinessActivity:
     type: object
     required:
