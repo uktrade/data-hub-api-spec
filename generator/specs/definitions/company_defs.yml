@@ -278,8 +278,6 @@
     type: object
     required:
     - id
-    - first_name
-    - last_name
     properties:
       id:
         type: string
