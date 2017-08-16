@@ -223,6 +223,14 @@
       address_postcode:
         type: string
         example: 'SN1 1AA'
+      project_manager_team:
+        $ref: '#/definitions/AdviserTeam'
+      project_manager:
+        $ref: '#/definitions/Adviser'
+      project_assurance_team:
+        $ref: '#/definitions/AdviserTeam'
+      project_assurance_adviser:
+        $ref: '#/definitions/Adviser'
       team_members:
         $ref: '#/definitions/InvestmentTeamMemberArray'
         description: Additional team members assigned to this project. Read-only in this endpoint.
