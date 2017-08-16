@@ -116,11 +116,6 @@
         required: true
         schema:
           $ref: '#/definitions/Interaction'
-      - in: query
-        name: Archived
-        description: Update the interaction's status to Archived
-        required: false
-        type: boolean
       responses:
         200:
           description: item updated
