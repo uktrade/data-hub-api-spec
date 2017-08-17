@@ -1,0 +1,67 @@
+  Event:
+    type: object
+    description: A temporary object to represent events within data hub
+    required:
+    - name
+    - event_type
+    - start_date
+    - country
+    - team
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'New York fashion webinar'
+      start_date:
+        type: string
+        format: date
+        example: '2017-11-15'
+      address_line_1:
+        type: string
+        example: 'Birmingham Expo Centre'
+      address_line_2:
+        type: string
+        example: 'Edgbaston Road'
+      city:
+        type: string
+        example: 'Birmingham'
+      county:
+        type: string
+        example: 'West Midlands'
+      uk_region:
+        type: string
+        example: 'West Midlands'
+      active:
+        type: boolean
+      country:
+        $ref: '#/definitions/Country'
+      event_type:
+        $ref: '#/definitions/EventType'
+      team:
+        $ref: '#/definitions/AdviserTeam'
+  EventType:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Inward Mission'
+  EventList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 30
+        results:
+          type: array
+          items:
+            $ref: '#/definitions/Event'
