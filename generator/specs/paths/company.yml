@@ -56,6 +56,30 @@
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/company/{companyId}/audit:
+    get:
+      tags:
+      - company
+      summary: Get audit log
+      operationId: getCompanyAudit
+      description: |
+        Returns the audit log for a specified company
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID for a Data Hub company
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted company object
+          schema:
+            $ref: '#/definitions/AuditItemList'
+        404:
+          description: company does not exist
   /v3/company/{company_id}/archive:
     post:
       tags:
