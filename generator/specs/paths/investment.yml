@@ -56,17 +56,18 @@
           description: invalid input, object invalid
         409:
           description: investment already exists
-  /v3/investment/from/{time}:
+  /v3/investment/from:
     get:
       tags:
       - investment
-      summary: returns a summary of investment projects that have changed since a given time
+      - unimplemented
+      summary: returns a list of investment projects that have changed since a given time
       operationId: getprojectssincetime
-      description: Returns a summary list of investment projects that have been modified since the _from_ time; this API should *not* paginate as it is intended solely for the user of MI to ingest changes to FDI projects
+      description: Returns a list of investment projects that have been modified since the _from_ time; this API should *not* paginate as it is intended solely for the user of MI to ingest changes to FDI projects
       produces:
       - application/json
       parameters:
-      - in: path
+      - in: query
         name: time
         type: string
         format: date-time
@@ -76,36 +77,7 @@
         200:
           description: JSON formatted array of investment project summaries
           schema:
-            $ref: '#/definitions/InvestmentProjectsList'
-        400:
-          description: bad input parameter
-  /v3/investment/from/{startTime}/to/{endTime}:
-    get:
-      tags:
-      - investment
-      summary: returns a summary of investment projects that have changed since a given time
-      operationId: getprojectssincetime
-      description: Returns a summary list of investment projects that have been modified since the _from_ time and before the _to_ time; this API should *not* paginate as it is intended solely for the user of MI to ingest changes to FDI projects
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: startTime
-        type: string
-        format: date-time
-        description: RFC3339 formatted date time string
-        required: true
-      - in: path
-        name: endTime
-        type: string
-        format: date-time
-        description: RFC3339 formatted date time string
-        required: true
-      responses:
-        200:
-          description: JSON formatted array of investment project summaries
-          schema:
-            $ref: '#/definitions/InvestmentProjectsList'
+            $ref: '#/definitions/InvestmentProjectsListFull'
         400:
           description: bad input parameter
   /v3/investment/{investmentId}:

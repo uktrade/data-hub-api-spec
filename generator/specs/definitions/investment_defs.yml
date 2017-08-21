@@ -257,6 +257,19 @@
         $ref: '#/definitions/AdviserTeam'
       project_assurance_advisor:
         $ref: '#/definitions/Adviser'
+  InvestmentProjectsListFull:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/InvestmentProject'
   BusinessActivity:
     type: object
     required:
