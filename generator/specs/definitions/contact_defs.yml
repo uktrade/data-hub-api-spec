@@ -97,6 +97,17 @@
     type: array
     items:
       $ref: '#/definitions/Contact'
+  ContactList:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        $ref: '#/definitions/ContactArray'
   ContactSlim:
     type: object
     required:
