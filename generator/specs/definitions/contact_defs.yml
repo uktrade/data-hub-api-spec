@@ -50,12 +50,6 @@
       address_2:
         type: string
         example: '1 Woodlane'
-      address_3:
-        type: string
-        example: '1 Woodlane'
-      address_4:
-        type: string
-        example: '1 Woodlane'
       address_town:
         type: string
         example: 'London'
