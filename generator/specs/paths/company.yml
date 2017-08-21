@@ -46,11 +46,6 @@
         required: true
         schema:
           $ref: '#/definitions/Company'
-      - in: query
-        name: Archived
-        description: Update the company's status to Archived
-        required: false
-        type: boolean
       responses:
         200:
           description: item updated
