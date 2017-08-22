@@ -111,6 +111,30 @@
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/investment/{investmentId}/audit:
+    get:
+      tags:
+      - investment
+      summary: Get audit log
+      operationId: getInvestmentAudit
+      description: |
+        Returns the audit log for a specified investment project
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of an investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON investment object
+          schema:
+            $ref: '#/definitions/AuditItemList'
+        404:
+          description: investment project does not exist
   /v3/investment/{investmentId}/archive:
     post:
       tags:
