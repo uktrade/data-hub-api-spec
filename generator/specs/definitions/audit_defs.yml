@@ -12,6 +12,9 @@
     type: object
     description: An audit log entry containing changes made to an object
     properties:
+      id:
+        type: integer
+        example: 70
       user:
         $ref: '#/definitions/Adviser'
       timestamp:
