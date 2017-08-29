@@ -56,6 +56,30 @@
           description: invalid input, object invalid
         409:
           description: investment already exists
+  /v3/investment/from:
+    get:
+      tags:
+      - investment
+      - unimplemented
+      summary: returns a list of investment projects that have changed since a given time
+      operationId: getprojectssincetime
+      description: Returns a list of investment projects that have been modified since the _from_ time; this API should *not* paginate as it is intended solely for the user of MI to ingest changes to FDI projects
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: time
+        type: string
+        format: date-time
+        description: RFC3339 formatted date time string
+        required: true
+      responses:
+        200:
+          description: JSON formatted array of investment project summaries
+          schema:
+            $ref: '#/definitions/InvestmentProjectsListFull'
+        400:
+          description: bad input parameter
   /v3/investment/{investmentId}:
     get:
       tags:
