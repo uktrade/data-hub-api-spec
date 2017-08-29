@@ -19,18 +19,21 @@
         type: string
         format: date
         example: '2017-11-15'
-      address_line_1:
+      address_1:
         type: string
         example: 'Birmingham Expo Centre'
-      address_line_2:
+      address_2:
         type: string
         example: 'Edgbaston Road'
-      city:
+      address_town:
         type: string
         example: 'Birmingham'
-      county:
+      address_county:
         type: string
         example: 'West Midlands'
+      address_postcode:
+        type: string
+        example: 'BN1 1AA'
       uk_region:
         type: string
         example: 'West Midlands'
