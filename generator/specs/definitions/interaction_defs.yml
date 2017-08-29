@@ -1,0 +1,82 @@
+  Interaction:
+    type: object
+    description: An interaction (e.g. meeting, email) between DIT and a company
+    required:
+    - date
+    - dit_adviser
+    - dit_team
+    - interaction_type
+    - investment_project
+    - service
+    - subject
+    - notes
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      subject:
+        type: string
+        example: Exporting exhibition meeting
+      notes:
+        type: string
+        example:
+      date:
+        type: string
+        format: date
+        example: 2020-01-01
+      company:
+        $ref: '#/definitions/CompanySlim'
+      contact:
+        $ref: '#/definitions/ContactSlim'
+      dit_adviser:
+        $ref: '#/definitions/Adviser'
+      dit_team:
+        $ref: '#/definitions/TeamSlim'
+      interaction_type:
+        $ref: '#/definitions/InteractionType'
+      investment_project:
+        $ref: '#/definitions/InvestmentProjectSlim'
+      service:
+        $ref: '#/definitions/Service'
+  InteractionList:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/Interaction'
+  InteractionType:
+    type: object
+    description: "Interaction type (mode of communication) metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Face to face'
+  Service:
+    type: object
+    description: "Service metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Investment – Services'

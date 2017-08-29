@@ -1,0 +1,39 @@
+  AuditItemList:
+    type: object
+    description: A list of audit log entries, representing historical changes made to the referenced object
+    required:
+    - results
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/AuditItem'
+  AuditItem:
+    type: object
+    description: An audit log entry containing changes made to an object
+    properties:
+      id:
+        type: integer
+        example: 70
+      user:
+        $ref: '#/definitions/Adviser'
+      timestamp:
+        type: string
+        format: date-time
+        example: 2017-08-18T13:42:08.134932
+      comment:
+        type: string
+        description: Only used for changes made via admin pages
+        example: Changed telephone_number.
+      changes:
+        type: object
+        description: Mapping of changes with changed field names as keys
+        additionalProperties:
+          type: array
+          description: 'Array with exactly two items: [old value, new value]'
+          minItems: 2
+          maxItems: 2
+          items:
+            # JSON Schema supports items as an array, but this doesn't seem to work with OpenAPI 2.0
+            type: string
+            example: John
