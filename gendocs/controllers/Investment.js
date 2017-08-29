@@ -24,6 +24,10 @@ module.exports.createInvestment = function createInvestment (req, res, next) {
   Investment.createInvestment(req.swagger.params, res, next);
 };
 
+module.exports.getInvestmentAudit = function getInvestmentAudit (req, res, next) {
+  Investment.getInvestmentAudit(req.swagger.params, res, next);
+};
+
 module.exports.getInvestmentDocument = function getInvestmentDocument (req, res, next) {
   Investment.getInvestmentDocument(req.swagger.params, res, next);
 };
@@ -46,6 +50,10 @@ module.exports.getinvestment = function getinvestment (req, res, next) {
 
 module.exports.getprojectsforcompany = function getprojectsforcompany (req, res, next) {
   Investment.getprojectsforcompany(req.swagger.params, res, next);
+};
+
+module.exports.getprojectssincetime = function getprojectssincetime (req, res, next) {
+  Investment.getprojectssincetime(req.swagger.params, res, next);
 };
 
 module.exports.metadataBusinessActivity = function metadataBusinessActivity (req, res, next) {
