@@ -63,7 +63,7 @@
         type: array
         items:
           $ref: '#/definitions/AdviserTeam'
-      country:
+      address_country:
         $ref: '#/definitions/Country'
       lead_team:
         $ref: '#/definitions/AdviserTeam'
