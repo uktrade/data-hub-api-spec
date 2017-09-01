@@ -38,30 +38,6 @@
           description: invalid input, object invalid
         409:
           description: event already exists
-    patch:
-      tags:
-      - events
-      - unimplemented
-      summary: updates an event in the data hub database, typically used for setting active/inactive flag
-      operationId: createEvent
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      parameters:
-      - in: body
-        name: event
-        description: The event to create
-        required: true
-        schema:
-          $ref: '#/definitions/Event'
-      responses:
-        201:
-          description: item updated
-        400:
-          description: invalid input, object invalid
-        404:
-          description: no matching event found
   /v3/event/{eventId}:
     get:
       tags:
@@ -109,3 +85,34 @@
           description: bad request format
         404:
           description: no event found for the ID
+    patch:
+      tags:
+      - events
+      - unimplemented
+      summary: updates an event in the data hub database, typically used for setting active/inactive flag
+      operationId: createEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: eventId
+        description: UUID for a Data Hub event object
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: event
+        description: The event to create
+        required: true
+        schema:
+          $ref: '#/definitions/Event'
+      responses:
+        201:
+          description: item updated
+        400:
+          description: invalid input, object invalid
+        404:
+          description: no matching event found

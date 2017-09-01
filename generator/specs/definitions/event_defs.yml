@@ -6,7 +6,7 @@
     - event_type
     - start_date
     - country
-    - team
+    - lead_team
     properties:
       id:
         type: string
@@ -16,6 +16,10 @@
         type: string
         example: 'New York fashion webinar'
       start_date:
+        type: string
+        format: date
+        example: '2017-11-15'
+      end_date:
         type: string
         format: date
         example: '2017-11-15'
@@ -34,37 +38,51 @@
       address_postcode:
         type: string
         example: 'BN1 1AA'
-      uk_region:
+      event_type:
         type: string
-        example: 'West Midlands'
-      active:
-        type: boolean
+        enum:
+        - 'Seminar'
+        - 'Exhibition'
+        - 'Inward Mission'
+        - 'Outward Mission'
+        - 'UK region local service'
+      location_type:
+        type: string
+        enum:
+        - 'HQ'
+        - 'Post'
+        - 'Regional network'
+        - 'Other'
+      notes:
+        type: string
+        example: 'Webinar for new exporters'
+      reference_code:
+        type: string
+        example: 'WEB/EX-1'
+      additional_teams:
+        type: array
+        items:
+          $ref: '#/definitions/AdviserTeam'
       country:
         $ref: '#/definitions/Country'
-      event_type:
-        $ref: '#/definitions/EventType'
-      team:
+      lead_team:
         $ref: '#/definitions/AdviserTeam'
-  EventType:
-    type: object
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      name:
-        type: string
-        example: 'Inward Mission'
+      related_programmes:
+        $ref: '#/definitions/RelatedProgrammes'
+      uk_region:
+        $ref: '#/definitions/UKRegion'
   EventList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 30
-        results:
-          type: array
-          items:
-            $ref: '#/definitions/Event'
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/Event'
+  RelatedProgrammes:
+    type: object
