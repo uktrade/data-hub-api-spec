@@ -22,6 +22,39 @@ exports.archiveCompany = function(args, res, next) {
   res.end();
 }
 
+exports.getCompanyAudit = function(args, res, next) {
+  /**
+   * Get audit log
+   * Returns the audit log for a specified company 
+   *
+   * companyId UUID UUID for a Data Hub company
+   * returns AuditItemList
+   **/
+  var examples = {};
+  examples['application/json'] = {
+  "results" : [ {
+    "changes" : {
+      "key" : [ "John" ]
+    },
+    "comment" : "Changed telephone_number.",
+    "id" : 70,
+    "user" : {
+      "name" : "Annette Adviser",
+      "last_name" : "Adviser",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "first_name" : "Annette"
+    },
+    "timestamp" : "2017-08-18T13:42:08.135+0000"
+  } ]
+};
+  if (Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  } else {
+    res.end();
+  }
+}
+
 exports.getchcompany = function(args, res, next) {
   /**
    * Returns a Companies House company from the Data Hub repository
@@ -84,6 +117,7 @@ exports.getcompany = function(args, res, next) {
   "archived" : true,
   "archived_reason" : "Company dissolved",
   "account_manager" : {
+    "name" : "Annette Adviser",
     "last_name" : "Adviser",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
     "first_name" : "Annette"
@@ -99,15 +133,8 @@ exports.getcompany = function(args, res, next) {
     "count" : 30,
     "results" : [ {
       "name" : "Marriot Hotels - New hotel in Manchester",
-      "project_assurance_advisor" : "",
       "project_code" : "P-01234567",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-      "project_manager" : "",
-      "project_manager_team" : {
-        "name" : "Sector Advisory Services",
-        "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      },
-      "project_assurance_team" : ""
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     } ]
   },
   "business_type" : {
@@ -194,7 +221,6 @@ exports.updateCompany = function(args, res, next) {
    *
    * companyId String UUID for a Data Hub company
    * company Company Company data to update
-   * archived Boolean Update the company's status to Archived (optional)
    * no response value expected for this operation
    **/
   res.end();

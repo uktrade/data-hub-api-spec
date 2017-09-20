@@ -75,16 +75,35 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/Company'
-      - in: query
-        name: Archived
-        description: Update the company's status to Archived
-        required: false
-        type: boolean
       responses:
         200:
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/company/{companyId}/audit:
+    get:
+      tags:
+      - company
+      summary: Get audit log
+      operationId: getCompanyAudit
+      description: |
+        Returns the audit log for a specified company
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: companyId
+        description: UUID for a Data Hub company
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON API formatted company object
+          schema:
+            $ref: '#/definitions/AuditItemList'
+        404:
+          description: company does not exist
   /v3/company/{company_id}/archive:
     post:
       tags:
@@ -188,6 +207,317 @@ paths:
           description: bad input parameter
         404:
           description: company does not exist
+  /v3/contact:
+    get:
+      tags:
+      - contact
+      summary: Gets a list of contacts in the system
+      operationId: getAllContacts
+      description: Gets a list of contacts, optionally filtered by company
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: company_id
+        description: UUID of a company to filter results by
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: offset
+        type: integer
+        description: Pagination parameter
+        required: false
+      - in: query
+        name: limit
+        type: integer
+        description: Pagination parameter
+        required: false
+      responses:
+        200:
+          description: Single page of results
+          schema:
+            $ref: '#/definitions/ContactList'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - contact
+      summary: Creates a contact
+      operationId: createContact
+      description: Adds a Data Hub contact from a Companies House contact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contact
+        description: Contact to add
+        required: true
+        schema:
+          $ref: '#/definitions/Contact'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: contact already exists
+  /v3/contact/{contactId}:
+    get:
+      tags:
+      - contact
+      summary: Gets a single contact
+      operationId: getContact
+      description: |
+        Passing in a contact UUID returns a Data Hub contact object
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID for a Data Hub contact
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON contact object
+          schema:
+            $ref: '#/definitions/Contact'
+        400:
+          description: bad input parameter
+        404:
+          description: contact does not exist
+    patch:
+      tags:
+      - contact
+      summary: Updates a contact
+      operationId: updateContact
+      description: Updates an existing contact, changing only the fields specified in the request
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID for a Data Hub contact
+        type: string
+        required: true
+      - in: body
+        name: contact
+        description: Contact data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Contact'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
+  /v3/contact/{contactId}/audit:
+    get:
+      tags:
+      - contact
+      summary: Get audit log for a contact
+      operationId: getContactAudit
+      description: |
+        Returns the audit log for a specified contact
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID for a Data Hub contact
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON contact object
+          schema:
+            $ref: '#/definitions/AuditItemList'
+        404:
+          description: contact does not exist
+  /v3/contact/{contactId}/archive:
+    post:
+      tags:
+      - contact
+      summary: Archives a contact with a reason
+      operationId: archiveContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID of contact
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveReason'
+      responses:
+        201:
+          description: contact archived
+        400:
+          description: input invalid
+        404:
+          description: contact is already archived or does not exist
+  /v3/contact/{contactId}/unarchive:
+    post:
+      tags:
+      - contact
+      summary: Unarchives a contact
+      operationId: unarchiveContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID of contact
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: contact unarchived
+        400:
+          description: input invalid
+        404:
+          description: contact is already archived or does not exist
+  /v3/interaction:
+    get:
+      tags:
+      - interaction
+      summary: Gets a list of interactions in the system
+      operationId: getAllInteractions
+      description: Gets a list of interactions, optionally filtered by company, contact or investment project
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: company_id
+        description: UUID of a company
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: contact_id
+        description: UUID of a contact
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: investment_project_id
+        description: UUID of a investment project
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: offset
+        type: integer
+        description: Pagination parameter
+        required: false
+      - in: query
+        name: limit
+        type: integer
+        description: Pagination parameter
+        required: false
+      responses:
+        200:
+          description: Single page of results
+          schema:
+            $ref: '#/definitions/InteractionList'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - interaction
+      summary: Creates an interaction
+      operationId: createInteraction
+      description: Adds an interaction against a company, contact and/or investment project
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: interaction
+        description: Interaction data
+        required: true
+        schema:
+          $ref: '#/definitions/Interaction'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+  /v3/interaction/{interactionId}:
+    get:
+      tags:
+      - interaction
+      summary: Gets an individual interaction
+      operationId: getInteraction
+      description: |
+        Gets an individual interaction given an interaction ID
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: interactionId
+        description: An interaction UUID
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: Interaction object
+          schema:
+            $ref: '#/definitions/Interaction'
+        400:
+          description: bad input parameter
+        404:
+          description: interaction does not exist
+    patch:
+      tags:
+      - interaction
+      summary: Updates an interaction
+      operationId: updateInteraction
+      description: Updates an existing interaction, only changing fields specified in the request
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: interactionId
+        description: UUID for a Data Hub interaction
+        type: string
+        required: true
+      - in: body
+        name: interaction
+        description: Interaction data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Interaction'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
   /v3/investment:
     get:
       tags:
@@ -246,6 +576,30 @@ paths:
           description: invalid input, object invalid
         409:
           description: investment already exists
+  /v3/investment/from:
+    get:
+      tags:
+      - investment
+      - unimplemented
+      summary: returns a list of investment projects that have changed since a given time
+      operationId: getprojectssincetime
+      description: Returns a list of investment projects that have been modified since the _from_ time; this API should *not* paginate as it is intended solely for the user of MI to ingest changes to FDI projects
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: time
+        type: string
+        format: date-time
+        description: RFC3339 formatted date time string
+        required: true
+      responses:
+        200:
+          description: JSON formatted array of investment project summaries
+          schema:
+            $ref: '#/definitions/InvestmentProjectsListFull'
+        400:
+          description: bad input parameter
   /v3/investment/{investmentId}:
     get:
       tags:
@@ -301,6 +655,30 @@ paths:
           description: item updated
         400:
           description: invalid input, object invalid
+  /v3/investment/{investmentId}/audit:
+    get:
+      tags:
+      - investment
+      summary: Get audit log
+      operationId: getInvestmentAudit
+      description: |
+        Returns the audit log for a specified investment project
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: investmentId
+        description: UUID of an investment project
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON investment object
+          schema:
+            $ref: '#/definitions/AuditItemList'
+        404:
+          description: investment project does not exist
   /v3/investment/{investmentId}/archive:
     post:
       tags:
@@ -768,6 +1146,45 @@ paths:
           schema:
             $ref: '#/definitions/InvestmentSearchResults'
 definitions:
+  AuditItemList:
+    type: object
+    description: A list of audit log entries, representing historical changes made to the referenced object
+    required:
+    - results
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/AuditItem'
+  AuditItem:
+    type: object
+    description: An audit log entry containing changes made to an object
+    properties:
+      id:
+        type: integer
+        example: 70
+      user:
+        $ref: '#/definitions/Adviser'
+      timestamp:
+        type: string
+        format: date-time
+        example: 2017-08-18T13:42:08.134932
+      comment:
+        type: string
+        description: Only used for changes made via admin pages
+        example: Changed telephone_number.
+      changes:
+        type: object
+        description: Mapping of changes with changed field names as keys
+        additionalProperties:
+          type: array
+          description: 'Array with exactly two items: [old value, new value]'
+          minItems: 2
+          maxItems: 2
+          items:
+            # JSON Schema supports items as an array, but this doesn't seem to work with OpenAPI 2.0
+            type: string
+            example: John
   Company:
     type: object
     description: A representation of the Data Hub company object
@@ -899,6 +1316,9 @@ definitions:
       last_name:
         type: string
         example: 'Adviser'
+      name:
+        type: string
+        example: Annette Adviser
   BusinessType:
     type: object
     description: "Business Type metadata"
@@ -942,105 +1362,6 @@ definitions:
       name:
         type: string
         example: 'Company Registered Name Ltd'
-  ContactArray:
-    type: array
-    items:
-      $ref: '#/definitions/Contact'
-  Contact:
-    type: object
-    required:
-      - id
-      - first_name
-      - last_name
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      first_name:
-        type: string
-        example: 'Alison'
-      last_name:
-        type: string
-        example: 'Contact'
-      archived:
-        type: boolean
-      archived_on:
-        format: date-time
-        example: 2014-07-23T10:36:04
-      archived_reason:
-        type: string
-        example: 'Archived Reason'
-      created_on:
-        format: date-time
-        example: 2014-07-23T10:36:04
-      modified_on:
-        format: date-time
-        example: 2014-07-23T10:36:04
-      title:
-        $ref: '#/definitions/ContactTitle'
-      primary:
-        type: boolean
-      telephone_countrycode:
-        type: string
-        example: '+44'
-      telephone_number:
-        type: string
-        example: '12345678'
-      email:
-        type: string
-        example: 'valid@email.address'
-      address_same_as_company:
-        type: boolean
-      address_1:
-        type: string
-        example: '1 Woodlane'
-      address_2:
-        type: string
-        example: '1 Woodlane'
-      address_3:
-        type: string
-        example: '1 Woodlane'
-      address_4:
-        type: string
-        example: '1 Woodlane'
-      address_town:
-        type: string
-        example: 'London'
-      address_county:
-        type: string
-        example: 'County'
-      address_postcode:
-        type: string
-        example: 'ABC 123'
-      telephone_alternative:
-        type: string
-        example: 'Telegraph'
-      email_alternative:
-        type: string
-        example: 'alternative@email.address'
-      notes:
-        type: string
-        example: 'Notes'
-      job_title:
-        type: string
-        example: 'Director'
-      contactable_by_dit:
-        type: boolean
-      contactable_by_dit_partners:
-        type: boolean
-      contactable_by_email:
-        type: boolean
-      contactable_by_phone:
-        type: boolean
-      address_country:
-        $ref: '#/definitions/Country'
-      advisor:
-        $ref: '#/definitions/Adviser'
-      archived_by:
-        $ref: '#/definitions/Adviser'
-      company:
-        $ref: '#/definitions/CompanySlim'
   CountryArray:
     type: array
     items:
@@ -1100,19 +1421,19 @@ definitions:
       name:
         type: string
         example: 'HeadquarterType'
-  ContactTitle:
+  TeamSlim:
     type: object
-    description: "Title of the contact"
     required:
-    - id
-    - name
+      - id
+      - name
     properties:
       id:
         type: string
         format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
       name:
         type: string
-        example: 'Mr.'
+        example: Investment Services Team
   TurnoverRange:
     type: object
     required:
@@ -1202,6 +1523,217 @@ definitions:
         type: string
         example: 'Company has ceased trading'
 
+  Contact:
+    type: object
+    required:
+      - id
+      - first_name
+      - last_name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      first_name:
+        type: string
+        example: 'Alison'
+      last_name:
+        type: string
+        example: 'Contact'
+      archived:
+        type: boolean
+      archived_on:
+        format: date-time
+        example: 2014-07-23T10:36:04
+      archived_reason:
+        type: string
+        example: 'Archived Reason'
+      created_on:
+        format: date-time
+        example: 2014-07-23T10:36:04
+      modified_on:
+        format: date-time
+        example: 2014-07-23T10:36:04
+      title:
+        $ref: '#/definitions/ContactTitle'
+      primary:
+        type: boolean
+      telephone_countrycode:
+        type: string
+        example: '+44'
+      telephone_number:
+        type: string
+        example: '12345678'
+      email:
+        type: string
+        example: 'valid@email.address'
+      address_same_as_company:
+        type: boolean
+      address_1:
+        type: string
+        example: '1 Woodlane'
+      address_2:
+        type: string
+        example: '1 Woodlane'
+      address_town:
+        type: string
+        example: 'London'
+      address_county:
+        type: string
+        example: 'County'
+      address_postcode:
+        type: string
+        example: 'ABC 123'
+      telephone_alternative:
+        type: string
+        example: 'Telegraph'
+      email_alternative:
+        type: string
+        example: 'alternative@email.address'
+      notes:
+        type: string
+        example: 'Notes'
+      job_title:
+        type: string
+        example: 'Director'
+      contactable_by_dit:
+        type: boolean
+      contactable_by_dit_partners:
+        type: boolean
+      contactable_by_email:
+        type: boolean
+      contactable_by_phone:
+        type: boolean
+      address_country:
+        $ref: '#/definitions/Country'
+      adviser:
+        $ref: '#/definitions/Adviser'
+      archived_by:
+        $ref: '#/definitions/Adviser'
+      company:
+        $ref: '#/definitions/CompanySlim'
+  ContactArray:
+    type: array
+    items:
+      $ref: '#/definitions/Contact'
+  ContactList:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        $ref: '#/definitions/ContactArray'
+  ContactSlim:
+    type: object
+    required:
+    - id
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: George Theo
+  ContactTitle:
+    type: object
+    description: "Title of the contact"
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        example: 'Mr'
+  Interaction:
+    type: object
+    description: An interaction (e.g. meeting, email) between DIT and a company
+    required:
+    - date
+    - dit_adviser
+    - dit_team
+    - interaction_type
+    - investment_project
+    - service
+    - subject
+    - notes
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      subject:
+        type: string
+        example: Exporting exhibition meeting
+      notes:
+        type: string
+        example:
+      date:
+        type: string
+        format: date
+        example: 2020-01-01
+      company:
+        $ref: '#/definitions/CompanySlim'
+      contact:
+        $ref: '#/definitions/ContactSlim'
+      dit_adviser:
+        $ref: '#/definitions/Adviser'
+      dit_team:
+        $ref: '#/definitions/TeamSlim'
+      interaction_type:
+        $ref: '#/definitions/InteractionType'
+      investment_project:
+        $ref: '#/definitions/InvestmentProjectSlim'
+      service:
+        $ref: '#/definitions/Service'
+  InteractionList:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/Interaction'
+  InteractionType:
+    type: object
+    description: "Interaction type (mode of communication) metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Face to face'
+  Service:
+    type: object
+    description: "Service metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'Investment – Services'
   InvestmentProject:
     type: object
     description: A Data Hub investment project
@@ -1240,10 +1772,10 @@ definitions:
         type: string
         format: date
         example: '2018-11-01'
-      actual_land_date_documents:
-        $ref: '#/definitions/Documents'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
+      other_business_activity:
+        type: string
       client_contacts:
         $ref: '#/definitions/ContactArray'
       client_relationship_manager:
@@ -1257,8 +1789,6 @@ definitions:
         example: '2017-05-01'
       fdi_type:
         $ref: '#/definitions/FDIType'
-      fdi_type_documents:
-        $ref: '#/definitions/Documents'
       fdi_value:
         $ref: '#/definitions/FDIValue'
       id:
@@ -1282,15 +1812,42 @@ definitions:
       not_shareable_reason:
         type: string
         example: 'Company has asked us to keep project quiet until official announcement'
-      operations_commenced_documents:
-        $ref: '#/definitions/Documents'
       stage:
         $ref: '#/definitions/Stage'
+      status:
+        type: string
+        enum:
+        - ongoing
+        - delayed
+        - abandoned
+        - lost
+      reason_delayed:
+        type: string
+        example: Problems getting planning permission
+      reason_abandoned:
+        type: string
+        example: Funding lost
+      date_abandoned:
+        type: string
+        format: date
+        example: '2018-11-01'
+      reason_lost:
+        type: string
+        example: Cheaper in other country
+      date_lost:
+        type: string
+        format: date
+        example: '2018-11-01'
+      country_lost_to:
+        $ref: '#/definitions/Country'
       project_code:
         type: string
         example: 'P-01234567'
       project_shareable:
         type: boolean
+      quotable_as_public_case_study:
+        type: boolean
+        example: false
       referral_source_activity:
         $ref: '#/definitions/ReferralSourceActivity'
       referral_source_activity_marketing:
@@ -1320,16 +1877,12 @@ definitions:
         - 1_low
         - 2_medium
         - 3_high
-      total_investment_documents:
-        $ref: '#/definitions/Documents'
       client_cannot_provide_total_investment:
         type: boolean
         example: false
       foreign_equity_investment:
         type: integer
         example: 100000000
-      foreign_equity_investment_documents:
-        $ref: '#/definitions/Documents'
       client_cannot_provide_foreign_investment:
         type: boolean
         example: false
@@ -1345,31 +1898,21 @@ definitions:
       will_new_jobs_last_two_years:
         type: boolean
         example: false
-      number_new_jobs_documents:
-        $ref: '#/definitions/Documents'
       number_safeguarded_jobs:
         type: integer
         example: 100
-      number_safeguarded_jobs_documents:
-        $ref: '#/definitions/Documents'
       r_and_d_budget:
         type: boolean
         example: false
-      r_and_d_budget_documents:
-        $ref: '#/definitions/Documents'
       non_fdi_r_and_d_budget:
         type: boolean
         example: false
       new_tech_to_uk:
         type: boolean
         example: false
-      new_tech_to_uk_documents:
-        $ref: '#/definitions/Documents'
       export_revenue:
         type: boolean
         example: false
-      export_revenue_documents:
-        $ref: '#/definitions/Documents'
       average_salary:
         type: object
         required:
@@ -1383,8 +1926,6 @@ definitions:
           name:
             type: string
             example: '£35,000'
-      average_salary_documents:
-        $ref: '#/definitions/Documents'
       requirements_complete:
         type: boolean
         example: false
@@ -1418,6 +1959,14 @@ definitions:
       address_postcode:
         type: string
         example: 'SN1 1AA'
+      project_manager_team:
+        $ref: '#/definitions/AdviserTeam'
+      project_manager:
+        $ref: '#/definitions/Adviser'
+      project_assurance_team:
+        $ref: '#/definitions/AdviserTeam'
+      project_assurance_adviser:
+        $ref: '#/definitions/Adviser'
       team_members:
         $ref: '#/definitions/InvestmentTeamMemberArray'
         description: Additional team members assigned to this project. Read-only in this endpoint.
@@ -1453,14 +2002,19 @@ definitions:
       project_code:
         type: string
         example: 'P-01234567'
-      project_manager_team:
-        $ref: '#/definitions/AdviserTeam'
-      project_manager:
-        $ref: '#/definitions/Adviser'
-      project_assurance_team:
-        $ref: '#/definitions/AdviserTeam'
-      project_assurance_advisor:
-        $ref: '#/definitions/Adviser'
+  InvestmentProjectsListFull:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/InvestmentProject'
   BusinessActivity:
     type: object
     required:
@@ -1683,6 +2237,9 @@ definitions:
       doc_type:
         type: string
         example: "new_tech_to_uk_documents"
+        description: 'one of actual_land_date, hq, foreign_ownership, operations_commenced, total_investment,
+        foreign_equity_investment, number_new_jobs, number_safeguarded_jobs, r_and_d_budget, new_tech_to_uk,
+        export_revenue, average_salary'
       filename:
         type: string
         example: "press_release.pdf"

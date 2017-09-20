@@ -1,0 +1,188 @@
+  /v3/contact:
+    get:
+      tags:
+      - contact
+      summary: Gets a list of contacts in the system
+      operationId: getAllContacts
+      description: Gets a list of contacts, optionally filtered by company
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: company_id
+        description: UUID of a company to filter results by
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: false
+        type: string
+        format: uuid
+      - in: query
+        name: offset
+        type: integer
+        description: Pagination parameter
+        required: false
+      - in: query
+        name: limit
+        type: integer
+        description: Pagination parameter
+        required: false
+      responses:
+        200:
+          description: Single page of results
+          schema:
+            $ref: '#/definitions/ContactList'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - contact
+      summary: Creates a contact
+      operationId: createContact
+      description: Adds a Data Hub contact from a Companies House contact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contact
+        description: Contact to add
+        required: true
+        schema:
+          $ref: '#/definitions/Contact'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: contact already exists
+  /v3/contact/{contactId}:
+    get:
+      tags:
+      - contact
+      summary: Gets a single contact
+      operationId: getContact
+      description: |
+        Passing in a contact UUID returns a Data Hub contact object
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID for a Data Hub contact
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON contact object
+          schema:
+            $ref: '#/definitions/Contact'
+        400:
+          description: bad input parameter
+        404:
+          description: contact does not exist
+    patch:
+      tags:
+      - contact
+      summary: Updates a contact
+      operationId: updateContact
+      description: Updates an existing contact, changing only the fields specified in the request
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID for a Data Hub contact
+        type: string
+        required: true
+      - in: body
+        name: contact
+        description: Contact data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Contact'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
+  /v3/contact/{contactId}/audit:
+    get:
+      tags:
+      - contact
+      summary: Get audit log for a contact
+      operationId: getContactAudit
+      description: |
+        Returns the audit log for a specified contact
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID for a Data Hub contact
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: JSON contact object
+          schema:
+            $ref: '#/definitions/AuditItemList'
+        404:
+          description: contact does not exist
+  /v3/contact/{contactId}/archive:
+    post:
+      tags:
+      - contact
+      summary: Archives a contact with a reason
+      operationId: archiveContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID of contact
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ArchiveReason'
+      responses:
+        201:
+          description: contact archived
+        400:
+          description: input invalid
+        404:
+          description: contact is already archived or does not exist
+  /v3/contact/{contactId}/unarchive:
+    post:
+      tags:
+      - contact
+      summary: Unarchives a contact
+      operationId: unarchiveContact
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: contactId
+        description: UUID of contact
+        required: true
+        type: string
+        format: uuid
+      responses:
+        201:
+          description: contact unarchived
+        400:
+          description: input invalid
+        404:
+          description: contact is already archived or does not exist
