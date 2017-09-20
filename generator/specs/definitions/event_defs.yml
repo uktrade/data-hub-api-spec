@@ -4,9 +4,10 @@
     required:
     - name
     - event_type
-    - start_date
-    - country
-    - lead_team
+    - address_1
+    - address_town
+    - address_country
+    - service
     properties:
       id:
         type: string
@@ -38,31 +39,19 @@
       address_postcode:
         type: string
         example: 'BN1 1AA'
-      event_type:
-        type: string
-        enum:
-        - 'Seminar'
-        - 'Exhibition'
-        - 'Inward Mission'
-        - 'Outward Mission'
-        - 'UK region local service'
-      location_type:
-        type: string
-        enum:
-        - 'HQ'
-        - 'Post'
-        - 'Regional network'
-        - 'Other'
       notes:
         type: string
         example: 'Webinar for new exporters'
-      reference_code:
-        type: string
-        example: 'WEB/EX-1'
-      additional_teams:
+      teams:
         type: array
         items:
           $ref: '#/definitions/AdviserTeam'
+      event_type:
+        $ref: '#/definitions/EventType'
+      location_type:
+        $ref: '#/definitions/LocationType'
+      organiser:
+        $ref: '#/definitions/Adviser'
       address_country:
         $ref: '#/definitions/Country'
       lead_team:
@@ -71,6 +60,9 @@
         $ref: '#/definitions/RelatedProgrammes'
       uk_region:
         $ref: '#/definitions/UKRegion'
+        description: DIT UK region, required when address_country is United Kingdom
+      service:
+        $ref: '#/definitions/Service'
   EventList:
     type: object
     required:
@@ -96,4 +88,29 @@
         name:
           type: string
           example: 'HVO Specialist Contribution'
-
+  EventType:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Seminar
+  LocationType:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Post
