@@ -3,11 +3,24 @@
     description: A list of audit log entries, representing historical changes made to the referenced object
     required:
     - results
+    - count
     properties:
       results:
         type: array
         items:
           $ref: '#/definitions/AuditItem'
+      count:
+        type: integer
+        example: 99
+        description: Total number of audit log entries for this object
+      next:
+        type: string
+        example: https://api/collection/id/audit?offset=400&limit=100
+        description: URL for the next page of results (null if this is the last page)
+      previous:
+        type: string
+        example: https://api/collection/id/audit?offset=200&limit=100
+        description: URL for the previous page of results (null if this is the first page)
   AuditItem:
     type: object
     description: An audit log entry containing changes made to an object
