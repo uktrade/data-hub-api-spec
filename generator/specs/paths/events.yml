@@ -1,0 +1,91 @@
+  /v3/event:
+    get:
+      tags:
+      - events
+      summary: returns a list of active events
+      operationId: getEvents
+      produces:
+      - application/json
+      responses:
+        200:
+          description: list of current active events
+          schema:
+            $ref: '#/definitions/EventList'
+        404:
+          description: no events in the system
+    post:
+      tags:
+      - events
+      summary: creates an event and inserts into the data hub database
+      operationId: createEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: event
+        description: The event to create
+        required: true
+        schema:
+          $ref: '#/definitions/Event'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: event already exists
+  /v3/event/{eventId}:
+    get:
+      tags:
+      - events
+      summary: returns a single event
+      operationId: getEvent
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: eventId
+        description: UUID for a Data Hub event object
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: desired event
+          schema:
+            $ref: '#/definitions/Event'
+        404:
+          description: no event found for the ID
+    patch:
+      tags:
+      - events
+      summary: updates an event in the data hub database
+      operationId: patchEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: eventId
+        description: UUID for a Data Hub event object
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: event
+        description: The event data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Event'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
+        404:
+          description: no matching event found

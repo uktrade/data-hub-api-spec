@@ -1,0 +1,116 @@
+  Event:
+    type: object
+    description: A temporary object to represent events within data hub
+    required:
+    - name
+    - event_type
+    - address_1
+    - address_town
+    - address_country
+    - service
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'New York fashion webinar'
+      start_date:
+        type: string
+        format: date
+        example: '2017-11-15'
+      end_date:
+        type: string
+        format: date
+        example: '2017-11-15'
+      address_1:
+        type: string
+        example: 'Birmingham Expo Centre'
+      address_2:
+        type: string
+        example: 'Edgbaston Road'
+      address_town:
+        type: string
+        example: 'Birmingham'
+      address_county:
+        type: string
+        example: 'West Midlands'
+      address_postcode:
+        type: string
+        example: 'BN1 1AA'
+      notes:
+        type: string
+        example: 'Webinar for new exporters'
+      teams:
+        type: array
+        items:
+          $ref: '#/definitions/AdviserTeam'
+      event_type:
+        $ref: '#/definitions/EventType'
+      location_type:
+        $ref: '#/definitions/LocationType'
+      organiser:
+        $ref: '#/definitions/Adviser'
+      address_country:
+        $ref: '#/definitions/Country'
+      lead_team:
+        $ref: '#/definitions/AdviserTeam'
+      related_programmes:
+        $ref: '#/definitions/RelatedProgrammes'
+      uk_region:
+        $ref: '#/definitions/UKRegion'
+        description: DIT UK region, required when address_country is United Kingdom
+      service:
+        $ref: '#/definitions/Service'
+  EventList:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/Event'
+  RelatedProgrammes:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        name:
+          type: string
+          example: 'HVO Specialist Contribution'
+  EventType:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Seminar
+  LocationType:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Post
