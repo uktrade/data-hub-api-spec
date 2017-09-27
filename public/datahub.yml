@@ -395,6 +395,97 @@ paths:
           description: input invalid
         404:
           description: contact is already archived or does not exist
+  /v3/event:
+    get:
+      tags:
+      - events
+      summary: returns a list of active events
+      operationId: getEvents
+      produces:
+      - application/json
+      responses:
+        200:
+          description: list of current active events
+          schema:
+            $ref: '#/definitions/EventList'
+        404:
+          description: no events in the system
+    post:
+      tags:
+      - events
+      summary: creates an event and inserts into the data hub database
+      operationId: createEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: event
+        description: The event to create
+        required: true
+        schema:
+          $ref: '#/definitions/Event'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: event already exists
+  /v3/event/{eventId}:
+    get:
+      tags:
+      - events
+      summary: returns a single event
+      operationId: getEvent
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: eventId
+        description: UUID for a Data Hub event object
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: desired event
+          schema:
+            $ref: '#/definitions/Event'
+        404:
+          description: no event found for the ID
+    patch:
+      tags:
+      - events
+      summary: updates an event in the data hub database
+      operationId: patchEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: eventId
+        description: UUID for a Data Hub event object
+        default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: event
+        description: The event data to update
+        required: true
+        schema:
+          $ref: '#/definitions/Event'
+      responses:
+        200:
+          description: item updated
+        400:
+          description: invalid input, object invalid
+        404:
+          description: no matching event found
   /v3/interaction:
     get:
       tags:
@@ -1151,11 +1242,24 @@ definitions:
     description: A list of audit log entries, representing historical changes made to the referenced object
     required:
     - results
+    - count
     properties:
       results:
         type: array
         items:
           $ref: '#/definitions/AuditItem'
+      count:
+        type: integer
+        example: 99
+        description: Total number of audit log entries for this object
+      next:
+        type: string
+        example: https://api/collection/id/audit?offset=400&limit=100
+        description: URL for the next page of results (null if this is the last page)
+      previous:
+        type: string
+        example: https://api/collection/id/audit?offset=200&limit=100
+        description: URL for the previous page of results (null if this is the first page)
   AuditItem:
     type: object
     description: An audit log entry containing changes made to an object
@@ -1652,6 +1756,122 @@ definitions:
       name:
         type: string
         example: 'Mr'
+  Event:
+    type: object
+    description: A temporary object to represent events within data hub
+    required:
+    - name
+    - event_type
+    - address_1
+    - address_town
+    - address_country
+    - service
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'New York fashion webinar'
+      start_date:
+        type: string
+        format: date
+        example: '2017-11-15'
+      end_date:
+        type: string
+        format: date
+        example: '2017-11-15'
+      address_1:
+        type: string
+        example: 'Birmingham Expo Centre'
+      address_2:
+        type: string
+        example: 'Edgbaston Road'
+      address_town:
+        type: string
+        example: 'Birmingham'
+      address_county:
+        type: string
+        example: 'West Midlands'
+      address_postcode:
+        type: string
+        example: 'BN1 1AA'
+      notes:
+        type: string
+        example: 'Webinar for new exporters'
+      teams:
+        type: array
+        items:
+          $ref: '#/definitions/AdviserTeam'
+      event_type:
+        $ref: '#/definitions/EventType'
+      location_type:
+        $ref: '#/definitions/LocationType'
+      organiser:
+        $ref: '#/definitions/Adviser'
+      address_country:
+        $ref: '#/definitions/Country'
+      lead_team:
+        $ref: '#/definitions/AdviserTeam'
+      related_programmes:
+        $ref: '#/definitions/RelatedProgrammes'
+      uk_region:
+        $ref: '#/definitions/UKRegion'
+        description: DIT UK region, required when address_country is United Kingdom
+      service:
+        $ref: '#/definitions/Service'
+  EventList:
+    type: object
+    required:
+    - count
+    - results
+    properties:
+      count:
+        type: integer
+        example: 30
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/Event'
+  RelatedProgrammes:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+        name:
+          type: string
+          example: 'HVO Specialist Contribution'
+  EventType:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Seminar
+  LocationType:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Post
   Interaction:
     type: object
     description: An interaction (e.g. meeting, email) between DIT and a company

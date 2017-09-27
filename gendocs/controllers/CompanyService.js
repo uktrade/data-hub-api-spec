@@ -32,6 +32,9 @@ exports.getCompanyAudit = function(args, res, next) {
    **/
   var examples = {};
   examples['application/json'] = {
+  "next" : "https://api/collection/id/audit?offset=400&limit=100",
+  "previous" : "https://api/collection/id/audit?offset=200&limit=100",
+  "count" : 99,
   "results" : [ {
     "changes" : {
       "key" : [ "John" ]
