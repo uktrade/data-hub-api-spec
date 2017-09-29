@@ -9,6 +9,11 @@
       - application/json
       parameters:
       - in: query
+        name: class
+        description: Interaction class (interaction or service_delivery)
+        required: false
+        type: string
+      - in: query
         name: company_id
         description: UUID of a company
         default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
