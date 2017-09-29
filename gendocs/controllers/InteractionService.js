@@ -16,6 +16,7 @@ exports.getAllInteractions = function(args, res, next) {
    * Gets a list of interactions in the system
    * Gets a list of interactions, optionally filtered by company, contact or investment project
    *
+   * _class String Interaction class (interaction or service_delivery) (optional)
    * company_id UUID UUID of a company (optional)
    * contact_id UUID UUID of a contact (optional)
    * investment_project_id UUID UUID of a investment project (optional)
@@ -28,6 +29,10 @@ exports.getAllInteractions = function(args, res, next) {
   "count" : 30,
   "results" : [ {
     "date" : "2020-01-01T00:00:00.000+0000",
+    "communication_channel" : {
+      "name" : "Face to face",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "dit_adviser" : {
       "name" : "Annette Adviser",
       "last_name" : "Adviser",
@@ -41,6 +46,10 @@ exports.getAllInteractions = function(args, res, next) {
     },
     "notes" : "null",
     "subject" : "Exporting exhibition meeting",
+    "dit_team" : {
+      "name" : "Investment Services Team",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "service" : {
       "name" : "Investment – Services",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -49,19 +58,16 @@ exports.getAllInteractions = function(args, res, next) {
       "name" : "George Theo",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "interaction_type" : {
-      "name" : "Face to face",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "company" : {
       "name" : "Company Registered Name Ltd",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-    "dit_team" : {
-      "name" : "Investment Services Team",
+    "event" : {
+      "name" : "New York fashion webinar",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    }
+    },
+    "class" : "aeiou"
   } ]
 };
   if (Object.keys(examples).length > 0) {
@@ -83,6 +89,10 @@ exports.getInteraction = function(args, res, next) {
   var examples = {};
   examples['application/json'] = {
   "date" : "2020-01-01T00:00:00.000+0000",
+  "communication_channel" : {
+    "name" : "Face to face",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "dit_adviser" : {
     "name" : "Annette Adviser",
     "last_name" : "Adviser",
@@ -96,6 +106,10 @@ exports.getInteraction = function(args, res, next) {
   },
   "notes" : "null",
   "subject" : "Exporting exhibition meeting",
+  "dit_team" : {
+    "name" : "Investment Services Team",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "service" : {
     "name" : "Investment – Services",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -104,19 +118,16 @@ exports.getInteraction = function(args, res, next) {
     "name" : "George Theo",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
-  "interaction_type" : {
-    "name" : "Face to face",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
   "company" : {
     "name" : "Company Registered Name Ltd",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   },
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "dit_team" : {
-    "name" : "Investment Services Team",
+  "event" : {
+    "name" : "New York fashion webinar",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  }
+  },
+  "class" : "aeiou"
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');

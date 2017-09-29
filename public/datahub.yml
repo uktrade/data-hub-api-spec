@@ -497,6 +497,11 @@ paths:
       - application/json
       parameters:
       - in: query
+        name: class
+        description: Interaction class (interaction or service_delivery)
+        required: false
+        type: string
+      - in: query
         name: company_id
         description: UUID of a company
         default: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
@@ -1821,6 +1826,19 @@ definitions:
         description: DIT UK region, required when address_country is United Kingdom
       service:
         $ref: '#/definitions/Service'
+  EventSlim:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'New York fashion webinar'
   EventList:
     type: object
     required:
@@ -1876,10 +1894,10 @@ definitions:
     type: object
     description: An interaction (e.g. meeting, email) between DIT and a company
     required:
+    - class
     - date
     - dit_adviser
     - dit_team
-    - interaction_type
     - investment_project
     - service
     - subject
@@ -1889,6 +1907,11 @@ definitions:
         type: string
         format: uuid
         example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      class:
+        type: string
+        enum:
+        - interaction
+        - service_delivery
       subject:
         type: string
         example: Exporting exhibition meeting
@@ -1899,6 +1922,8 @@ definitions:
         type: string
         format: date
         example: 2020-01-01
+      communication_channel:
+        $ref: '#/definitions/InteractionCommunicationChannel'
       company:
         $ref: '#/definitions/CompanySlim'
       contact:
@@ -1907,8 +1932,8 @@ definitions:
         $ref: '#/definitions/Adviser'
       dit_team:
         $ref: '#/definitions/TeamSlim'
-      interaction_type:
-        $ref: '#/definitions/InteractionType'
+      event:
+        $ref: '#/definitions/EventSlim'
       investment_project:
         $ref: '#/definitions/InvestmentProjectSlim'
       service:
@@ -1926,9 +1951,9 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Interaction'
-  InteractionType:
+  InteractionCommunicationChannel:
     type: object
-    description: "Interaction type (mode of communication) metadata"
+    description: "Channel (mode of communication) metadata"
     required:
       - id
       - name
