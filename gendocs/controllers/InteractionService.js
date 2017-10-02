@@ -16,7 +16,7 @@ exports.getAllInteractions = function(args, res, next) {
    * Gets a list of interactions in the system
    * Gets a list of interactions, optionally filtered by company, contact or investment project
    *
-   * _class String Interaction class (interaction or service_delivery) (optional)
+   * kind String Interaction kind (interaction or service_delivery) (optional)
    * company_id UUID UUID of a company (optional)
    * contact_id UUID UUID of a contact (optional)
    * investment_project_id UUID UUID of a investment project (optional)
@@ -45,6 +45,7 @@ exports.getAllInteractions = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "notes" : "null",
+    "kind" : "aeiou",
     "subject" : "Exporting exhibition meeting",
     "dit_team" : {
       "name" : "Investment Services Team",
@@ -66,8 +67,7 @@ exports.getAllInteractions = function(args, res, next) {
     "event" : {
       "name" : "New York fashion webinar",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
-    "class" : "aeiou"
+    }
   } ]
 };
   if (Object.keys(examples).length > 0) {
@@ -105,6 +105,7 @@ exports.getInteraction = function(args, res, next) {
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "notes" : "null",
+  "kind" : "aeiou",
   "subject" : "Exporting exhibition meeting",
   "dit_team" : {
     "name" : "Investment Services Team",
@@ -126,8 +127,7 @@ exports.getInteraction = function(args, res, next) {
   "event" : {
     "name" : "New York fashion webinar",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
-  "class" : "aeiou"
+  }
 };
   if (Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');

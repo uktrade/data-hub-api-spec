@@ -497,8 +497,8 @@ paths:
       - application/json
       parameters:
       - in: query
-        name: class
-        description: Interaction class (interaction or service_delivery)
+        name: kind
+        description: Interaction kind (interaction or service_delivery)
         required: false
         type: string
       - in: query
@@ -1894,7 +1894,7 @@ definitions:
     type: object
     description: An interaction (e.g. meeting, email) between DIT and a company
     required:
-    - class
+    - kind
     - date
     - dit_adviser
     - dit_team
@@ -1907,7 +1907,7 @@ definitions:
         type: string
         format: uuid
         example: d290f1ee-6c54-4b01-90e6-d701748f0851
-      class:
+      kind:
         type: string
         enum:
         - interaction

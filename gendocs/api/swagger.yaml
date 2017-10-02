@@ -503,9 +503,9 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "class"
+      - name: "kind"
         in: "query"
-        description: "Interaction class (interaction or service_delivery)"
+        description: "Interaction kind (interaction or service_delivery)"
         required: false
         type: "string"
       - name: "company_id"
@@ -1914,11 +1914,11 @@ definitions:
   Interaction:
     type: "object"
     required:
-    - "class"
     - "date"
     - "dit_adviser"
     - "dit_team"
     - "investment_project"
+    - "kind"
     - "notes"
     - "service"
     - "subject"
@@ -1927,7 +1927,7 @@ definitions:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      class:
+      kind:
         type: "string"
         enum:
         - "interaction"
