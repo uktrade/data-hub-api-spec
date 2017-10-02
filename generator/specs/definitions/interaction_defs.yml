@@ -2,7 +2,7 @@
     type: object
     description: An interaction (e.g. meeting, email) between DIT and a company
     required:
-    - class
+    - kind
     - date
     - dit_adviser
     - dit_team
@@ -15,7 +15,7 @@
         type: string
         format: uuid
         example: d290f1ee-6c54-4b01-90e6-d701748f0851
-      class:
+      kind:
         type: string
         enum:
         - interaction

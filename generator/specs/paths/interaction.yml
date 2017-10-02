@@ -9,8 +9,8 @@
       - application/json
       parameters:
       - in: query
-        name: class
-        description: Interaction class (interaction or service_delivery)
+        name: kind
+        description: Interaction kind (interaction or service_delivery)
         required: false
         type: string
       - in: query
