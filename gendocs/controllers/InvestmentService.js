@@ -250,6 +250,10 @@ exports.getinvestment = function(args, res, next) {
   "approved_commitment_to_invest" : true,
   "approved_fdi" : true,
   "reason_abandoned" : "Funding lost",
+  "client_relationship_manager_team" : {
+    "name" : "Sector Advisory Services",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "actual_land_date" : "2018-11-01",
   "investor_company" : "",
   "address_postcode" : "SN1 1AA",
@@ -271,16 +275,17 @@ exports.getinvestment = function(args, res, next) {
   "export_revenue" : false,
   "some_new_jobs" : false,
   "uk_company" : "",
+  "investor_company_country" : {
+    "name" : "France",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "name" : "Marriot Hotels - New hotel in Manchester",
   "client_considering_other_countries" : false,
   "value_complete" : false,
   "business_activities" : "",
   "status" : "aeiou",
   "requirements_complete" : false,
-  "country_lost_to" : {
-    "name" : "France",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
+  "country_lost_to" : "",
   "likelihood_of_landing" : 60,
   "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
   "referral_source_activity_event" : "Moscow Hotels Expo 2017",
@@ -315,10 +320,7 @@ exports.getinvestment = function(args, res, next) {
     "name" : "Good",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
-  "project_manager_team" : {
-    "name" : "Sector Advisory Services",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
+  "project_manager_team" : "",
   "government_assistance" : false,
   "competitor_countries" : "",
   "stage" : {
@@ -418,6 +420,10 @@ exports.getprojectssincetime = function(args, res, next) {
     "approved_commitment_to_invest" : true,
     "approved_fdi" : true,
     "reason_abandoned" : "Funding lost",
+    "client_relationship_manager_team" : {
+      "name" : "Sector Advisory Services",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "actual_land_date" : "2018-11-01",
     "investor_company" : "",
     "address_postcode" : "SN1 1AA",
@@ -439,16 +445,17 @@ exports.getprojectssincetime = function(args, res, next) {
     "export_revenue" : false,
     "some_new_jobs" : false,
     "uk_company" : "",
+    "investor_company_country" : {
+      "name" : "France",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "name" : "Marriot Hotels - New hotel in Manchester",
     "client_considering_other_countries" : false,
     "value_complete" : false,
     "business_activities" : "",
     "status" : "aeiou",
     "requirements_complete" : false,
-    "country_lost_to" : {
-      "name" : "France",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
+    "country_lost_to" : "",
     "likelihood_of_landing" : 60,
     "description" : "Marriott hotels wishes to open in a new part of Manchester under-served by its existing hotels",
     "referral_source_activity_event" : "Moscow Hotels Expo 2017",
@@ -483,10 +490,7 @@ exports.getprojectssincetime = function(args, res, next) {
       "name" : "Good",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
-    "project_manager_team" : {
-      "name" : "Sector Advisory Services",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
+    "project_manager_team" : "",
     "government_assistance" : false,
     "competitor_countries" : "",
     "stage" : {

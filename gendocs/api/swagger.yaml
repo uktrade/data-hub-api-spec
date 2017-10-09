@@ -2046,6 +2046,9 @@ definitions:
         $ref: "#/definitions/ContactArray"
       client_relationship_manager:
         $ref: "#/definitions/Adviser"
+      client_relationship_manager_team:
+        description: "Read-only team of the client relationship manager"
+        $ref: "#/definitions/AdviserTeam"
       description:
         type: "string"
         example: "Marriott hotels wishes to open in a new part of Manchester under-served\
@@ -2066,6 +2069,9 @@ definitions:
         $ref: "#/definitions/CompanySlim"
       investor_company:
         $ref: "#/definitions/CompanySlim"
+      investor_company_country:
+        description: "Read-only country of the investor company"
+        $ref: "#/definitions/Country"
       investment_type:
         $ref: "#/definitions/InvestmentType"
       name:
