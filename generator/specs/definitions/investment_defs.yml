@@ -36,6 +36,9 @@
         type: string
         format: date
         example: '2018-11-01'
+      anonymous_description:
+        type: string
+        example: 'An international hotel chain wishes to expand into the north of the UK'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       other_business_activity:
