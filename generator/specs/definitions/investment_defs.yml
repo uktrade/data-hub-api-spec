@@ -10,7 +10,6 @@
     - investor_company
     - investment_type
     - name
-    - nda_signed
     - referral_source_activity
     - sector
     properties:
@@ -82,9 +81,6 @@
         example: false
       non_fdi_type:
         $ref: '#/definitions/NonFDIType'
-      not_shareable_reason:
-        type: string
-        example: 'Company has asked us to keep project quiet until official announcement'
       stage:
         $ref: '#/definitions/Stage'
       status:
@@ -116,8 +112,6 @@
       project_code:
         type: string
         example: 'P-01234567'
-      project_shareable:
-        type: boolean
       quotable_as_public_case_study:
         type: boolean
         example: false
