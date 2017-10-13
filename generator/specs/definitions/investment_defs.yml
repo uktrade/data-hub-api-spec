@@ -179,7 +179,10 @@
         example: false
       non_fdi_r_and_d_budget:
         type: boolean
+        description: Is this project associated with a non-FDI R&D project?
         example: false
+      associated_non_fdi_r_and_d_project:
+        $ref: '#/definitions/InvestmentProjectSlim'
       new_tech_to_uk:
         type: boolean
         example: false
