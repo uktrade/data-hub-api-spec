@@ -10,7 +10,6 @@
     - investor_company
     - investment_type
     - name
-    - nda_signed
     - referral_source_activity
     - sector
     properties:
@@ -36,6 +35,9 @@
         type: string
         format: date
         example: '2018-11-01'
+      anonymous_description:
+        type: string
+        example: 'An international hotel chain wishes to expand into the north of the UK'
       business_activities:
         $ref: '#/definitions/BusinessActivities'
       other_business_activity:
@@ -79,9 +81,6 @@
         example: false
       non_fdi_type:
         $ref: '#/definitions/NonFDIType'
-      not_shareable_reason:
-        type: string
-        example: 'Company has asked us to keep project quiet until official announcement'
       stage:
         $ref: '#/definitions/Stage'
       status:
@@ -113,8 +112,6 @@
       project_code:
         type: string
         example: 'P-01234567'
-      project_shareable:
-        type: boolean
       quotable_as_public_case_study:
         type: boolean
         example: false
@@ -176,7 +173,10 @@
         example: false
       non_fdi_r_and_d_budget:
         type: boolean
+        description: Is this project associated with a non-FDI R&D project?
         example: false
+      associated_non_fdi_r_and_d_project:
+        $ref: '#/definitions/InvestmentProjectSlim'
       new_tech_to_uk:
         type: boolean
         example: false
