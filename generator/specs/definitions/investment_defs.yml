@@ -203,13 +203,13 @@
       client_requirements:
         type: string
         example: 'Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....'
-      address_line_1:
+      address_1:
         type: string
         example: '19 Railway Cuttings'
-      address_line_2:
+      address_2:
         type: string
         example: 'East Cheam'
-      address_line_3:
+      address_town:
         type: string
         example: 'Surrey'
       client_considering_other_countries:
