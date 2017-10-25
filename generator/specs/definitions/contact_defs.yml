@@ -73,8 +73,16 @@
         example: 'Director'
       contactable_by_dit:
         type: boolean
-      contactable_by_dit_partners:
+        default: false
+      contactable_by_uk_dit_partners:
         type: boolean
+        default: false
+      contactable_by_overseas_dit_partners:
+        type: boolean
+        default: false
+      accepts_dit_email_marketing:
+        type: boolean
+        default: false
       contactable_by_email:
         type: boolean
       contactable_by_phone:
