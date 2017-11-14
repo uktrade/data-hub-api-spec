@@ -79,8 +79,6 @@
       nda_signed:
         type: boolean
         example: false
-      non_fdi_type:
-        $ref: '#/definitions/NonFDIType'
       stage:
         $ref: '#/definitions/Stage'
       status:
@@ -217,6 +215,12 @@
         example: false
       competitor_countries:
         $ref: '#/definitions/CountryArray'
+      investor_type:
+        $ref: '#/definitions/InvestorType'
+      level_of_involvement:
+        $ref: '#/definitions/InvestmentInvolvementLevel'
+      specific_programme:
+        $ref: '#/definitions/InvestmentProgramme'
       uk_region_locations:
         $ref: '#/definitions/UKRegions'
       strategic_drivers:
@@ -350,20 +354,6 @@
       name:
         type: string
         example: 'Merger'
-  NonFDIType:
-    type: object
-    description: "Non-FDI Metadata"
-    required:
-    - id
-    - name
-    properties:
-      id:
-        type: string
-        format: uuid
-        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
-      name:
-        type: string
-        example: 'Advanced Engineering Supply Chain'
   FDIValue:
     type: object
     description: "FDI value categorisation"
@@ -423,6 +413,34 @@
       name:
         type: string
         example: 'Access to market'
+  InvestmentInvolvementLevel:
+    type: object
+    description: Level of involvement for investment projects
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'FDI Hub + Post + LEP'
+  InvestmentProgramme:
+    type: object
+    description: Related programmes for investment projects
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'GREAT branded'
   InvestmentTeamMember:
     type: object
     required:
@@ -452,6 +470,20 @@
       name:
         type: string
         example: 'FDI'
+  InvestorType:
+    type: object
+    description: Typr of investor (new or existing)
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: New investor
   UKRegions:
     type: array
     items:
