@@ -10,12 +10,21 @@
         type: string
         format: uuid
         example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      reference_code:
+        type: string
+        example: 'ORG-10096257'
       name:
         type: string
         example: 'EXAMPLE Ltd'
       trading_name:
         type: string
         example: 'Example Trading'
+      company_number:
+        type: string
+        example: 01234567
+      vat_number:
+        type: string
+        example: 012345678
       uk_based:
         type: boolean
       registered_address_1:
@@ -89,6 +98,8 @@
         $ref: '#/definitions/EmployeeRange'
       export_to_countries:
         $ref: '#/definitions/CountryArray'
+      export_experience_category:
+        $ref: '#/definitions/ExportExperienceCategory'
       future_interest_countries:
         $ref: '#/definitions/CountryArray'
       headquarter_type:
@@ -207,6 +218,19 @@
       name:
         type: string
         example: '10 - 100'
+  ExportExperienceCategory:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+      name:
+        type: string
+        example: 'New exporter'
   Sector:
     type: object
     description: "Metadata"
