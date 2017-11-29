@@ -107,6 +107,7 @@ exports.getcompany = function(args, res, next) {
     "name" : "Company Registered Name Ltd",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   },
+  "vat_number" : "1.2345678E7",
   "trading_address_country" : "",
   "employee_range" : {
     "name" : "10 - 100",
@@ -130,6 +131,10 @@ exports.getcompany = function(args, res, next) {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   },
   "export_to_countries" : "",
+  "export_experience_category" : {
+    "name" : "New exporter",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "trading_address_town" : "ANYTOWN",
   "children" : "",
   "investment_projects_invested_in" : {
@@ -146,6 +151,7 @@ exports.getcompany = function(args, res, next) {
   },
   "one_list_account_owner" : "",
   "trading_address_county" : "ANYSHIRE",
+  "reference_code" : "ORG-10096257",
   "uk_based" : true,
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "sector" : {
@@ -194,6 +200,7 @@ exports.getcompany = function(args, res, next) {
     "name" : "France",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
+  "company_number" : "342391",
   "created_on" : "2014-07-23T10:36:04.000+0000",
   "trading_name" : "Example Trading",
   "name" : "EXAMPLE Ltd",

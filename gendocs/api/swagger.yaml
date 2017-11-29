@@ -1344,12 +1344,21 @@ definitions:
         type: "string"
         format: "uuid"
         example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      reference_code:
+        type: "string"
+        example: "ORG-10096257"
       name:
         type: "string"
         example: "EXAMPLE Ltd"
       trading_name:
         type: "string"
         example: "Example Trading"
+      company_number:
+        type: "string"
+        example: "342391"
+      vat_number:
+        type: "string"
+        example: "1.2345678E7"
       uk_based:
         type: "boolean"
       registered_address_1:
@@ -1423,6 +1432,8 @@ definitions:
         $ref: "#/definitions/EmployeeRange"
       export_to_countries:
         $ref: "#/definitions/CountryArray"
+      export_experience_category:
+        $ref: "#/definitions/ExportExperienceCategory"
       future_interest_countries:
         $ref: "#/definitions/CountryArray"
       headquarter_type:
@@ -1542,6 +1553,19 @@ definitions:
         type: "string"
         example: "10 - 100"
     description: "Employee range metadata"
+  ExportExperienceCategory:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "New exporter"
   Sector:
     type: "object"
     required:
@@ -1736,8 +1760,16 @@ definitions:
         example: "Director"
       contactable_by_dit:
         type: "boolean"
-      contactable_by_dit_partners:
+        default: false
+      contactable_by_uk_dit_partners:
         type: "boolean"
+        default: false
+      contactable_by_overseas_dit_partners:
+        type: "boolean"
+        default: false
+      accepts_dit_email_marketing:
+        type: "boolean"
+        default: false
       contactable_by_email:
         type: "boolean"
       contactable_by_phone:
@@ -2011,7 +2043,6 @@ definitions:
     - "investment_type"
     - "investor_company"
     - "name"
-    - "nda_signed"
     - "referral_source_activity"
     - "sector"
     properties:
@@ -2038,6 +2069,10 @@ definitions:
         type: "string"
         format: "date"
         example: "2018-11-01"
+      anonymous_description:
+        type: "string"
+        example: "An international hotel chain wishes to expand into the north of\
+          \ the UK"
       business_activities:
         $ref: "#/definitions/BusinessActivities"
       other_business_activity:
@@ -2080,11 +2115,6 @@ definitions:
       nda_signed:
         type: "boolean"
         example: false
-      non_fdi_type:
-        $ref: "#/definitions/NonFDIType"
-      not_shareable_reason:
-        type: "string"
-        example: "Company has asked us to keep project quiet until official announcement"
       stage:
         $ref: "#/definitions/Stage"
       status:
@@ -2116,8 +2146,6 @@ definitions:
       project_code:
         type: "string"
         example: "P-01234567"
-      project_shareable:
-        type: "boolean"
       quotable_as_public_case_study:
         type: "boolean"
         example: false
@@ -2181,6 +2209,9 @@ definitions:
       non_fdi_r_and_d_budget:
         type: "boolean"
         example: false
+        description: "Is this project associated with a non-FDI R&D project?"
+      associated_non_fdi_r_and_d_project:
+        $ref: "#/definitions/InvestmentProjectSlim"
       new_tech_to_uk:
         type: "boolean"
         example: false
@@ -2212,6 +2243,12 @@ definitions:
         example: false
       competitor_countries:
         $ref: "#/definitions/CountryArray"
+      investor_type:
+        $ref: "#/definitions/InvestorType"
+      level_of_involvement:
+        $ref: "#/definitions/InvestmentInvolvementLevel"
+      specific_programme:
+        $ref: "#/definitions/InvestmentProgramme"
       uk_region_locations:
         $ref: "#/definitions/UKRegions"
       strategic_drivers:
@@ -2347,20 +2384,6 @@ definitions:
         type: "string"
         example: "Merger"
     description: "FDI Metadata"
-  NonFDIType:
-    type: "object"
-    required:
-    - "id"
-    - "name"
-    properties:
-      id:
-        type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      name:
-        type: "string"
-        example: "Advanced Engineering Supply Chain"
-    description: "Non-FDI Metadata"
   FDIValue:
     type: "object"
     required:
@@ -2420,6 +2443,34 @@ definitions:
         type: "string"
         example: "Access to market"
     description: "Strategic Driver metadata"
+  InvestmentInvolvementLevel:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "FDI Hub + Post + LEP"
+    description: "Level of involvement for investment projects"
+  InvestmentProgramme:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "GREAT branded"
+    description: "Related programmes for investment projects"
   InvestmentTeamMember:
     type: "object"
     required:
@@ -2449,6 +2500,20 @@ definitions:
         type: "string"
         example: "FDI"
     description: "Investment Type metadata - one of FDI, Non-FDI, Commitment to Invest"
+  InvestorType:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "New investor"
+    description: "Typr of investor (new or existing)"
   UKRegions:
     type: "array"
     items:

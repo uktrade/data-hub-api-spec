@@ -57,6 +57,7 @@ exports.getContact = function(args, res, next) {
   examples['application/json'] = {
   "archived_by" : "",
   "notes" : "Notes",
+  "contactable_by_uk_dit_partners" : true,
   "address_1" : "1 Woodlane",
   "address_2" : "1 Woodlane",
   "telephone_number" : "12345678",
@@ -65,9 +66,11 @@ exports.getContact = function(args, res, next) {
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
   },
   "telephone_alternative" : "Telegraph",
+  "accepts_dit_email_marketing" : true,
   "archived" : true,
   "archived_reason" : "Archived Reason",
   "contactable_by_phone" : true,
+  "contactable_by_overseas_dit_partners" : true,
   "contactable_by_dit" : true,
   "company" : {
     "name" : "Company Registered Name Ltd",
@@ -92,7 +95,6 @@ exports.getContact = function(args, res, next) {
   "address_county" : "County",
   "telephone_countrycode" : "+44",
   "address_same_as_company" : true,
-  "contactable_by_dit_partners" : true,
   "contactable_by_email" : true,
   "email_alternative" : "alternative@email.address",
   "address_town" : "London",

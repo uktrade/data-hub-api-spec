@@ -17,6 +17,7 @@ exports.datahubSearch = function(args, res, next) {
       "name" : "Company Registered Name Ltd",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
+    "vat_number" : "1.2345678E7",
     "trading_address_country" : "",
     "employee_range" : {
       "name" : "10 - 100",
@@ -40,6 +41,10 @@ exports.datahubSearch = function(args, res, next) {
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
     "export_to_countries" : "",
+    "export_experience_category" : {
+      "name" : "New exporter",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "trading_address_town" : "ANYTOWN",
     "children" : "",
     "investment_projects_invested_in" : {
@@ -56,6 +61,7 @@ exports.datahubSearch = function(args, res, next) {
     },
     "one_list_account_owner" : "",
     "trading_address_county" : "ANYSHIRE",
+    "reference_code" : "ORG-10096257",
     "uk_based" : true,
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
     "sector" : {
@@ -104,6 +110,7 @@ exports.datahubSearch = function(args, res, next) {
       "name" : "France",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "company_number" : "342391",
     "created_on" : "2014-07-23T10:36:04.000+0000",
     "trading_name" : "Example Trading",
     "name" : "EXAMPLE Ltd",
@@ -118,12 +125,19 @@ exports.datahubSearch = function(args, res, next) {
     "estimated_land_date" : "2017-05-01",
     "total_investment" : 145000000,
     "client_requirements" : "Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....",
+    "level_of_involvement" : {
+      "name" : "FDI Hub + Post + LEP",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "date_abandoned" : "2018-11-01",
     "quotable_as_public_case_study" : false,
     "approved_landed" : true,
+    "investor_type" : {
+      "name" : "New investor",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "non_fdi_r_and_d_budget" : false,
     "project_assurance_adviser" : "",
-    "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
     "incomplete_fields" : [ "total_investment" ],
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
@@ -140,6 +154,7 @@ exports.datahubSearch = function(args, res, next) {
     "project_assurance_team" : "",
     "approved_commitment_to_invest" : true,
     "approved_fdi" : true,
+    "associated_non_fdi_r_and_d_project" : "",
     "reason_abandoned" : "Funding lost",
     "client_relationship_manager_team" : {
       "name" : "Sector Advisory Services",
@@ -154,7 +169,6 @@ exports.datahubSearch = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "priority" : "aeiou",
-    "project_shareable" : true,
     "foreign_equity_investment" : 100000000,
     "referral_source_advisor" : "",
     "nda_signed" : false,
@@ -188,6 +202,7 @@ exports.datahubSearch = function(args, res, next) {
     "approved_high_value" : true,
     "strategic_drivers" : "",
     "team_complete" : false,
+    "anonymous_description" : "An international hotel chain wishes to expand into the north of the UK",
     "r_and_d_budget" : false,
     "address_line_1" : "19 Railway Cuttings",
     "will_new_jobs_last_two_years" : false,
@@ -210,16 +225,16 @@ exports.datahubSearch = function(args, res, next) {
     },
     "project_manager_team" : "",
     "government_assistance" : false,
+    "specific_programme" : {
+      "name" : "GREAT branded",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "competitor_countries" : "",
     "stage" : {
       "name" : "Active",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "new_tech_to_uk" : false,
-    "non_fdi_type" : {
-      "name" : "Advanced Engineering Supply Chain",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "team_members" : "",
     "approved_good_value" : true,
     "intermediate_company" : ""
@@ -227,6 +242,7 @@ exports.datahubSearch = function(args, res, next) {
   "contacts" : [ {
     "archived_by" : "",
     "notes" : "Notes",
+    "contactable_by_uk_dit_partners" : true,
     "address_1" : "1 Woodlane",
     "address_2" : "1 Woodlane",
     "telephone_number" : "12345678",
@@ -235,9 +251,11 @@ exports.datahubSearch = function(args, res, next) {
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
     "telephone_alternative" : "Telegraph",
+    "accepts_dit_email_marketing" : true,
     "archived" : true,
     "archived_reason" : "Archived Reason",
     "contactable_by_phone" : true,
+    "contactable_by_overseas_dit_partners" : true,
     "contactable_by_dit" : true,
     "company" : "",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
@@ -251,7 +269,6 @@ exports.datahubSearch = function(args, res, next) {
     "address_county" : "County",
     "telephone_countrycode" : "+44",
     "address_same_as_company" : true,
-    "contactable_by_dit_partners" : true,
     "contactable_by_email" : true,
     "email_alternative" : "alternative@email.address",
     "address_town" : "London",
@@ -283,6 +300,7 @@ exports.datahubSearch_0 = function(args, res, next) {
       "name" : "Company Registered Name Ltd",
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
+    "vat_number" : "1.2345678E7",
     "trading_address_country" : "",
     "employee_range" : {
       "name" : "10 - 100",
@@ -306,6 +324,10 @@ exports.datahubSearch_0 = function(args, res, next) {
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
     "export_to_countries" : "",
+    "export_experience_category" : {
+      "name" : "New exporter",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "trading_address_town" : "ANYTOWN",
     "children" : "",
     "investment_projects_invested_in" : {
@@ -322,6 +344,7 @@ exports.datahubSearch_0 = function(args, res, next) {
     },
     "one_list_account_owner" : "",
     "trading_address_county" : "ANYSHIRE",
+    "reference_code" : "ORG-10096257",
     "uk_based" : true,
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
     "sector" : {
@@ -370,6 +393,7 @@ exports.datahubSearch_0 = function(args, res, next) {
       "name" : "France",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
+    "company_number" : "342391",
     "created_on" : "2014-07-23T10:36:04.000+0000",
     "trading_name" : "Example Trading",
     "name" : "EXAMPLE Ltd",
@@ -398,6 +422,7 @@ exports.datahubSearch_1 = function(args, res, next) {
   "results" : [ {
     "archived_by" : "",
     "notes" : "Notes",
+    "contactable_by_uk_dit_partners" : true,
     "address_1" : "1 Woodlane",
     "address_2" : "1 Woodlane",
     "telephone_number" : "12345678",
@@ -406,9 +431,11 @@ exports.datahubSearch_1 = function(args, res, next) {
       "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91"
     },
     "telephone_alternative" : "Telegraph",
+    "accepts_dit_email_marketing" : true,
     "archived" : true,
     "archived_reason" : "Archived Reason",
     "contactable_by_phone" : true,
+    "contactable_by_overseas_dit_partners" : true,
     "contactable_by_dit" : true,
     "company" : {
       "name" : "Company Registered Name Ltd",
@@ -433,7 +460,6 @@ exports.datahubSearch_1 = function(args, res, next) {
     "address_county" : "County",
     "telephone_countrycode" : "+44",
     "address_same_as_company" : true,
-    "contactable_by_dit_partners" : true,
     "contactable_by_email" : true,
     "email_alternative" : "alternative@email.address",
     "address_town" : "London",
@@ -463,12 +489,19 @@ exports.datahubSearch_2 = function(args, res, next) {
     "estimated_land_date" : "2017-05-01",
     "total_investment" : 145000000,
     "client_requirements" : "Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....",
+    "level_of_involvement" : {
+      "name" : "FDI Hub + Post + LEP",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "date_abandoned" : "2018-11-01",
     "quotable_as_public_case_study" : false,
     "approved_landed" : true,
+    "investor_type" : {
+      "name" : "New investor",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "non_fdi_r_and_d_budget" : false,
     "project_assurance_adviser" : "",
-    "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
     "incomplete_fields" : [ "total_investment" ],
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
@@ -493,6 +526,11 @@ exports.datahubSearch_2 = function(args, res, next) {
     "project_assurance_team" : "",
     "approved_commitment_to_invest" : true,
     "approved_fdi" : true,
+    "associated_non_fdi_r_and_d_project" : {
+      "name" : "Marriot Hotels - New hotel in Manchester",
+      "project_code" : "P-01234567",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "reason_abandoned" : "Funding lost",
     "client_relationship_manager_team" : {
       "name" : "Sector Advisory Services",
@@ -507,7 +545,6 @@ exports.datahubSearch_2 = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "priority" : "aeiou",
-    "project_shareable" : true,
     "foreign_equity_investment" : 100000000,
     "referral_source_advisor" : "",
     "nda_signed" : false,
@@ -544,6 +581,7 @@ exports.datahubSearch_2 = function(args, res, next) {
     "approved_high_value" : true,
     "strategic_drivers" : "",
     "team_complete" : false,
+    "anonymous_description" : "An international hotel chain wishes to expand into the north of the UK",
     "r_and_d_budget" : false,
     "address_line_1" : "19 Railway Cuttings",
     "will_new_jobs_last_two_years" : false,
@@ -566,16 +604,16 @@ exports.datahubSearch_2 = function(args, res, next) {
     },
     "project_manager_team" : "",
     "government_assistance" : false,
+    "specific_programme" : {
+      "name" : "GREAT branded",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "competitor_countries" : "",
     "stage" : {
       "name" : "Active",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "new_tech_to_uk" : false,
-    "non_fdi_type" : {
-      "name" : "Advanced Engineering Supply Chain",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "team_members" : "",
     "approved_good_value" : true,
     "intermediate_company" : {

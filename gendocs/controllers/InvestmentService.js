@@ -219,12 +219,19 @@ exports.getinvestment = function(args, res, next) {
   "estimated_land_date" : "2017-05-01",
   "total_investment" : 145000000,
   "client_requirements" : "Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....",
+  "level_of_involvement" : {
+    "name" : "FDI Hub + Post + LEP",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "date_abandoned" : "2018-11-01",
   "quotable_as_public_case_study" : false,
   "approved_landed" : true,
+  "investor_type" : {
+    "name" : "New investor",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "non_fdi_r_and_d_budget" : false,
   "project_assurance_adviser" : "",
-  "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
   "incomplete_fields" : [ "total_investment" ],
   "referral_source_activity_marketing" : {
     "name" : "Press advertisement",
@@ -249,6 +256,11 @@ exports.getinvestment = function(args, res, next) {
   "project_assurance_team" : "",
   "approved_commitment_to_invest" : true,
   "approved_fdi" : true,
+  "associated_non_fdi_r_and_d_project" : {
+    "name" : "Marriot Hotels - New hotel in Manchester",
+    "project_code" : "P-01234567",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "reason_abandoned" : "Funding lost",
   "client_relationship_manager_team" : {
     "name" : "Sector Advisory Services",
@@ -263,7 +275,6 @@ exports.getinvestment = function(args, res, next) {
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "priority" : "aeiou",
-  "project_shareable" : true,
   "foreign_equity_investment" : 100000000,
   "referral_source_advisor" : "",
   "nda_signed" : false,
@@ -300,6 +311,7 @@ exports.getinvestment = function(args, res, next) {
   "approved_high_value" : true,
   "strategic_drivers" : "",
   "team_complete" : false,
+  "anonymous_description" : "An international hotel chain wishes to expand into the north of the UK",
   "r_and_d_budget" : false,
   "address_line_1" : "19 Railway Cuttings",
   "will_new_jobs_last_two_years" : false,
@@ -322,16 +334,16 @@ exports.getinvestment = function(args, res, next) {
   },
   "project_manager_team" : "",
   "government_assistance" : false,
+  "specific_programme" : {
+    "name" : "GREAT branded",
+    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+  },
   "competitor_countries" : "",
   "stage" : {
     "name" : "Active",
     "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
   },
   "new_tech_to_uk" : false,
-  "non_fdi_type" : {
-    "name" : "Advanced Engineering Supply Chain",
-    "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-  },
   "team_members" : "",
   "approved_good_value" : true,
   "intermediate_company" : {
@@ -389,12 +401,19 @@ exports.getprojectssincetime = function(args, res, next) {
     "estimated_land_date" : "2017-05-01",
     "total_investment" : 145000000,
     "client_requirements" : "Marriott are looking to expand into a city or town where they do not currently have a presence, or have room for expansion....",
+    "level_of_involvement" : {
+      "name" : "FDI Hub + Post + LEP",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "date_abandoned" : "2018-11-01",
     "quotable_as_public_case_study" : false,
     "approved_landed" : true,
+    "investor_type" : {
+      "name" : "New investor",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "non_fdi_r_and_d_budget" : false,
     "project_assurance_adviser" : "",
-    "not_shareable_reason" : "Company has asked us to keep project quiet until official announcement",
     "incomplete_fields" : [ "total_investment" ],
     "referral_source_activity_marketing" : {
       "name" : "Press advertisement",
@@ -419,6 +438,11 @@ exports.getprojectssincetime = function(args, res, next) {
     "project_assurance_team" : "",
     "approved_commitment_to_invest" : true,
     "approved_fdi" : true,
+    "associated_non_fdi_r_and_d_project" : {
+      "name" : "Marriot Hotels - New hotel in Manchester",
+      "project_code" : "P-01234567",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "reason_abandoned" : "Funding lost",
     "client_relationship_manager_team" : {
       "name" : "Sector Advisory Services",
@@ -433,7 +457,6 @@ exports.getprojectssincetime = function(args, res, next) {
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "priority" : "aeiou",
-    "project_shareable" : true,
     "foreign_equity_investment" : 100000000,
     "referral_source_advisor" : "",
     "nda_signed" : false,
@@ -470,6 +493,7 @@ exports.getprojectssincetime = function(args, res, next) {
     "approved_high_value" : true,
     "strategic_drivers" : "",
     "team_complete" : false,
+    "anonymous_description" : "An international hotel chain wishes to expand into the north of the UK",
     "r_and_d_budget" : false,
     "address_line_1" : "19 Railway Cuttings",
     "will_new_jobs_last_two_years" : false,
@@ -492,16 +516,16 @@ exports.getprojectssincetime = function(args, res, next) {
     },
     "project_manager_team" : "",
     "government_assistance" : false,
+    "specific_programme" : {
+      "name" : "GREAT branded",
+      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+    },
     "competitor_countries" : "",
     "stage" : {
       "name" : "Active",
       "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
     },
     "new_tech_to_uk" : false,
-    "non_fdi_type" : {
-      "name" : "Advanced Engineering Supply Chain",
-      "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
-    },
     "team_members" : "",
     "approved_good_value" : true,
     "intermediate_company" : {
