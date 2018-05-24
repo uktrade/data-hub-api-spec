@@ -29,6 +29,5 @@
     "url": "https://github.com/uktrade/data-hub-api-spec/issues"
   },
   "homepage": "https://github.com/uktrade/data-hub-api-spec#readme",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
