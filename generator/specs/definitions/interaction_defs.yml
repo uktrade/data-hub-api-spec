@@ -30,12 +30,34 @@
         type: string
         format: date
         example: 2020-01-01
+      is_event:
+        type: boolean
+        example: true
+      grant_amount_offered:
+        type: string
+        example: '2000.00'
+        description: Decimal field. Null represents a blank value.
+      net_company_receipt:
+        type: string
+        example: '1525.00'
+        description: Decimal field. Null represents a blank value.
+      archived_documents_url_path:
+        type: string
+        example: /path/to/documents
+      created_on:
+        format: date
+        example: 2015-01-01
+      modified_on:
+        format: date
+        example: 2015-01-01
       communication_channel:
         $ref: '#/definitions/InteractionCommunicationChannel'
       company:
         $ref: '#/definitions/CompanySlim'
       contact:
         $ref: '#/definitions/ContactSlim'
+      created_by:
+        $ref: '#/definitions/Adviser'
       dit_adviser:
         $ref: '#/definitions/Adviser'
       dit_team:
@@ -44,8 +66,12 @@
         $ref: '#/definitions/EventSlim'
       investment_project:
         $ref: '#/definitions/InvestmentProjectSlim'
+      modified_by:
+        $ref: '#/definitions/Adviser'
       service:
         $ref: '#/definitions/Service'
+      service_delivery_status:
+        $ref: '#/definitions/ServiceDeliveryStatus'
   InteractionList:
     type: object
     required:
@@ -87,3 +113,17 @@
       name:
         type: string
         example: 'Investment – Services'
+  ServiceDeliveryStatus:
+    type: object
+    description: "Service delivery status metadata"
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Offered
